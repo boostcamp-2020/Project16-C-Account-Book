@@ -9,19 +9,9 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@lib/*": ["src/lib/*"],
-      "@apis/*": ["src/apis/*"],
-      "@themes/*": ["src/themes/*"],
-      "@stores/*": ["src/stores/*"],
-      "@hooks/*": ["src/hooks/*"]
-    },
-    "moduleResolution": "node"
-  },
-  "exclude": ["node_modules"],
-  "include": ["**/*.ts", "**/*.tsx"]
+
+  }
+}
