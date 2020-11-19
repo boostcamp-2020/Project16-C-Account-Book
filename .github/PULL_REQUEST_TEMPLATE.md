@@ -12,3 +12,11 @@ Close #
 - [ ] 작업 내역 3
 - [ ] 작업 내역 4
 <br/>
+
+### 멘토님 멘셔닝
+
+@kwangdosa
+@mysticPrg
+@kimwonyong
+@chanmo-kim
+<br/>
