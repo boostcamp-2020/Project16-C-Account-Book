@@ -7,13 +7,14 @@
     "lib": ["dom", "ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
     "esModuleInterop": true,
     "module": "commonjs",
-    "isolatedModules": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "moduleResolution":"node"
+    "moduleResolution":"node",
+    "outDir":"dist"
   },
   "include":["src/**/*.ts","src/**/*.tsx"],
   "exclude": ["node_modules"]

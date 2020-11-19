@@ -7,6 +7,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
   entry: './src/index',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.[hash].js',
   },
@@ -33,7 +34,7 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.s?css$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
@@ -61,7 +62,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: './index.html',
+      template: './public/index.html',
       changeOrigin: true,
     }),
     new CleanWebpackPlugin(),
