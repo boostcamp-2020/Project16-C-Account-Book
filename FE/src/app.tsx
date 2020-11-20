@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-const App = props => {
-  return <h1>hello</h1>;
+import LoginPage from './components/Login';
+
+const App: React.FC = () => {
+  console.log('sss');
+
+  return (
+    <Router>
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+      </Switch>
+    </Router>
+  );
 };
 
 export default App;
