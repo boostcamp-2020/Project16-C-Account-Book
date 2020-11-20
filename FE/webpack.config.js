@@ -51,7 +51,7 @@ module.exports = {
       },
     ],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
@@ -67,5 +67,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: [/node_modules/],
+      test: /\.(ts|tsx)/i,
+    }),
   ],
 };
