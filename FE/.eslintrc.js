@@ -37,8 +37,6 @@ module.exports = {
       'ignorePackages',
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'never' },
     ],
-    'react/jsx-indent': [2, 'tab'],
-    'react/jsx-indent-props': [2, 'tab'],
     'prettier/prettier': [
       'error',
       {

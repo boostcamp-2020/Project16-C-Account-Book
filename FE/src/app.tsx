@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import Search from './search';
+import CityList from './city';
+import StoreProvider from './context';
 
-const App = props => {
-  return <h1>hello</h1>;
+const App: ReactElement = () => {
+  return (
+    <StoreProvider>
+      <div className="App">
+        <header className="App-header">
+          <Search />
+          <CityList />
+        </header>
+      </div>
+    </StoreProvider>
+  );
 };
 
 export default App;
