@@ -1,11 +1,14 @@
+import 'module-alias/register';
 import Koa from 'koa';
+import loaders from './loaders';
+// startServer();
 
-const app = new Koa();
+const startServer = async () => {
+  const app = new Koa();
+  await loaders(app);
 
-app.use(ctx => {
-  ctx.body = 'Hello Koa';
-});
+  app.listen(process.env.PORT);
+  console.info(`✅ http://localhost:${process.env.PORT}`);
+};
 
-app.listen(3000, () => {
-  console.log(`http://localhost:3000`);
-});
+startServer();
