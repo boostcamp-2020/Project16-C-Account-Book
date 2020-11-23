@@ -15,8 +15,5 @@ Close #
 
 ### 멘토님 멘셔닝
 
-@kwangdosa
-@mysticPrg
-@kimwonyong
-@chanmo-kim
+@boostcamp-2020/accountbook_mentor
 <br/>
