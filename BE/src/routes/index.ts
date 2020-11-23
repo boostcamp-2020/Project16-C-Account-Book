@@ -1,13 +1,13 @@
-import { Context, Request, Response } from 'koa';
+import { Context } from 'koa';
 import Router from 'koa-router';
 import apiRouter from './api/index';
 
-const home = new Router();
+const router = new Router();
 
-home.get('/', (ctx: Context) => {
-  ctx.body = 'home';
+router.get('/', (ctx: Context) => {
+  ctx.body = `GET ${ctx.path}`;
 });
 
-home.use('/api', apiRouter.routes());
+router.use('/api', apiRouter.routes());
 
-export default home;
+export default router;

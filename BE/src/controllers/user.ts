@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 
 const get = (ctx: Context): Context['body'] => {
-  ctx.body = 'get';
+  ctx.body = `GET ${ctx.path}`;
   return ctx.body;
 };
 
