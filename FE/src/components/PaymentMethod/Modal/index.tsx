@@ -11,12 +11,6 @@ export default function Modal({ setModal }): React.ReactElement {
   const [addData, setAddData] = useState({ name: '', color: '' });
   const [methodNick, setMethodNick] = useState('');
 
-  // 백엔드에서 받아올 user의 결제수단 데이터
-  const [paymentMethodData, setPaymentMethodData] = useState([
-    { name: 'Naver', desc: 'main method', color: 'hsla(120, 100%, 50%, 0.93)' },
-    { name: 'Kakao', desc: 'sub method', color: 'hsla(40, 100%, 50%, 0.93)' },
-  ]);
-
   // 백엔드에서 받아올 default 결제수단.
   const defaultMethod = [
     { name: 'KB 국민카드', color: 'hsla(0, 100%, 50%, 0.93)' },
@@ -45,7 +39,7 @@ export default function Modal({ setModal }): React.ReactElement {
         <button type="button" onClick={onClickNew} className="new__button">
           Add
         </button>
-        <CardContainer paymentMethodData={paymentMethodData} />
+        <CardContainer />
       </div>
       {addForm && (
         <NewMethod setAddData={setAddData} defaultMethod={defaultMethod} />
@@ -57,8 +51,6 @@ export default function Modal({ setModal }): React.ReactElement {
           setMethodNick={setMethodNick}
           setAddData={setAddData}
           methodNick={methodNick}
-          paymentMethodData={paymentMethodData}
-          setPaymentMethodData={setPaymentMethodData}
           setAddForm={setAddForm}
         />
       )}
