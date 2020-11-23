@@ -10,10 +10,25 @@ export default function Modal({ setModal }): React.ReactElement {
   const [addForm, setAddForm] = useState(false);
   const [addData, setAddData] = useState({ name: '', color: '' });
   const [methodNick, setMethodNick] = useState('');
-  const [mockData, setMockData] = useState([
+
+  // 백엔드에서 받아올 user의 결제수단 데이터
+  const [paymentMethodData, setPaymentMethodData] = useState([
     { name: 'Naver', desc: 'main method', color: 'hsla(120, 100%, 50%, 0.93)' },
     { name: 'Kakao', desc: 'sub method', color: 'hsla(40, 100%, 50%, 0.93)' },
   ]);
+
+  // 백엔드에서 받아올 default 결제수단.
+  const defaultMethod = [
+    { name: 'KB 국민카드', color: 'hsla(0, 100%, 50%, 0.93)' },
+    { name: 'Kakao ', color: 'hsla(40, 100%, 50%, 0.93)' },
+    { name: 'SC 제일은행', color: 'hsla(80, 100%, 50%, 0.93)' },
+    { name: 'Naver ', color: 'hsla(120, 100%, 50%, 0.93)' },
+    { name: 'KEB Hana ', color: 'hsla(160, 100%, 50%, 0.93)' },
+    { name: 'WOORI Card', color: 'hsla(200, 100%, 50%, 0.93)' },
+    { name: 'Samsung', color: 'hsla(240, 100%, 50%, 0.93)' },
+    { name: 'Hyundai', color: 'hsla(280, 100%, 50%, 0.93)' },
+    { name: 'BC Card', color: 'hsla(320, 100%, 50%, 0.93)' },
+  ];
 
   const onClickNew = () => {
     setAddForm(() => !addForm);
@@ -30,9 +45,11 @@ export default function Modal({ setModal }): React.ReactElement {
         <button type="button" onClick={onClickNew} className="new__button">
           Add
         </button>
-        <CardContainer mockData={mockData} />
+        <CardContainer paymentMethodData={paymentMethodData} />
       </div>
-      {addForm && <NewMethod setAddData={setAddData} />}
+      {addForm && (
+        <NewMethod setAddData={setAddData} defaultMethod={defaultMethod} />
+      )}
       {addForm && (
         <AddTemplate
           name={addData.name}
@@ -40,8 +57,8 @@ export default function Modal({ setModal }): React.ReactElement {
           setMethodNick={setMethodNick}
           setAddData={setAddData}
           methodNick={methodNick}
-          mockData={mockData}
-          setMockData={setMockData}
+          paymentMethodData={paymentMethodData}
+          setPaymentMethodData={setPaymentMethodData}
           setAddForm={setAddForm}
         />
       )}

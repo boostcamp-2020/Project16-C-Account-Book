@@ -8,8 +8,8 @@ interface Card {
   color: string;
   methodNick: string;
   setMethodNick: (data: string) => void;
-  mockData: object[];
-  setMockData: (data: object) => void;
+  paymentMethodData: object[];
+  setPaymentMethodData: (data: object) => void;
   setAddForm: (data: boolean) => void;
   setAddData: (data: object) => void;
 }
@@ -19,8 +19,8 @@ export default function AddTemplate({
   color,
   setMethodNick,
   methodNick,
-  mockData,
-  setMockData,
+  paymentMethodData,
+  setPaymentMethodData,
   setAddForm,
   setAddData,
 }: Card): React.ReactElement {
@@ -32,13 +32,13 @@ export default function AddTemplate({
 
   const onAddCard = event => {
     if (event.key === 'Enter') {
-      setMockData(() => [
+      setPaymentMethodData(() => [
         {
           name,
           desc: `${methodNick}`,
           color,
         },
-        ...mockData,
+        ...paymentMethodData,
       ]);
       setAddForm(() => false);
       setAddData(() => {
