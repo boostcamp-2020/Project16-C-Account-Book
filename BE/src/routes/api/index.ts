@@ -1,6 +1,6 @@
 import { Context } from 'koa';
 import Router from 'koa-router';
-import apiRouter from './api/index';
+import userRouter from './user';
 
 const router = new Router();
 
@@ -8,6 +8,6 @@ router.get('/', (ctx: Context) => {
   ctx.body = `GET ${ctx.path}`;
 });
 
-router.use('/api', apiRouter.routes());
+router.use('/user', userRouter.routes());
 
 export default router;
