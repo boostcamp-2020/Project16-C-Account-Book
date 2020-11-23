@@ -7,8 +7,6 @@ dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const URL = process.env.DATABASE_URL || `mongodb://localhost:27017/test`;
 
-console.log(URL);
-
 export default async (): Promise<void> => {
   await mongoose.connect(
     URL,
