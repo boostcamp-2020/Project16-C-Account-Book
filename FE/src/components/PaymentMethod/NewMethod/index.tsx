@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { useObserver } from 'mobx-react-lite';
+
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
+import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 import './newMethod.scss';
 
 interface SetData {
@@ -11,6 +12,7 @@ export default function NewMethod({
   defaultMethod,
 }: SetData): React.ReactElement {
   const store = useContext(paymentContext);
+  const updateAddTemplate = useRootData(store => store.updateAddTemplate);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const carousel = useRef();
 
@@ -38,38 +40,36 @@ export default function NewMethod({
   };
 
   const onClickCard = event => {
-    store.updateAddTemplate({
+    updateAddTemplate({
       name: event.target.textContent,
       color: event.target.dataset.color,
     });
   };
 
-  return useObserver(() => {
-    return (
-      <>
-        <div className="wrapper">
-          <div className="scene">
-            <div className="carousel" ref={carousel}>
-              {defaultMethod.map(card => (
-                <div
-                  className="carousel__cell"
-                  onClick={onClickCard}
-                  data-color={card.color}
-                  style={{ background: `${card.color}` }}
-                >
-                  {card.name}
-                </div>
-              ))}
-            </div>
+  return (
+    <>
+      <div className="wrapper">
+        <div className="scene">
+          <div className="carousel" ref={carousel}>
+            {defaultMethod.map(card => (
+              <div
+                className="carousel__cell"
+                onClick={onClickCard}
+                data-color={card.color}
+                style={{ background: `${card.color}` }}
+              >
+                {card.name}
+              </div>
+            ))}
           </div>
-          <button type="button" onClick={onClickPrev} className="prev__button">
-            prev
-          </button>
-          <button type="button" onClick={onClickNext} className="next__button">
-            next
-          </button>
         </div>
-      </>
-    );
-  });
+        <button type="button" onClick={onClickPrev} className="prev__button">
+          prev
+        </button>
+        <button type="button" onClick={onClickNext} className="next__button">
+          next
+        </button>
+      </div>
+    </>
+  );
 }

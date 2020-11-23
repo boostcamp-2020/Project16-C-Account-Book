@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/no-autofocus */
 import React, { useRef, useEffect, useContext } from 'react';
-import { useObserver } from 'mobx-react-lite';
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
+import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import styles from './addForm.module.scss';
 
@@ -22,6 +21,8 @@ export default function AddTemplate({
 }: Card): React.ReactElement {
   const methodInput = useRef();
   const store = useContext(paymentContext);
+  const addPaymentMethod = useRootData(store => store.addPaymentMethod);
+  const updateAddTemplate = useRootData(store => store.updateAddTemplate);
 
   const onChangeNick = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMethodNick(event.target.value);
@@ -29,14 +30,14 @@ export default function AddTemplate({
 
   const onAddCard = event => {
     if (event.key === 'Enter') {
-      store?.addPaymentMethod({
+      addPaymentMethod({
         name,
         desc: `${methodNick}`,
         color,
       });
 
       setAddFormModal(() => false);
-      store?.updateAddTemplate({ name: '', color: '' });
+      updateAddTemplate({ name: '', color: '' });
       setMethodNick(() => '');
     }
   };
