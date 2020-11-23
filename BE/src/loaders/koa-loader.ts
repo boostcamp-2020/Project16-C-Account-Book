@@ -4,7 +4,7 @@ import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 
 import ResponseError from '@/types/error';
-import indexRouter from '@/routes';
+import apiRouter from '@/routes';
 
 const router = new Router();
 
@@ -30,7 +30,7 @@ const init = async (app: Koa): Promise<any> => {
   app.use(router.allowedMethods());
   app.on('error', errorHandler);
 
-  router.use('/', indexRouter.routes());
+  router.use(apiRouter.routes());
 };
 
 export default init;
