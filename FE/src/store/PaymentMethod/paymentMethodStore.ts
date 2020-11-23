@@ -1,7 +1,6 @@
-import { observable } from 'mobx';
-
 export const createStore = () => {
   const store = {
+    addTemplateData: { name: '', color: '' },
     paymentMethod: [
       {
         name: 'Naver',
@@ -12,6 +11,9 @@ export const createStore = () => {
     ],
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
       this.paymentMethod = [data, ...this.paymentMethod];
+    },
+    updateAddTemplate(data: { name: string; color: string }) {
+      this.addTemplateData = data;
     },
   };
   return store;

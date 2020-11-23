@@ -1,28 +1,24 @@
 /* eslint-disable jsx-a11y/no-autofocus */
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import { useObserver } from 'mobx-react-lite';
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 
 import styles from './addForm.module.scss';
 
 interface Card {
-  name: string;
-  color: string;
+  name: string | undefined;
+  color: string | undefined;
   methodNick: string;
   setMethodNick: (data: string) => void;
-  paymentMethodData: object[];
-  setPaymentMethodData: (data: object) => void;
-  setAddForm: (data: boolean) => void;
-  setAddData: (data: object) => void;
+  setAddFormModal: (data: boolean) => void;
 }
 
 export default function AddTemplate({
   name,
   color,
-  setMethodNick,
   methodNick,
-  setAddForm,
-  setAddData,
+  setMethodNick,
+  setAddFormModal,
 }: Card): React.ReactElement {
   const methodInput = useRef();
   const store = useContext(paymentContext);
@@ -39,10 +35,8 @@ export default function AddTemplate({
         color,
       });
 
-      setAddForm(() => false);
-      setAddData(() => {
-        return { name: '', color: '' };
-      });
+      setAddFormModal(() => false);
+      store?.updateAddTemplate({ name: '', color: '' });
       setMethodNick(() => '');
     }
   };
