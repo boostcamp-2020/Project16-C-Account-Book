@@ -1,0 +1,44 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-x: hidden;
+  flex: 1;
+  z-index: 2;
+
+  .card {
+    position: relative;
+    color: white;
+    width: 333px;
+    min-height: 195px;
+    margin-top: 3em;
+    transform: translateX(10px);
+    transition: transform 500ms ease;
+    border-radius: 6px;
+    padding: 1.5em;
+
+    .cardTitle {
+      font-size: 2em;
+      padding: 0.2em 0;
+      font-weight: bold;
+    }
+
+    .cardDesc {
+      font-size: 1.2em;
+    }
+    &:hover {
+      cursor: pointer;
+      transition: transform 500ms ease;
+      transform: translateX(-50px);
+    }
+
+    &:last-child {
+      margin-bottom: 3em;
+    }
+  }
+}
