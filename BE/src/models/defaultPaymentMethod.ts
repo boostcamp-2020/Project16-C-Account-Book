@@ -10,7 +10,17 @@ const DefaultPaymentMethodSchema = new mongoose.Schema({
   color: { type: String, required: true },
 });
 
-export const DefaultPaymentMethodModel = mongoose.model<DefaultPaymentMethod>(
+const DefaultPaymentMethodModel = mongoose.model<DefaultPaymentMethod>(
   'default_payment_methods',
   DefaultPaymentMethodSchema,
 );
+
+const getAllPaymentMethods = () => {
+  try {
+    return DefaultPaymentMethodModel.find();
+  } catch (error) {
+    return { statusCode: 500 };
+  }
+};
+
+export default { getAllPaymentMethods };
