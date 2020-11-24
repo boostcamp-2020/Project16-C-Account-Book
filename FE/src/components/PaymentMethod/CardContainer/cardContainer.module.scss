@@ -9,6 +9,7 @@
   align-items: flex-end;
   overflow-x: hidden;
   flex: 1;
+  animation: cardShow 1s;
   z-index: 2;
 
   .card {
@@ -16,12 +17,18 @@
     color: white;
     width: 333px;
     min-height: 195px;
-    margin-top: 3em;
-    transform: translateX(10px);
+    margin-top: 4em;
+    transform: translateX(35px);
+
     transition: transform 500ms ease;
     border-radius: 6px;
     padding: 1.5em;
 
+    .cancel {
+      position: absolute;
+      right: 1.5em;
+      top: 1em;
+    }
     .cardTitle {
       font-size: 2em;
       padding: 0.2em 0;
@@ -39,6 +46,18 @@
 
     &:last-child {
       margin-bottom: 3em;
+    }
+  }
+
+  @keyframes cardShow {
+    from {
+      opacity: 0;
+      transform: translateX(300px);
+    }
+
+    to {
+      opacity: 1;
+      transform: 0;
     }
   }
 }
