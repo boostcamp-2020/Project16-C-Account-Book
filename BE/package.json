@@ -5,22 +5,36 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsc && node build/index.js"
+    "start": "tsc && set PRODUCTION=true && node -r ./tsconfig-paths-bootstrap.js build/index.js",
+    "dev": "nodemon"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "cors": "^2.8.5",
+    "@types/http-errors": "^1.8.0",
     "dotenv": "^8.2.0",
+    "http-errors": "^1.8.0",
     "koa": "2.13.0",
     "koa-bodyparser": "^4.3.0",
+    "koa-logger": "^3.2.1",
     "koa-router": "10.0.0",
     "module-alias": "2.2.2",
-    "mongoose": "^5.10.15"
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.15",
+    "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.8",
     "@types/koa": "2.11.6",
     "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-logger": "^3.1.1",
     "@types/koa-router": "^7.4.1",
+    "@types/koa__cors": "^3.0.2",
+    "@types/module-alias": "^2.0.0",
+    "@types/mongodb": "^3.5.33",
+    "@types/mongoose": "^5.10.1",
     "@types/node": "14.14.8",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "4.8.1",
@@ -33,8 +47,5 @@
     "prettier": "2.1.2",
     "ts-node": "9.0.0",
     "typescript": "4.0.5"
-  },
-  "_moduleAliases": {
-    "@root": "build"
   }
 }

@@ -1,11 +1,16 @@
+import 'module-alias/register';
 import Koa from 'koa';
+import dotenv from 'dotenv';
+import path from 'path';
+import loaders from './loaders';
 
-const app = new Koa();
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
-app.use(ctx => {
-  ctx.body = 'Hello Koa';
-});
+const startServer = async () => {
+  const app = new Koa();
+  await loaders(app);
+  app.listen(process.env.PORT);
+  console.info(`http://localhost:${process.env.PORT} ✅`);
+};
 
-app.listen(3000, () => {
-  console.log(`http://localhost:3000`);
-});
+startServer();
