@@ -11,4 +11,4 @@ jobs:
     - name: Reviewer lottery
       uses: uesteibar/reviewer-lottery@v1.1.0
       with:
-        repo-token: ${{ secrets.TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
