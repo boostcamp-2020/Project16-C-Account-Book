@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
-import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
+import React, { useState } from 'react';
+
 import AddTemplate from '../AddTemplate';
 import CardContainer from '../CardContainer';
 import NewMethod from '../NewMethod';
@@ -8,10 +7,7 @@ import NewMethod from '../NewMethod';
 import './modal.scss';
 
 export default function Modal({ setModal, defaultMethod }): React.ReactElement {
-  const store = useContext(paymentContext);
-  const addTemplateData = useRootData(store => store.addTemplateData);
   const [addFormModal, setAddFormModal] = useState(false);
-  const [methodNick, setMethodNick] = useState('');
 
   const onClickNew = () => {
     setAddFormModal(() => !addFormModal);
@@ -31,15 +27,7 @@ export default function Modal({ setModal, defaultMethod }): React.ReactElement {
         <CardContainer />
       </div>
       {addFormModal && <NewMethod defaultMethod={defaultMethod} />}
-      {addFormModal && (
-        <AddTemplate
-          name={addTemplateData.name}
-          color={addTemplateData.color}
-          setMethodNick={setMethodNick}
-          methodNick={methodNick}
-          setAddFormModal={setAddFormModal}
-        />
-      )}
+      {addFormModal && <AddTemplate setAddFormModal={setAddFormModal} />}
     </>
   );
 }

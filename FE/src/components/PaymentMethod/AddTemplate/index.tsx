@@ -1,26 +1,20 @@
-import React, { useRef, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext, useState } from 'react';
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import styles from './addForm.module.scss';
 
 interface Card {
-  name: string | undefined;
-  color: string | undefined;
-  methodNick: string;
-  setMethodNick: (data: string) => void;
   setAddFormModal: (data: boolean) => void;
 }
 
 export default function AddTemplate({
-  name,
-  color,
-  methodNick,
-  setMethodNick,
   setAddFormModal,
 }: Card): React.ReactElement {
+  const [methodNick, setMethodNick] = useState('');
   const methodInput = useRef();
   const store = useContext(paymentContext);
+  const addTemplateData = useRootData(store => store.addTemplateData);
   const addPaymentMethod = useRootData(store => store.addPaymentMethod);
   const updateAddTemplate = useRootData(store => store.updateAddTemplate);
 
@@ -31,9 +25,9 @@ export default function AddTemplate({
   const onAddCard = event => {
     if (event.key === 'Enter') {
       addPaymentMethod({
-        name,
+        name: addTemplateData.name,
         desc: `${methodNick}`,
-        color,
+        color: addTemplateData.color,
       });
 
       setAddFormModal(() => false);
@@ -43,15 +37,18 @@ export default function AddTemplate({
   };
 
   useEffect(() => {
-    if (name) {
+    if (addTemplateData.name) {
       methodInput.current.focus();
     }
   });
 
   return (
-    <div className={styles.wrapper} style={{ background: `${color}` }}>
-      {name || '아래에서 카드를 선택해주세요.'}
-      {name && (
+    <div
+      className={styles.wrapper}
+      style={{ background: `${addTemplateData.color}` }}
+    >
+      {addTemplateData.name || '아래에서 카드를 선택해주세요.'}
+      {addTemplateData.name && (
         <input
           ref={methodInput}
           value={methodNick}
