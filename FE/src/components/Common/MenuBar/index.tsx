@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './menubar.module.scss';
 
 const MenuBar = ({ setModal }) => {
@@ -7,10 +8,18 @@ const MenuBar = ({ setModal }) => {
   };
   return (
     <header className={styles.header}>
-      <button>내역</button>
-      <button>캘린더</button>
-      <button>차트</button>
-      <button onClick={onClickPayment}>결제수단</button>
+      <button className={styles.navBtn}>
+        <i className="fas fa-history" />
+      </button>
+      <button className={styles.navBtn}>
+        <i className="far fa-calendar-alt" />
+      </button>
+      <button className={styles.navBtn}>
+        <i className="far fa-chart-bar" />
+      </button>
+      <button className={styles.navBtn} onClick={onClickPayment}>
+        <i className="fas fa-credit-card" />
+      </button>
     </header>
   );
 };

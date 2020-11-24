@@ -6,7 +6,7 @@ import styles from './paymentPage.module.scss';
 import { getDefaultMethods } from '../../api/defaultPaymentMethod';
 
 export default function PaymentMethod() {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [defaultMethod, setDefaultMethod] = useState([]);
 
   const getData = useCallback(async () => {
