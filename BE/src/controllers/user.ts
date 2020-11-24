@@ -2,7 +2,8 @@ import { Context } from 'koa';
 import service from '@/services/user';
 
 const get = async (ctx: Context): Promise<Context['body']> => {
-  const user = await service.get('asdfasdfasdf');
+  const userData = ctx.request.body;
+  const user = await service.get(userData);
   ctx.body = user;
   return ctx.body;
 };
