@@ -16,6 +16,6 @@
     "moduleResolution":"node",
     "outDir":"dist"
   },
-  "include":["src/**/*.ts","src/**/*.tsx"],
+  "include":["src/**/*.ts","src/**/*.tsx", "src/app.js"],
   "exclude": ["node_modules"]
 }

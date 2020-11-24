@@ -1,7 +1,15 @@
 import React from 'react';
+import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
+import './app.scss';
+
+import PaymentMethod from './pages/PaymentMethod';
 
 const App = props => {
-  return <h1>hello</h1>;
+  return (
+    <PaymentProvider>
+      <PaymentMethod />
+    </PaymentProvider>
+  );
 };
 
 export default App;
