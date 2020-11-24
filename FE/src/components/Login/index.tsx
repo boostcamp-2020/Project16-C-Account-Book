@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NaverLoginButton from './NaverLoginButton';
+import GithubLoginButton from './GithubLoginButton';
 import './index.scss';
 
 const LoginPage = () => {
@@ -8,7 +8,7 @@ const LoginPage = () => {
     <div className="container">
       <div className="title">팀이름</div>
       <div className="login-button-container">
-        <NaverLoginButton />
+        <GithubLoginButton />
       </div>
     </div>
   );

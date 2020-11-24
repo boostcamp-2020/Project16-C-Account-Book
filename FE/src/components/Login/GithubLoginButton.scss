@@ -1,15 +1,15 @@
-.NaverLoginButton {
+.GithubLoginButton {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #1ec800;
+  background-color: black;
   color: white;
   box-shadow: 0 0 5px 1px grey;
   width: 300px;
   height: 60px;
   border: none;
 
-  .N-logo {
+  .github-logo {
     font-weight: 900;
     font-size: 35px;
   }
