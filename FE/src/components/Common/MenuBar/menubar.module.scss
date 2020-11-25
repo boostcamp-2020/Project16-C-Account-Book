@@ -1,20 +1,34 @@
 .header {
   position: fixed;
-  background-color: black;
+  background-color: #222;
   width: 100%;
-  padding: 3em;
+  padding: 2em 0;
 
   .buttons {
     display: flex;
     justify-content: center;
     gap: 3em;
+
     .navBtn {
+      text-align: center;
+      line-height: 1.8em;
+      width: 1.8em;
+      height: 1.8em;
       background-color: transparent;
       border: none;
       outline: none;
-      color: white;
+      color: #3e3e3e;
       cursor: pointer;
       font-size: 2em;
+      box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.5), inset 3px 3px 5px;
+
+      &.checked {
+        box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
+          3px 3px 5px rgba(255, 255, 255, 0.07);
+        text-shadow: 0 0 10px rgba(33, 156, 243, 1),
+          0 0 10px rgba(33, 156, 243, 1);
+        color: white;
+      }
     }
   }
 
@@ -24,8 +38,9 @@
     display: flex;
     justify-content: center;
     gap: 3em;
+    font-weight: 900;
     color: white;
-
+    text-shadow: 0 0 10px rgba(33, 156, 243, 1), 0 0 10px rgba(33, 156, 243, 1);
     .btn-cal {
       position: relative;
       float: left;
@@ -34,9 +49,13 @@
       margin-top: 5px;
       font-size: 16px;
       cursor: pointer;
+      outline: none;
       border: none;
       background: none;
+      font-weight: 900;
       color: white;
+      text-shadow: 0 0 10px rgba(33, 156, 243, 1),
+        0 0 10px rgba(33, 156, 243, 1);
     }
     .btn-cal:after {
       content: '<';
@@ -57,7 +76,7 @@
     }
 
     .year-month {
-      width: 100px;
+      width: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;

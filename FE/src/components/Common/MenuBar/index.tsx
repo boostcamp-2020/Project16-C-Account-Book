@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useContext } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
@@ -11,10 +11,14 @@ const MenuBar = ({ setModal }) => {
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
 
+  const allBtnRef = useRef();
   const btnNextRef = useRef();
   const btnPrevRef = useRef();
   const calMonRef = useRef();
   const calYearRef = useRef();
+  const transactionIconRef = useRef();
+  const calIconRef = useRef();
+  const chartIconRef = useRef();
 
   const setYearMonth = useCallback((year, month) => {
     const yy = year;
@@ -36,8 +40,20 @@ const MenuBar = ({ setModal }) => {
     setDateInfo(info.getFullYear(), info.getMonth());
   }, []);
 
-  const onClickCalendar = useCallback(() => {
-    history.push('/calendar');
+  const onClickIcon = useCallback(event => {
+    allBtnRef.current.childNodes.forEach(target =>
+      target.classList.remove(styles.checked),
+    );
+    if (event.target.dataset.type === 'transaction') {
+      transactionIconRef.current.classList.toggle(styles.checked);
+    }
+    if (event.target.dataset.type === 'calendar') {
+      calIconRef.current.classList.toggle(styles.checked);
+      history.push('/calendar');
+    }
+    if (event.target.dataset.type === 'chart') {
+      chartIconRef.current.classList.toggle(styles.checked);
+    }
   }, []);
 
   const onClickPayment = useCallback(() => {
@@ -50,19 +66,34 @@ const MenuBar = ({ setModal }) => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.buttons}>
-        <button className={styles.navBtn}>
-          <i className="fas fa-history" />
-        </button>
-        <button className={styles.navBtn} onClick={onClickCalendar}>
-          <i className="far fa-calendar-alt" />
-        </button>
-        <button className={styles.navBtn}>
-          <i className="far fa-chart-bar" />
-        </button>
-        <button className={styles.navBtn} onClick={onClickPayment}>
+      <div className={styles.buttons} ref={allBtnRef}>
+        <div
+          ref={transactionIconRef}
+          className={styles.navBtn}
+          data-type="transaction"
+          onClick={onClickIcon}
+        >
+          <i data-type="transaction" className="fas fa-history" />
+        </div>
+        <div
+          ref={calIconRef}
+          className={styles.navBtn}
+          data-type="calendar"
+          onClick={onClickIcon}
+        >
+          <i data-type="calendar" className="far fa-calendar-alt" />
+        </div>
+        <div
+          ref={chartIconRef}
+          className={styles.navBtn}
+          data-type="chart"
+          onClick={onClickIcon}
+        >
+          <i data-type="chart" className="far fa-chart-bar" />
+        </div>
+        <div className={styles.navBtn} onClick={onClickPayment}>
           <i className="fas fa-credit-card" />
-        </button>
+        </div>
       </div>
 
       <div className={styles.ctrBox}>
