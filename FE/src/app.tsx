@@ -4,7 +4,7 @@ import DateInfoProvider from './store/DateInfo/dateInfoContext';
 import './app.scss';
 
 import PaymentMethod from './pages/defaultTemplate';
-import Calendar from './pages/Calendar';
+import CalendarPage from './pages/Calendar';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 const App = props => {
@@ -13,7 +13,7 @@ const App = props => {
       <PaymentProvider>
         <BrowserRouter>
           <Route path="/" component={PaymentMethod} />
-          <Route path="/calendar" component={Calendar} />
+          <Route path="/calendar" component={CalendarPage} />
         </BrowserRouter>
       </PaymentProvider>
     </DateInfoProvider>
