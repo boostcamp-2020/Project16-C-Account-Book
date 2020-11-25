@@ -3,16 +3,64 @@
   background-color: black;
   width: 100%;
   padding: 3em;
-  display: flex;
-  justify-content: center;
-  gap: 3em;
 
-  .navBtn {
-    background-color: transparent;
-    border: none;
-    outline: none;
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+    .navBtn {
+      background-color: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      cursor: pointer;
+      font-size: 2em;
+    }
+  }
+
+  .ctrBox {
+    margin-top: 2em;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 3em;
     color: white;
-    cursor: pointer;
-    font-size: 2em;
+
+    .btn-cal {
+      position: relative;
+      float: left;
+      width: 25px;
+      height: 25px;
+      margin-top: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: white;
+    }
+    .btn-cal:after {
+      content: '<';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      line-height: 25px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .btn-cal.next {
+      float: right;
+    }
+    .btn-cal.next:after {
+      content: '>';
+    }
+
+    .year-month {
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
