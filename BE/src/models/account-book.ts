@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-export interface accountBookMethod extends mongoose.Document {
+interface accountBookMethod extends mongoose.Document {
   name: string;
   description: string;
   transaction: [];
@@ -25,4 +25,24 @@ const getAllAccountBookMethods = () => {
   }
 };
 
-export default { getAllAccountBookMethods };
+const createAccountBookMethods = ({
+  name,
+  description,
+  transaction,
+}: {
+  name: string;
+  description: string;
+  transaction: [];
+}) => {
+  try {
+    return accountBookMethodModel.create({
+      name,
+      description,
+      transaction,
+    });
+  } catch (error) {
+    return { statusCode: 500 };
+  }
+};
+
+export default { getAllAccountBookMethods, createAccountBookMethods };

@@ -8,4 +8,11 @@ const get = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
-export default { get };
+const post = async (ctx: Context): Promise<Context['body']> => {
+  const accountBook = await service.post(ctx.request.body);
+  ctx.body = accountBook;
+
+  return ctx.body;
+};
+
+export default { get, post };
