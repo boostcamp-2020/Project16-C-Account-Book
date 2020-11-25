@@ -6,7 +6,7 @@ import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import styles from './menubar.module.scss';
 import CalculateDate from '../../../util/calculateDate';
 
-const MenuBar = ({ setModal }) => {
+const MenuBar = ({ setModal, pageType }) => {
   const history = useHistory();
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
@@ -41,28 +41,29 @@ const MenuBar = ({ setModal }) => {
   }, []);
 
   const onClickIcon = useCallback(event => {
-    allBtnRef.current.childNodes.forEach(target =>
-      target.classList.remove(styles.checked),
-    );
-    if (event.target.dataset.type === 'transaction') {
-      transactionIconRef.current.classList.toggle(styles.checked);
-    }
-    if (event.target.dataset.type === 'calendar') {
-      calIconRef.current.classList.toggle(styles.checked);
-      history.push('/calendar');
-    }
-    if (event.target.dataset.type === 'chart') {
-      chartIconRef.current.classList.toggle(styles.checked);
-    }
+    history.push(event.target.dataset.type);
   }, []);
 
   const onClickPayment = useCallback(() => {
     setModal(true);
   }, []);
 
+  const setIcon = useCallback(pageType => {
+    if (pageType === 'transaction') {
+      transactionIconRef.current.classList.toggle(styles.checked);
+    }
+    if (pageType === 'calendar') {
+      calIconRef.current.classList.toggle(styles.checked);
+    }
+    if (pageType === 'chart') {
+      chartIconRef.current.classList.toggle(styles.checked);
+    }
+  }, pageType);
+
   useEffect(() => {
+    setIcon(pageType);
     setYearMonth(DateInfo.year, DateInfo.month);
-  }, []);
+  }, [pageType]);
 
   return (
     <header className={styles.header}>

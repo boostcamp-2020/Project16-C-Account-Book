@@ -21,7 +21,7 @@ export default function CalendarPage() {
 
   return (
     <div className={styles.wrapper}>
-      <MenuBar setModal={setModal} />
+      <MenuBar setModal={setModal} pageType="calendar" />
       <Calendar />
       {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
     </div>

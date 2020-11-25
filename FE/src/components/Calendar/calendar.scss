@@ -82,21 +82,29 @@
       }
     }
 
-    .clicked-date {
-      position: absolute;
-      display: none;
-      border-radius: 25px;
-      margin-top: 36px;
-      float: right;
-      width: 20%;
-      padding: 46px 0 26px;
-      background-color: lightgrey;
-      .cal-day {
-        font-size: 2em;
+    .detail__overlay {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.9);
+      &.hidden {
+        display: none;
       }
+      .clicked-date {
+        position: absolute;
+        border-radius: 25px;
+        margin-top: 36px;
+        float: right;
+        width: 20%;
+        padding: 46px 0 26px;
+        background-color: lightgrey;
+        .cal-day {
+          font-size: 2em;
+        }
 
-      .cal-date {
-        font-size: 3em;
+        .cal-date {
+          font-size: 3em;
+        }
       }
     }
   }

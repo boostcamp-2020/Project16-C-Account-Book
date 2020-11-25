@@ -8,6 +8,7 @@ const Calendar = props => {
   const calDateRef = useRef();
   const calDayRef = useRef();
   const calBodyRef = useRef();
+  const detailRef = useRef();
 
   const DateInfo = useRootData(store => store.nowCalendarInfo);
 
@@ -115,10 +116,12 @@ const Calendar = props => {
             />
           </table>
         </div>
-        <div className="clicked-date">
-          <div className="cal-day" ref={calDayRef} />
-          <div className="cal-date" ref={calDateRef} />
-          <div className="cal-transition">내역들</div>
+        <div ref={detailRef} className="detail__overlay hidden">
+          <div className="clicked-date">
+            <div className="cal-day" ref={calDayRef} />
+            <div className="cal-date" ref={calDateRef} />
+            <div className="cal-transition">내역들</div>
+          </div>
         </div>
       </div>
     </div>
