@@ -12,7 +12,7 @@ const App = props => {
     <DateInfoProvider>
       <PaymentProvider>
         <BrowserRouter>
-          <Route path="/" component={DefaultTemplate} />
+          <Route exact path="/" component={DefaultTemplate} />
           <Route exact path="/calendar" component={CalendarPage} />
         </BrowserRouter>
       </PaymentProvider>
