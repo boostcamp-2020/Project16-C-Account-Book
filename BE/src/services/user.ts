@@ -1,5 +1,4 @@
 import { UserModel } from '@/models/user';
-import { Context } from 'koa';
 
 const get = async ({ id }: { id: string }): Promise<any> => {
   const users = await UserModel.find({ id });
