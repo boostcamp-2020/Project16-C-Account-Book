@@ -14,7 +14,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
@@ -34,8 +34,12 @@ module.exports = {
         },
       },
       {
-        test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.tsx?$/,
@@ -57,7 +61,7 @@ module.exports = {
     historyApiFallback: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -67,5 +71,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: [/node_modules/],
+      test: /\.(ts|tsx)/i,
+    }),
   ],
 };
