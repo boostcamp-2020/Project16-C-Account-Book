@@ -14,7 +14,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
@@ -34,8 +34,12 @@ module.exports = {
         },
       },
       {
-        test: /\.s?css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
       {
         test: /\.tsx?$/,
@@ -49,15 +53,19 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(svg)$/, // .svg 확장자로 마치는 모든 파일
+        use: ['@svgr/webpack', 'url-loader'], // 파일 로더를 적용한다
+      },
     ],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -67,5 +75,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new webpack.SourceMapDevToolPlugin({
+      exclude: [/node_modules/],
+      test: /\.(ts|tsx)/i,
+    }),
   ],
 };

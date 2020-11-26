@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './GithubLoginButton.scss';
 import { ReactComponent as GithubLogo } from '../../../public/images/github-logo.svg';

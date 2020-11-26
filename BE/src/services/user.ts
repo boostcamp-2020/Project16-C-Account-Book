@@ -10,4 +10,5 @@ const post = async (body: Context['body']): Promise<string> => {
   const userId = await userModel.create(body);
   return userId;
 };
+
 export default { get, post };
