@@ -1,6 +1,7 @@
 import { getFetch } from '../service/fetch';
 
 export const getDefaultMethods = () => {
-  const data = getFetch('http://localhost:3000/api/defaultPaymentMethod');
+  const serverUrl = process.env.SERVER_URL;
+  const data = getFetch(serverUrl + '/api/defaultPaymentMethod');
   return data;
 };
