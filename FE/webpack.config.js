@@ -53,9 +53,13 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(svg)$/, // .svg 확장자로 마치는 모든 파일
+        use: ['@svgr/webpack', 'url-loader'], // 파일 로더를 적용한다
+      },
     ],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,

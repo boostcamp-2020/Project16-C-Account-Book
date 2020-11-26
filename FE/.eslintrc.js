@@ -37,6 +37,11 @@ module.exports = {
       'ignorePackages',
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never', json: 'never' },
     ],
-    'prettier/prettier': ['error'],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 };

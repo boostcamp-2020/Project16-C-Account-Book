@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
 import DateInfoProvider from './store/DateInfo/dateInfoContext';
 import './app.scss';
 
 import DefaultTemplate from './pages/DefaultTemplate';
 import CalendarPage from './pages/Calendar';
-import { BrowserRouter, Route } from 'react-router-dom';
+import LoginPage from './components/Login';
 
-const App = props => {
+const App = () => {
+    
   return (
     <DateInfoProvider>
       <PaymentProvider>
-        <BrowserRouter>
-          <Route exact path="/" component={DefaultTemplate} />
-          <Route exact path="/calendar" component={CalendarPage} />
-        </BrowserRouter>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={DefaultTemplate} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/calendar" component={CalendarPage} />
+          </Switch>
+        </Router>
       </PaymentProvider>
     </DateInfoProvider>
   );

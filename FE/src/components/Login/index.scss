@@ -1,0 +1,23 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 0 0;
+  position: relative;
+
+  .title {
+    position: absolute;
+    top: 28%;
+    left: 16vw;
+    font-weight: 1000;
+    font-size: 100px;
+    &::first-letter {
+      font-size: 150px;
+    }
+  }
+
+  .login-button-container {
+    position: absolute;
+    top: 70%;
+    left: 18vw;
+  }
+}
