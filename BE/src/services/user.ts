@@ -1,21 +1,14 @@
-import { UserModel } from '@/models/user';
+import userModel from '@/models/user';
+import { Context } from 'koa';
 
-const get = async ({ id }: { id: string }): Promise<any> => {
-  const users = await UserModel.find({ id });
+const get = async (body: Context['body']): Promise<any> => {
+  const users = await userModel.get(body);
   return users;
 };
 
-const post = async ({
-  id,
-  name,
-  password,
-}: {
-  id: string;
-  name: string;
-  password: string;
-}): Promise<string> => {
-  const userData = new UserModel({ id, name, password });
-  const user = await userData.save();
-  return user.id;
+const post = async (body: Context['body']): Promise<string> => {
+  const userId = await userModel.create(body);
+  return userId;
 };
+
 export default { get, post };

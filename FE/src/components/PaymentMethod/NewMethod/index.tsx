@@ -20,7 +20,7 @@ export default function NewMethod({
   const radius = 288;
   const theta = 360 / defaultMethod.length;
 
-  useEffect(() => {}, [selectedIndex]);
+  // useEffect(() => {}, [selectedIndex]);
 
   const rotateCarousel = turn => {
     if (carousel) {

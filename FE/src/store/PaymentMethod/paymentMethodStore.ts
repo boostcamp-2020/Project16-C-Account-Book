@@ -13,7 +13,11 @@ export const createStore = () => {
       this.paymentMethod = [data, ...this.paymentMethod];
     },
     updateAddTemplate(data: { name: string; color: string }) {
-      this.addTemplateData = data;
+      this.addTemplateData = {
+        ...this.addTemplateData,
+        name: data.name,
+        color: data.color,
+      };
     },
   };
   return store;

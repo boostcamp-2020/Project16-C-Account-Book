@@ -17,15 +17,16 @@ const accountBookMethodModel = mongoose.model<accountBookMethod>(
   accountBookMethodSchema,
 );
 
-const getAllAccountBookMethods = () => {
+const getAllAccountBookMethods = async () => {
   try {
-    return accountBookMethodModel.find();
+    return await accountBookMethodModel.find();
   } catch (error) {
+    console.error(error);
     return { statusCode: 500 };
   }
 };
 
-const createAccountBookMethods = ({
+const createAccountBookMethods = async ({
   name,
   description,
   transaction,
@@ -35,12 +36,13 @@ const createAccountBookMethods = ({
   transaction: [];
 }) => {
   try {
-    return accountBookMethodModel.create({
+    return await accountBookMethodModel.create({
       name,
       description,
       transaction,
     });
   } catch (error) {
+    console.error(error);
     return { statusCode: 500 };
   }
 };
