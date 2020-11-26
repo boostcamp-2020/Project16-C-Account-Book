@@ -1,8 +1,10 @@
 import { Context } from 'koa';
 import Router from 'koa-router';
 import userRouter from './user';
+import authRouter from './auth';
 import accountBookRouter from './account-book';
 import defaultPaymentMethodRouter from './defaultPaymentMethod';
+
 
 const router = new Router();
 
@@ -11,6 +13,7 @@ router.get('/', (ctx: Context) => {
 });
 
 router.use('/user', userRouter.routes());
+router.use('/auth', authRouter.routes());
 router.use('/accountbook', accountBookRouter.routes());
 router.use('/defaultPaymentMethod', defaultPaymentMethodRouter.routes());
 

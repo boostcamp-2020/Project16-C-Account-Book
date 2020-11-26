@@ -13,6 +13,7 @@ export default async (): Promise<void> => {
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     },
     (error: MongoError) => {
       if (error) {
