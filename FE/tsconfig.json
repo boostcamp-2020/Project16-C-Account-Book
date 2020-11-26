@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+  "allowJs": true,
+  "checkJs": true,
+  "sourceMap": true,
+  "target": "es5",
+    "lib": ["dom", "ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020"],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "moduleResolution":"node",
+    "outDir":"dist"
+  },
+  "include":["src/**/*.ts","src/**/*.tsx", "src/app.js"],
+  "exclude": ["node_modules"]
+}
