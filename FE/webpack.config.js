@@ -63,6 +63,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
+    host: '0.0.0.0'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
