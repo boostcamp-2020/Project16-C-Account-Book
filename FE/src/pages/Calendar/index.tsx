@@ -4,19 +4,21 @@ import Modal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import Calendar from '../../components/Calendar';
 import styles from './calendar.module.scss';
-import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+import { useRootData } from '../../store/PaymentMethod/paymentMethodHook';
 
 export default function CalendarPage() {
   const [modal, setModal] = useState(false);
   const [defaultMethod, setDefaultMethod] = useState([]);
 
-  const getData = async () => {
-    const datas = await getDefaultMethods();
+  const storeData = useRootData(store => store.defaultMethods);
+
+  const getDefaultMethod = async () => {
+    const datas = await storeData;
     setDefaultMethod(datas);
   };
 
   useEffect(() => {
-    getData();
+    getDefaultMethod();
   }, []);
 
   return (

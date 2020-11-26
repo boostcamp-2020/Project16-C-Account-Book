@@ -1,5 +1,8 @@
+import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+
 export const createStore = () => {
   const store = {
+    defaultMethods: getDefaultMethods(),
     addTemplateData: { name: '', color: '' },
     paymentMethod: [
       {
