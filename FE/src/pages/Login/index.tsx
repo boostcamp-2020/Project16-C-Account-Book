@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GithubLoginButton from './GithubLoginButton';
+import GithubLoginButton from '../../components/Login/GithubLoginButton';
 import './index.scss';
 
 const LoginPage = () => {

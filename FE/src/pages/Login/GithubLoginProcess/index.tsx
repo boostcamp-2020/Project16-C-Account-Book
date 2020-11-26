@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './GithubLoginProcess.scss';
 
-import authApi from '../../api/auth';
+import authApi from '../../../api/auth';
 
 const LoginProcessPage = () => {
   const history = useHistory();

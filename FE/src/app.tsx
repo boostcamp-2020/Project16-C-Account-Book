@@ -7,10 +7,10 @@ import './app.scss';
 
 import DefaultTemplate from './pages/DefaultTemplate';
 import CalendarPage from './pages/Calendar';
-import LoginPage from './components/Login';
+import LoginPage from './pages/Login';
+import GithubLoginProcess from './pages/Login/GithubLoginProcess';
 
 const App = () => {
-    
   return (
     <DateInfoProvider>
       <PaymentProvider>
@@ -18,6 +18,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={DefaultTemplate} />
             <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/auth/github" component={GithubLoginProcess} />
             <Route exact path="/calendar" component={CalendarPage} />
           </Switch>
         </Router>
