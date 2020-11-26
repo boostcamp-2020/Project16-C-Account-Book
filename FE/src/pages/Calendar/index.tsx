@@ -7,14 +7,16 @@ import styles from './calendar.module.scss';
 import useDefaultPayment from '../../service/useDefaultPayment';
 
 export default function CalendarPage() {
-  const [modal, setModal] = useState(false);
+  const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const defaultMethod = useDefaultPayment();
 
   return (
     <div className={styles.wrapper}>
-      <MenuBar setModal={setModal} pageType="calendar" />
+      <MenuBar setModal={setPaymentMethodModal} pageType="calendar" />
       <Calendar />
-      {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      {paymentMethodModal && (
+        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+      )}
     </div>
   );
 }
