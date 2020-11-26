@@ -1,17 +1,22 @@
 import React, { ReactElement } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
+import './app.scss';
+import PaymentMethod from './pages/PaymentMethod';
 import LoginPage from './components/Login';
 
-const App: React.FC = () => {
-  console.log('sss');
-
+const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/login" component={LoginPage} />
-      </Switch>
-    </Router>
+    <PaymentProvider>
+      <Router>
+        <Switch>
+
+            <Route path="/login" component={LoginPage} />
+            <Route path="/paymentmethod" component={PaymentMethod} />
+        </Switch>
+      </Router>
+    </PaymentProvider>  
   );
 };
 

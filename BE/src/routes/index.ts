@@ -1,12 +1,14 @@
-import createError from 'http-errors';
+
+import { Context } from 'koa';
 import Router from 'koa-router';
+import apiRouter from './api/index';
 
-const indexRouter = new Router();
+const router = new Router();
 
-indexRouter.get('/', (ctx, next) => {
-  const error = createError(402, 'error error wow');
-
-  throw error;
+router.get('/', (ctx: Context) => {
+  ctx.body = `GET ${ctx.path}`;
 });
 
-export default indexRouter;
+router.use('/api', apiRouter.routes());
+
+export default router;
