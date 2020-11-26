@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styles from './transaction.module.scss';
 
 import Modal from '../../components/PaymentMethod/Modal';
-import Menubar from '../../components/Common/MenuBar';
+import MenuBar from '../../components/Common/MenuBar';
 import ListContainer from '../../components/transaction/list/listcontainer';
+import styles from './transaction.module.scss';
 import { getDefaultMethods } from '../../api/defaultPaymentMethod';
 
-const TransactionComponent = props => {
+export default function TransactionComponent() {
   const [modal, setModal] = useState(false);
   const [defaultMethod, setDefaultMethod] = useState([]);
 
@@ -20,12 +20,10 @@ const TransactionComponent = props => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <Menubar setModal={setModal} pageType="transaction" />
-      <ListContainer />
+    <div className={styles.wrapper}>
+      <MenuBar setModal={setModal} pageType="transaction" />
       {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      <ListContainer />
     </div>
   );
-};
-
-export default TransactionComponent;
+}
