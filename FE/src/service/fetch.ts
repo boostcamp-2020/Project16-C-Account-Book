@@ -5,6 +5,7 @@ export const getFetch = async query => {
       'Content-Type': 'application/json;',
     },
   });
+
   const json = response.json();
   return json;
 };
