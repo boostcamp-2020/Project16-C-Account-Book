@@ -7,15 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --mode=development",
     "build": "webpack --mode=production",
-    "dev": "webpack-dev-server --open"
+    "dev": "webpack-dev-server -d --open"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@svgr/webpack": "^5.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
+    "sass": "^1.29.0",
+    "url-loader": "^4.1.1"
     "mobx-react-lite": "^3.1.6"
   },
   "devDependencies": {
