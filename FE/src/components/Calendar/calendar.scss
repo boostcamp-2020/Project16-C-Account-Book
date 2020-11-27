@@ -1,12 +1,10 @@
 .calendar-container {
-  position: absolute;
-  top: 12em;
-  // left: 50%;
+  margin-top: 10em;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  // transform: translateX(-50%);
+
   .my-calendar {
     width: 100%;
     margin: 30px;
