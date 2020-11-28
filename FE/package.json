@@ -14,12 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@svgr/webpack": "^5.5.0",
+    "mobx-react": "^7.0.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "sass": "^1.29.0",
-    "url-loader": "^4.1.1",
-    "mobx-react-lite": "^3.1.6"
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
