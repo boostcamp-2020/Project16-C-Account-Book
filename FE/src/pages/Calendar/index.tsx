@@ -5,8 +5,10 @@ import MenuBar from '../../components/Common/MenuBar';
 import Calendar from '../../components/Calendar';
 import styles from './calendar.module.scss';
 import useDefaultPayment from '../../service/useDefaultPayment';
+import useLoginCheck from '../../service/useLoginCheck';
 
 export default function CalendarPage() {
+  useLoginCheck();
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const defaultMethod = useDefaultPayment();
 
