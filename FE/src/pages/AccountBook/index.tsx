@@ -1,12 +1,13 @@
 import React from 'react';
 
-import AccountBookList from '../../components/AccountBook';
-import styles from './AccountListPage.module.scss';
+import AccountBookControl from '../../components/AccountBook/AccountBookControl';
+import AccountBookList from '../../components/AccountBook/AccountBookList';
+import styles from './AccountBookListPage.module.scss';
 
-export default function AccountListPage() {
+export default function AccountBookListPage() {
   return (
     <div className={styles.container}>
-      <h1>가계부 리스트</h1>
+      <AccountBookControl />
       <AccountBookList />
     </div>
   );

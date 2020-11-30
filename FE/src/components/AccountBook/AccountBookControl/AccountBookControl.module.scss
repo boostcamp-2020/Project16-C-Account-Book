@@ -1,0 +1,17 @@
+.container {
+  margin-top: 100px;
+
+  .title {
+    font-size: 45px;
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .plus {
+      margin-right: 10px;
+    }
+  }
+}
