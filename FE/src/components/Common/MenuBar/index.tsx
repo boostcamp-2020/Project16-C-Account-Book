@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
@@ -48,23 +48,7 @@ const MenuBar = ({ setModal, pageType }) => {
     setModal(true);
   }, []);
 
-  const setIcon = useCallback(
-    pageType => {
-      if (pageType === 'transaction') {
-        transactionIconRef.current.classList.toggle(styles.checked);
-      }
-      if (pageType === 'calendar') {
-        calIconRef.current.classList.toggle(styles.checked);
-      }
-      if (pageType === 'chart') {
-        chartIconRef.current.classList.toggle(styles.checked);
-      }
-    },
-    [pageType],
-  );
-
   useEffect(() => {
-    setIcon(pageType);
     setYearMonth(DateInfo.year, DateInfo.month);
   }, [pageType]);
 
@@ -73,7 +57,11 @@ const MenuBar = ({ setModal, pageType }) => {
       <div className={styles.buttons} ref={allBtnRef}>
         <div
           ref={transactionIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'transaction'
+              ? `${styles.navBtn} ${styles.checked}`
+              : `${styles.navBtn}`
+          }
           data-type="transaction"
           onClick={onClickIcon}
         >
@@ -81,7 +69,11 @@ const MenuBar = ({ setModal, pageType }) => {
         </div>
         <div
           ref={calIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'calendar'
+              ? `${styles.navBtn} ${styles.checked}`
+              : `${styles.navBtn}`
+          }
           data-type="calendar"
           onClick={onClickIcon}
         >
@@ -89,7 +81,11 @@ const MenuBar = ({ setModal, pageType }) => {
         </div>
         <div
           ref={chartIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'chart'
+              ? `${styles.navBtn} ${styles.checked}`
+              : `${styles.navBtn}`
+          }
           data-type="chart"
           onClick={onClickIcon}
         >
