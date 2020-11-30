@@ -1,31 +1,26 @@
 import mongoose from 'mongoose';
+import { iUser } from '@/types/auth';
 
-export interface iUser extends mongoose.Document {
+export interface iUserDoc extends mongoose.Document {
   id: string;
   name: string;
 }
 
 const userSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
+  name: { type: String },
 });
 
 userSchema.index({ id: 1 });
 
-const UserModel = mongoose.model<iUser>('users', userSchema);
+const UserModel = mongoose.model<iUserDoc>('users', userSchema);
 
-const get = async ({ id }: { id: string }): Promise<iUser | null> => {
+const get = async ({ id }: iUser): Promise<iUserDoc | null> => {
   const user = await UserModel.findOne({ id });
   return user;
 };
 
-const create = async ({
-  id,
-  name,
-}: {
-  id: string;
-  name: string;
-}): Promise<string> => {
+const create = async ({ id, name }: iUser): Promise<string> => {
   const userData = new UserModel({ id, name });
   const user = await userData.save();
 
