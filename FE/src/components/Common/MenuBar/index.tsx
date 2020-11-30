@@ -48,17 +48,20 @@ const MenuBar = ({ setModal, pageType }) => {
     setModal(true);
   }, []);
 
-  const setIcon = useCallback(pageType => {
-    if (pageType === 'transaction') {
-      transactionIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'calendar') {
-      calIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'chart') {
-      chartIconRef.current.classList.toggle(styles.checked);
-    }
-  }, pageType);
+  const setIcon = useCallback(
+    pageType => {
+      if (pageType === 'transaction') {
+        transactionIconRef.current.classList.toggle(styles.checked);
+      }
+      if (pageType === 'calendar') {
+        calIconRef.current.classList.toggle(styles.checked);
+      }
+      if (pageType === 'chart') {
+        chartIconRef.current.classList.toggle(styles.checked);
+      }
+    },
+    [pageType],
+  );
 
   useEffect(() => {
     setIcon(pageType);
