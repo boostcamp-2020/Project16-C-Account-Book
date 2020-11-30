@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { v4 } from 'uuid';
+import ChartColorCollections from '../../../util/chartColorCollection';
 import './tableChart.scss';
 
 export default function TableChart({ chartInfo }) {
-  const colors = ['#ff9aa2', '#ffefb9', '#ffdac1', '#ffb7b2'];
   return (
     <div className="pie__table">
       {chartInfo &&
@@ -19,7 +18,7 @@ export default function TableChart({ chartInfo }) {
                   display: 'inline-block',
                   width: `${Math.floor(el.percent)}%`,
                   height: '20px',
-                  backgroundColor: `${colors[i]}`,
+                  backgroundColor: `${ChartColorCollections[i]}`,
                 }}
               />
             </span>

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { v4 } from 'uuid';
+import ChartColorCollections from '../../../util/chartColorCollection';
 import './pieChart.scss';
 
 export default function PieChart({ chartInfo, refArr }) {
-  const colors = ['#ff9aa2', '#ffefb9', '#ffdac1', '#ffb7b2'];
-
   const drawAnimation = () => {
     if (chartInfo.length !== 0) {
       refArr.forEach((_, i) => {
@@ -34,7 +33,7 @@ export default function PieChart({ chartInfo, refArr }) {
               cy="150"
               r="125"
               data-radius="125"
-              stroke={`${colors[i]}`}
+              stroke={`${ChartColorCollections[i]}`}
               strokeDasharray="1"
               strokeDashoffset="0"
               data-per={`${el.percent}`}
