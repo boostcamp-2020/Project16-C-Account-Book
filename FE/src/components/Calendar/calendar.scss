@@ -1,3 +1,6 @@
+@use '../../styles/values' as *;
+@use '../../styles/mixins' as *;
+
 .calendar-container {
   width: 100%;
   display: flex;
@@ -57,13 +60,13 @@
           transform: translateX(-50%);
           line-height: 40px;
           border-radius: 50%;
-          color: white;
+          color: $white;
         }
 
         @keyframes todayColor {
           from {
             transform: translate(-50px);
-            background: white;
+            background: $white;
           }
         }
 
@@ -84,7 +87,7 @@
       width: 100%;
       height: 100%;
       position: fixed;
-      background-color: rgba(0, 0, 0, 0.9);
+      background-color: $modal-background;
       &.hidden {
         display: none;
       }
@@ -95,7 +98,8 @@
         float: right;
         width: 20%;
         padding: 46px 0 26px;
-        background-color: lightgrey;
+        background-color: $light-grey;
+
         .cal-day {
           font-size: 2em;
         }
