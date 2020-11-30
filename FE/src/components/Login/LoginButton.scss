@@ -1,15 +1,19 @@
-.NaverLoginButton {
+$naver-color: #1ec800;
+$github-color: black;
+
+@mixin LoginButton($color) {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #1ec800;
+  background-color: $color;
   color: white;
   box-shadow: 0 0 5px 1px grey;
   width: 300px;
   height: 60px;
   border: none;
+  margin-top: 20px;
 
-  .N-logo {
+  .logo {
     font-weight: 900;
     font-size: 35px;
   }
@@ -23,4 +27,12 @@
     font-weight: 700;
     font-size: 20px;
   }
+}
+
+.GithubLoginButton {
+  @include LoginButton($github-color);
+}
+
+.NaverLoginButton {
+  @include LoginButton($naver-color);
 }
