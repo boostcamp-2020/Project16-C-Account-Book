@@ -1,15 +1,14 @@
-.header {
-  // position: fixed;
+.menubar__header {
   background-color: #222;
   width: 100%;
   padding: 1.5em 0;
   z-index: 2;
-  .buttons {
+  .menubar__buttons {
     display: flex;
     justify-content: center;
     gap: 3em;
 
-    .navBtn {
+    .menubar__navBtn {
       text-align: center;
       line-height: 1.5em;
       width: 1.5em;
@@ -32,7 +31,7 @@
     }
   }
 
-  .ctrBox {
+  .menubar__ctrBox {
     margin-top: 1.5em;
     font-size: 20px;
     display: flex;
