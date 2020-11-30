@@ -1,10 +1,13 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/values' as *;
+
 .addform__wrapper {
   width: 333px;
   height: 195px;
-  border-radius: 6px;
-  border: 1px solid white;
-  background-color: rgba(0, 0, 0, 0.1);
-  color: white;
+  border-radius: $basic-border-radius;
+  border: 1px solid $white;
+  background-color: $modal-button-background;
+  color: $white;
   font-weight: bold;
   position: absolute;
   font-size: 1.5em;
@@ -21,7 +24,7 @@
     width: 70%;
     margin: auto;
     font-size: 0.8em;
-    color: black;
+    color: $black;
     border: none;
   }
 }
