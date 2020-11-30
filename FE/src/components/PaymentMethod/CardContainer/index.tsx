@@ -1,23 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { v4 } from 'uuid';
 
-import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
-import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
-import styles from './cardContainer.module.scss';
+import './cardContainer.scss';
 
-export default function CardContainer(): React.ReactElement {
-  const store = useContext(paymentContext);
-  if (!store) throw Error("Store shouldn't be null");
-  const paymentMethods = useRootData(store => store.paymentMethod);
-
+export default React.memo(function CardContainer({
+  paymentMethods,
+}): React.ReactElement {
   return (
-    <div className={styles.container} data-overlay>
+    <div className="card__container" data-overlay>
       {paymentMethods.map(card => (
-        <div className={styles.card} style={{ background: `${card.color}` }}>
-          <div className={styles.cancel}>X</div>
-          <div className={styles.cardTitle}>{card.name}</div>
-          <div className={styles.cardDesc}>{card.desc}</div>
+        <div
+          key={v4()}
+          className="card__container__card"
+          style={{ background: `${card.color}` }}
+        >
+          <div className="card__cancel">X</div>
+          <div className="card__title">{card.name}</div>
+          <div className="card__desc">{card.desc}</div>
         </div>
       ))}
     </div>
   );
-}
+});

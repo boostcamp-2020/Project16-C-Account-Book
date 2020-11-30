@@ -1,4 +1,4 @@
-.wrapper {
+.addform__wrapper {
   width: 333px;
   height: 195px;
   border-radius: 6px;
@@ -17,7 +17,7 @@
   flex-direction: column;
   z-index: 3;
 
-  .methodName {
+  .addform__method__name {
     width: 70%;
     margin: auto;
     font-size: 0.8em;
