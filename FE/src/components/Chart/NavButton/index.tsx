@@ -1,19 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 import './navButton.scss';
 
 export default function NavButton({ chartType, setChartType }) {
   const buttonRef = useRef();
-
-  const setButton = () => {
-    buttonRef.current.childNodes.forEach(item => {
-      if (item.classList.value === chartType) {
-        item.classList.add('selected');
-      } else {
-        item.classList.remove('selected');
-      }
-    });
-  };
 
   const onClickCategoryButton = () => {
     setChartType('category');
@@ -23,20 +13,20 @@ export default function NavButton({ chartType, setChartType }) {
     setChartType('date');
   };
 
-  useEffect(() => {
-    setButton();
-  }, [chartType]);
-
   return (
     <div ref={buttonRef} className="nav__buttons">
       <button
         type="button"
-        className="category"
+        className={chartType === 'category' ? 'category selected' : 'category'}
         onClick={onClickCategoryButton}
       >
         By Category
       </button>
-      <button type="button" className="date" onClick={onClickDateButton}>
+      <button
+        type="button"
+        className={chartType === 'date' ? 'date selected' : 'date'}
+        onClick={onClickDateButton}
+      >
         By Dates
       </button>
     </div>
