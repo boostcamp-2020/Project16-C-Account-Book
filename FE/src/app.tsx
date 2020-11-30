@@ -10,6 +10,7 @@ import CalendarPage from './pages/Calendar';
 import LoginPage from './pages/Login';
 import TransactionPage from './pages/transaction';
 import GithubLoginProcess from './pages/Login/GithubLoginProcess';
+import NaverLoginProcess from './pages/Login/NaverLoginProcess';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route exact path="/" component={DefaultTemplate} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/auth/github" component={GithubLoginProcess} />
+            <Route exact path="/auth/naver" component={NaverLoginProcess} />
             <Route exact path="/calendar" component={CalendarPage} />
             <Route exact path="/transaction" component={TransactionPage} />
           </Switch>
