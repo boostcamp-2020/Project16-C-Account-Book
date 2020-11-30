@@ -1,3 +1,32 @@
+@use '../../../styles/values' as *;
+
+@mixin noSelectedButton($category) {
+  width: 15em;
+  padding: 0.7em 0;
+  border: none;
+
+  font-size: 1.2em;
+  @if $category == category {
+    border-radius: 6px 0 0 6px;
+  } @else {
+    border-radius: 0 6px 6px 0;
+  }
+  background-color: rgba(0, 0, 0, 0.5);
+  outline: none;
+  color: white;
+  box-shadow: $noSelectedBoxShadow;
+  cursor: pointer;
+}
+
+@mixin selectedButton {
+  &.selected {
+    background-color: #222;
+    box-shadow: $selectedBoxShadow;
+    text-shadow: $selectedTextShadow;
+    color: white;
+  }
+}
+
 .nav__buttons {
   margin-top: 3em;
   width: 100%;
@@ -6,45 +35,12 @@
   justify-content: center;
 
   .category {
-    width: 15em;
-
-    padding: 0.7em 0;
-    border: none;
-    border-radius: 6px 0 0 6px;
-    font-size: 1.2em;
-    background-color: rgba(0, 0, 0, 0.5);
-    outline: none;
-    color: white;
-    cursor: pointer;
-
-    &.selected {
-      background-color: #222;
-      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
-        3px 3px 5px rgba(255, 255, 255, 0.07);
-      text-shadow: 0 0 10px rgba(33, 156, 243, 1),
-        0 0 10px rgba(33, 156, 243, 1);
-      color: white;
-    }
+    @include noSelectedButton(category);
+    @include selectedButton;
   }
 
   .date {
-    width: 15em;
-    padding: 0.7em 0;
-    border: none;
-    border-radius: 0 6px 6px 0;
-    font-size: 1.2em;
-    background-color: rgba(0, 0, 0, 0.5);
-    outline: none;
-    color: white;
-    cursor: pointer;
-
-    &.selected {
-      background-color: #222;
-      box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
-        3px 3px 5px rgba(255, 255, 255, 0.07);
-      text-shadow: 0 0 10px rgba(33, 156, 243, 1),
-        0 0 10px rgba(33, 156, 243, 1);
-      color: white;
-    }
+    @include noSelectedButton(date);
+    @include selectedButton;
   }
 }

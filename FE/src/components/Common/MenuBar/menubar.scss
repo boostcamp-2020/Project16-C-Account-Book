@@ -1,3 +1,5 @@
+@use '../../../styles/values' as *;
+
 .menubar__header {
   background-color: #222;
   width: 100%;
@@ -19,13 +21,11 @@
       color: #3e3e3e;
       cursor: pointer;
       font-size: 2em;
-      box-shadow: inset -2px -2px 5px rgba(0, 0, 0, 0.5), inset 3px 3px 5px;
+      box-shadow: $noSelectedBoxShadow;
 
       &.checked {
-        box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
-          3px 3px 5px rgba(255, 255, 255, 0.07);
-        text-shadow: 0 0 10px rgba(33, 156, 243, 1),
-          0 0 10px rgba(33, 156, 243, 1);
+        box-shadow: $selectedBoxShadow;
+        text-shadow: $selectedTextShadow;
         color: white;
       }
     }
@@ -39,7 +39,8 @@
     gap: 2em;
     font-weight: 900;
     color: white;
-    text-shadow: 0 0 10px rgba(33, 156, 243, 1), 0 0 10px rgba(33, 156, 243, 1);
+    text-shadow: $selectedTextShadow;
+
     .btn-cal {
       position: relative;
       float: left;
@@ -53,8 +54,7 @@
       background: none;
       font-weight: 900;
       color: white;
-      text-shadow: 0 0 10px rgba(33, 156, 243, 1),
-        0 0 10px rgba(33, 156, 243, 1);
+      text-shadow: $selectedTextShadow;
     }
     .btn-cal:after {
       content: '<';
