@@ -1,7 +1,8 @@
 @use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
 
 .menubar__header {
-  background-color: #222;
+  background-color: $light-black;
   width: 100%;
   padding: 1.5em 0;
   z-index: 2;
@@ -11,15 +12,14 @@
     gap: 3em;
 
     .menubar__navBtn {
+      @include buttonDefaultSetting;
+
       text-align: center;
       line-height: 1.5em;
       width: 1.5em;
       height: 1.5em;
       background-color: transparent;
-      border: none;
-      outline: none;
       color: #3e3e3e;
-      cursor: pointer;
       font-size: 2em;
       box-shadow: $noSelectedBoxShadow;
 
@@ -42,15 +42,13 @@
     text-shadow: $selectedTextShadow;
 
     .btn-cal {
+      @include buttonDefaultSetting;
       position: relative;
       float: left;
       width: 25px;
       height: 25px;
       margin-top: 5px;
       font-size: 16px;
-      cursor: pointer;
-      outline: none;
-      border: none;
       background: none;
       font-weight: 900;
       color: white;
