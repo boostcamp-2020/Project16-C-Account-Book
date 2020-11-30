@@ -1,5 +1,6 @@
 .acbook__list {
   margin-left: auto;
+
   div:nth-child(1) {
     animation: cardShow 0.5s;
   }
@@ -42,10 +43,11 @@
       width: 260px;
       margin: 5px;
     }
-  }
 
-  .create__cancle {
-    cursor: pointer;
+    .create__cancle {
+      cursor: pointer;
+      width: 0px;
+    }
   }
 
   .acbook {
@@ -58,7 +60,8 @@
     padding: 16px;
     transition-duration: 0.3s;
     transform: translateX(20%);
-    // animation: cardShow 1s;
+    color: black;
+    cursor: pointer;
 
     &:hover {
       transform: translateX(5%);

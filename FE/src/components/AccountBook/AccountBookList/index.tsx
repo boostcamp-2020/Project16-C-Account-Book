@@ -1,19 +1,26 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import { useObserver } from 'mobx-react-lite';
+import { useHistory } from 'react-router-dom';
 
 import { AccountBookContext } from '../../../store/AccountBook/account-book.context.tsx';
 import styles from './AccountBookList.module.scss';
 import { getAccountBookList } from '../../../api/accoun-book-list';
 import { postFetch } from '../../../service/fetch';
 import { useRootData } from '../../../store/AccountBook/account-book.hook';
+import Calendar from 'src/components/Calendar';
 
 export const AccountBookView: ReactElement<{
   datas: any[];
 }> = ({ datas }) => {
+  const history = useHistory();
+  const linkToDetail = (id = '') => {
+    history.push(`calendar/${id}`);
+  };
+
   return (
     <>
       {datas.map(data => (
-        <div className={styles.acbook}>
+        <div className={styles.acbook} onClick={() => linkToDetail()}>
           <h3>{data.name}</h3>
           <p>{data.description}</p>
         </div>
@@ -58,6 +65,7 @@ export const AccountBookList = () => {
   const fetchAccountBooks = async () => {
     try {
       const datas = await getAccountBookList();
+      console.log(datas);
       store.AccountBooks = datas.reverse();
     } catch (error) {
       console.error(error);
