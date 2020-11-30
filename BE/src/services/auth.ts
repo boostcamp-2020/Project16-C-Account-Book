@@ -18,6 +18,23 @@ interface iUser {
   name: string;
 }
 
+const accessToken = async (
+  code: string,
+  tokenGetUrl: string,
+  tokenGetParams: iTokenGetParams,
+  reg: RegExp,
+) => {
+  const { data } = await axios.post(tokenGetUrl, null, {
+    params: tokenGetParams,
+  });
+
+  const regArr = data.match(reg);
+
+  if (!regArr) throw createError(401, 'code expired');
+
+  return regArr[1];
+};
+
 const getGitubAccessToken = async (code: string) => {
   const tokenGetParams: iTokenGetParams = {
     code,
@@ -25,15 +42,10 @@ const getGitubAccessToken = async (code: string) => {
     client_secret: process.env.GITHUB_CLIENT_SECRET || '',
   };
   const tokenGetUrl = 'https://github.com/login/oauth/access_token';
-  const { data } = await axios.post(tokenGetUrl, null, {
-    params: tokenGetParams,
-  });
+  const reg = /access_token=(\w+)&/;
 
-  const regArr = data.match(/access_token=(\w+)&/);
-
-  if (!regArr) throw createError(401, 'code expired');
-
-  return regArr[1];
+  const token = await accessToken(code, tokenGetUrl, tokenGetParams, reg);
+  return token;
 };
 
 const getGithubUserInfo = async (accessToken: string) => {
@@ -63,6 +75,7 @@ const makeToken = (userInfo: iUser): string => {
 
 const login = async (body: Context['body']): Promise<string> => {
   try {
+    const { social, code } = body;
     const githubAccessToken = await getGitubAccessToken(body.code);
     const userInfo = await getGithubUserInfo(githubAccessToken);
     const isUserInDB = await checkUserInDB(userInfo);
