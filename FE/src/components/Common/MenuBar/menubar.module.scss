@@ -1,8 +1,8 @@
 .header {
-  position: fixed;
+  // position: fixed;
   background-color: #222;
   width: 100%;
-  padding: 2em 0;
+  padding: 1.5em 0;
   z-index: 2;
   .buttons {
     display: flex;
@@ -11,9 +11,9 @@
 
     .navBtn {
       text-align: center;
-      line-height: 1.8em;
-      width: 1.8em;
-      height: 1.8em;
+      line-height: 1.5em;
+      width: 1.5em;
+      height: 1.5em;
       background-color: transparent;
       border: none;
       outline: none;
@@ -33,11 +33,11 @@
   }
 
   .ctrBox {
-    margin-top: 2em;
+    margin-top: 1.5em;
     font-size: 20px;
     display: flex;
     justify-content: center;
-    gap: 3em;
+    gap: 2em;
     font-weight: 900;
     color: white;
     text-shadow: 0 0 10px rgba(33, 156, 243, 1), 0 0 10px rgba(33, 156, 243, 1);
