@@ -4,26 +4,21 @@ import Modal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import Calendar from '../../components/Calendar';
 import styles from './calendar.module.scss';
-import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+import useDefaultPayment from '../../service/useDefaultPayment';
+import useLoginCheck from '../../service/useLoginCheck';
 
 export default function CalendarPage() {
-  const [modal, setModal] = useState(false);
-  const [defaultMethod, setDefaultMethod] = useState([]);
-
-  const getData = async () => {
-    const datas = await getDefaultMethods();
-    setDefaultMethod(datas);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  useLoginCheck();
+  const [paymentMethodModal, setPaymentMethodModal] = useState(false);
+  const defaultMethod = useDefaultPayment();
 
   return (
     <div className={styles.wrapper}>
-      <MenuBar setModal={setModal} pageType="calendar" />
+      <MenuBar setModal={setPaymentMethodModal} pageType="calendar" />
       <Calendar />
-      {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      {paymentMethodModal && (
+        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+      )}
     </div>
   );
 }

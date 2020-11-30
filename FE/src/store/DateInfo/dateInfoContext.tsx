@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { useLocalStore } from 'mobx-react-lite';
+import { useLocalStore } from 'mobx-react';
 import { createStore, TStore } from './dateInfoStore';
 
 export const dateInfoContext = createContext<TStore | null>(null);

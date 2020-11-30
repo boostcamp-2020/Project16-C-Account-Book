@@ -1,5 +1,5 @@
 import React from 'react';
-import { useObserver } from 'mobx-react-lite';
+import { useObserver } from 'mobx-react';
 import { dateInfoContext } from './dateInfoContext';
 import { TStore } from './dateInfoStore';
 
