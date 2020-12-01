@@ -1,26 +1,18 @@
 import { User, UserModel } from './schema';
 
-const get = async ({
-  id,
-  password,
-}: {
-  id: string;
-  password: string | undefined;
-}): Promise<User | null> => {
-  const user = await UserModel.findOne({ id, password });
+const get = async ({ id }: { id: string }): Promise<User | null> => {
+  const user = await UserModel.findOne({ id });
   return user;
 };
 
 const create = async ({
   id,
   name,
-  password,
 }: {
   id: string;
   name: string;
-  password: string | undefined;
 }): Promise<string> => {
-  const userData = new UserModel({ id, name, password });
+  const userData = new UserModel({ id, name });
   const user = await userData.save();
 
   return user.id;

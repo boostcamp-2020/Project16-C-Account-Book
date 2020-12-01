@@ -46,15 +46,11 @@ const getGithubUserInfo = async (accessToken: string) => {
   const userInfo = {
     id: `${data.login}_github`,
     name: data.name,
-    password: undefined,
   };
   return userInfo;
 };
 
-const checkUserInDB = async (userInfo: {
-  id: string;
-  password: string | undefined;
-}): Promise<boolean> => {
+const checkUserInDB = async (userInfo: { id: string }): Promise<boolean> => {
   const user = await userModel.get(userInfo);
   return !!user;
 };
