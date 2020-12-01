@@ -75,10 +75,10 @@
           right: 5%;
 
           &.income {
-            color: #54aafc;
+            color: $income-color;
           }
           &.spending {
-            color: #ee4337;
+            color: $spending-color;
           }
         }
       }

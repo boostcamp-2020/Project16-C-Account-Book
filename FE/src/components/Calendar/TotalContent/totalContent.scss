@@ -1,14 +1,16 @@
+@use '../../../styles/values.scss' as *;
+
 @mixin calendar-total($type) {
   width: 22%;
   text-align: center;
   border-radius: 50px;
   padding: 1em 5em;
   @if $type== income {
-    border: 1.5px solid #54aafc;
-    color: #54aafc;
+    border: 1.5px solid $income-color;
+    color: $income-color;
   } @else {
-    border: 1.5px solid #ee4337;
-    color: #ee4337;
+    border: 1.5px solid $spending-color;
+    color: $spending-color;
   }
 }
 

@@ -39,11 +39,11 @@
 
           .income__info {
             font-size: 0.8em;
-            color: #54aafc;
+            color: $income-color;
           }
           .spending__info {
             font-size: 0.8em;
-            color: #ee4337;
+            color: $spending-color;
           }
         }
         .day {
@@ -89,7 +89,6 @@
           bottom: 0;
           width: 100%;
           height: 4px;
-          background: #ffc107;
         }
       }
     }
