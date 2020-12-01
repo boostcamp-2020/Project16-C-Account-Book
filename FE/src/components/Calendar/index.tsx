@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import { useRootData } from '../../store/DateInfo/dateInfoHook';
 import CalculateDate from '../../util/calculateDate';
@@ -6,15 +6,18 @@ import './calendar.scss';
 
 const Calendar = props => {
   const calDateRef = useRef();
-  const calDayRef = useRef();
+  const calMonthRef = useRef();
+  const calYearRef = useRef();
   const calBodyRef = useRef();
-  const detailRef = useRef();
+
+  const [detailModal, setDetailModal] = useState(false);
 
   const DateInfo = useRootData(store => store.nowCalendarInfo);
 
-  const loadDate = (date, dayIn) => {
+  const loadDate = (year, month, date) => {
+    calYearRef.current.textContent = `${year}년`;
+    calMonthRef.current.textContent = `${month}월`;
     calDateRef.current.textContent = `${date}일`;
-    calDayRef.current.textContent = CalculateDate.dayList[dayIn];
   };
 
   const makeCalendar = (year, month) => {
@@ -77,20 +80,26 @@ const Calendar = props => {
 
   const onClickCalBody = useCallback(event => {
     if (event.target.classList.contains('day')) {
-      if (CalculateDate.activeDTag) {
-        CalculateDate.activeDTag.classList.remove('day-active');
-      }
+      const { year } = DateInfo;
+      const { month } = DateInfo;
       const day = Number(event.target.textContent);
-      loadDate(day, event.target.cellIndex);
-      event.target.classList.add('day-active');
+
+      loadDate(year, month + 1, day); // 요일검증을 위한값
       CalculateDate.activeDTag = event.target;
       CalculateDate.activeDate.setDate(day);
+      setDetailModal(true);
     }
   }, []);
 
+  const onClickDetailOverlay = event => {
+    if (event.target.classList.contains('detail-info-overlay')) {
+      setDetailModal(false);
+    }
+  };
+
   useEffect(() => {
     makeCalendar(DateInfo.year, DateInfo.month);
-    loadDate(CalculateDate.today.getDate(), CalculateDate.today.getDay());
+    loadDate(DateInfo.year, DateInfo.month + 1, CalculateDate.today.getDate());
   }, [DateInfo]);
 
   return (
@@ -116,10 +125,18 @@ const Calendar = props => {
             />
           </table>
         </div>
-        <div ref={detailRef} className="detail__overlay hidden">
+        <div
+          className={
+            detailModal ? 'detail-info-overlay' : 'detail-info-overlay hidden'
+          }
+          onClick={onClickDetailOverlay}
+        >
           <div className="clicked-date">
-            <div className="cal-day" ref={calDayRef} />
-            <div className="cal-date" ref={calDateRef} />
+            <div className="cal-date-info">
+              <span className="cal-year" ref={calYearRef} />
+              <span className="cal-month" ref={calMonthRef} />
+              <span className="cal-date" ref={calDateRef} />
+            </div>
             <div className="cal-transition">내역들</div>
           </div>
         </div>

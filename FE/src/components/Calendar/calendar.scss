@@ -9,8 +9,7 @@
 
   .my-calendar {
     width: 100%;
-    margin: 30px;
-    padding: 20px 20px 10px;
+
     text-align: center;
     font-weight: 800;
     display: flex;
@@ -83,29 +82,42 @@
       }
     }
 
-    .detail__overlay {
+    .detail-info-overlay {
+      position: absolute;
       width: 100%;
-      height: 100%;
-      position: fixed;
+      height: 80%;
       background-color: $modal-background;
+      display: flex;
+      justify-content: center;
+
       &.hidden {
         display: none;
       }
+
       .clicked-date {
         position: absolute;
-        border-radius: 25px;
-        margin-top: 36px;
-        float: right;
-        width: 20%;
-        padding: 46px 0 26px;
+        border-radius: $basic-border-radius;
+        width: 50em;
+        height: 35em;
         background-color: $light-grey;
+        padding: 2em 0;
+        margin-top: 5%;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
 
-        .cal-day {
-          font-size: 2em;
+        .cal-date-info {
+          display: flex;
+          gap: 1em;
+          font-size: 1.5em;
+          justify-content: center;
+          .cal-year,
+          .cal-month,
+          .cal-date {
+            display: inline-block;
+          }
         }
-
-        .cal-date {
-          font-size: 3em;
+        .cal-transition {
+          margin-top: 2em;
         }
       }
     }
