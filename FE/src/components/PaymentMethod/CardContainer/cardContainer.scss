@@ -20,13 +20,13 @@
     width: 333px;
     min-height: 195px;
     margin-top: 4em;
-    transform: translateX(35px);
-    animation: cardShow 1s forwards;
-    animation-iteration-count: 1;
+
+    animation: cardShow 1s backwards;
     transition: transform 500ms ease;
+    transform: translateX(35px);
+
     border-radius: 6px;
     padding: 1.5em;
-    opacity: 0;
 
     .card__cancel {
       position: absolute;
@@ -62,7 +62,6 @@
 
     to {
       opacity: 1;
-      transform: 0;
     }
   }
 }
