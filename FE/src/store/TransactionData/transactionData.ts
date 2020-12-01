@@ -32,7 +32,7 @@ export const createStore = () => {
       user: [1, 2, 3, 4],
       transaction: [
         {
-          _id: 'asdf',
+          _id: 'a',
           content: 'test',
           type: '지출',
           cost: 10000,
@@ -47,7 +47,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'b',
           content: 'test2',
           type: '지출',
           cost: 20000,
@@ -62,7 +62,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'c',
           content: 'test3',
           type: '지출',
           cost: 30000,
@@ -77,7 +77,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'd',
           content: 'test4',
           type: '지출',
           cost: 40000,
@@ -93,7 +93,7 @@ export const createStore = () => {
         },
 
         {
-          _id: 'asdf',
+          _id: 'e',
           content: 'test4',
           type: '지출',
           cost: 50000,
@@ -108,7 +108,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'f',
           content: 'test4',
           type: '지출',
           cost: 1000,
@@ -123,7 +123,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'g',
           content: 'test4',
           type: '지출',
           cost: 10000,
@@ -138,7 +138,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'h',
           content: '옷',
           type: '지출',
           cost: 1000000,
@@ -153,7 +153,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'i',
           content: '치킨',
           type: '지출',
           cost: 20000,
@@ -168,7 +168,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'j',
           content: '정기 교통비',
           type: '지출',
           cost: 30000,
@@ -183,7 +183,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'k',
           content: '영화보기',
           type: '지출',
           cost: 40000,
@@ -198,7 +198,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'l',
           content: '정기용돈',
           type: '수입',
           cost: 500000000,
@@ -213,7 +213,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'm',
           content: '정기월급',
           type: '수입',
           cost: 400000000,
@@ -249,6 +249,21 @@ export const createStore = () => {
       this.accountBook.transaction.forEach(item => {
         if (
           item.type === '지출' &&
+          Number(item.date.split('-')[0]) === year &&
+          Number(item.date.split('-')[1]) === month
+        ) {
+          sum += item.cost;
+        }
+      });
+
+      return sum;
+    },
+    getIncomeTotal(year, month) {
+      let sum = 0;
+
+      this.accountBook.transaction.forEach(item => {
+        if (
+          item.type === '수입' &&
           Number(item.date.split('-')[0]) === year &&
           Number(item.date.split('-')[1]) === month
         ) {
