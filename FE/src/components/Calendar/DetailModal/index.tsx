@@ -45,18 +45,22 @@ export default function DetailModal({ setDetailModal }) {
           <span className="cal-date" ref={calDateRef} />
         </div>
         <div className="cal-transition">
-          {transactions.map(item => {
-            return (
-              <div className="specific__transaction__unit" key={item._id}>
-                <span className="specific__cost">{item.type}</span>
-                <span className="specific__cost">{item.category.name}</span>
-                <span className="specific__cost">
-                  {item.payment.description}
-                </span>
-                <span className="specific__cost">{item.cost}</span>
-              </div>
-            );
-          })}
+          {transactions.length !== 0 ? (
+            transactions.map(item => {
+              return (
+                <div className="specific__transaction__unit" key={item._id}>
+                  <span className="specific__cost">{item.type}</span>
+                  <span className="specific__cost">{item.category.name}</span>
+                  <span className="specific__cost">
+                    {item.payment.description}
+                  </span>
+                  <span className="specific__cost">{item.cost}</span>
+                </div>
+              );
+            })
+          ) : (
+            <div>No Transactions</div>
+          )}
         </div>
       </div>
     </div>
