@@ -1,0 +1,45 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+
+.detail-info-overlay {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  background-color: $modal-background;
+  display: flex;
+  justify-content: center;
+
+  &.hidden {
+    display: none;
+  }
+
+  .clicked-date {
+    position: absolute;
+    border-radius: $basic-border-radius;
+    width: 50em;
+    height: 35em;
+    background-color: $light-grey;
+    padding: 2em 0;
+    margin-top: 5%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cal-date-info {
+      display: flex;
+      gap: 1em;
+      font-size: 1.5em;
+
+      .cal-year,
+      .cal-month,
+      .cal-date {
+        display: inline-block;
+      }
+    }
+    .cal-transition {
+      margin-top: 2em;
+    }
+  }
+}
