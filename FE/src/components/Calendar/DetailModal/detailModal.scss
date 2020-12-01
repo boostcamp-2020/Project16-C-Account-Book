@@ -2,12 +2,13 @@
 @use '../../../styles/mixins' as *;
 
 .detail-info-overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
-  height: 80%;
+  height: 120%;
   background-color: $modal-background;
   display: flex;
   justify-content: center;
+  z-index: 3;
 
   &.hidden {
     display: none;
@@ -17,10 +18,10 @@
     position: absolute;
     border-radius: $basic-border-radius;
     width: 45%;
-    height: 75%;
+    height: 55%;
     background-color: transparent;
     padding: 2em 0;
-    margin-top: 5%;
+    margin-top: 10%;
     overflow-y: scroll;
     scroll-behavior: smooth;
     display: flex;
@@ -40,6 +41,8 @@
       display: flex;
       gap: 1em;
       font-size: 1.2em;
+      color: white;
+      text-shadow: $selectedTextShadow;
     }
     .cal-transition {
       margin-top: 2em;
@@ -59,7 +62,14 @@
         background-color: #333;
         color: #979797;
         position: relative;
+        animation: specificDataShow 1s;
 
+        @keyframes specificDataShow {
+          from {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+        }
         .specific__content {
           position: absolute;
           left: 30%;

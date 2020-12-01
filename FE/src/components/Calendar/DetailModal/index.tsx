@@ -47,9 +47,15 @@ export default function DetailModal({ setDetailModal }) {
         </div>
         <div className="cal-transition">
           {transactions.length !== 0 ? (
-            transactions.map(item => {
+            transactions.map((item, i) => {
               return (
-                <div className="specific__transaction__unit" key={item._id}>
+                <div
+                  className="specific__transaction__unit"
+                  key={item._id}
+                  style={{
+                    animationDelay: `${i * 0.05}s`,
+                  }}
+                >
                   <span className="specific__category">
                     {item.category.name}
                   </span>
