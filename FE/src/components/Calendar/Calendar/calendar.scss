@@ -34,8 +34,17 @@
         td {
           padding: 3px 0;
           height: 80px;
-          font-size: 15px;
-          vertical-align: middle;
+
+          vertical-align: center;
+
+          .income__info {
+            font-size: 0.8em;
+            color: #54aafc;
+          }
+          .spending__info {
+            font-size: 0.8em;
+            color: #ee4337;
+          }
         }
         .day {
           position: relative;

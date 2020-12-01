@@ -234,6 +234,39 @@ export const createStore = () => {
       return this.accountBook.transaction;
     },
 
+    getTransactionsByYearMonth(year: number, month: number) {
+      const yearMonthDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]),
+      );
+
+      return yearMonthDatas;
+    },
+    getTransactionsForCalendar(year: number, month: number) {
+      const yearMonthDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]),
+      );
+
+      const priceSumData = {};
+
+      yearMonthDatas.forEach(item => {
+        const date = String(Number(item.date.split('-')[2]));
+        if (!priceSumData.hasOwnProperty(String(date))) {
+          item.type === '지출'
+            ? (priceSumData[`${date}`] = { spending: item.cost, income: 0 })
+            : (priceSumData[`${date}`] = { income: item.cost, spendiing: 0 });
+        } else {
+          item.type === '지출'
+            ? (priceSumData[`${date}`].spending += item.cost)
+            : (priceSumData[`${date}`].income += item.cost);
+        }
+      });
+
+      return priceSumData;
+    },
     getSpecificTransactions(year: number, month: number, day: number) {
       const specificDatas = this.accountBook.transaction.filter(
         item =>

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
 import './calendar.scss';
@@ -12,19 +13,37 @@ export default function Calendar() {
 
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
+  const YearMonthTransactions = useTransactionData(store =>
+    store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
+  );
 
   const makeCalendar = (year, month) => {
     const allDay = calculateDay(year, month);
     calBodyRef.current.innerHTML = allDay;
   };
 
+  const markPriceToCalendar = () => {
+    Object.entries(YearMonthTransactions).forEach(([day, info]) => {
+      calBodyRef.current.childNodes.forEach(el => {
+        el.childNodes.forEach(date => {
+          if (date.classList && date.classList.contains(day)) {
+            date.insertAdjacentHTML(
+              'beforeend',
+              `
+              <div class="income__info" data-date=${day}>+${info.income}원</div>
+              <div class="spending__info" data-date=${day}>-${info.spending}원</div>
+            `,
+            );
+          }
+        });
+      });
+    });
+  };
+
   const onClickCalBody = useCallback(
     event => {
-      if (
-        event.target.classList.contains('day') ||
-        event.target.classList.contains('today')
-      ) {
-        const day = Number(event.target.textContent);
+      if (event.target.dataset.date) {
+        const day = Number(event.target.dataset.date);
 
         CalculateDate.activeDTag = event.target;
         CalculateDate.activeDate.setDate(day);
@@ -37,6 +56,7 @@ export default function Calendar() {
 
   useEffect(() => {
     makeCalendar(DateInfo.year, DateInfo.month);
+    markPriceToCalendar();
   }, [DateInfo]);
 
   return (
@@ -99,10 +119,10 @@ export const calculateDay = (year, month) => {
           mm + 1,
         )}.${CalculateDate.addZero(countDay + 1)}`;
         trtd += `
-          <td class="day
+          <td class="day ${countDay + 1} 
           ${
             markToday && markToday === countDay + 1
-              ? '"><div class="today"'
+              ? `" data-date=${countDay + 1}><div class="today"`
               : '"'
           } 
           data-date="${countDay + 1}" data-fdate="${fullDate}">

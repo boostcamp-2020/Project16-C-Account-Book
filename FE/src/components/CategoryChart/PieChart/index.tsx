@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { v4 } from 'uuid';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './pieChart.scss';
@@ -29,7 +30,8 @@ export default function PieChart({ chartInfo, refArr }) {
       {chartInfo.map((el, i) => {
         return (
           <svg
-            key={DateInfo.year + DateInfo.month + el.category}
+            key={v4()}
+            // key={DateInfo.year + DateInfo.month + el.category}
             className="s_donut"
             width="300"
             height="300"
