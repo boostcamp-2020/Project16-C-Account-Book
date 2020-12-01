@@ -46,9 +46,9 @@ export default function NewMethod({
 
   return (
     <>
-      <div className="wrapper">
-        <div className="scene">
-          <div className="carousel" ref={carousel}>
+      <div className="new__method__wrapper">
+        <div className="new__method__scene">
+          <div className="new__method__carousel" ref={carousel}>
             {defaultMethod.map(card => (
               <div
                 className="carousel__cell"
@@ -61,10 +61,18 @@ export default function NewMethod({
             ))}
           </div>
         </div>
-        <button type="button" onClick={onClickPrev} className="prev__button">
+        <button
+          type="button"
+          onClick={onClickPrev}
+          className="new__method__prev__button"
+        >
           prev
         </button>
-        <button type="button" onClick={onClickNext} className="next__button">
+        <button
+          type="button"
+          onClick={onClickNext}
+          className="new__method__next__button"
+        >
           next
         </button>
       </div>

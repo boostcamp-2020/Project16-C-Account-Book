@@ -137,6 +137,66 @@ export const createStore = () => {
             description: 'naver',
           },
         },
+        {
+          _id: 'asdf',
+          content: 'test',
+          type: '지출',
+          cost: 10000,
+          date: '2020-12-01',
+          category: {
+            name: 'shopping',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'asdf',
+          content: 'test2',
+          type: '지출',
+          cost: 20000,
+          date: '2020-12-01',
+          category: {
+            name: 'food',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'asdf',
+          content: 'test3',
+          type: '지출',
+          cost: 30000,
+          date: '2020-12-01',
+          category: {
+            name: 'life',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'asdf',
+          content: 'test4',
+          type: '지출',
+          cost: 40000,
+          date: '2020-12-01',
+          category: {
+            name: 'etc',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
       ],
     },
 

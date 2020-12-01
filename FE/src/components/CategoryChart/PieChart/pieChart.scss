@@ -11,8 +11,6 @@
   .donut {
     stroke-width: 50;
     fill: transparent;
-    stroke-dasharray: var(--l);
-    stroke-dashoffset: var(--l);
     animation: drawDonut 1.5s forwards;
     animation-iteration-count: 1;
     @keyframes drawDonut {
