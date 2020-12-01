@@ -1,17 +1,14 @@
-import accountBookMethodModel from '@/models/account-book';
+import accountBookMethodModel from '@models/accountbook';
+import { Context } from 'koa';
 
 const get = async (): Promise<any> => {
-  const accountBookMethods = await accountBookMethodModel.getAllAccountBookMethods();
+  const accountBookMethods = await accountBookMethodModel.get();
 
   return accountBookMethods;
 };
 
-const post = async (ctx: any): Promise<any> => {
-  const accountBookMethods = await accountBookMethodModel.createAccountBookMethods(
-    ctx,
-  );
-
-  return accountBookMethods;
+const post = async (body: Context['body']): Promise<any> => {
+  await accountBookMethodModel.create(body.name, body.description, body.userId);
 };
 
 export default { get, post };
