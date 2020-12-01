@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { v4 } from 'uuid';
+
+import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './pieChart.scss';
 
 export default function PieChart({ chartInfo, refArr }) {
+  const DateInfo = useRootData(store => store.nowCalendarInfo);
+
   const drawAnimation = () => {
     if (chartInfo.length !== 0) {
       refArr.forEach((_, i) => {
@@ -25,7 +28,12 @@ export default function PieChart({ chartInfo, refArr }) {
     <>
       {chartInfo.map((el, i) => {
         return (
-          <svg key={v4()} className="s_donut" width="300" height="300">
+          <svg
+            key={DateInfo.year + DateInfo.month + el.category}
+            className="s_donut"
+            width="300"
+            height="300"
+          >
             <circle
               ref={refArr[i]}
               className="donut"

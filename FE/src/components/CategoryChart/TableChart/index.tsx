@@ -1,14 +1,18 @@
 import React from 'react';
-import { v4 } from 'uuid';
+import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './tableChart.scss';
 
 export default function TableChart({ chartInfo }) {
+  const DateInfo = useRootData(store => store.nowCalendarInfo);
   return (
     <div className="pie__table">
       {chartInfo &&
         chartInfo.map((el, i) => (
-          <div className="stat__unit" key={v4()}>
+          <div
+            className="stat__unit"
+            key={DateInfo.year + DateInfo.month + el.category}
+          >
             <span className="stat__category">{el.category}</span>
             <span className="stat__percent">{Math.floor(el.percent)}%</span>
             <span className="stat__background">
