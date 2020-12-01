@@ -2,7 +2,7 @@ import { getDefaultMethods } from '../../api/defaultPaymentMethod';
 
 export const createStore = () => {
   const store = {
-    defaultMethods: getDefaultMethods(),
+    defaultMethods: [],
     addTemplateData: { name: '', color: '' },
     paymentMethod: [
       {
@@ -18,6 +18,11 @@ export const createStore = () => {
       console.log('here');
       return datas;
     },
+
+    initialMethods() {
+      this.defaultMethods = getDefaultMethods();
+    },
+
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
       this.paymentMethod = [data, ...this.paymentMethod];
     },
