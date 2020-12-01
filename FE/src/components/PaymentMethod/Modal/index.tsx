@@ -8,7 +8,10 @@ import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import './modal.scss';
 
-export default function Modal({ setModal, defaultMethod }): React.ReactElement {
+export default function PaymentModal({
+  setModal,
+  defaultMethod,
+}): React.ReactElement {
   const [addFormModal, setAddFormModal] = useState(false);
   const paymentMethods = useRootData(store => store.paymentMethod);
 

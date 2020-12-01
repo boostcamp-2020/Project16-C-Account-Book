@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 
-import { useRootData } from '../../store/DateInfo/dateInfoHook';
-import CalculateDate from '../../util/calculateDate';
-import DetailModal from './DetailModal';
+import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import CalculateDate from '../../../util/calculateDate';
+import DetailModal from '../DetailModal';
 import './calendar.scss';
 
 export default function Calendar() {

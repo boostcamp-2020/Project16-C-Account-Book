@@ -5,4 +5,26 @@
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
+
+  .calendar__total__price {
+    position: absolute;
+    top: 12em;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5em;
+
+    .calendar__income__total {
+      border: 1.5px solid #54aafc;
+      border-radius: 50px;
+      color: #54aafc;
+      padding: 1em 5em;
+    }
+    .calendar__spending__total {
+      border: 1.5px solid #ee4337;
+      border-radius: 50px;
+      color: #ee4337;
+      padding: 1em 5em;
+    }
+  }
 }
