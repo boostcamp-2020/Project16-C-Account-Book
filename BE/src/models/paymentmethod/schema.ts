@@ -9,7 +9,7 @@ export interface PaymentMethod extends mongoose.Document {
 export const Schema = new mongoose.Schema({
   name: { type: String, required: true },
   color: { type: String, required: true },
-  desc: { type: String },
+  desc: { type: String, default: '' },
 });
 
 export const DefaultPaymentMethodModel = mongoose.model<PaymentMethod>(
