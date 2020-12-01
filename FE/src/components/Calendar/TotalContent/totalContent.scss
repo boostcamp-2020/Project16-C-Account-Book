@@ -1,21 +1,29 @@
+@mixin calendar-total($type) {
+  width: 25%;
+  text-align: center;
+  border-radius: 50px;
+  padding: 1em 5em;
+  @if $type== income {
+    border: 1.5px solid #54aafc;
+    color: #54aafc;
+  } @else {
+    border: 1.5px solid #ee4337;
+    color: #ee4337;
+  }
+}
+
 .calendar__total__price {
   position: absolute;
+  width: 100%;
   top: 12em;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  justify-content: center;
   gap: 5em;
 
   .calendar__income__total {
-    border: 1.5px solid #54aafc;
-    border-radius: 50px;
-    color: #54aafc;
-    padding: 1em 5em;
+    @include calendar-total(income);
   }
   .calendar__spending__total {
-    border: 1.5px solid #ee4337;
-    border-radius: 50px;
-    color: #ee4337;
-    padding: 1em 5em;
+    @include calendar-total(spending);
   }
 }
