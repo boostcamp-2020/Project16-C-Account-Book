@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import CommaMaker from '../../../util/commaForMoney';
 import './totalContent.scss';
 
 export default function TotalContent(props) {
@@ -15,8 +16,12 @@ export default function TotalContent(props) {
 
   return (
     <div className="calendar__total__price">
-      <div className="calendar__income__total">+{incomeTotal}원</div>
-      <div className="calendar__spending__total">-{spendingTotal}원</div>
+      <div className="calendar__income__total">
+        +{CommaMaker(incomeTotal)}원
+      </div>
+      <div className="calendar__spending__total">
+        -{CommaMaker(spendingTotal)}원
+      </div>
     </div>
   );
 }

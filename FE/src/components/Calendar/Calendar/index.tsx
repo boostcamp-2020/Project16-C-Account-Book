@@ -4,6 +4,7 @@ import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
+import CommaMaker from '../../../util/commaForMoney';
 import './calendar.scss';
 
 export default function Calendar() {
@@ -30,8 +31,12 @@ export default function Calendar() {
             date.insertAdjacentHTML(
               'beforeend',
               `
-              <div class="income__info" data-date=${day}>+${info.income}원</div>
-              <div class="spending__info" data-date=${day}>-${info.spending}원</div>
+              <div class="income__info" data-date=${day}>+${CommaMaker(
+                info.income,
+              )}원</div>
+              <div class="spending__info" data-date=${day}>-${CommaMaker(
+                info.spending,
+              )}원</div>
             `,
             );
           }

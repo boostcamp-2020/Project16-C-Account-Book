@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import CommaMaker from '../../../util/commaForMoney';
 import './detailModal.scss';
 
 export default function DetailModal({ setDetailModal }) {
@@ -58,11 +59,11 @@ export default function DetailModal({ setDetailModal }) {
                   </span>
                   {item.type === '지출' ? (
                     <span className="specific__cost spending">
-                      -{item.cost}원
+                      -{CommaMaker(item.cost)}원
                     </span>
                   ) : (
                     <span className="specific__cost income">
-                      +{item.cost}원
+                      +{CommaMaker(item.cost)}원
                     </span>
                   )}
                 </div>
