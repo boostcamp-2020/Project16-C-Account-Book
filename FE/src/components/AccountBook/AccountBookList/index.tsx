@@ -3,15 +3,14 @@ import { useObserver } from 'mobx-react-lite';
 import { useHistory } from 'react-router-dom';
 
 import { AccountBookContext } from '../../../store/AccountBook/account-book.context.tsx';
-import styles from './AccountBookList.module.scss';
-import { getAccountBookList } from '../../../api/accoun-book-list';
+import './AccountBookList.scss';
 import { postFetch } from '../../../service/fetch';
-import { useRootData } from '../../../store/AccountBook/account-book.hook';
-import Calendar from 'src/components/Calendar';
+import { useAccountBookData } from '../../../store/AccountBook/account-book.hook';
 
 export const AccountBookView: ReactElement<{
   datas: any[];
 }> = ({ datas }) => {
+  console.log('observe');
   const history = useHistory();
   const linkToDetail = (id = '') => {
     history.push(`calendar/${id}`);
@@ -20,7 +19,7 @@ export const AccountBookView: ReactElement<{
   return (
     <>
       {datas.map(data => (
-        <div className={styles.acbook} onClick={() => linkToDetail()}>
+        <div className="acbook" onClick={() => linkToDetail()}>
           <h3>{data.name}</h3>
           <p>{data.description}</p>
         </div>
@@ -34,6 +33,16 @@ export const AccountBookList = () => {
   const accountBookInput = useRef();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [datas, setDatas] = useState([]);
+
+  const accountBookData = useAccountBookData(store => store.accountBooks);
+  console.log(accountBookData);
+
+  const getAccountBookList = async () => {
+    const data = await accountBookData;
+    console.log(data);
+    setDatas(data);
+  };
 
   const onCreateAccountBook = event => {
     if (event.key === 'Enter') {
@@ -42,11 +51,11 @@ export const AccountBookList = () => {
         description,
         transaction: [],
       };
-      postFetch(`${process.env.BACKEND}/api/accountbook`, accountBookBody);
-      store.Create = false;
+      // postFetch(`${process.env.BACKEND}/api/accountbook`, accountBookBody);
+      store.create = false;
       setName('');
       setDescription('');
-      fetchAccountBooks();
+      setDatas([{ name, description, transaction: [] }, ...datas]);
     }
   };
 
@@ -59,30 +68,21 @@ export const AccountBookList = () => {
   };
 
   const cancleCreate = () => {
-    store.Create = false;
-  };
-
-  const fetchAccountBooks = async () => {
-    try {
-      const datas = await getAccountBookList();
-      console.log(datas);
-      store.AccountBooks = datas.reverse();
-    } catch (error) {
-      console.error(error);
-    }
+    store.create = false;
   };
 
   useEffect(() => {
-    fetchAccountBooks();
+    console.log('useEffect');
+    getAccountBookList();
   }, []);
 
   if (!store) throw Error("Store shouldn't be null");
 
   return useObserver(() => {
     return (
-      <div className={styles.acbook__list}>
-        {store.Create ? (
-          <div className={styles.create__acbook}>
+      <div className="acbook__list">
+        {store.create ? (
+          <div className="create__acbook">
             <input
               className="input__name"
               ref={accountBookInput}
@@ -102,12 +102,12 @@ export const AccountBookList = () => {
               onKeyPress={onCreateAccountBook}
               onChange={onChangeDescription}
             />
-            <p className={styles.create__cancle} onClick={cancleCreate}>
+            <p className="create__cancle" onClick={cancleCreate}>
               Cancle
             </p>
           </div>
         ) : null}
-        <AccountBookView datas={store.AccountBooks} create={store.Create} />
+        {datas ? <AccountBookView datas={datas} create={store.create} /> : null}
       </div>
     );
   });

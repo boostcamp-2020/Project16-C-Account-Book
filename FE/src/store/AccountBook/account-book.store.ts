@@ -1,7 +1,9 @@
+import { getAccountBookList } from '../../api/accoun-book-list';
+
 export const createStore = () => {
   const store = {
-    AccountBooks: [],
-    Create: false,
+    accountBooks: getAccountBookList(),
+    create: false,
   };
 
   return store;

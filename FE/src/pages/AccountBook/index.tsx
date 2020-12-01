@@ -2,11 +2,11 @@ import React from 'react';
 
 import AccountBookControl from '../../components/AccountBook/AccountBookControl';
 import AccountBookList from '../../components/AccountBook/AccountBookList';
-import styles from './AccountBookListPage.module.scss';
+import './AccountBookListPage.scss';
 
 export default function AccountBookListPage() {
   return (
-    <div className={styles.container}>
+    <div className="acbook__list__container">
       <AccountBookControl />
       <AccountBookList />
     </div>

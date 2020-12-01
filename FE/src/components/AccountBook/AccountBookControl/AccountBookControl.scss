@@ -1,16 +1,16 @@
-.container {
+.acbook__container {
   margin-top: 100px;
 
-  .title {
+  .acbook__title {
     font-size: 45px;
   }
 
-  .control {
+  .acbook__control {
     display: flex;
     align-items: center;
     cursor: pointer;
 
-    .plus {
+    .acbook__plus {
       margin-right: 10px;
     }
   }

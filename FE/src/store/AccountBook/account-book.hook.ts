@@ -13,11 +13,12 @@ export const useStoreData = <Selection, ContextData, Store>(
 
   const store = storeSelector(value);
   return useObserver(() => {
+    console.log('obs', value, store);
     return dataSelector(store);
   });
 };
 
-export const useRootData = <Selection>(
+export const useAccountBookData = <Selection>(
   dataSelector: (store: TStore) => Selection,
 ) =>
   useStoreData(AccountBookContext, contextData => contextData!, dataSelector);

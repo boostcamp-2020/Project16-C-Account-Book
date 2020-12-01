@@ -9,7 +9,7 @@ import CalendarPage from './pages/Calendar';
 import LoginPage from './pages/Login';
 import TransactionPage from './pages/transaction';
 import GithubLoginProcess from './pages/Login/GithubLoginProcess';
-import { AccountBookProvider } from './store/AccountBook/account-book.context';
+import AccountBookProvider from './store/AccountBook/account-book.context';
 
 const App = () => {
   return (
