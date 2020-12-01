@@ -5,15 +5,16 @@ import { iTransactionItem } from '../../../../types/transaction';
 
 const TransactionItem = ({
   category,
-  description,
+  content,
   payment,
   cost,
+  type,
 }: iTransactionItem) => {
   return (
     <div className={styles.transaction}>
-      <span className={styles.category}>{category}</span>
-      <span className={styles.description}>{description}</span>
-      <span className={styles.payment}>{payment}</span>
+      <span className={styles.category}>{category.name}</span>
+      <span className={styles.description}>{content}</span>
+      <span className={styles.payment}>{payment.description}</span>
       <span className={styles.cost}>{cost}</span>
     </div>
   );

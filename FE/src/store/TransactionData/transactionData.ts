@@ -204,7 +204,7 @@ export const createStore = () => {
       return this.accountBook.transaction;
     },
 
-    getSpendingTotal(year, month) {
+    getSpendingTotal(year: any, month: any) {
       let sum = 0;
       this.accountBook.transaction.forEach(item => {
         if (
