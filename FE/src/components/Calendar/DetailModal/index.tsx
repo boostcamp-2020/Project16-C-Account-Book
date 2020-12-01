@@ -56,14 +56,20 @@ export default function DetailModal({ setDetailModal }) {
                   <span className="specific__payment">
                     {item.payment.description}
                   </span>
-                  <span className="specific__cost">
-                    {item.type === '지출' ? `-${item.cost}` : `+${item.cost}`}
-                  </span>
+                  {item.type === '지출' ? (
+                    <span className="specific__cost spending">
+                      -{item.cost}원
+                    </span>
+                  ) : (
+                    <span className="specific__cost income">
+                      +{item.cost}원
+                    </span>
+                  )}
                 </div>
               );
             })
           ) : (
-            <div>No Transactions</div>
+            <div className="no__specific__data">No Transactions</div>
           )}
         </div>
       </div>
