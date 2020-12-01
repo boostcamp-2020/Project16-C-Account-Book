@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import CommaMaker from '../../../util/commaForMoney';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './tableChart.scss';
 
@@ -28,7 +29,7 @@ export default function TableChart({ chartInfo }) {
                 }}
               />
             </span>
-            <span className="stat__price"> {el.cost}원</span>
+            <span className="stat__price"> {CommaMaker(el.cost)}원</span>
           </div>
         ))}
     </div>
