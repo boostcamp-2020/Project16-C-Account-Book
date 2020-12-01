@@ -204,6 +204,16 @@ export const createStore = () => {
       return this.accountBook.transaction;
     },
 
+    getSpecificTransactions(year: number, month: number, day: number) {
+      const specificDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]) &&
+          day === Number(item.date.split('-')[2]),
+      );
+      return specificDatas;
+    },
+
     getSpendingTotal(year, month) {
       let sum = 0;
       this.accountBook.transaction.forEach(item => {
