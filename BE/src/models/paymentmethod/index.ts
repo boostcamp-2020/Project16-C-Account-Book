@@ -1,7 +1,7 @@
-import { Payment, PaymentModel } from './schema';
+import { PaymentMethod, DefaultPaymentMethodModel } from './schema';
 
-const get = async (): Promise<Payment[]> => {
-  const defaultPayments = await PaymentModel.find();
+const get = async (): Promise<PaymentMethod[]> => {
+  const defaultPayments = await DefaultPaymentMethodModel.find();
   return defaultPayments;
 };
 
