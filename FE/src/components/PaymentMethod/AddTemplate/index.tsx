@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext, useState } from 'react';
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
-import styles from './addForm.module.scss';
+import './addForm.scss';
 
 interface Card {
   setAddFormModal: (data: boolean) => void;
@@ -44,7 +44,7 @@ export default function AddTemplate({
 
   return (
     <div
-      className={styles.wrapper}
+      className="addform__wrapper"
       style={{ background: `${addTemplateData.color}` }}
     >
       {addTemplateData.name || '아래에서 카드를 선택해주세요.'}
@@ -52,7 +52,7 @@ export default function AddTemplate({
         <input
           ref={methodInput}
           value={methodNick}
-          className={styles.methodName}
+          className="addform__method__name"
           type="text"
           placeholder="Enter Method Nickname"
           onChange={onChangeNick}

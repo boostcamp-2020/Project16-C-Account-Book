@@ -1,0 +1,50 @@
+.pie__table {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+
+  width: 40%;
+  height: 50%;
+
+  .stat__unit {
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .stat__background {
+    position: absolute;
+    display: inline-block;
+    left: 20%;
+    width: 65%;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    .stat__color {
+      position: absolute;
+      animation: statAnimation 2s;
+    }
+
+    @keyframes statAnimation {
+      from {
+        width: 0;
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .stat__percent {
+    position: absolute;
+    left: 13%;
+    font-weight: bolder;
+  }
+
+  .stat__price {
+    position: absolute;
+    right: 0;
+  }
+}
