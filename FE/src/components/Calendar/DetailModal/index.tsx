@@ -49,12 +49,16 @@ export default function DetailModal({ setDetailModal }) {
             transactions.map(item => {
               return (
                 <div className="specific__transaction__unit" key={item._id}>
-                  <span className="specific__cost">{item.type}</span>
-                  <span className="specific__cost">{item.category.name}</span>
-                  <span className="specific__cost">
+                  <span className="specific__category">
+                    {item.category.name}
+                  </span>
+                  <span className="specific__content">{item.content}</span>
+                  <span className="specific__payment">
                     {item.payment.description}
                   </span>
-                  <span className="specific__cost">{item.cost}</span>
+                  <span className="specific__cost">
+                    {item.type === '지출' ? `-${item.cost}` : `+${item.cost}`}
+                  </span>
                 </div>
               );
             })

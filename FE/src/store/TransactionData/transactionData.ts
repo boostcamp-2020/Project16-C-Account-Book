@@ -139,12 +139,12 @@ export const createStore = () => {
         },
         {
           _id: 'asdf',
-          content: 'test',
+          content: '옷',
           type: '지출',
-          cost: 10000,
+          cost: 1000000,
           date: '2020-12-01',
           category: {
-            name: 'shopping',
+            name: '쇼핑',
             icon: 1,
           },
           payment: {
@@ -154,12 +154,12 @@ export const createStore = () => {
         },
         {
           _id: 'asdf',
-          content: 'test2',
+          content: '치킨',
           type: '지출',
           cost: 20000,
           date: '2020-12-01',
           category: {
-            name: 'food',
+            name: '식비',
             icon: 1,
           },
           payment: {
@@ -169,12 +169,12 @@ export const createStore = () => {
         },
         {
           _id: 'asdf',
-          content: 'test3',
+          content: '정기 교통비',
           type: '지출',
           cost: 30000,
           date: '2020-12-01',
           category: {
-            name: 'life',
+            name: '교통',
             icon: 1,
           },
           payment: {
@@ -184,12 +184,42 @@ export const createStore = () => {
         },
         {
           _id: 'asdf',
-          content: 'test4',
+          content: '영화보기',
           type: '지출',
           cost: 40000,
           date: '2020-12-01',
           category: {
-            name: 'etc',
+            name: '여가',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'asdf',
+          content: '정기용돈',
+          type: '수입',
+          cost: 500000000,
+          date: '2020-12-01',
+          category: {
+            name: '용돈',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'asdf',
+          content: '정기월급',
+          type: '수입',
+          cost: 400000000,
+          date: '2020-12-01',
+          category: {
+            name: '월급',
             icon: 1,
           },
           payment: {
@@ -235,6 +265,7 @@ export const createStore = () => {
 
       const datas = this.accountBook.transaction.filter(
         item =>
+          item.type === '지출' &&
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );

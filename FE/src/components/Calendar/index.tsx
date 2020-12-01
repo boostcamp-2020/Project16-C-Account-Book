@@ -8,7 +8,7 @@ import './calendar.scss';
 export default function Calendar() {
   const calBodyRef = useRef();
 
-  const [detailModal, setDetailModal] = useState(false);
+  const [detailModal, setDetailModal] = useState(true);
 
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
