@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import Modal from '../../components/PaymentMethod/Modal';
+import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
-import Calendar from '../../components/Calendar';
-import styles from './calendar.module.scss';
+import TotalContent from '../../components/Calendar/TotalContent';
+import Calendar from '../../components/Calendar/Calendar';
+import './calendar.scss';
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 
@@ -13,11 +14,15 @@ export default function CalendarPage() {
   const defaultMethod = useDefaultPayment();
 
   return (
-    <div className={styles.wrapper}>
+    <div className="calendar__wrapper">
       <MenuBar setModal={setPaymentMethodModal} pageType="calendar" />
+      <TotalContent />
       <Calendar />
       {paymentMethodModal && (
-        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+        <PaymentModal
+          setModal={setPaymentMethodModal}
+          defaultMethod={defaultMethod}
+        />
       )}
     </div>
   );

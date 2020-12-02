@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState } from 'react';
 
-import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 import './newMethod.scss';
 
@@ -11,7 +10,6 @@ interface SetData {
 export default function NewMethod({
   defaultMethod,
 }: SetData): React.ReactElement {
-  const store = useContext(paymentContext);
   const updateAddTemplate = useRootData(store => store.updateAddTemplate);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const carousel = useRef();
@@ -48,9 +46,9 @@ export default function NewMethod({
 
   return (
     <>
-      <div className="wrapper">
-        <div className="scene">
-          <div className="carousel" ref={carousel}>
+      <div className="new__method__wrapper">
+        <div className="new__method__scene">
+          <div className="new__method__carousel" ref={carousel}>
             {defaultMethod.map(card => (
               <div
                 className="carousel__cell"
@@ -63,10 +61,18 @@ export default function NewMethod({
             ))}
           </div>
         </div>
-        <button type="button" onClick={onClickPrev} className="prev__button">
+        <button
+          type="button"
+          onClick={onClickPrev}
+          className="new__method__prev__button"
+        >
           prev
         </button>
-        <button type="button" onClick={onClickNext} className="next__button">
+        <button
+          type="button"
+          onClick={onClickNext}
+          className="new__method__next__button"
+        >
           next
         </button>
       </div>

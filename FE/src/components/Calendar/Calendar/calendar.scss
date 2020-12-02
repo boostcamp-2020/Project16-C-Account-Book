@@ -1,14 +1,16 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+
 .calendar-container {
-  margin-top: 10em;
   width: 100%;
+  height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .my-calendar {
     width: 100%;
-    margin: 30px;
-    padding: 20px 20px 10px;
+
     text-align: center;
     font-weight: 800;
     display: flex;
@@ -16,11 +18,13 @@
     cursor: default;
 
     .calendar-box {
+      margin-top: 3em;
       width: 70%;
 
       .cal-table {
         margin-top: 5em;
         width: 100%;
+
         th {
           width: 14.2857%;
           padding-bottom: 5px;
@@ -30,8 +34,17 @@
         td {
           padding: 3px 0;
           height: 80px;
-          font-size: 15px;
-          vertical-align: middle;
+
+          vertical-align: center;
+
+          .income__info {
+            font-size: 0.8em;
+            color: $income-color;
+          }
+          .spending__info {
+            font-size: 0.8em;
+            color: $spending-color;
+          }
         }
         .day {
           position: relative;
@@ -58,13 +71,13 @@
           transform: translateX(-50%);
           line-height: 40px;
           border-radius: 50%;
-          color: white;
+          color: $white;
         }
 
         @keyframes todayColor {
           from {
             transform: translate(-50px);
-            background: white;
+            background: $white;
           }
         }
 
@@ -76,33 +89,6 @@
           bottom: 0;
           width: 100%;
           height: 4px;
-          background: #ffc107;
-        }
-      }
-    }
-
-    .detail__overlay {
-      width: 100%;
-      height: 100%;
-      position: fixed;
-      background-color: rgba(0, 0, 0, 0.9);
-      &.hidden {
-        display: none;
-      }
-      .clicked-date {
-        position: absolute;
-        border-radius: 25px;
-        margin-top: 36px;
-        float: right;
-        width: 20%;
-        padding: 46px 0 26px;
-        background-color: lightgrey;
-        .cal-day {
-          font-size: 2em;
-        }
-
-        .cal-date {
-          font-size: 3em;
         }
       }
     }

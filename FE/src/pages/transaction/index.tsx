@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styles from './transaction.module.scss';
 
 import Modal from '../../components/PaymentMethod/Modal';
-import Menubar from '../../components/Common/MenuBar';
+import MenuBar from '../../components/Common/MenuBar';
 import ListContainer from '../../components/transaction/list/listcontainer';
+import styles from './transaction.module.scss';
+
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 
@@ -22,5 +23,3 @@ const TransactionComponent = props => {
     </div>
   );
 };
-
-export default TransactionComponent;
