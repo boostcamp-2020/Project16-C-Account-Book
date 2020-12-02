@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'src/pages/DefaultTemplate/node_modules/react';
 
 import Modal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
@@ -8,18 +12,18 @@ import styles from './transaction.module.scss';
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 
-const TransactionComponent = props => {
+export default function TransactionComponent(props) {
   useLoginCheck();
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const defaultMethod = useDefaultPayment();
 
   return (
     <div className={styles.container}>
-      <Menubar setModal={setPaymentMethodModal} pageType="transaction" />
+      <MenuBar setModal={setPaymentMethodModal} pageType="transaction" />
       <ListContainer />
       {paymentMethodModal && (
         <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
       )}
     </div>
   );
-};
+}

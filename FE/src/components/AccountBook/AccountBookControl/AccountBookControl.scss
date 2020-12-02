@@ -1,0 +1,17 @@
+.acbook__container {
+  margin-top: 100px;
+
+  .acbook__title {
+    font-size: 45px;
+  }
+
+  .acbook__control {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .acbook__plus {
+      margin-right: 10px;
+    }
+  }
+}
