@@ -11,15 +11,16 @@ export const AccountBookView: ReactElement<{
   datas: any[];
 }> = ({ datas }) => {
   console.log('observe');
+  const store = React.useContext(AccountBookContext);
   const history = useHistory();
   const linkToDetail = (id = '') => {
     history.push(`calendar/${id}`);
   };
 
   const deleteAccountBook = (id = '') => {
-    console.log(id);
-    datas.filter(data => data._id !== id);
+    datas = datas.filter(data => data._id !== id);
     console.log(datas);
+    store.array = datas;
   };
 
   return (
@@ -56,6 +57,7 @@ export const AccountBookList = () => {
     const data = await accountBookData;
     console.log(data);
     setDatas(data);
+    store.array = data;
   };
 
   const onCreateAccountBook = event => {
@@ -70,6 +72,7 @@ export const AccountBookList = () => {
       setName('');
       setDescription('');
       setDatas([{ name, description, transaction: [] }, ...datas]);
+      store.array = [{ name, description, transaction: [] }, ...datas];
     }
   };
 
@@ -121,7 +124,7 @@ export const AccountBookList = () => {
             </p>
           </div>
         ) : null}
-        {datas ? <AccountBookView datas={datas} create={store.create} /> : null}
+        {datas ? <AccountBookView datas={store.array} /> : null}
       </div>
     );
   });

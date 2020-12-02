@@ -4,6 +4,7 @@ export const createStore = () => {
   const store = {
     accountBooks: getAccountBookList(),
     create: false,
+    array: [],
   };
 
   return store;
