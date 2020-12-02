@@ -48,8 +48,8 @@ const getTokenFromRes = (data: any, social: string): string => {
 export const getAccessToken = async (code: string, social: string) => {
   const { data } = await axios.post(tokenGetUrl[social], null, {
     params: {
-      code,
       ...tokenGetParams[social],
+      code,
     },
   });
 
