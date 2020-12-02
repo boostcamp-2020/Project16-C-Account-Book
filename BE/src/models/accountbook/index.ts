@@ -1,5 +1,6 @@
-import PaymentMethod from '@models/paymentmethod';
-import Category from '@models/category';
+import PaymentMethodModel from '@models/paymentmethod';
+import CategoryModel from '@models/category';
+import { Transaction } from '@models/transaction/schema';
 import { AccountBook, AccountBookModel } from './schema';
 
 const get = async (): Promise<AccountBook[]> => {
@@ -12,8 +13,8 @@ const create = async (
   description: string | undefined,
   users: [string],
 ): Promise<any> => {
-  const defaultCategory = await Category.get();
-  const defaultPaymentMethod = await PaymentMethod.get();
+  const defaultCategory = await CategoryModel.get();
+  const defaultPaymentMethod = await PaymentMethodModel.get();
   const accountbook = {
     name,
     description,
@@ -27,4 +28,23 @@ const create = async (
   result = await result.save();
 };
 
-export default { get, create };
+const addTransaction = async (
+  accountBookId: string,
+  transaction: any,
+): Promise<any> => {
+  const id = accountBookId;
+  const curAccountBook = await AccountBookModel.findOne({ _id: id });
+  if (curAccountBook) {
+    const curTransactions = [...curAccountBook.transactions];
+    curTransactions.push(transaction);
+    const updateResult = await AccountBookModel.update(
+      { _id: id },
+      { transactions: curTransactions },
+    );
+    console.log(updateResult);
+  } else {
+    console.log(`존재하지 않는 가계부`);
+  }
+};
+
+export default { get, create, addTransaction };
