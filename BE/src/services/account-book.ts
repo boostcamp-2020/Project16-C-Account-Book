@@ -1,14 +1,18 @@
 import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
 
-const get = async (): Promise<any> => {
-  const accountBookModels = await accountBookModel.get();
+const get = async (ctx: Context): Promise<any> => {
+  const accountBookModels = await accountBookModel.get(ctx.user);
 
   return accountBookModels;
 };
 
-const post = async (body: Context['body']): Promise<any> => {
-  await accountBookModel.create(body.name, body.description, body.userId);
+const post = async (ctx: Context): Promise<any> => {
+  await accountBookModel.create(
+    ctx.request.body.name,
+    ctx.request.body.description,
+    ctx.user,
+  );
 };
 
 const addTransaction = async (body: Context['body']): Promise<any> => {

@@ -2,23 +2,33 @@ import PaymentMethodModel from '@models/paymentmethod';
 import CategoryModel from '@models/category';
 import { Transaction } from '@models/transaction/schema';
 import { AccountBook, AccountBookModel } from './schema';
+import { User } from '../user/schema';
 
-const get = async (): Promise<AccountBook[]> => {
-  const accountBooks = await AccountBookModel.find();
+const get = async ({
+  id,
+  social,
+}: {
+  id: string;
+  social: string;
+}): Promise<AccountBook[]> => {
+  const accountBooks = await AccountBookModel.find({
+    'users.id': id,
+    'users.social': social,
+  });
   return accountBooks;
 };
 
 const create = async (
   name: string,
   description: string | undefined,
-  users: [string],
+  users: User,
 ): Promise<any> => {
   const defaultCategory = await CategoryModel.get();
   const defaultPaymentMethod = await PaymentMethodModel.get();
   const accountbook = {
     name,
     description,
-    users: [...users],
+    users: users,
     categories: [...defaultCategory],
     payments: [...defaultPaymentMethod],
     transactions: [],
