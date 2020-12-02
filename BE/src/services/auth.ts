@@ -43,7 +43,10 @@ const getGithubUserInfo = async (accessToken: string) => {
       Authorization: `BEARER ${accessToken}`,
     },
   });
-  const userInfo = { id: data.login, name: data.name };
+  const userInfo = {
+    id: `${data.login}_github`,
+    name: data.name,
+  };
   return userInfo;
 };
 
