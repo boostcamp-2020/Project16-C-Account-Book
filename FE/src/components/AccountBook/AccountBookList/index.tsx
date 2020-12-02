@@ -16,13 +16,27 @@ export const AccountBookView: ReactElement<{
     history.push(`calendar/${id}`);
   };
 
+  const deleteAccountBook = (id = '') => {
+    console.log(id);
+    datas.filter(data => data._id !== id);
+    console.log(datas);
+  };
+
   return (
     <>
       {datas.map(data => (
-        <div className="acbook" onClick={() => linkToDetail()}>
-          <h3>{data.name}</h3>
-          <p>{data.description}</p>
-        </div>
+        <>
+          <div className="acbook" onClick={() => linkToDetail()}>
+            <h3>{data.name}</h3>
+            <p>{data.description}</p>
+          </div>
+          <button
+            className="delete__button"
+            onClick={() => deleteAccountBook(data._id)}
+          >
+            Delete
+          </button>
+        </>
       ))}
     </>
   );
