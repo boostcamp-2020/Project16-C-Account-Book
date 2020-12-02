@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import './GithubLoginProcess.scss';
+import './NaverLoginProcess.scss';
 
 import authApi from '../../../api/auth';
 
@@ -18,10 +18,16 @@ const LoginProcessPage = () => {
 
     if (!hasCode) return;
 
-    const code = url.split('?code=')[1];
+    const matched = url.match(/code=([^&]+)(?:&*)/);
 
-    if (code) {
-      login(code, 'github');
+    console.log(matched);
+    if (!!matched && matched.length > 1) {
+      const code = matched[1];
+      console.log(code);
+
+      if (code) {
+        login(code, 'naver');
+      }
     }
   });
 
