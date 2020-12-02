@@ -1,22 +1,10 @@
-import { Context } from 'koa';
+import { Context, Next } from 'koa';
 import createError from 'http-errors';
 import axios from 'axios';
-import * as jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 
 import userModel from '@/models/user';
-import { create } from 'domain';
-import { errorHandler } from '@/loaders/error';
-
-interface iTokenGetParams {
-  code: string;
-  client_id: string;
-  client_secret: string;
-}
-
-interface iUser {
-  id: string;
-  name: string;
-}
+import { iTokenGetParams, iUser } from '@/types/auth';
 
 const getGitubAccessToken = async (code: string) => {
   const tokenGetParams: iTokenGetParams = {
@@ -50,17 +38,15 @@ const getGithubUserInfo = async (accessToken: string) => {
   return userInfo;
 };
 
-const checkUserInDB = async (userInfo: { id: string }): Promise<boolean> => {
+const checkUserInDB = async (userInfo: iUser): Promise<boolean> => {
   const user = await userModel.get(userInfo);
   return !!user;
 };
 
 const makeToken = (userInfo: iUser): string => {
   const jwtKey = process.env.JWT_KEY || '';
-  const jwtConfig = {
-    expiresIn: '2day',
-  };
-  const token = jwt.sign(userInfo, jwtKey, jwtConfig);
+
+  const token = jwt.sign(userInfo, jwtKey);
   return token;
 };
 
@@ -84,4 +70,44 @@ const login = async (body: Context['body']): Promise<string> => {
   }
 };
 
-export default { login };
+const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
+  if (!authorization) {
+    const authTypeError = createError(401, 'authorization header is not set');
+    throw authTypeError;
+  }
+
+  const tokenReg = /Bearer ((\w|.)+)/;
+  const matched = authorization.match(tokenReg);
+
+  if (!matched || matched?.length < 2) {
+    const authTypeError = createError(
+      401,
+      'authorization type needs to be BEARER',
+    );
+    throw authTypeError;
+  }
+
+  return matched[1];
+};
+
+const decodeToken = (token: string): iUser => {
+  const jwtKey: Secret = process.env.JWT_KEY as Secret;
+  try {
+    const user: iUser = jwt.verify(token, jwtKey) as iUser;
+    return user;
+  } catch (error) {
+    const jwtError = createError(401, 'jwt malformed');
+    throw jwtError;
+  }
+};
+
+const checkToken = async (header: Context['header']): Promise<boolean> => {
+  const token = parseTokenFromHeader(header);
+  console.log('token: ', token);
+
+  const user = decodeToken(token);
+  const isUserInDB = await checkUserInDB(user);
+  return isUserInDB;
+};
+
+export default { login, checkToken };
