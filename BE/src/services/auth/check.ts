@@ -36,13 +36,13 @@ const decodeToken = (token: string): iUser => {
   }
 };
 
-const checkToken = async (header: Context['header']): Promise<boolean> => {
+const checkToken = async (header: Context['header']): Promise<iUser | null> => {
   const token = parseTokenFromHeader(header);
   console.log('token: ', token);
 
   const user = decodeToken(token);
   const isUserInDB = !!(await userModel.get(user));
-  return isUserInDB;
+  return isUserInDB ? user : null;
 };
 
 export default { checkToken };
