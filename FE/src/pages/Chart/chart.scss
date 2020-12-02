@@ -1,0 +1,21 @@
+.chart__wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .date__charts,
+  .category__charts {
+    width: 100%;
+    height: 100%;
+  }
+
+  .no__data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
