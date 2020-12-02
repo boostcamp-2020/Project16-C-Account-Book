@@ -1,5 +1,5 @@
 import { Context } from 'koa';
-import service from '@/services/account-book';
+import service from '@services/account-book';
 
 const get = async (ctx: Context): Promise<Context['body']> => {
   const accountBook = await service.get();

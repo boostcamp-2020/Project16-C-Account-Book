@@ -1,6 +1,6 @@
 import Koa from 'koa';
 
-import ResponseError from '@/types/error';
+import ResponseError from '@interfaces/error';
 
 const errorCatcher = async (
   ctx: Koa.Context,

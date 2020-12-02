@@ -2,9 +2,9 @@ import { Context } from 'koa';
 import createError from 'http-errors';
 import jwt from 'jsonwebtoken';
 
-import userModel from '@/models/user';
-import { iUser } from '@/types/auth';
-import { getAccessToken, getUserInfo } from '@/services/auth/oauth';
+import userModel from '@models/user';
+import { iUser } from '@interfaces/auth';
+import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
 const makeToken = (userInfo: iUser): string => {
   const jwtKey = process.env.JWT_KEY || '';

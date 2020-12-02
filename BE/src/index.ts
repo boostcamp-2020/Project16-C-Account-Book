@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import loaders from './loaders';
 
-
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const startServer = async () => {
