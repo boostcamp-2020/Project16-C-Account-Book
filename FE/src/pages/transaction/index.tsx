@@ -1,31 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import styles from './transaction.module.scss';
 
 import Modal from '../../components/PaymentMethod/Modal';
-import Menubar from '../../components/Common/MenuBar';
+import MenuBar from '../../components/Common/MenuBar';
 import ListContainer from '../../components/transaction/list/listcontainer';
-import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+import styles from './transaction.module.scss';
+
+import useDefaultPayment from '../../service/useDefaultPayment';
+import useLoginCheck from '../../service/useLoginCheck';
 
 const TransactionComponent = props => {
-  const [modal, setModal] = useState(false);
-  const [defaultMethod, setDefaultMethod] = useState([]);
-
-  const getData = async () => {
-    const datas = await getDefaultMethods();
-    setDefaultMethod(datas);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  useLoginCheck();
+  const [paymentMethodModal, setPaymentMethodModal] = useState(false);
+  const defaultMethod = useDefaultPayment();
 
   return (
     <div className={styles.container}>
-      <Menubar setModal={setModal} pageType="transaction" />
+      <Menubar setModal={setPaymentMethodModal} pageType="transaction" />
       <ListContainer />
-      {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      {paymentMethodModal && (
+        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+      )}
     </div>
   );
 };
-
-export default TransactionComponent;

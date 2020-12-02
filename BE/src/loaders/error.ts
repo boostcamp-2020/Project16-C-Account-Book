@@ -15,8 +15,8 @@ const errorCatcher = async (
 
 const errorHandler = (err: ResponseError, ctx: Koa.Context): void => {
   ctx.status = err.status || 500;
-  ctx.body = err.message;
-  console.error(`error code: [${err.status}], message: ${err.message}`);
+  ctx.body = { message: err.message };
+  console.error(`error code: [${ctx.status}], message: ${err.message}`);
 };
 
 export { errorCatcher, errorHandler };

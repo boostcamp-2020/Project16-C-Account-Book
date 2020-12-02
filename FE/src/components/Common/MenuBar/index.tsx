@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 
-import styles from './menubar.module.scss';
+import './menubar.scss';
 import CalculateDate from '../../../util/calculateDate';
 
 const MenuBar = ({ setModal, pageType }) => {
@@ -48,29 +48,20 @@ const MenuBar = ({ setModal, pageType }) => {
     setModal(true);
   }, []);
 
-  const setIcon = useCallback(pageType => {
-    if (pageType === 'transaction') {
-      transactionIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'calendar') {
-      calIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'chart') {
-      chartIconRef.current.classList.toggle(styles.checked);
-    }
-  }, pageType);
-
   useEffect(() => {
-    setIcon(pageType);
     setYearMonth(DateInfo.year, DateInfo.month);
   }, [pageType]);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.buttons} ref={allBtnRef}>
+    <header className="menubar__header">
+      <div className="menubar__buttons" ref={allBtnRef}>
         <div
           ref={transactionIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'transaction'
+              ? 'menubar__navBtn checked'
+              : 'menubar__navBtn'
+          }
           data-type="transaction"
           onClick={onClickIcon}
         >
@@ -78,7 +69,11 @@ const MenuBar = ({ setModal, pageType }) => {
         </div>
         <div
           ref={calIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'calendar'
+              ? 'menubar__navBtn checked'
+              : 'menubar__navBtn'
+          }
           data-type="calendar"
           onClick={onClickIcon}
         >
@@ -86,34 +81,36 @@ const MenuBar = ({ setModal, pageType }) => {
         </div>
         <div
           ref={chartIconRef}
-          className={styles.navBtn}
+          className={
+            pageType === 'chart' ? 'menubar__navBtn checked' : 'menubar__navBtn'
+          }
           data-type="chart"
           onClick={onClickIcon}
         >
           <i data-type="chart" className="far fa-chart-bar" />
         </div>
-        <div className={styles.navBtn} onClick={onClickPayment}>
+        <div className="menubar__navBtn" onClick={onClickPayment}>
           <i className="fas fa-credit-card" />
         </div>
       </div>
 
-      <div className={styles.ctrBox}>
+      <div className="menubar__ctrBox">
         <button
           type="button"
           title="prev"
-          className={`${styles['btn-cal']} ${styles.prev}`}
+          className="btn-cal prev"
           onClick={onClickPrevMonth}
           ref={btnPrevRef}
         />
-        <div className={styles['year-month']}>
-          <span className={styles['cal-year']} ref={calYearRef} />
-          <span className={styles['cal-month']} ref={calMonRef} />
+        <div className="year-month">
+          <span className="cal-year" ref={calYearRef} />
+          <span className="cal-month" ref={calMonRef} />
         </div>
 
         <button
           type="button"
           title="next"
-          className={`${styles['btn-cal']} ${styles.next}`}
+          className="btn-cal next"
           onClick={onClickNextMonth}
           ref={btnNextRef}
         />
