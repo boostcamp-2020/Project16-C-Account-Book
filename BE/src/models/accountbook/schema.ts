@@ -13,10 +13,10 @@ import {
 export interface AccountBook extends mongoose.Document {
   name: string;
   description: string;
-  categories: [Category];
-  payments: [PaymentMethod];
+  categories: Category[];
+  payments: PaymentMethod[];
   users: [string];
-  transactions: [Transaction];
+  transactions: Transaction[];
 }
 
 const Schema = new mongoose.Schema({
