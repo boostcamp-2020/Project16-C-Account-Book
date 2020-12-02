@@ -15,11 +15,12 @@ const checkToken = async (
   ctx: Context,
   next: Next,
 ): Promise<Context['body']> => {
-  const isUserInDB = await service.checkToken(ctx.header);
-  if (!isUserInDB) {
+  const user = await service.checkToken(ctx.header);
+  if (!user) {
     const jwtError = createError(401, 'unauthorized');
     throw jwtError;
   }
+  ctx.user = user;
   await next();
 };
 
