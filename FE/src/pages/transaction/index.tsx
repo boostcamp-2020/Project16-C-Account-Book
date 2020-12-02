@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-} from 'src/pages/DefaultTemplate/node_modules/react';
+import React, { useState } from 'react';
 
 import Modal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
@@ -11,7 +11,7 @@ import './app.scss';
 import AccountBookListPage from './pages/AccountBook';
 import CalendarPage from './pages/Calendar';
 import LoginPage from './pages/Login';
-import TransactionPage from './pages/transaction';
+import TransactionPage from './pages/Transaction';
 
 import GithubLoginProcess from './pages/Login/GithubLoginProcess';
 import NaverLoginProcess from './pages/Login/NaverLoginProcess';
