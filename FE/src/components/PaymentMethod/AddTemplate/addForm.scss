@@ -20,6 +20,18 @@
   flex-direction: column;
   z-index: 3;
 
+  &.selected {
+    animation: selectedMethodShow 1.5s;
+  }
+
+  @keyframes selectedMethodShow {
+    from {
+      opacity: 0;
+
+      transform: translate(-50%, 60%);
+    }
+  }
+
   .addform__method__name {
     width: 70%;
     margin: auto;

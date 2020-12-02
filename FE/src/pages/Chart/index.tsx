@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Modal from '../../components/PaymentMethod/Modal';
+import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import NavButton from '../../components/Chart/NavButton';
 import PieChart from '../../components/CategoryChart/PieChart';
@@ -49,7 +49,10 @@ const Chart = props => {
         </div>
       )}
       {paymentMethodModal && (
-        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+        <PaymentModal
+          setModal={setPaymentMethodModal}
+          defaultMethod={defaultMethod}
+        />
       )}
     </div>
   );
