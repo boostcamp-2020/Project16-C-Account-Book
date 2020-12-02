@@ -29,6 +29,6 @@ const Schema = new mongoose.Schema({
 });
 
 export const AccountBookModel = mongoose.model<AccountBook>(
-  'accountbook',
+  'accountbooks',
   Schema,
 );
