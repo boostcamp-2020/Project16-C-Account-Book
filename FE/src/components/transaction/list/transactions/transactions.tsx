@@ -1,23 +1,37 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
+import { useRootData } from '../../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../../store/TransactionData/transactionInfoHook';
 
-const Transactions = () => {
+const Transactions = ({
+  selectedCategory,
+  selectedTypes,
+}: {
+  selectedCategory: string;
+  selectedTypes: string[];
+}) => {
   // axios로 비동기 처리
-  const transactions = useTransactionData(
-    store => store.accountBook.transaction,
-  );
+  const { transactions, filterTransaction } = useTransactionData(store => ({
+    transactions: store.filteredTransactions,
+    filterTransaction: store.filterTransaction,
+  }));
 
-  const days = transactions.map(value => value.date);
-  const daysArr = Array.from(new Set<string>(days)).reverse();
+  const { year, month } = useRootData(store => store.nowCalendarInfo);
+
+  useEffect(() => {
+    filterTransaction(selectedCategory, year, month, selectedTypes);
+  }, [selectedCategory, year, month, selectedTypes]);
 
   return (
     <>
-      {daysArr.map(day => (
-        <TransactionsOfOneDay date={day} transactions={transactions} />
-      ))}
+      {Object.keys(transactions)
+        .sort()
+        .reverse()
+        .map(day => (
+          <TransactionsOfOneDay date={day} transactions={transactions[day]} />
+        ))}
     </>
   );
 };
