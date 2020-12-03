@@ -1,17 +1,17 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import getAccountBookList from '../../../api/accoun-book-list';
 import './accountBookList.scss';
-import { postFetch } from '../../../service/fetch';
 
 export const AccountBookList = ({ datas, setDatas }) => {
+  const history = useHistory();
+
   const setAccountBookList = async () => {
     const data = await getAccountBookList();
     setDatas(data);
   };
 
-  const history = useHistory();
   const linkToDetail = () => {
     history.push(`/calendar`);
   };
