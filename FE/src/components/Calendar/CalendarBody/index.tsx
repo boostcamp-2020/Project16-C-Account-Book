@@ -1,7 +1,17 @@
 import React from 'react';
 import CalculateDate from '../../../util/calculateDate';
+import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import CommaMaker from '../../../util/commaForMoney';
+import './calendarBody.scss';
 
 export default function CalendarBody({ year, month }) {
+  const DateInfo = useRootData(store => store.nowCalendarInfo);
+
+  const YearMonthTransactions = useTransactionData(store =>
+    store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
+  );
+
   const yy = year;
   const mm = month;
   const firstDay = CalculateDate.getFirstDay(yy, mm);
@@ -15,7 +25,6 @@ export default function CalendarBody({ year, month }) {
     markToday = CalculateDate.today.getDate();
   }
 
-  const trtd = '';
   let startCount;
   const countDay = 0;
 
@@ -54,10 +63,46 @@ export default function CalendarBody({ year, month }) {
                       <div className="today" data-date={countDay}>
                         {countDay}
                       </div>
+                      {YearMonthTransactions[String(countDay)] && (
+                        <>
+                          <div className="income__info" data-date={countDay}>
+                            +
+                            {CommaMaker(
+                              YearMonthTransactions[String(countDay)].income,
+                            )}
+                            원
+                          </div>
+                          <div className="spending__info" data-date={countDay}>
+                            -
+                            {CommaMaker(
+                              YearMonthTransactions[String(countDay)].spending,
+                            )}
+                            원
+                          </div>
+                        </>
+                      )}
                     </td>
                   ) : (
                     <td className={`day ${countDay}`} data-date={countDay}>
                       {countDay}
+                      {YearMonthTransactions[String(countDay)] && (
+                        <>
+                          <div className="income__info" data-date={countDay}>
+                            +
+                            {CommaMaker(
+                              YearMonthTransactions[String(countDay)].income,
+                            )}
+                            원
+                          </div>
+                          <div className="spending__info" data-date={countDay}>
+                            -
+                            {CommaMaker(
+                              YearMonthTransactions[String(countDay)].spending,
+                            )}
+                            원
+                          </div>
+                        </>
+                      )}
                     </td>
                   )}
                 </>

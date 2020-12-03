@@ -1,50 +1,18 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
-import CommaMaker from '../../../util/commaForMoney';
+
 import CalendarBody from '../CalendarBody';
 import './calendar.scss';
 
 export default function Calendar() {
-  const calBodyRef = useRef();
-
   const [detailModal, setDetailModal] = useState(false);
 
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
-  const YearMonthTransactions = useTransactionData(store =>
-    store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
-  );
-
-  const markPriceToCalendar = () => {
-    Object.entries(YearMonthTransactions).forEach(([day, info]) => {
-      calBodyRef.current.childNodes.forEach(el => {
-        const priceInfo = 1;
-        el.childNodes.forEach(date => {
-          if (
-            date.classList &&
-            date.classList.contains(day) &&
-            date.childNodes[priceInfo] === undefined
-          ) {
-            date.insertAdjacentHTML(
-              'beforeend',
-              `
-              <div class="income__info" data-date=${day}>+${CommaMaker(
-                info.income,
-              )}원</div>
-              <div class="spending__info" data-date=${day}>-${CommaMaker(
-                info.spending,
-              )}원</div>
-            `,
-            );
-          }
-        });
-      });
-    });
-  };
 
   const onClickCalBody = useCallback(
     event => {
@@ -58,10 +26,6 @@ export default function Calendar() {
     },
     [DateInfo],
   );
-
-  useEffect(() => {
-    markPriceToCalendar();
-  }, [DateInfo]);
 
   return (
     <div className="calendar-container">
@@ -79,11 +43,7 @@ export default function Calendar() {
                 <th>SAT</th>
               </tr>
             </thead>
-            <tbody
-              className="cal-body"
-              ref={calBodyRef}
-              onClick={onClickCalBody}
-            >
+            <tbody className="cal-body" onClick={onClickCalBody}>
               <CalendarBody year={DateInfo.year} month={DateInfo.month} />
             </tbody>
           </table>
