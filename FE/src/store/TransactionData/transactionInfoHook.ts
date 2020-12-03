@@ -1,7 +1,7 @@
 import React from 'react';
 import { useObserver } from 'mobx-react';
 import { transactionInfoContext } from './transactionDataContext';
-import { TStore } from './transactionData';
+import { TStore } from './transactionDataStore';
 
 export const useStoreData = <Selection, ContextData, Store>(
   context: React.Context<ContextData>,

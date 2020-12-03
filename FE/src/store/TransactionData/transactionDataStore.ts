@@ -1,5 +1,7 @@
 export const createStore = () => {
-  const store = {
+  const store: any = {
+    filteredTransactions: {},
+
     accountBook: {
       _id: 'abcdefg',
       name: 'test account',
@@ -7,12 +9,12 @@ export const createStore = () => {
       category: [
         {
           _id: '123456',
-          name: 'shopping',
+          name: '쇼핑',
           icon: 1,
         },
         {
           _id: '234567',
-          name: 'food',
+          name: '음식',
           icon: 2,
         },
       ],
@@ -36,9 +38,9 @@ export const createStore = () => {
           content: 'test',
           type: '지출',
           cost: 10000,
-          date: '2020-11-29',
+          date: '2020-11-30',
           category: {
-            name: 'shopping',
+            name: '쇼핑',
             icon: 1,
           },
           payment: {
@@ -51,9 +53,9 @@ export const createStore = () => {
           content: 'test2',
           type: '지출',
           cost: 20000,
-          date: '2020-11-29',
+          date: '2020-11-30',
           category: {
-            name: 'food',
+            name: '음식',
             icon: 1,
           },
           payment: {
@@ -66,9 +68,9 @@ export const createStore = () => {
           content: 'test3',
           type: '지출',
           cost: 30000,
-          date: '2020-11-29',
+          date: '2020-11-28',
           category: {
-            name: 'life',
+            name: '영화',
             icon: 1,
           },
           payment: {
@@ -81,9 +83,9 @@ export const createStore = () => {
           content: 'test4',
           type: '지출',
           cost: 40000,
-          date: '2020-11-29',
+          date: '2020-11-27',
           category: {
-            name: 'etc',
+            name: '기타',
             icon: 1,
           },
           payment: {
@@ -99,7 +101,7 @@ export const createStore = () => {
           cost: 50000,
           date: '2020-11-29',
           category: {
-            name: 'etc',
+            name: '기타',
             icon: 1,
           },
           payment: {
@@ -114,7 +116,7 @@ export const createStore = () => {
           cost: 1000,
           date: '2020-10-29',
           category: {
-            name: 'etc',
+            name: '기타',
             icon: 1,
           },
           payment: {
@@ -129,7 +131,7 @@ export const createStore = () => {
           cost: 10000,
           date: '2020-10-29',
           category: {
-            name: 'shopping',
+            name: '쇼핑',
             icon: 1,
           },
           payment: {
@@ -230,13 +232,47 @@ export const createStore = () => {
       ],
     },
 
+    filterTransaction(
+      category: string,
+      year: number,
+      month: number,
+      types: string[],
+    ) {
+      const transactions = this.getTransactionsByYearMonth(year, month);
+
+      const typeFiltered = transactions.filter(
+        (transaction: { type: string }) => {
+          return types.includes(transaction.type);
+        },
+      );
+
+      const categoryFiltered =
+        category === 'all'
+          ? typeFiltered
+          : typeFiltered.filter(
+              (transaction: { category: { name: string } }) => {
+                return transaction.category.name === category;
+              },
+            );
+
+      const transactionsGroupByDate = categoryFiltered.reduce((acc, curr) => {
+        acc[curr.date] = [...(acc[curr.date] || []), curr];
+        return acc;
+      }, {});
+
+      console.log(categoryFiltered);
+      console.log(transactionsGroupByDate);
+
+      this.filteredTransactions = transactionsGroupByDate;
+    },
+
     getAllTransactions() {
       return this.accountBook.transaction;
     },
 
     getTransactionsByYearMonth(year: number, month: number) {
       const yearMonthDatas = this.accountBook.transaction.filter(
-        item =>
+        (item: { date: string }) =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );
@@ -245,31 +281,33 @@ export const createStore = () => {
     },
     getTransactionsForCalendar(year: number, month: number) {
       const yearMonthDatas = this.accountBook.transaction.filter(
-        item =>
+        (item: { date: string }) =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );
 
       const priceSumData = {};
 
-      yearMonthDatas.forEach(item => {
-        const date = String(Number(item.date.split('-')[2]));
-        if (!priceSumData.hasOwnProperty(String(date))) {
-          item.type === '지출'
-            ? (priceSumData[`${date}`] = { spending: item.cost, income: 0 })
-            : (priceSumData[`${date}`] = { income: item.cost, spendiing: 0 });
-        } else {
-          item.type === '지출'
-            ? (priceSumData[`${date}`].spending += item.cost)
-            : (priceSumData[`${date}`].income += item.cost);
-        }
-      });
+      yearMonthDatas.forEach(
+        (item: { date: string; type: string; cost: any }) => {
+          const date = String(Number(item.date.split('-')[2]));
+          if (!priceSumData.hasOwnProperty(String(date))) {
+            item.type === '지출'
+              ? (priceSumData[`${date}`] = { spending: item.cost, income: 0 })
+              : (priceSumData[`${date}`] = { income: item.cost, spendiing: 0 });
+          } else {
+            item.type === '지출'
+              ? (priceSumData[`${date}`].spending += item.cost)
+              : (priceSumData[`${date}`].income += item.cost);
+          }
+        },
+      );
 
       return priceSumData;
     },
     getSpecificTransactions(year: number, month: number, day: number) {
       const specificDatas = this.accountBook.transaction.filter(
-        item =>
+        (item: { date: string }) =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]) &&
           day === Number(item.date.split('-')[2]),
@@ -277,32 +315,36 @@ export const createStore = () => {
       return specificDatas;
     },
 
-    getSpendingTotal(year, month) {
+    getSpendingTotal(year: number, month: number) {
       let sum = 0;
-      this.accountBook.transaction.forEach(item => {
-        if (
-          item.type === '지출' &&
-          Number(item.date.split('-')[0]) === year &&
-          Number(item.date.split('-')[1]) === month
-        ) {
-          sum += item.cost;
-        }
-      });
+      this.accountBook.transaction.forEach(
+        (item: { type: string; date: string; cost: number }) => {
+          if (
+            item.type === '지출' &&
+            Number(item.date.split('-')[0]) === year &&
+            Number(item.date.split('-')[1]) === month
+          ) {
+            sum += item.cost;
+          }
+        },
+      );
 
       return sum;
     },
-    getIncomeTotal(year, month) {
+    getIncomeTotal(year: number, month: number) {
       let sum = 0;
 
-      this.accountBook.transaction.forEach(item => {
-        if (
-          item.type === '수입' &&
-          Number(item.date.split('-')[0]) === year &&
-          Number(item.date.split('-')[1]) === month
-        ) {
-          sum += item.cost;
-        }
-      });
+      this.accountBook.transaction.forEach(
+        (item: { type: string; date: string; cost: number }) => {
+          if (
+            item.type === '수입' &&
+            Number(item.date.split('-')[0]) === year &&
+            Number(item.date.split('-')[1]) === month
+          ) {
+            sum += item.cost;
+          }
+        },
+      );
 
       return sum;
     },
@@ -312,13 +354,13 @@ export const createStore = () => {
       let accumDeg = 0;
 
       const datas = this.accountBook.transaction.filter(
-        item =>
+        (item: { type: string; date: string }) =>
           item.type === '지출' &&
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );
 
-      datas.forEach(item => {
+      datas.forEach((item: { category: { name: string }; cost: any }) => {
         if (item.category.name in chartInfo) {
           chartInfo[item.category.name].cost += item.cost;
         } else {
