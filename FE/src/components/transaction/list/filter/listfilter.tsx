@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styles from './listfilter.modules.scss';
 
 const Filter = ({
@@ -12,27 +12,31 @@ const Filter = ({
   selectedTypes: string[];
   selectType: (values: string[]) => void;
 }) => {
-  const onCategoryClicked = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
-    const targetElement = e.target as HTMLInputElement;
-    if (selectedCategory === targetElement.value) {
-      selectCategory('all');
-      targetElement.checked = false;
-    } else {
-      selectCategory(targetElement.value);
-    }
-  };
+  const onCategoryClicked = useCallback(
+    (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+      const targetElement = e.target as HTMLInputElement;
+      if (selectedCategory === targetElement.value) {
+        selectCategory('all');
+        targetElement.checked = false;
+      } else {
+        selectCategory(targetElement.value);
+      }
+    },
+    [selectedCategory, selectCategory],
+  );
 
-  const onTypeClicked = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    const targetElement = e.target as HTMLInputElement;
-    if (selectedTypes.includes(targetElement.value)) {
-      const rest = selectedTypes.filter(type => type !== targetElement.value);
-      selectType(rest);
-    } else {
-      selectType([...selectedTypes, targetElement.value]);
-    }
-  };
+  const onTypeClicked = useCallback(
+    (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+      const targetElement = e.target as HTMLInputElement;
+      if (selectedTypes.includes(targetElement.value)) {
+        const rest = selectedTypes.filter(type => type !== targetElement.value);
+        selectType(rest);
+      } else {
+        selectType([...selectedTypes, targetElement.value]);
+      }
+    },
+    [selectedTypes, selectType],
+  );
 
   return (
     <div className={styles.container}>
@@ -67,6 +71,7 @@ const Filter = ({
           <input
             type="radio"
             id="shopping"
+            name="category"
             value="쇼핑"
             onClick={onCategoryClicked}
           />
@@ -76,6 +81,7 @@ const Filter = ({
           <input
             type="radio"
             id="movie"
+            name="category"
             value="영화"
             onClick={onCategoryClicked}
           />
@@ -85,6 +91,7 @@ const Filter = ({
           <input
             type="radio"
             id="music"
+            name="category"
             value="음악"
             onClick={onCategoryClicked}
           />
@@ -94,6 +101,7 @@ const Filter = ({
           <input
             type="radio"
             id="food"
+            name="category"
             value="음식"
             onClick={onCategoryClicked}
           />
@@ -103,6 +111,7 @@ const Filter = ({
           <input
             type="radio"
             id="any"
+            name="category"
             value="기타"
             onClick={onCategoryClicked}
           />
