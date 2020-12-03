@@ -10,11 +10,15 @@ export default function AccountBookControl({ setCreate }) {
 
   return (
     <div className="acbook__container">
-      <h1 className="acbook__title">가계부 리스트</h1>
-      <div className="acbook__control" onClick={createAccountBook}>
-        <PlusCircleIcon className="acbook__plus" size={24} />
-        <h2>새 가계부 추가</h2>
-      </div>
+      <div className="acbook__title">Account Book List</div>
+
+      <button
+        type="button"
+        onClick={createAccountBook}
+        className="new__accountbook"
+      >
+        Add
+      </button>
     </div>
   );
 }

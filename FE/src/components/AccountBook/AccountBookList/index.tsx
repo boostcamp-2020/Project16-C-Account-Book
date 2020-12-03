@@ -31,13 +31,14 @@ export const AccountBookList = ({ datas, setDatas }) => {
   }, []);
 
   return (
-    <>
-      {datas.map(data => (
+    <div className="acbook__list">
+      {datas.map((data, index) => (
         <div
           key={data._id}
           className="acbook"
           data-acbookid={data._id}
           onClick={linkToDetail}
+          style={{ animationDelay: `${index * 0.08}s` }}
         >
           <h3 data-acbookid={data._id}>{data.name}</h3>
           <p data-acbookid={data._id}>{data.description}</p>
@@ -50,7 +51,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
           </button>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
