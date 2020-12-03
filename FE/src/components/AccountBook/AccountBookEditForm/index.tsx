@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+
+import './accountBookEditForm.scss';
 
 export default function AccountBookEditForm({ data, props }) {
   const { datas, setDatas, name, setName, description, setDescription } = props;
@@ -46,6 +48,10 @@ export default function AccountBookEditForm({ data, props }) {
     });
     setDatas(newArr);
   };
+
+  useEffect(() => {
+    accountBookInput.current.focus();
+  }, []);
 
   return (
     <div className="edit__acbook">

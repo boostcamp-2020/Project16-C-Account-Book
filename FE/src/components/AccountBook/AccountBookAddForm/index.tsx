@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 import { postFetch } from '../../../service/fetch';
 import './accountBookAddForm.scss';
@@ -44,6 +44,12 @@ export default function AccountBookAddForm({ props }) {
   const cancleCreate = () => {
     setCreate(false);
   };
+
+  useEffect(() => {
+    if (create) {
+      accountBookInput.current.focus();
+    }
+  });
 
   return (
     <>
