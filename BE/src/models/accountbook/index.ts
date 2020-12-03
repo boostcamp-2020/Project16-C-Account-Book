@@ -17,6 +17,13 @@ const get = async ({
   return accountBooks;
 };
 
+const getDetail = async (id: string): Promise<any> => {
+  const accountBook = await AccountBookModel.findOne({
+    _id: id,
+  });
+  return accountBook;
+};
+
 const create = async ({
   name,
   description,
@@ -83,4 +90,4 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, update, del, addTransaction };
+export default { get, getDetail, create, update, del, addTransaction };

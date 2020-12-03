@@ -39,7 +39,10 @@ const del = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const getDetail = async (ctx: Context): Promise<Context['body']> => {
-  ctx.body = `GET ${ctx.url}`;
+  const accountBook = await service.getDetail(ctx);
+  const res = response(200, 'success', accountBook);
+  ctx.status = res.status;
+  ctx.body = res;
   return ctx.body;
 };
 export default { get, post, update, del, getDetail };

@@ -43,6 +43,13 @@ const del = async (ctx: Context): Promise<any> => {
   return deleteResult;
 };
 
+const getDetail = async (ctx: Context): Promise<any> => {
+  const accountBook = await accountBookModel.getDetail(
+    ctx.params.accountbookid,
+  );
+  return accountBook;
+};
+
 const addTransaction = async (body: Context['body']): Promise<any> => {
   const transactionInfo = {
     content: body.content,
@@ -55,4 +62,4 @@ const addTransaction = async (body: Context['body']): Promise<any> => {
   await accountBookModel.addTransaction(body.accountBookId, transactionInfo);
 };
 
-export default { get, post, patch, del, addTransaction };
+export default { get, getDetail, post, patch, del, addTransaction };
