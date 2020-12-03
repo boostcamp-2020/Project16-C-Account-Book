@@ -7,8 +7,7 @@ export const getAccountBookList = () => {
 };
 
 export const getTargetAccountBook = id => {
-  const data = getFetch(
-    `${process.env.SERVER_URL}/api/accountbook?accountbookid=${id}`,
-  );
+  const data = getFetch(`${process.env.SERVER_URL}/api/accountbook/${id}`);
+
   return data;
 };
