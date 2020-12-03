@@ -227,6 +227,96 @@ export const createStore = () => {
             description: 'naver',
           },
         },
+        {
+          _id: 'n',
+          content: '영화보기',
+          type: '지출',
+          cost: 40000,
+          date: '2020-12-02',
+          category: {
+            name: '여가',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'o',
+          content: '정기용돈',
+          type: '수입',
+          cost: 500000000,
+          date: '2020-12-02',
+          category: {
+            name: '용돈',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'p',
+          content: '영화보기',
+          type: '지출',
+          cost: 40000,
+          date: '2020-12-03',
+          category: {
+            name: '여가',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'q',
+          content: '정기용돈',
+          type: '수입',
+          cost: 500000000,
+          date: '2020-12-03',
+          category: {
+            name: '용돈',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'r',
+          content: '영화보기',
+          type: '지출',
+          cost: 40000,
+          date: '2020-12-04',
+          category: {
+            name: '여가',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 's',
+          content: '정기용돈',
+          type: '수입',
+          cost: 500000000,
+          date: '2020-12-05',
+          category: {
+            name: '용돈',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
       ],
     },
 
@@ -257,7 +347,7 @@ export const createStore = () => {
         if (!priceSumData.hasOwnProperty(String(date))) {
           item.type === '지출'
             ? (priceSumData[`${date}`] = { spending: item.cost, income: 0 })
-            : (priceSumData[`${date}`] = { income: item.cost, spendiing: 0 });
+            : (priceSumData[`${date}`] = { income: item.cost, spending: 0 });
         } else {
           item.type === '지출'
             ? (priceSumData[`${date}`].spending += item.cost)

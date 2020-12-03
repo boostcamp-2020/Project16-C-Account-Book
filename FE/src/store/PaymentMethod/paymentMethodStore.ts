@@ -13,14 +13,8 @@ export const createStore = () => {
       { name: 'Kakao', desc: 'sub method', color: 'hsla(40, 100%, 50%, 0.93)' },
     ],
 
-    async getDefaultMethods() {
-      const datas = await this.defaultMethods;
-      console.log('here');
-      return datas;
-    },
-
-    initialMethods() {
-      this.defaultMethods = getDefaultMethods();
+    async initialMethods() {
+      this.defaultMethods = await getDefaultMethods();
     },
 
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
