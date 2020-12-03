@@ -3,58 +3,19 @@ import { getTargetAccountBook } from '../../api/accoun-book-list';
 export const createStore = () => {
   const store = {
     accountBook: {
-      _id: 'hello',
-      name: 'test account',
-      description: 'mock account book',
-      category: [
-        {
-          _id: '123456',
-          name: 'shopping',
-          icon: 1,
-        },
-        {
-          _id: '234567',
-          name: 'food',
-          icon: 2,
-        },
-      ],
-      payment: [
-        {
-          _id: 'acacacac',
-          card: 1,
-          description: 'naver',
-        },
-        {
-          _id: 'adadadad',
-          card: 2,
-          description: 'kakao',
-        },
-      ],
-
-      user: [1, 2, 3, 4],
-      transactions: [
-        {
-          _id: 'a',
-          content: 'test',
-          type: '지출',
-          cost: 10000,
-          date: '2020-11-29',
-          category: {
-            name: 'shopping',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-      ],
+      _id: null,
+      name: null,
+      description: null,
+      category: [],
+      payment: [],
+      user: [],
+      transactions: [],
     },
 
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
 
-      this.accountBook = accountBook[0];
+      this.accountBook = accountBook;
     },
 
     getAllTransactions() {
