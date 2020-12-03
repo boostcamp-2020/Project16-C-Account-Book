@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useRootData } from '../store/PaymentMethod/paymentMethodHook';
 
 const useDefaultPayment = () => {
-  const [defaultMethod, setDefaultMethod] = useState([]);
-
+  const defaultMethod = useRootData(store => store.defaultMethods);
   const initialDefaultMethods = useRootData(store => store.initialMethods);
-  const storeData = useRootData(store => store.getDefaultMethods);
 
-  const getDefaultMethod = async () => {
+  const getDefaultMethod = () => {
     initialDefaultMethods();
-    const datas = await storeData();
-    setDefaultMethod(datas);
   };
 
   useEffect(() => {
-    getDefaultMethod();
+    if (defaultMethod.length === 0) {
+      getDefaultMethod();
+    }
   }, []);
 
   return defaultMethod;

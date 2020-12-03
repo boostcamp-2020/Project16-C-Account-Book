@@ -20,12 +20,12 @@ const post = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
+
 const update = async (ctx: Context): Promise<Context['body']> => {
   const updateResult = await service.patch(ctx);
   const res = response(200, updateResult.message, updateResult.data);
   ctx.status = res.status;
   ctx.body = res;
-
   return ctx.body;
 };
 

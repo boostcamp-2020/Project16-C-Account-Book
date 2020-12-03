@@ -1,7 +1,13 @@
-import { getFetch, postFetch } from '../service/fetch';
+import { getFetch } from '../service/fetch';
 
-export const getAccountBookList = async () => {
-  const backendPath = process.env.BACKEND;
-  const data = await getFetch(`${backendPath}/api/accountbook`);
-  return data.reverse();
+export const getAccountBookList = () => {
+  const data = getFetch(`${process.env.SERVER_URL}/api/accountbook`);
+
+  return data;
+};
+
+export const getTargetAccountBook = id => {
+  const data = getFetch(`${process.env.SERVER_URL}/api/accountbook/${id}`);
+
+  return data;
 };

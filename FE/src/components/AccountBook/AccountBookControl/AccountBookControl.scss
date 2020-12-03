@@ -1,17 +1,39 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mixins.scss' as *;
 .acbook__container {
-  margin-top: 100px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 
   .acbook__title {
-    font-size: 45px;
+    font-size: 4.5em;
+    color: white;
+    text-shadow: $selectedTextShadow;
   }
 
   .acbook__control {
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
 
-    .acbook__plus {
-      margin-right: 10px;
+  .new__accountbook {
+    @include buttonDefaultSetting;
+    border: 1px solid $white;
+    color: $white;
+    position: absolute;
+    top: 10em;
+    left: 15em;
+    width: 8em;
+    height: 50px;
+    background-color: $modal-button-background;
+
+    font-size: 1em;
+    z-index: 3;
+    &:hover {
+      background-color: $light-black;
+      text-shadow: $selectedTextShadow;
+      box-shadow: $selectedBoxShadow;
     }
   }
 }

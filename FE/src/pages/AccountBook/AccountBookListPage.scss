@@ -1,5 +1,9 @@
 .acbook__list__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
-  padding: 90px 60px;
+  padding: 5em 3em;
+  background-color: rgba(0, 0, 0, 0.9);
+  overflow-x: hidden;
 }
