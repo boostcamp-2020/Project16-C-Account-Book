@@ -6,7 +6,7 @@ const useDefaultPayment = () => {
   const defaultMethod = useRootData(store => store.defaultMethods);
   const initialDefaultMethods = useRootData(store => store.initialMethods);
 
-  const getDefaultMethod = async () => {
+  const getDefaultMethod = () => {
     initialDefaultMethods();
   };
 

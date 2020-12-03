@@ -1,7 +1,9 @@
+import { getTargetAccountBook } from '../../api/accoun-book-list';
+
 export const createStore = () => {
   const store = {
     accountBook: {
-      _id: 'abcdefg',
+      _id: 'hello',
       name: 'test account',
       description: 'mock account book',
       category: [
@@ -30,7 +32,7 @@ export const createStore = () => {
       ],
 
       user: [1, 2, 3, 4],
-      transaction: [
+      transactions: [
         {
           _id: 'a',
           content: 'test',
@@ -46,286 +48,21 @@ export const createStore = () => {
             description: 'naver',
           },
         },
-        {
-          _id: 'b',
-          content: 'test2',
-          type: '지출',
-          cost: 20000,
-          date: '2020-11-29',
-          category: {
-            name: 'food',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'c',
-          content: 'test3',
-          type: '지출',
-          cost: 30000,
-          date: '2020-11-29',
-          category: {
-            name: 'life',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'd',
-          content: 'test4',
-          type: '지출',
-          cost: 40000,
-          date: '2020-11-29',
-          category: {
-            name: 'etc',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-
-        {
-          _id: 'e',
-          content: 'test4',
-          type: '지출',
-          cost: 50000,
-          date: '2020-11-29',
-          category: {
-            name: 'etc',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'f',
-          content: 'test4',
-          type: '지출',
-          cost: 1000,
-          date: '2020-10-29',
-          category: {
-            name: 'etc',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'g',
-          content: 'test4',
-          type: '지출',
-          cost: 10000,
-          date: '2020-10-29',
-          category: {
-            name: 'shopping',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'h',
-          content: '옷',
-          type: '지출',
-          cost: 1000000,
-          date: '2020-12-01',
-          category: {
-            name: '쇼핑',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'i',
-          content: '치킨',
-          type: '지출',
-          cost: 20000,
-          date: '2020-12-01',
-          category: {
-            name: '식비',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'j',
-          content: '정기 교통비',
-          type: '지출',
-          cost: 30000,
-          date: '2020-12-01',
-          category: {
-            name: '교통',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'k',
-          content: '영화보기',
-          type: '지출',
-          cost: 40000,
-          date: '2020-12-01',
-          category: {
-            name: '여가',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'l',
-          content: '정기용돈',
-          type: '수입',
-          cost: 500000000,
-          date: '2020-12-01',
-          category: {
-            name: '용돈',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'm',
-          content: '정기월급',
-          type: '수입',
-          cost: 400000000,
-          date: '2020-12-01',
-          category: {
-            name: '월급',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'n',
-          content: '영화보기',
-          type: '지출',
-          cost: 40000,
-          date: '2020-12-02',
-          category: {
-            name: '여가',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'o',
-          content: '정기용돈',
-          type: '수입',
-          cost: 500000000,
-          date: '2020-12-02',
-          category: {
-            name: '용돈',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'p',
-          content: '영화보기',
-          type: '지출',
-          cost: 40000,
-          date: '2020-12-03',
-          category: {
-            name: '여가',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'q',
-          content: '정기용돈',
-          type: '수입',
-          cost: 500000000,
-          date: '2020-12-03',
-          category: {
-            name: '용돈',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 'r',
-          content: '영화보기',
-          type: '지출',
-          cost: 40000,
-          date: '2020-12-04',
-          category: {
-            name: '여가',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
-        {
-          _id: 's',
-          content: '정기용돈',
-          type: '수입',
-          cost: 500000000,
-          date: '2020-12-05',
-          category: {
-            name: '용돈',
-            icon: 1,
-          },
-          payment: {
-            card: 1,
-            description: 'naver',
-          },
-        },
       ],
     },
 
+    async setAccountBook(id) {
+      const accountBook = await getTargetAccountBook(id);
+
+      this.accountBook = accountBook[0];
+    },
+
     getAllTransactions() {
-      return this.accountBook.transaction;
+      return this.accountBook.transactions;
     },
 
     getTransactionsByYearMonth(year: number, month: number) {
-      const yearMonthDatas = this.accountBook.transaction.filter(
+      const yearMonthDatas = this.accountBook.transactions.filter(
         item =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
@@ -334,7 +71,7 @@ export const createStore = () => {
       return yearMonthDatas;
     },
     getTransactionsForCalendar(year: number, month: number) {
-      const yearMonthDatas = this.accountBook.transaction.filter(
+      const yearMonthDatas = this.accountBook.transactions.filter(
         item =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
@@ -358,7 +95,7 @@ export const createStore = () => {
       return priceSumData;
     },
     getSpecificTransactions(year: number, month: number, day: number) {
-      const specificDatas = this.accountBook.transaction.filter(
+      const specificDatas = this.accountBook.transactions.filter(
         item =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]) &&
@@ -369,7 +106,7 @@ export const createStore = () => {
 
     getSpendingTotal(year, month) {
       let sum = 0;
-      this.accountBook.transaction.forEach(item => {
+      this.accountBook.transactions.forEach(item => {
         if (
           item.type === '지출' &&
           Number(item.date.split('-')[0]) === year &&
@@ -384,7 +121,7 @@ export const createStore = () => {
     getIncomeTotal(year, month) {
       let sum = 0;
 
-      this.accountBook.transaction.forEach(item => {
+      this.accountBook.transactions.forEach(item => {
         if (
           item.type === '수입' &&
           Number(item.date.split('-')[0]) === year &&
@@ -401,7 +138,7 @@ export const createStore = () => {
       const chartInfo = {};
       let accumDeg = 0;
 
-      const datas = this.accountBook.transaction.filter(
+      const datas = this.accountBook.transactions.filter(
         item =>
           item.type === '지출' &&
           year === Number(item.date.split('-')[0]) &&

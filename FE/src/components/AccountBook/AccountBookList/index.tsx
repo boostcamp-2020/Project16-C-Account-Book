@@ -1,18 +1,23 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import getAccountBookList from '../../../api/accoun-book-list';
+import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import { getAccountBookList } from '../../../api/accoun-book-list';
 import './accountBookList.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
 
+  const setAccountBook = useTransactionData(store => store.setAccountBook);
+
   const setAccountBookList = async () => {
     const data = await getAccountBookList();
-    setDatas(data);
+
+    setDatas(data.reverse());
   };
 
-  const linkToDetail = () => {
+  const linkToDetail = async event => {
+    setAccountBook(event.target.dataset.acbookid);
     history.push(`/calendar`);
   };
 
@@ -27,10 +32,16 @@ export const AccountBookList = ({ datas, setDatas }) => {
   return (
     <>
       {datas.map(data => (
-        <div key={data._id} className="acbook" onClick={linkToDetail}>
-          <h3>{data.name}</h3>
-          <p>{data.description}</p>
+        <div
+          key={data._id}
+          className="acbook"
+          data-acbookid={data._id}
+          onClick={linkToDetail}
+        >
+          <h3 data-acbookid={data._id}>{data.name}</h3>
+          <p data-acbookid={data._id}>{data.description}</p>
           <button
+            data-acbookid={data._id}
             className="delete__button"
             onClick={() => deleteAccountBook(data._id)}
           >
