@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useTransactionData } from '../store/TransactionData/transactionInfoHook';
 
-const useDefaultPayment = accountBookId => {
+const useAccountBook = accountBookId => {
   const setAccountBook = useTransactionData(store => store.setAccountBook);
 
   useEffect(() => {
@@ -10,4 +10,4 @@ const useDefaultPayment = accountBookId => {
   }, []);
 };
 
-export default useDefaultPayment;
+export default useAccountBook;
