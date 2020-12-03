@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-
+import { createAccountBook } from '../../../api/accoun-book-list';
 import './accountBookAddForm.scss';
 
 export default function AccountBookAddForm({ setCreate, datas, setDatas }) {
@@ -7,8 +7,9 @@ export default function AccountBookAddForm({ setCreate, datas, setDatas }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
-  const onCreateAccountBook = event => {
+  const onCreateAccountBook = async event => {
     if (event.key === 'Enter') {
+      const res = await createAccountBook({ name, description });
       setCreate(false);
       setDatas([{ name, description }, ...datas]);
     }
