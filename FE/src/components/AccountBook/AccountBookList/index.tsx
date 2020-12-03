@@ -12,8 +12,8 @@ export const AccountBookList = ({ datas, setDatas }) => {
   };
 
   const history = useHistory();
-  const linkToDetail = (id = '') => {
-    history.push(`calendar/${id}`);
+  const linkToDetail = () => {
+    history.push(`/calendar`);
   };
 
   const deleteAccountBook = (id = '') => {
