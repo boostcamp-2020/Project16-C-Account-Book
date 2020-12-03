@@ -9,17 +9,12 @@ import './accountBookList.scss';
 export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
 
-  const setAccountBook = useTransactionData(store => store.setAccountBook);
-
   const setAccountBookList = async () => {
     const data = await getAccountBookList();
-
     setDatas(data.reverse());
   };
 
   const linkToDetail = async event => {
-    setAccountBook(event.target.dataset.acbookid);
-
     history.push({
       pathname: '/calendar',
       state: {
