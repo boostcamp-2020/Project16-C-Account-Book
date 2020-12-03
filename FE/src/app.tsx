@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
 import DateInfoProvider from './store/DateInfo/dateInfoContext';
-import TransactionInfoProvider from './store/TransactionData/transactionDataContext';
+import TransactionInfoProvider from './store/AccountBook/accountBookDataContext';
 
 import './app.scss';
 

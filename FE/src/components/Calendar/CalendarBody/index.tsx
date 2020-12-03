@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 } from 'uuid';
 import CalculateDate from '../../../util/calculateDate';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import './calendarBody.scss';
 

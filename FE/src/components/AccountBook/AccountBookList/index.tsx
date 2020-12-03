@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
-
 import { getAccountBookList } from '../../../api/accoun-book-list';
 import './accountBookList.scss';
 
@@ -11,6 +9,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
 
   const setAccountBookList = async () => {
     const data = await getAccountBookList();
+
     setDatas(data.reverse());
   };
 
