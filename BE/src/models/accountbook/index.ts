@@ -1,8 +1,7 @@
-import PaymentMethodModel from '@models/paymentmethod';
 import CategoryModel from '@models/category';
-import { Transaction } from '@models/transaction/schema';
 import { User } from '@interfaces/auth';
-import { AccountBook, AccountBookModel } from './schema';
+import AccountBook from '@interfaces/accountbook';
+import { AccountBookModel } from './schema';
 
 const get = async ({
   id,
