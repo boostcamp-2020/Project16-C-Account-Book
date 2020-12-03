@@ -44,7 +44,7 @@ export default function Calendar() {
               </tr>
             </thead>
             <tbody className="cal-body" onClick={onClickCalBody}>
-              <CalendarBody year={DateInfo.year} month={DateInfo.month} />
+              <CalendarBody />
             </tbody>
           </table>
         </div>

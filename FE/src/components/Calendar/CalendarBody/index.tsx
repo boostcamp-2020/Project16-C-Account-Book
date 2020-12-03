@@ -5,15 +5,15 @@ import { useTransactionData } from '../../../store/TransactionData/transactionIn
 import CommaMaker from '../../../util/commaForMoney';
 import './calendarBody.scss';
 
-export default function CalendarBody({ year, month }) {
+export default function CalendarBody() {
   const DateInfo = useRootData(store => store.nowCalendarInfo);
 
   const YearMonthTransactions = useTransactionData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
 
-  const yy = year;
-  const mm = month;
+  const yy = DateInfo.year;
+  const mm = DateInfo.month;
   const firstDay = CalculateDate.getFirstDay(yy, mm);
   const lastDay = CalculateDate.getLastDay(yy, mm);
   let markToday;
