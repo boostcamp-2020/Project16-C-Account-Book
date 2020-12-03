@@ -19,6 +19,7 @@ const MenuBar = ({ id, setModal, pageType }) => {
   const transactionIconRef = useRef();
   const calIconRef = useRef();
   const chartIconRef = useRef();
+  const backIconRef = useRef();
 
   const setYearMonth = useCallback((year, month) => {
     const yy = year;
@@ -60,6 +61,15 @@ const MenuBar = ({ id, setModal, pageType }) => {
   return (
     <header className="menubar__header">
       <div className="menubar__buttons" ref={allBtnRef}>
+        <div
+          ref={backIconRef}
+          className={pageType === '/' ? 'back__navBtn checked' : 'back__navBtn'}
+          data-type="/"
+          onClick={onClickIcon}
+        >
+          <i data-type="/" className="fas fa-arrow-left" />
+          <span data-type="/">List</span>
+        </div>
         <div
           ref={transactionIconRef}
           className={
