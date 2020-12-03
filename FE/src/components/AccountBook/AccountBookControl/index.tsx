@@ -1,16 +1,16 @@
 import React from 'react';
 import { PlusCircleIcon } from '@primer/octicons-react';
 
-import './AccountBookControl.scss';
+import './accountBookControl.scss';
 import { AccountBookContext } from '../../../store/AccountBook/account-book.context.tsx';
 import { useAccountBookData } from '../../../store/AccountBook/account-book.hook';
 
-export default function AccountBookControl() {
+export default function AccountBookControl({ setCreate }) {
   const store = React.useContext(AccountBookContext);
   // const isCreate = useAccountBookData(store => store.create);
 
   const createAccountBook = () => {
-    store.create = true;
+    setCreate(true);
   };
 
   return (

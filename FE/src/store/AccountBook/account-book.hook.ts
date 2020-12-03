@@ -13,7 +13,6 @@ export const useStoreData = <Selection, ContextData, Store>(
 
   const store = storeSelector(value);
   return useObserver(() => {
-    console.log('obs', value, store);
     return dataSelector(store);
   });
 };

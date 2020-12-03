@@ -1,8 +1,7 @@
 import { Context } from 'koa';
 import Router from 'koa-router';
 
-import authController from '@/controllers/auth';
-import userRouter from './user';
+import authController from '@controllers/auth';
 import authRouter from './auth';
 import accountBookRouter from './account-book';
 import defaultPaymentMethodRouter from './defaultPaymentMethod';
@@ -18,7 +17,6 @@ router.use('/auth', authRouter.routes());
 
 router.use(authController.checkToken);
 
-router.use('/user', userRouter.routes());
 router.use('/accountbook', accountBookRouter.routes());
 router.use('/defaultPaymentMethod', defaultPaymentMethodRouter.routes());
 

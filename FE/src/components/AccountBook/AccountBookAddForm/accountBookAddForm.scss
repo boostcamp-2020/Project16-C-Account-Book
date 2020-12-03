@@ -1,0 +1,30 @@
+.create__acbook {
+  background-color: #f9e000;
+  height: 200px;
+  width: 340px;
+  margin: 20px 0px 20px 0px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  padding: 16px;
+  transition-duration: 0.3s;
+  transform: translateX(20%);
+  margin-bottom: 56px;
+
+  > input {
+    height: 30px;
+    width: 260px;
+    text-decoration: none;
+    margin: 5px;
+  }
+
+  > textarea {
+    height: 70px;
+    width: 260px;
+    margin: 5px;
+  }
+
+  .create__cancle {
+    cursor: pointer;
+    width: 0px;
+  }
+}

@@ -21,25 +21,21 @@ const App = () => {
   return (
     <DateInfoProvider>
       <TransactionInfoProvider>
-        <AccountBookProvider>
-          <PaymentProvider>
-            <Router>
-              <Switch>
-                <Route exact path="/" component={AccountBookListPage} />
-                <Route exact path="/login" component={LoginPage} />
-                <Route
-                  exact
-                  path="/auth/github"
-                  component={GithubLoginProcess}
-                />
-                <Route exact path="/auth/naver" component={NaverLoginProcess} />
-                <Route exact path="/calendar" component={CalendarPage} />
-                <Route exact path="/transaction" component={TransactionPage} />
-                <Route exact path="/chart" component={ChartPage} />
-              </Switch>
-            </Router>
-          </PaymentProvider>
-        </AccountBookProvider>
+        {/* <AccountBookProvider> */}
+        <PaymentProvider>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={AccountBookListPage} />
+              <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/auth/github" component={GithubLoginProcess} />
+              <Route exact path="/auth/naver" component={NaverLoginProcess} />
+              <Route exact path="/calendar" component={CalendarPage} />
+              <Route exact path="/transaction" component={TransactionPage} />
+              <Route exact path="/chart" component={ChartPage} />
+            </Switch>
+          </Router>
+        </PaymentProvider>
+        {/* </AccountBookProvider> */}
       </TransactionInfoProvider>
     </DateInfoProvider>
   );
