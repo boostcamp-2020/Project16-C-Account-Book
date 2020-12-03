@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
@@ -12,10 +13,14 @@ import useLoginCheck from '../../service/useLoginCheck';
 
 import { useRootData } from '../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../store/TransactionData/transactionInfoHook';
+import useAccountBook from '../../service/useAccountBookSetting';
 
 import './chart.scss';
 
 const Chart = props => {
+  const accountBookId = useHistory().location.state;
+
+  useAccountBook(accountBookId);
   useLoginCheck();
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [chartType, setChartType] = useState('category');
@@ -32,7 +37,11 @@ const Chart = props => {
 
   return (
     <div className="chart__wrapper">
-      <MenuBar setModal={setPaymentMethodModal} pageType="chart" />
+      <MenuBar
+        id={accountBookId.id}
+        setModal={setPaymentMethodModal}
+        pageType="chart"
+      />
       <NavButton chartType={chartType} setChartType={setChartType} />
 
       {chartInfo.length === 0 && <div className="no__data">No Data</div>}
