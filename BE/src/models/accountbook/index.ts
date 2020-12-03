@@ -37,7 +37,7 @@ const create = async ({
   const information = {
     name,
     description,
-    users,
+    user,
     categories: [...defaultCategory],
     payments: [],
     transactions: [],
@@ -90,8 +90,4 @@ const addTransaction = async (
   }
 };
 
-
 export default { get, getDetail, create, update, del, addTransaction };
-
-
-

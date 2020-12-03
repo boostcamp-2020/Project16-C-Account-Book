@@ -1,16 +1,18 @@
 import mongoose from 'mongoose';
-import { Schema as CategorySchema } from '@models/category/schema';
-import { Schema as PaymentSchema } from '@models/paymentmethod/schema';
+import { CategoryDoc, Schema as CategorySchema } from '@models/category/schema';
+import {
+  PaymentDoc,
+  Schema as PaymentSchema,
+} from '@models/paymentmethod/schema';
 import Transaction from '@interfaces/transaction';
-
 
 export interface TransactionDoc extends Transaction, mongoose.Document {
   content: string;
   type: string;
-  category: { category: Category };
+  category: { category: CategoryDoc };
   cost: number;
   date: string;
-  payment: { payment: PaymentMethod };
+  payment: { payment: PaymentDoc };
 }
 
 export const Schema = new mongoose.Schema({
