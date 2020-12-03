@@ -37,6 +37,20 @@ const create = async (
   return accountbook;
 };
 
+const update = async (
+  _id: string,
+  name: string,
+  description: string | undefined,
+): Promise<any> => {
+  const updateData = {
+    name,
+    description,
+  };
+
+  const updateResult = await AccountBookModel.update({ _id }, updateData);
+  return !!updateResult.ok;
+};
+
 const addTransaction = async (
   accountBookId: string,
   transaction: any,
@@ -56,4 +70,4 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, addTransaction };
+export default { get, create, update, addTransaction };

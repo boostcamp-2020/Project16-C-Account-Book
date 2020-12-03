@@ -15,6 +15,16 @@ const post = async (ctx: Context): Promise<any> => {
   return accountBook;
 };
 
+const patch = async (ctx: Context): Promise<any> => {
+  const updateResult = await accountBookModel.update(
+    ctx.params.accountbookid,
+    ctx.request.body.name,
+    ctx.request.body.description,
+  );
+  console.log(updateResult);
+  return updateResult;
+};
+
 const addTransaction = async (body: Context['body']): Promise<any> => {
   const transactionInfo = {
     content: body.content,
@@ -27,4 +37,4 @@ const addTransaction = async (body: Context['body']): Promise<any> => {
   await accountBookModel.addTransaction(body.accountBookId, transactionInfo);
 };
 
-export default { get, post, addTransaction };
+export default { get, post, patch, addTransaction };
