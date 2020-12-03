@@ -21,7 +21,7 @@ export default async (): Promise<void> => {
         console.error(error);
         throw error;
       } else {
-        console.log('connected to DB ✅');
+        console.log(`connected to DB ${URL}✅`);
       }
     },
   );

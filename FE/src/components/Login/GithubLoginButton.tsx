@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './GithubLoginButton.scss';
+import './LoginButton.scss';
 import { ReactComponent as GithubLogo } from '../../../public/images/github-logo.svg';
 
 const Button = () => {
@@ -20,7 +20,7 @@ const Button = () => {
       className="GithubLoginButton"
       onClick={onGithubLoginButtonClicked}
     >
-      <div className="github-logo">
+      <div className="logo">
         <GithubLogo fill="white" />
       </div>
       <div className="divider" />

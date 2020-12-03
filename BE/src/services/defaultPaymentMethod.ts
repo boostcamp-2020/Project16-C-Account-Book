@@ -1,7 +1,7 @@
-import DefaultPaymentMethodModel from '@/models/defaultPaymentMethod';
+import PaymentModel from '@models/paymentmethod';
 
 const get = async (): Promise<any> => {
-  const defaultPaymentMethods = await DefaultPaymentMethodModel.getAllPaymentMethods();
+  const defaultPaymentMethods = await PaymentModel.get();
   return defaultPaymentMethods;
 };
 

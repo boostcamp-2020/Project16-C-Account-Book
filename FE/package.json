@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@primer/octicons-react": "^11.1.0",
     "@svgr/webpack": "^5.5.0",
     "mobx-react": "^7.0.5",
     "react": "^17.0.1",

@@ -32,7 +32,7 @@ export const createStore = () => {
       user: [1, 2, 3, 4],
       transaction: [
         {
-          _id: 'asdf',
+          _id: 'a',
           content: 'test',
           type: '지출',
           cost: 10000,
@@ -47,7 +47,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'b',
           content: 'test2',
           type: '지출',
           cost: 20000,
@@ -62,7 +62,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'c',
           content: 'test3',
           type: '지출',
           cost: 30000,
@@ -77,7 +77,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'd',
           content: 'test4',
           type: '지출',
           cost: 40000,
@@ -93,7 +93,7 @@ export const createStore = () => {
         },
 
         {
-          _id: 'asdf',
+          _id: 'e',
           content: 'test4',
           type: '지출',
           cost: 50000,
@@ -108,7 +108,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'f',
           content: 'test4',
           type: '지출',
           cost: 1000,
@@ -123,7 +123,7 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
+          _id: 'g',
           content: 'test4',
           type: '지출',
           cost: 10000,
@@ -138,13 +138,13 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
-          content: 'test',
+          _id: 'h',
+          content: '옷',
           type: '지출',
-          cost: 10000,
+          cost: 1000000,
           date: '2020-12-01',
           category: {
-            name: 'shopping',
+            name: '쇼핑',
             icon: 1,
           },
           payment: {
@@ -153,13 +153,13 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
-          content: 'test2',
+          _id: 'i',
+          content: '치킨',
           type: '지출',
           cost: 20000,
           date: '2020-12-01',
           category: {
-            name: 'food',
+            name: '식비',
             icon: 1,
           },
           payment: {
@@ -168,13 +168,13 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
-          content: 'test3',
+          _id: 'j',
+          content: '정기 교통비',
           type: '지출',
           cost: 30000,
           date: '2020-12-01',
           category: {
-            name: 'life',
+            name: '교통',
             icon: 1,
           },
           payment: {
@@ -183,13 +183,43 @@ export const createStore = () => {
           },
         },
         {
-          _id: 'asdf',
-          content: 'test4',
+          _id: 'k',
+          content: '영화보기',
           type: '지출',
           cost: 40000,
           date: '2020-12-01',
           category: {
-            name: 'etc',
+            name: '여가',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'l',
+          content: '정기용돈',
+          type: '수입',
+          cost: 500000000,
+          date: '2020-12-01',
+          category: {
+            name: '용돈',
+            icon: 1,
+          },
+          payment: {
+            card: 1,
+            description: 'naver',
+          },
+        },
+        {
+          _id: 'm',
+          content: '정기월급',
+          type: '수입',
+          cost: 400000000,
+          date: '2020-12-01',
+          category: {
+            name: '월급',
             icon: 1,
           },
           payment: {
@@ -204,11 +234,69 @@ export const createStore = () => {
       return this.accountBook.transaction;
     },
 
-    getSpendingTotal(year: any, month: any) {
+    getTransactionsByYearMonth(year: number, month: number) {
+      const yearMonthDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]),
+      );
+
+      return yearMonthDatas;
+    },
+    getTransactionsForCalendar(year: number, month: number) {
+      const yearMonthDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]),
+      );
+
+      const priceSumData = {};
+
+      yearMonthDatas.forEach(item => {
+        const date = String(Number(item.date.split('-')[2]));
+        if (!priceSumData.hasOwnProperty(String(date))) {
+          item.type === '지출'
+            ? (priceSumData[`${date}`] = { spending: item.cost, income: 0 })
+            : (priceSumData[`${date}`] = { income: item.cost, spendiing: 0 });
+        } else {
+          item.type === '지출'
+            ? (priceSumData[`${date}`].spending += item.cost)
+            : (priceSumData[`${date}`].income += item.cost);
+        }
+      });
+
+      return priceSumData;
+    },
+    getSpecificTransactions(year: number, month: number, day: number) {
+      const specificDatas = this.accountBook.transaction.filter(
+        item =>
+          year === Number(item.date.split('-')[0]) &&
+          month === Number(item.date.split('-')[1]) &&
+          day === Number(item.date.split('-')[2]),
+      );
+      return specificDatas;
+    },
+
+    getSpendingTotal(year, month) {
       let sum = 0;
       this.accountBook.transaction.forEach(item => {
         if (
           item.type === '지출' &&
+          Number(item.date.split('-')[0]) === year &&
+          Number(item.date.split('-')[1]) === month
+        ) {
+          sum += item.cost;
+        }
+      });
+
+      return sum;
+    },
+    getIncomeTotal(year, month) {
+      let sum = 0;
+
+      this.accountBook.transaction.forEach(item => {
+        if (
+          item.type === '수입' &&
           Number(item.date.split('-')[0]) === year &&
           Number(item.date.split('-')[1]) === month
         ) {
@@ -225,6 +313,7 @@ export const createStore = () => {
 
       const datas = this.accountBook.transaction.filter(
         item =>
+          item.type === '지출' &&
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );

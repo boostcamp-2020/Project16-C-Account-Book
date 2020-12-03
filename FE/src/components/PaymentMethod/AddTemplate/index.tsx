@@ -44,7 +44,11 @@ export default function AddTemplate({
 
   return (
     <div
-      className="addform__wrapper"
+      className={
+        addTemplateData.name.length === 0
+          ? 'addform__wrapper'
+          : 'addform__wrapper selected'
+      }
       style={{ background: `${addTemplateData.color}` }}
     >
       {addTemplateData.name || '아래에서 카드를 선택해주세요.'}
