@@ -23,7 +23,9 @@ const update = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
-  ctx.body = `DELETE ${ctx.url}`;
+  const deleteResult = await service.del(ctx);
+  ctx.body = deleteResult;
+
   return ctx.body;
 };
 

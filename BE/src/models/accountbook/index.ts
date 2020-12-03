@@ -51,6 +51,11 @@ const update = async (
   return !!updateResult.ok;
 };
 
+const del = async (_id: string): Promise<any> => {
+  const deleteResult = await AccountBookModel.deleteOne({ _id });
+  return !!deleteResult.deletedCount;
+};
+
 const addTransaction = async (
   accountBookId: string,
   transaction: any,
@@ -70,4 +75,4 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, update, addTransaction };
+export default { get, create, update, del, addTransaction };
