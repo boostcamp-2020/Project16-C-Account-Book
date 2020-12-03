@@ -40,7 +40,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
   }, []);
 
   return (
-    <div className="acbook__list">
+    <>
       {datas.map((data, index) => (
         <div
           key={data._id}
@@ -63,7 +63,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
           />
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

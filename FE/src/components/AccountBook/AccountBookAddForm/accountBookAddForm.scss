@@ -4,13 +4,10 @@
   background-color: #f9e000;
   width: 333px;
   min-height: 195px;
-  margin: 20px 0px 20px 0px;
   border: 1px solid transparent;
   border-radius: 15px;
   padding: 2em 1em;
-  transition-duration: 0.3s;
-  transform: translateX(15%);
-  margin-bottom: 56px;
+  // transition-duration: 0.3s;
   animation: cardShow 1s backwards;
 
   .fas.fa-minus-circle {
@@ -39,10 +36,6 @@
     resize: none;
   }
 
-  .create__cancle {
-    cursor: pointer;
-    width: 0px;
-  }
   @keyframes cardShow {
     from {
       opacity: 0;
