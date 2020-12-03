@@ -3,15 +3,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { postFetch } from '../../../service/fetch';
 import './accountBookAddForm.scss';
 
-export default function AccountBookAddForm({
-  create,
-  setCreate,
-  datas,
-  setDatas,
-}) {
+export default function AccountBookAddForm({ props }) {
+  const {
+    create,
+    setCreate,
+    datas,
+    setDatas,
+    name,
+    setName,
+    description,
+    setDescription,
+  } = props;
   const accountBookInput = useRef();
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
 
   const onCreateAccountBook = event => {
     if (event.key === 'Enter') {
@@ -19,10 +22,10 @@ export default function AccountBookAddForm({
         name,
         description,
       };
-      //   const response = postFetch(
-      //     `${process.env.SERVER_URL}/api/accountbook`,
-      // accountBookBody,
-      //   );
+      const response = postFetch(
+        `${process.env.SERVER_URL}/api/accountbook`,
+        accountBookBody,
+      );
       setCreate(false);
       setName('');
       setDescription('');

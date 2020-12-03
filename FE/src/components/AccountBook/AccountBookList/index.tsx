@@ -1,22 +1,31 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import getAccountBookList from '../../../api/accoun-book-list';
 import './accountBookList.scss';
-import { postFetch } from '../../../service/fetch';
+import AccountBookEditButton from '../AccountBookEditButton';
+import AccountBookEditForm from '../AccountBookEditForm';
 
-export const AccountBookList = ({ datas, setDatas }) => {
+export const AccountBookList = ({ props }) => {
+  const { datas, setDatas } = props;
+
   const setAccountBookList = async () => {
-    const data = await getAccountBookList();
-    setDatas(data);
+    const accountBookDatas = await getAccountBookList();
+
+    accountBookDatas.map(data => (data.isEdit = false));
+    setDatas(accountBookDatas);
   };
 
   const history = useHistory();
-  const linkToDetail = (id = '') => {
-    history.push(`calendar/${id}`);
+
+  const linkToDetail = event => {
+    const targetClass = event.target.className;
+    if (targetClass !== 'delete__button' && targetClass !== 'edit__button') {
+      history.push(`calendar`);
+    }
   };
 
-  const deleteAccountBook = (id = '') => {
+  const deleteAccountBook = id => {
     setDatas(datas.filter(data => data._id !== id));
   };
 
@@ -26,24 +35,27 @@ export const AccountBookList = ({ datas, setDatas }) => {
 
   return (
     <>
-      {datas ? (
-        <>
-          {datas.map(data => (
+      {datas.map((data, index) => (
+        <div key={index}>
+          {!data.isEdit ? (
             <>
-              <div className="acbook" onClick={() => linkToDetail()}>
+              <div className="acbook" onClick={linkToDetail}>
                 <h3>{data.name}</h3>
                 <p>{data.description}</p>
+                <button
+                  className="delete__button"
+                  onClick={event => deleteAccountBook(data._id, event)}
+                >
+                  Delete
+                </button>
+                <AccountBookEditButton data={data} props={props} />
               </div>
-              <button
-                className="delete__button"
-                onClick={() => deleteAccountBook(data._id)}
-              >
-                Delete
-              </button>
             </>
-          ))}
-        </>
-      ) : null}
+          ) : (
+            <AccountBookEditForm data={data} props={props} />
+          )}
+        </div>
+      ))}
     </>
   );
 };

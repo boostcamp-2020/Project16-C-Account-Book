@@ -8,22 +8,30 @@ import useLoginChcek from '../../service/useLoginCheck';
 import './accountBookListPage.scss';
 
 export default function AccountBookListPage() {
-  const [isCreate, setIsCreate] = useState(false);
-  const [listDatas, setListDatas] = useState([]);
+  const [create, setCreate] = useState(false);
+  const [datas, setDatas] = useState([]);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+
+  const props = {
+    create,
+    datas,
+    name,
+    description,
+    setCreate,
+    setDatas,
+    setName,
+    setDescription,
+  };
 
   useLoginChcek();
 
   return (
     <div className="acbook__list__container">
-      <AccountBookControl setCreate={setIsCreate} />
+      <AccountBookControl setCreate={setCreate} />
       <div className="acbook__list">
-        <AccountBookAddForm
-          create={isCreate}
-          setCreate={setIsCreate}
-          datas={listDatas}
-          setDatas={setListDatas}
-        />
-        <AccountBookList datas={listDatas} setDatas={setListDatas} />
+        <AccountBookAddForm props={props} />
+        <AccountBookList props={props} />
       </div>
     </div>
   );

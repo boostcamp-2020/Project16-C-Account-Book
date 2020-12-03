@@ -6,9 +6,6 @@ import { AccountBookContext } from '../../../store/AccountBook/account-book.cont
 import { useAccountBookData } from '../../../store/AccountBook/account-book.hook';
 
 export default function AccountBookControl({ setCreate }) {
-  const store = React.useContext(AccountBookContext);
-  // const isCreate = useAccountBookData(store => store.create);
-
   const createAccountBook = () => {
     setCreate(true);
   };
