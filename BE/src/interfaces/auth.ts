@@ -6,8 +6,8 @@ export interface iTokenGetParams {
   state?: string;
 }
 
-export interface iUser {
-  id: string;
+export interface User {
+  userid: string;
   social: string;
   name?: string;
 }

@@ -3,7 +3,7 @@ import { Context, Next } from 'koa';
 import jwt, { Secret } from 'jsonwebtoken';
 
 import userModel from '@models/user';
-import { iUser } from '@interfaces/auth';
+import { User } from '@interfaces/auth';
 
 const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   if (!authorization) {
@@ -25,10 +25,10 @@ const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   return matched[1];
 };
 
-const decodeToken = (token: string): iUser => {
+const decodeToken = (token: string): User => {
   const jwtKey: Secret = process.env.JWT_KEY as Secret;
   try {
-    const user: iUser = jwt.verify(token, jwtKey) as iUser;
+    const user: User = jwt.verify(token, jwtKey) as User;
     return user;
   } catch (error) {
     const jwtError = createError(401, 'jwt malformed');
@@ -36,7 +36,7 @@ const decodeToken = (token: string): iUser => {
   }
 };
 
-const checkToken = async (header: Context['header']): Promise<iUser | null> => {
+const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
   console.log('token: ', token);
 

@@ -8,7 +8,8 @@ import {
   Transaction,
   Schema as TransactionSchema,
 } from '@models/transaction/schema';
-import { User, Schema as UserSchema } from '@models/user/schema';
+import { Schema as UserSchema } from '@models/user/schema';
+import { User } from '@interfaces/auth';
 
 export interface AccountBook extends mongoose.Document {
   name: string;
