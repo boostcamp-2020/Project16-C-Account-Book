@@ -1,8 +1,8 @@
 import PaymentMethodModel from '@models/paymentmethod';
 import CategoryModel from '@models/category';
 import { Transaction } from '@models/transaction/schema';
+import { User } from '@interfaces/auth';
 import { AccountBook, AccountBookModel } from './schema';
-import { User } from '../user/schema';
 
 const get = async ({
   id,
@@ -22,20 +22,19 @@ const create = async (
   name: string,
   description: string | undefined,
   users: User,
-): Promise<any> => {
+): Promise<AccountBook> => {
   const defaultCategory = await CategoryModel.get();
-  const defaultPaymentMethod = await PaymentMethodModel.get();
-  const accountbook = {
+  const information = {
     name,
     description,
-    users: users,
+    users: [users],
     categories: [...defaultCategory],
-    payments: [...defaultPaymentMethod],
+    payments: [],
     transactions: [],
   };
 
-  let result = await new AccountBookModel(accountbook);
-  result = await result.save();
+  const accountbook = await new AccountBookModel(information).save();
+  return accountbook;
 };
 
 const addTransaction = async (
