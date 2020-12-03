@@ -9,14 +9,7 @@ export default function AccountBookAddForm({ setCreate, datas, setDatas }) {
 
   const onCreateAccountBook = event => {
     if (event.key === 'Enter') {
-      const accountBookBody = {
-        name,
-        description,
-      };
-
       setCreate(false);
-      setName('');
-      setDescription('');
       setDatas([{ name, description }, ...datas]);
     }
   };
