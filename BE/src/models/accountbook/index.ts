@@ -17,16 +17,20 @@ const get = async ({
   return accountBooks;
 };
 
-const create = async (
-  name: string,
-  description: string | undefined,
-  users: User,
-): Promise<AccountBook> => {
+const create = async ({
+  name,
+  description,
+  user,
+}: {
+  name: string;
+  description: string;
+  user: User;
+}): Promise<AccountBook> => {
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
     description,
-    users: [users],
+    users: [user],
     categories: [...defaultCategory],
     payments: [],
     transactions: [],
@@ -38,16 +42,21 @@ const create = async (
 
 const update = async (
   _id: string,
-  name: string,
-  description: string | undefined,
+  {
+    name,
+    description,
+  }: {
+    name: string;
+    description: string;
+  },
 ): Promise<any> => {
   const updateData = {
     name,
     description,
   };
 
-  const updateResult = await AccountBookModel.update({ _id }, updateData);
-  return !!updateResult.ok;
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  return !!updateResult.nModified;
 };
 
 const del = async (_id: string): Promise<any> => {

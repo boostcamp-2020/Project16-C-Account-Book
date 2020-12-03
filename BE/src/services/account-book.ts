@@ -7,21 +7,35 @@ const get = async (ctx: Context): Promise<any> => {
 };
 
 const post = async (ctx: Context): Promise<any> => {
-  const accountBook = await accountBookModel.create(
-    ctx.request.body.name,
-    ctx.request.body.description,
-    ctx.user,
-  );
+  const createInfo = {
+    name: ctx.request.body.name,
+    description: ctx.request.body.description,
+    user: ctx.user,
+  };
+  const accountBook = await accountBookModel.create(createInfo);
   return accountBook;
 };
 
 const patch = async (ctx: Context): Promise<any> => {
-  const updateResult = await accountBookModel.update(
-    ctx.params.accountbookid,
-    ctx.request.body.name,
-    ctx.request.body.description,
-  );
-  return updateResult;
+  const { accountbookid } = ctx.params;
+  const updateInfo = {
+    name: ctx.request.body.name,
+    description: ctx.request.body.description,
+  };
+  const updateResult = await accountBookModel.update(accountbookid, updateInfo);
+  if (updateResult)
+    return {
+      message: 'update',
+      data: {
+        _id: accountbookid,
+        name: updateInfo.name,
+        description: updateInfo.description,
+      },
+    };
+  return {
+    message: 'not update',
+    data: {},
+  };
 };
 
 const del = async (ctx: Context): Promise<any> => {
