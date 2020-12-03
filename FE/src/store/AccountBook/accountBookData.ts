@@ -15,7 +15,7 @@ export const createStore = () => {
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
 
-      this.accountBook = accountBook;
+      this.accountBook = accountBook.data;
     },
 
     getAllTransactions() {

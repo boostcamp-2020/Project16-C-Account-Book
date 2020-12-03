@@ -8,9 +8,9 @@ export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
 
   const setAccountBookList = async () => {
-    const data = await getAccountBookList();
+    const accountBooks = await getAccountBookList();
 
-    setDatas(data.reverse());
+    setDatas(accountBooks.data.reverse());
   };
 
   const linkToDetail = async event => {
