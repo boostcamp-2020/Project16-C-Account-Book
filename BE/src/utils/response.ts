@@ -3,7 +3,7 @@ import Response from '@interfaces/response';
 export const response = (
   status: number,
   message: string,
-  data: JSON,
+  data?: JSON,
 ): Response => {
   return { status, message, data };
 };
