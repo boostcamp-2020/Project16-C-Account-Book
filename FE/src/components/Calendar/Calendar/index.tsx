@@ -5,6 +5,7 @@ import { useTransactionData } from '../../../store/TransactionData/transactionIn
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
 import CommaMaker from '../../../util/commaForMoney';
+import CalendarBody from '../CalendarBody';
 import './calendar.scss';
 
 export default function Calendar() {
@@ -18,16 +19,16 @@ export default function Calendar() {
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
 
-  const makeCalendar = (year, month) => {
-    const allDay = calculateDay(year, month);
-    calBodyRef.current.innerHTML = allDay;
-  };
-
   const markPriceToCalendar = () => {
     Object.entries(YearMonthTransactions).forEach(([day, info]) => {
       calBodyRef.current.childNodes.forEach(el => {
+        const priceInfo = 1;
         el.childNodes.forEach(date => {
-          if (date.classList && date.classList.contains(day)) {
+          if (
+            date.classList &&
+            date.classList.contains(day) &&
+            date.childNodes[priceInfo] === undefined
+          ) {
             date.insertAdjacentHTML(
               'beforeend',
               `
@@ -49,7 +50,6 @@ export default function Calendar() {
     event => {
       if (event.target.dataset.date) {
         const day = Number(event.target.dataset.date);
-
         CalculateDate.activeDTag = event.target;
         CalculateDate.activeDate.setDate(day);
         setDetailModal(() => true);
@@ -60,7 +60,6 @@ export default function Calendar() {
   );
 
   useEffect(() => {
-    makeCalendar(DateInfo.year, DateInfo.month);
     markPriceToCalendar();
   }, [DateInfo]);
 
@@ -84,7 +83,9 @@ export default function Calendar() {
               className="cal-body"
               ref={calBodyRef}
               onClick={onClickCalBody}
-            />
+            >
+              <CalendarBody year={DateInfo.year} month={DateInfo.month} />
+            </tbody>
           </table>
         </div>
       </div>
@@ -92,61 +93,3 @@ export default function Calendar() {
     </div>
   );
 }
-
-export const calculateDay = (year, month) => {
-  const yy = year;
-  const mm = month;
-  const firstDay = CalculateDate.getFirstDay(yy, mm);
-  const lastDay = CalculateDate.getLastDay(yy, mm);
-  let markToday;
-
-  if (
-    mm === CalculateDate.today.getMonth() &&
-    yy === CalculateDate.today.getFullYear()
-  ) {
-    markToday = CalculateDate.today.getDate();
-  }
-
-  let trtd = '';
-  let startCount;
-  let countDay = 0;
-
-  for (let i = 0; i < 6; i++) {
-    trtd += '<tr>';
-    for (let j = 0; j < 7; j++) {
-      if (i === 0 && !startCount && j === firstDay.getDay()) {
-        startCount = 1;
-      }
-      if (!startCount) {
-        trtd += '<td>';
-      } else {
-        const fullDate = `${yy}.${CalculateDate.addZero(
-          mm + 1,
-        )}.${CalculateDate.addZero(countDay + 1)}`;
-        trtd += `
-          <td class="day ${countDay + 1} 
-          ${
-            markToday && markToday === countDay + 1
-              ? `" data-date=${countDay + 1}><div class="today"`
-              : '"'
-          } 
-          data-date="${countDay + 1}" data-fdate="${fullDate}">
-          `;
-      }
-
-      trtd += startCount ? ++countDay : '';
-
-      if (markToday && markToday === countDay) {
-        trtd += '</div>';
-      }
-
-      if (countDay === lastDay.getDate()) {
-        startCount = 0;
-      }
-
-      trtd += '</td>';
-    }
-    trtd += '</tr>';
-  }
-  return trtd;
-};
