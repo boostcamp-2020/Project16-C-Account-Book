@@ -2,8 +2,8 @@ import createError from 'http-errors';
 import { Context, Next } from 'koa';
 import jwt, { Secret } from 'jsonwebtoken';
 
-import userModel from '@/models/user';
-import { iUser } from '@/types/auth';
+import userModel from '@models/user';
+import { iUser } from '@interfaces/auth';
 
 const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   if (!authorization) {

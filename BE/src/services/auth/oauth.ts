@@ -1,7 +1,7 @@
 import createError from 'http-errors';
 import axios from 'axios';
 
-import { iTokenGetParams, iUser } from '@/types/auth';
+import { iTokenGetParams, iUser } from '@interfaces/auth';
 
 const tokenGetParams: { [key: string]: iTokenGetParams } = {
   github: {

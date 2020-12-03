@@ -1,4 +1,4 @@
-import userModel from '@/models/user';
+import userModel from '@models/user';
 import { Context } from 'koa';
 
 const get = async (body: Context['body']): Promise<any> => {
