@@ -28,7 +28,7 @@ const create = async (
   const accountbook = {
     name,
     description,
-    users: users,
+    users,
     categories: [...defaultCategory],
     payments: [...defaultPaymentMethod],
     transactions: [],
@@ -57,12 +57,8 @@ const addTransaction = async (
   }
 };
 
-const getDetail = async ({
-  accountbookid,
-}: {
-  accountbookid: string;
-}): Promise<any> => {
-  const accountBooks = await AccountBookModel.findOne({ _id: accountbookid });
+const getDetail = async (id: string): Promise<any> => {
+  const accountBooks = await AccountBookModel.findOne({ _id: id });
   return accountBooks;
 };
 

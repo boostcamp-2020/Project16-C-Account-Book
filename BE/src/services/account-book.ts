@@ -28,8 +28,9 @@ const addTransaction = async (body: Context['body']): Promise<any> => {
 };
 
 const getDetail = async (ctx: Context): Promise<any> => {
-  console.log(ctx.params);
-  const accountBook = await accountBookModel.getDetail(ctx.headers);
+  const accountBook = await accountBookModel.getDetail(
+    ctx.params.accountbookid,
+  );
 
   return accountBook;
 };
