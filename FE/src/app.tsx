@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
 import DateInfoProvider from './store/DateInfo/dateInfoContext';
-import TransactionInfoProvider from './store/TransactionData/transactionDataContext';
-import AccountBookProvider from './store/AccountBook/account-book.context';
+import TransactionInfoProvider from './store/AccountBook/accountBookDataContext';
 
 import './app.scss';
 
@@ -21,7 +20,6 @@ const App = () => {
   return (
     <DateInfoProvider>
       <TransactionInfoProvider>
-        {/* <AccountBookProvider> */}
         <PaymentProvider>
           <Router>
             <Switch>
@@ -29,13 +27,14 @@ const App = () => {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/auth/github" component={GithubLoginProcess} />
               <Route exact path="/auth/naver" component={NaverLoginProcess} />
-              <Route exact path="/calendar" component={CalendarPage} />
+              <Route exact path="/calendar">
+                <CalendarPage />
+              </Route>
               <Route exact path="/transaction" component={TransactionPage} />
               <Route exact path="/chart" component={ChartPage} />
             </Switch>
           </Router>
         </PaymentProvider>
-        {/* </AccountBookProvider> */}
       </TransactionInfoProvider>
     </DateInfoProvider>
   );

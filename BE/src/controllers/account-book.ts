@@ -16,7 +16,8 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const getDetail = async (ctx: Context): Promise<Context['body']> => {
-  ctx.body = `GET ${ctx.url}`;
+  ctx.body = await service.getDetail(ctx);
+
   return ctx.body;
 };
 

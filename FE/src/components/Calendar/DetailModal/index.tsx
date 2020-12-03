@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/TransactionData/transactionInfoHook';
+import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import './detailModal.scss';
 

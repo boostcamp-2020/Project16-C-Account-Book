@@ -6,7 +6,7 @@ import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import './menubar.scss';
 import CalculateDate from '../../../util/calculateDate';
 
-const MenuBar = ({ setModal, pageType }) => {
+const MenuBar = ({ id, setModal, pageType }) => {
   const history = useHistory();
   const DateInfo = useRootData(store => store.nowCalendarInfo);
   const setDateInfo = useRootData(store => store.setCalendarInfo);
@@ -41,7 +41,12 @@ const MenuBar = ({ setModal, pageType }) => {
   }, []);
 
   const onClickIcon = useCallback(event => {
-    history.push(event.target.dataset.type);
+    history.push({
+      pathname: event.target.dataset.type,
+      state: {
+        id,
+      },
+    });
   }, []);
 
   const onClickPayment = useCallback(() => {

@@ -28,7 +28,7 @@ const create = async (
   const accountbook = {
     name,
     description,
-    users: users,
+    users,
     categories: [...defaultCategory],
     payments: [...defaultPaymentMethod],
     transactions: [],
@@ -57,4 +57,9 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, addTransaction };
+const getDetail = async (id: string): Promise<any> => {
+  const accountBooks = await AccountBookModel.findOne({ _id: id });
+  return accountBooks;
+};
+
+export default { get, create, addTransaction, getDetail };
