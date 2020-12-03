@@ -7,7 +7,7 @@
     background-color: #f9e000;
     width: 333px;
     min-height: 195px;
-
+    z-index: 1;
     margin: 20px 0px 20px 0px;
     border: 1px solid transparent;
     border-radius: 15px;
@@ -17,7 +17,9 @@
     animation: cardShow 1s backwards;
     color: black;
     cursor: pointer;
-
+    .delete__button {
+      z-index: 2;
+    }
     &:hover {
       transform: translateX(5%);
       transition-duration: 0.3s;

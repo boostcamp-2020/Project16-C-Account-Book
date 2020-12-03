@@ -1,4 +1,4 @@
-import { getFetch, postFetch } from '../service/fetch';
+import { getFetch, postFetch, deleteFetch } from '../service/fetch';
 
 export const getAccountBookList = () => {
   const data = getFetch(`${process.env.SERVER_URL}/api/accountbook`);
@@ -19,4 +19,13 @@ export const createAccountBook = ({ name, description }) => {
   });
 
   return res;
+};
+
+export const deleteAccountBook = id => {
+  const data = deleteFetch(
+    `${process.env.SERVER_URL}/api/accountbook/${id}`,
+    {},
+  );
+
+  return data;
 };

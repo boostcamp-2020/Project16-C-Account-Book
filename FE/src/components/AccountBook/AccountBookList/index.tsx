@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, isValidElement } from 'react';
+
 import { useHistory } from 'react-router-dom';
 
-import { getAccountBookList } from '../../../api/accoun-book-list';
+import {
+  getAccountBookList,
+  deleteAccountBook,
+} from '../../../api/accoun-book-list';
 import './accountBookList.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
@@ -14,16 +18,20 @@ export const AccountBookList = ({ datas, setDatas }) => {
   };
 
   const linkToDetail = async event => {
-    history.push({
-      pathname: '/calendar',
-      state: {
-        id: event.target.dataset.acbookid,
-      },
-    });
+    if (!event.target.classList.contains('delete__button')) {
+      history.push({
+        pathname: '/calendar',
+        state: {
+          id: event.target.dataset.acbookid,
+        },
+      });
+    }
   };
 
-  const deleteAccountBook = (id = '') => {
-    setDatas(datas.filter(data => data._id !== id));
+  const onClickDelete = async event => {
+    const accountBookId = event.target.dataset.id;
+    const res = await deleteAccountBook(accountBookId);
+    setDatas(datas.filter(data => data._id !== accountBookId));
   };
 
   useEffect(() => {
@@ -43,9 +51,9 @@ export const AccountBookList = ({ datas, setDatas }) => {
           <h3 data-acbookid={data._id}>{data.name}</h3>
           <p data-acbookid={data._id}>{data.description}</p>
           <button
-            data-acbookid={data._id}
             className="delete__button"
-            onClick={() => deleteAccountBook(data._id)}
+            data-id={data._id}
+            onClick={onClickDelete}
           >
             Delete
           </button>
