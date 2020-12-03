@@ -1,7 +1,7 @@
 import { getFetch, postFetch } from '../service/fetch';
 
-export const getAccountBookList = async () => {
-  const backendPath = process.env.BACKEND;
+export default async function getAccountBookList() {
+  const backendPath = process.env.SERVER_URL;
   const data = await getFetch(`${backendPath}/api/accountbook`);
   return data.reverse();
-};
+}
