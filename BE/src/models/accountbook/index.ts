@@ -57,4 +57,13 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, addTransaction };
+const getDetail = async ({
+  accountbookid,
+}: {
+  accountbookid: string;
+}): Promise<any> => {
+  const accountBooks = await AccountBookModel.findOne({ _id: accountbookid });
+  return accountBooks;
+};
+
+export default { get, create, addTransaction, getDetail };
