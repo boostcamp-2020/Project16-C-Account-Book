@@ -1,27 +1,42 @@
+@use '../../../styles/values' as *;
 .create__acbook {
+  position: relative;
   background-color: #f9e000;
-  height: 200px;
-  width: 340px;
+  width: 333px;
+  min-height: 195px;
   margin: 20px 0px 20px 0px;
   border: 1px solid transparent;
   border-radius: 15px;
-  padding: 16px;
+  padding: 2em 1em;
   transition-duration: 0.3s;
-  transform: translateX(20%);
+  transform: translateX(15%);
   margin-bottom: 56px;
   animation: cardShow 1s backwards;
 
-  > input {
-    height: 30px;
+  .fas.fa-minus-circle {
+    position: absolute;
+    right: 0.5em;
+    top: 1em;
+    font-size: 1.4em;
+    color: $spending-color;
+    cursor: pointer;
+  }
+  .input__name {
+    position: absolute;
+    top: 1.3em;
+    height: 2em;
     width: 260px;
     text-decoration: none;
     margin: 5px;
   }
 
-  > textarea {
-    height: 70px;
+  .input__description {
+    position: absolute;
+    top: 5em;
+    height: 5em;
     width: 260px;
     margin: 5px;
+    resize: none;
   }
 
   .create__cancle {

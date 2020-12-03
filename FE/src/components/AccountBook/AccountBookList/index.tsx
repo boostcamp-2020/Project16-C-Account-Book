@@ -18,7 +18,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
   };
 
   const linkToDetail = async event => {
-    if (!event.target.classList.contains('delete__button')) {
+    if (!event.target.classList.contains('fa-trash-alt')) {
       history.push({
         pathname: '/calendar',
         state: {
@@ -31,6 +31,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
   const onClickDelete = async event => {
     const accountBookId = event.target.dataset.id;
     const res = await deleteAccountBook(accountBookId);
+
     setDatas(datas.filter(data => data._id !== accountBookId));
   };
 
@@ -48,15 +49,18 @@ export const AccountBookList = ({ datas, setDatas }) => {
           onClick={linkToDetail}
           style={{ animationDelay: `${index * 0.08}s` }}
         >
-          <h3 data-acbookid={data._id}>{data.name}</h3>
-          <p data-acbookid={data._id}>{data.description}</p>
-          <button
-            className="delete__button"
+          <div className="ac__title" data-acbookid={data._id}>
+            {data.name}
+          </div>
+          <div className="ac__desc" data-acbookid={data._id}>
+            {data.description}
+          </div>
+
+          <i
+            className="fas fa-trash-alt"
             data-id={data._id}
             onClick={onClickDelete}
-          >
-            Delete
-          </button>
+          />
         </div>
       ))}
     </div>

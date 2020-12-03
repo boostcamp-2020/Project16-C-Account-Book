@@ -10,8 +10,9 @@ export default function AccountBookAddForm({ setCreate, datas, setDatas }) {
   const onCreateAccountBook = async event => {
     if (event.key === 'Enter') {
       const res = await createAccountBook({ name, description });
+
       setCreate(false);
-      setDatas([{ name, description }, ...datas]);
+      setDatas([{ name, description, _id: res.data._id }, ...datas]);
     }
   };
 
@@ -48,9 +49,8 @@ export default function AccountBookAddForm({ setCreate, datas, setDatas }) {
         onKeyPress={onCreateAccountBook}
         onChange={onChangeDescription}
       />
-      <p className="create__cancle" onClick={cancleCreate}>
-        Cancle
-      </p>
+
+      <i className="fas fa-minus-circle" onClick={cancleCreate} />
     </div>
   );
 }
