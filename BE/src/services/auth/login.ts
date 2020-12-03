@@ -3,10 +3,10 @@ import createError from 'http-errors';
 import jwt from 'jsonwebtoken';
 
 import userModel from '@models/user';
-import { iUser } from '@interfaces/auth';
+import { User } from '@interfaces/auth';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
-const makeToken = (userInfo: iUser): string => {
+const makeToken = (userInfo: User): string => {
   const jwtKey = process.env.JWT_KEY || '';
 
   const token = jwt.sign(userInfo, jwtKey);

@@ -1,23 +1,11 @@
 import mongoose from 'mongoose';
-import { Category, Schema as CategorySchema } from '@models/category/schema';
-import {
-  PaymentMethod,
-  Schema as PaymentMethodSchema,
-} from '@models/paymentmethod/schema';
-import {
-  Transaction,
-  Schema as TransactionSchema,
-} from '@models/transaction/schema';
-import { User, Schema as UserSchema } from '@models/user/schema';
+import { Schema as CategorySchema } from '@models/category/schema';
+import { Schema as PaymentMethodSchema } from '@models/paymentmethod/schema';
+import { Schema as TransactionSchema } from '@models/transaction/schema';
+import { Schema as UserSchema } from '@models/user/schema';
+import AccountBook from '@interfaces/accountbook';
 
-export interface AccountBook extends mongoose.Document {
-  name: string;
-  description: string;
-  categories: Category[];
-  payments: PaymentMethod[];
-  users: User[];
-  transactions: Transaction[];
-}
+export interface AccountBookDoc extends AccountBook, mongoose.Document {}
 
 const Schema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -28,7 +16,7 @@ const Schema = new mongoose.Schema({
   transactions: { type: [TransactionSchema], default: [] },
 });
 
-export const AccountBookModel = mongoose.model<AccountBook>(
+export const AccountBookModel = mongoose.model<AccountBookDoc>(
   'accountbooks',
   Schema,
 );

@@ -1,4 +1,5 @@
-import { Category, CategoryModel } from './schema';
+import Category from '@interfaces/category';
+import { CategoryModel } from './schema';
 
 const get = async (): Promise<Category[]> => {
   const defaultCategories = await CategoryModel.find();
