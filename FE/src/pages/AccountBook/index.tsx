@@ -8,10 +8,9 @@ import useLoginChcek from '../../service/useLoginCheck';
 import './accountBookListPage.scss';
 
 export default function AccountBookListPage() {
+  useLoginChcek();
   const [isCreate, setIsCreate] = useState(false);
   const [listDatas, setListDatas] = useState([]);
-
-  useLoginChcek();
 
   return (
     <div className="acbook__list__container">

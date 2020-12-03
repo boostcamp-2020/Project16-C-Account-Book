@@ -26,24 +26,18 @@ export const AccountBookList = ({ datas, setDatas }) => {
 
   return (
     <>
-      {datas ? (
-        <>
-          {datas.map(data => (
-            <>
-              <div className="acbook" onClick={() => linkToDetail()}>
-                <h3>{data.name}</h3>
-                <p>{data.description}</p>
-              </div>
-              <button
-                className="delete__button"
-                onClick={() => deleteAccountBook(data._id)}
-              >
-                Delete
-              </button>
-            </>
-          ))}
-        </>
-      ) : null}
+      {datas.map(data => (
+        <div key={data._id} className="acbook" onClick={linkToDetail}>
+          <h3>{data.name}</h3>
+          <p>{data.description}</p>
+          <button
+            className="delete__button"
+            onClick={() => deleteAccountBook(data._id)}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
     </>
   );
 };
