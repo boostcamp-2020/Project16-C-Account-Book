@@ -16,6 +16,7 @@ const checkToken = async (
   next: Next,
 ): Promise<Context['body']> => {
   const user = await serviceAuthCheck.checkToken(ctx.header);
+  console.log(`여기${user}`);
   if (!user) {
     const jwtError = createError(401, 'unauthorized');
     throw jwtError;
