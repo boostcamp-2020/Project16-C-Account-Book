@@ -1,19 +1,25 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import getAccountBookList from '../../../api/accoun-book-list';
+import { getAccountBookList } from '../../../api/accoun-book-list';
 import './accountBookList.scss';
-import { postFetch } from '../../../service/fetch';
 
 export const AccountBookList = ({ datas, setDatas }) => {
+  const history = useHistory();
+
   const setAccountBookList = async () => {
-    const data = await getAccountBookList();
-    setDatas(data);
+    const accountBooks = await getAccountBookList();
+
+    setDatas(accountBooks.data.reverse());
   };
 
-  const history = useHistory();
-  const linkToDetail = (id = '') => {
-    history.push(`calendar/${id}`);
+  const linkToDetail = async event => {
+    history.push({
+      pathname: '/calendar',
+      state: {
+        id: event.target.dataset.acbookid,
+      },
+    });
   };
 
   const deleteAccountBook = (id = '') => {
@@ -25,26 +31,27 @@ export const AccountBookList = ({ datas, setDatas }) => {
   }, []);
 
   return (
-    <>
-      {datas ? (
-        <>
-          {datas.map(data => (
-            <>
-              <div className="acbook" onClick={() => linkToDetail()}>
-                <h3>{data.name}</h3>
-                <p>{data.description}</p>
-              </div>
-              <button
-                className="delete__button"
-                onClick={() => deleteAccountBook(data._id)}
-              >
-                Delete
-              </button>
-            </>
-          ))}
-        </>
-      ) : null}
-    </>
+    <div className="acbook__list">
+      {datas.map((data, index) => (
+        <div
+          key={data._id}
+          className="acbook"
+          data-acbookid={data._id}
+          onClick={linkToDetail}
+          style={{ animationDelay: `${index * 0.08}s` }}
+        >
+          <h3 data-acbookid={data._id}>{data.name}</h3>
+          <p data-acbookid={data._id}>{data.description}</p>
+          <button
+            data-acbookid={data._id}
+            className="delete__button"
+            onClick={() => deleteAccountBook(data._id)}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
+    </div>
   );
 };
 

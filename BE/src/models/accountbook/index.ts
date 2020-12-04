@@ -1,8 +1,7 @@
-import PaymentMethodModel from '@models/paymentmethod';
 import CategoryModel from '@models/category';
-import { Transaction } from '@models/transaction/schema';
-import { AccountBook, AccountBookModel } from './schema';
-import { User } from '../user/schema';
+import { User } from '@interfaces/auth';
+import AccountBook from '@interfaces/accountbook';
+import { AccountBookModel } from './schema';
 
 const get = async ({
   id,
@@ -18,24 +17,58 @@ const get = async ({
   return accountBooks;
 };
 
-const create = async (
-  name: string,
-  description: string | undefined,
-  users: User,
-): Promise<any> => {
+const getDetail = async (id: string): Promise<any> => {
+  const accountBook = await AccountBookModel.findOne({
+    _id: id,
+  });
+  return accountBook;
+};
+
+const create = async ({
+  name,
+  description,
+  user,
+}: {
+  name: string;
+  description: string;
+  user: User;
+}): Promise<AccountBook> => {
   const defaultCategory = await CategoryModel.get();
-  const defaultPaymentMethod = await PaymentMethodModel.get();
-  const accountbook = {
+  const information = {
     name,
     description,
-    users: users,
+    user,
     categories: [...defaultCategory],
-    payments: [...defaultPaymentMethod],
+    payments: [],
     transactions: [],
   };
 
-  let result = await new AccountBookModel(accountbook);
-  result = await result.save();
+  const accountbook = await new AccountBookModel(information).save();
+  return accountbook;
+};
+
+const update = async (
+  _id: string,
+  {
+    name,
+    description,
+  }: {
+    name: string;
+    description: string;
+  },
+): Promise<any> => {
+  const updateData = {
+    name,
+    description,
+  };
+
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  return !!updateResult.nModified;
+};
+
+const del = async (_id: string): Promise<any> => {
+  const deleteResult = await AccountBookModel.deleteOne({ _id });
+  return !!deleteResult.deletedCount;
 };
 
 const addTransaction = async (
@@ -57,4 +90,4 @@ const addTransaction = async (
   }
 };
 
-export default { get, create, addTransaction };
+export default { get, getDetail, create, update, del, addTransaction };

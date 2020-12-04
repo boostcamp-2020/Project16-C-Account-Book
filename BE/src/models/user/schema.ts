@@ -1,15 +1,12 @@
 import mongoose from 'mongoose';
+import { User } from '@interfaces/auth';
 
-export interface User extends mongoose.Document {
-  id: string;
-  name?: string;
-  social: string;
-}
+export interface UserDoc extends User, mongoose.Document {}
 
 export const Schema = new mongoose.Schema({
-  id: { type: String, required: true },
+  userid: { type: String, required: true },
   name: { type: String, required: true, default: '' },
   social: { type: String, required: true },
 });
 
-export const UserModel = mongoose.model<User>('users', Schema);
+export const UserModel = mongoose.model<UserDoc>('users', Schema);

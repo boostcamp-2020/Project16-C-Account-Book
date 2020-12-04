@@ -1,7 +1,7 @@
 import createError from 'http-errors';
 import axios from 'axios';
 
-import { iTokenGetParams, iUser } from '@interfaces/auth';
+import { iTokenGetParams, User } from '@interfaces/auth';
 
 const tokenGetParams: { [key: string]: iTokenGetParams } = {
   github: {
@@ -61,7 +61,7 @@ export const getAccessToken = async (code: string, social: string) => {
 export const getUserInfo = async (
   accessToken: string,
   social: string,
-): Promise<iUser> => {
+): Promise<User> => {
   const { data } = await axios.get(userInfoGetUrl[social], {
     headers: {
       Authorization: `BEARER ${accessToken}`,
@@ -71,12 +71,12 @@ export const getUserInfo = async (
   console.log('data: ', data);
 
   if (social === 'github') {
-    const userInfo = { id: data.login, name: data.name, social };
+    const userInfo = { userid: data.login, name: data.name, social };
     return userInfo;
   }
   if (social === 'naver') {
     const userInfo = {
-      id: data.response.email,
+      userid: data.response.email,
       name: data.response.name,
       social,
     };
