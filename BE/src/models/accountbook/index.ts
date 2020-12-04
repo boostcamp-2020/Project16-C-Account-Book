@@ -37,7 +37,7 @@ const create = async ({
   const information = {
     name,
     description,
-    user,
+    users: [user],
     categories: [...defaultCategory],
     payments: [],
     transactions: [],

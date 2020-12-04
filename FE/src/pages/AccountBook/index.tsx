@@ -12,8 +12,13 @@ export default function AccountBookListPage() {
   const [isCreate, setIsCreate] = useState(false);
   const [listDatas, setListDatas] = useState([]);
 
+  const onClickOverlay = event => {
+    if (event.target.classList.contains('acbook__container')) {
+      setIsCreate(false);
+    }
+  };
   return (
-    <div className="acbook__list__container">
+    <div className="acbook__list__container" onClick={onClickOverlay}>
       <AccountBookControl setCreate={setIsCreate} />
       <div className="acbook__list">
         {isCreate && (

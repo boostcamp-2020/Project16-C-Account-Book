@@ -1,27 +1,55 @@
-.acbook__list {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
+@use '../../../styles/values' as *;
 
+.acbook__list {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 3em;
+  padding: 8em 0;
   .acbook {
+    position: relative;
     background-color: #f9e000;
     width: 333px;
     min-height: 195px;
+    z-index: 1;
 
-    margin: 20px 0px 20px 0px;
-    border: 1px solid transparent;
-    border-radius: 15px;
-    padding: 16px;
+    border-radius: 16px;
+    padding: 2em;
     transition-duration: 0.3s;
-    transform: translateX(20%);
+    transform: translateX(10%);
     animation: cardShow 1s backwards;
     color: black;
+
     cursor: pointer;
 
+    .ac__title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .ac__desc {
+      margin-top: 2em;
+      font-weight: 900;
+    }
+    .fas.fa-trash-alt {
+      z-index: 2;
+      font-size: 1.5em;
+      top: 1.5em;
+      right: 1em;
+      position: absolute;
+
+      &:hover {
+        color: $spending-color;
+      }
+    }
     &:hover {
-      transform: translateX(5%);
+      transform: translateX(-5%);
       transition-duration: 0.3s;
       transition-timing-function: ease, ease;
+    }
+    &:last-child {
+      margin-bottom: 3em;
     }
 
     @keyframes cardShow {

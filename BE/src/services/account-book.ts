@@ -13,6 +13,7 @@ const post = async (ctx: Context): Promise<any> => {
     user: ctx.user,
   };
   const accountBook = await accountBookModel.create(createInfo);
+
   return accountBook;
 };
 
@@ -62,6 +63,4 @@ const addTransaction = async (body: Context['body']): Promise<any> => {
   await accountBookModel.addTransaction(body.accountBookId, transactionInfo);
 };
 
-
 export default { get, getDetail, post, patch, del, addTransaction };
-
