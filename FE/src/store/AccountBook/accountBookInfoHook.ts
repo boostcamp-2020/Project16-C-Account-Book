@@ -1,5 +1,6 @@
 import React from 'react';
 import { useObserver } from 'mobx-react';
+
 import { transactionInfoContext } from './accountBookDataContext';
 import { TStore } from './accountBookData';
 
