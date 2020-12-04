@@ -13,8 +13,10 @@ export const AccountBookList = ({ datas, setDatas }) => {
 
   const setAccountBookList = async () => {
     const accountBooks = await getAccountBookList();
-
-    setDatas(accountBooks.data.reverse());
+    accountBooks.data.sort((a, b) => {
+      return b.transactions.length - a.transactions.length;
+    });
+    setDatas(accountBooks.data);
   };
 
   const linkToDetail = async event => {
