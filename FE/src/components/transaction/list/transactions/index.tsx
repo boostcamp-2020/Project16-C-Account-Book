@@ -21,7 +21,7 @@ const Transactions = ({
   const { year, month } = useRootData(store => store.nowCalendarInfo);
 
   useEffect(() => {
-    filterTransaction(selectedCategory, year, month, selectedTypes);
+    filterTransaction(selectedCategory, year, month + 1, selectedTypes);
   }, [selectedCategory, year, month, selectedTypes]);
 
   return (
