@@ -5,13 +5,4 @@
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-
-  animation: showDetail 1s ease;
-
-  @keyframes showDetail {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-  }
 }
