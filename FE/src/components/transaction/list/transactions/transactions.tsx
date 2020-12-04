@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
 import { useRootData } from '../../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../../store/TransactionData/transactionInfoHook';
+import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const Transactions = ({
   selectedCategory,

@@ -12,10 +12,46 @@ export const createStore = () => {
       transactions: [],
     },
 
+    filteredTransactions: {},
+
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
 
       this.accountBook = accountBook.data;
+    },
+
+    filterTransaction(
+      category: string,
+      year: number,
+      month: number,
+      types: string[],
+    ) {
+      const transactions = this.getTransactionsByYearMonth(year, month);
+
+      const typeFiltered = transactions.filter(
+        (transaction: { type: string }) => {
+          return types.includes(transaction.type);
+        },
+      );
+
+      const categoryFiltered =
+        category === 'all'
+          ? typeFiltered
+          : typeFiltered.filter(
+              (transaction: { category: { name: string } }) => {
+                return transaction.category.name === category;
+              },
+            );
+
+      const transactionsGroupByDate = categoryFiltered.reduce((acc, curr) => {
+        acc[curr.date] = [...(acc[curr.date] || []), curr];
+        return acc;
+      }, {});
+
+      console.log(categoryFiltered);
+      console.log(transactionsGroupByDate);
+
+      this.filteredTransactions = transactionsGroupByDate;
     },
 
     getAllTransactions() {
