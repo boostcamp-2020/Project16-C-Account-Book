@@ -1,26 +1,27 @@
-import { User, UserModel } from './schema';
+import { User } from '@interfaces/auth';
+import { UserModel } from './schema';
 
 const get = async ({
-  id,
+  userid,
   social,
 }: {
-  id: string;
+  userid: string;
   social: string;
 }): Promise<User | null> => {
-  const user = await UserModel.findOne({ id, social });
+  const user = await UserModel.findOne({ userid, social });
   return user;
 };
 
 const create = async ({
-  id,
+  userid,
   name,
   social,
 }: {
-  id: string;
+  userid: string;
   name?: string;
   social: string;
 }): Promise<string> => {
-  const userData = new UserModel({ id, name, social });
+  const userData = new UserModel({ userid, name, social });
   const user = await userData.save();
 
   return user.id;

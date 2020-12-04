@@ -1,17 +1,18 @@
 import mongoose from 'mongoose';
-import { Category, Schema as CategorySchema } from '@models/category/schema';
+import { CategoryDoc, Schema as CategorySchema } from '@models/category/schema';
 import {
-  PaymentMethod,
+  PaymentDoc,
   Schema as PaymentSchema,
 } from '@models/paymentmethod/schema';
+import Transaction from '@interfaces/transaction';
 
-export interface Transaction extends mongoose.Document {
+export interface TransactionDoc extends Transaction, mongoose.Document {
   content: string;
   type: string;
-  category: { category: Category };
+  category: { category: CategoryDoc };
   cost: number;
-  date: Date;
-  payment: { payment: PaymentMethod };
+  date: string;
+  payment: { payment: PaymentDoc };
 }
 
 export const Schema = new mongoose.Schema({
@@ -19,11 +20,11 @@ export const Schema = new mongoose.Schema({
   type: { type: String, required: true },
   cost: { type: Number, required: true },
   category: { type: CategorySchema, required: true },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   payment: { type: PaymentSchema, required: true },
 });
 
-export const TransactionModel = mongoose.model<Transaction>(
+export const TransactionModel = mongoose.model<TransactionDoc>(
   'transactions',
   Schema,
 );

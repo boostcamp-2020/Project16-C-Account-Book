@@ -1,10 +1,7 @@
 import mongoose from 'mongoose';
+import PaymentMethod from '@interfaces/payment-method';
 
-export interface PaymentMethod extends mongoose.Document {
-  name: string;
-  color: string;
-  desc: string;
-}
+export interface PaymentDoc extends PaymentMethod, mongoose.Document {}
 
 export const Schema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -12,7 +9,7 @@ export const Schema = new mongoose.Schema({
   desc: { type: String, default: '' },
 });
 
-export const DefaultPaymentMethodModel = mongoose.model<PaymentMethod>(
+export const DefaultPaymentMethodModel = mongoose.model<PaymentDoc>(
   'default_payment_methods',
   Schema,
 );

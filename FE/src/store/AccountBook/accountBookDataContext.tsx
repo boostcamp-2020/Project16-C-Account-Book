@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { useLocalObservable } from 'mobx-react';
-import { createStore, TStore } from './transactionDataStore';
+
+import { createStore, TStore } from './accountBookData';
 
 export const transactionInfoContext = createContext<TStore | null>(null);
 

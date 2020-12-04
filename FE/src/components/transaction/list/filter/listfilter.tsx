@@ -47,6 +47,7 @@ const Filter = ({
             name="inout"
             id="in"
             value="수입"
+            checked={selectedTypes.includes('수입')}
             onClick={onTypeClicked}
           />
           <label htmlFor="in">
@@ -59,6 +60,7 @@ const Filter = ({
             name="inout"
             id="out"
             value="지출"
+            checked={selectedTypes.includes('지출')}
             onClick={onTypeClicked}
           />
           <label htmlFor="out">

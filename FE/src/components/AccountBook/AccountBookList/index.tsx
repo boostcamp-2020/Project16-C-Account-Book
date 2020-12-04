@@ -1,23 +1,38 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, isValidElement } from 'react';
+
 import { useHistory } from 'react-router-dom';
 
-import getAccountBookList from '../../../api/accoun-book-list';
+import {
+  getAccountBookList,
+  deleteAccountBook,
+} from '../../../api/accoun-book-list';
 import './accountBookList.scss';
-import { postFetch } from '../../../service/fetch';
 
 export const AccountBookList = ({ datas, setDatas }) => {
-  const setAccountBookList = async () => {
-    const data = await getAccountBookList();
-    setDatas(data);
-  };
-
   const history = useHistory();
-  const linkToDetail = (id = '') => {
-    history.push(`calendar/${id}`);
+
+  const setAccountBookList = async () => {
+    const accountBooks = await getAccountBookList();
+
+    setDatas(accountBooks.data.reverse());
   };
 
-  const deleteAccountBook = (id = '') => {
-    setDatas(datas.filter(data => data._id !== id));
+  const linkToDetail = async event => {
+    if (!event.target.classList.contains('fa-trash-alt')) {
+      history.push({
+        pathname: '/calendar',
+        state: {
+          id: event.target.dataset.acbookid,
+        },
+      });
+    }
+  };
+
+  const onClickDelete = async event => {
+    const accountBookId = event.target.dataset.id;
+    const res = await deleteAccountBook(accountBookId);
+
+    setDatas(datas.filter(data => data._id !== accountBookId));
   };
 
   useEffect(() => {
@@ -26,24 +41,28 @@ export const AccountBookList = ({ datas, setDatas }) => {
 
   return (
     <>
-      {datas ? (
-        <>
-          {datas.map(data => (
-            <>
-              <div className="acbook" onClick={() => linkToDetail()}>
-                <h3>{data.name}</h3>
-                <p>{data.description}</p>
-              </div>
-              <button
-                className="delete__button"
-                onClick={() => deleteAccountBook(data._id)}
-              >
-                Delete
-              </button>
-            </>
-          ))}
-        </>
-      ) : null}
+      {datas.map((data, index) => (
+        <div
+          key={data._id}
+          className="acbook"
+          data-acbookid={data._id}
+          onClick={linkToDetail}
+          style={{ animationDelay: `${index * 0.08}s` }}
+        >
+          <div className="ac__title" data-acbookid={data._id}>
+            {data.name}
+          </div>
+          <div className="ac__desc" data-acbookid={data._id}>
+            {data.description}
+          </div>
+
+          <i
+            className="fas fa-trash-alt"
+            data-id={data._id}
+            onClick={onClickDelete}
+          />
+        </div>
+      ))}
     </>
   );
 };

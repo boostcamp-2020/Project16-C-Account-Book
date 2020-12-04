@@ -1,6 +1,7 @@
 import Koa from 'koa';
 
 import ResponseError from '@interfaces/error';
+import { response } from '@utils/response';
 
 const errorCatcher = async (
   ctx: Koa.Context,
@@ -14,8 +15,10 @@ const errorCatcher = async (
 };
 
 const errorHandler = (err: ResponseError, ctx: Koa.Context): void => {
-  ctx.status = err.status || 500;
-  ctx.body = { message: err.message };
+  const status = err.status || 500;
+  const res = response(status, err.message);
+  ctx.status = res.status;
+  ctx.body = res;
   console.error(`error code: [${ctx.status}], message: ${err.message}`);
 };
 
