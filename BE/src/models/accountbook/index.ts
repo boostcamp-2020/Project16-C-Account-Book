@@ -10,8 +10,6 @@ const get = async ({
   userid: string;
   social: string;
 }): Promise<AccountBook[]> => {
-  console.log(userid, social);
-
   const accountBooks = await AccountBookModel.find({
     'users.userid': userid,
     'users.social': social,
@@ -64,11 +62,7 @@ const update = async (
     description,
   };
 
-  const updateResult = await AccountBookModel.updateOne(
-    { _id },
-    updateData,
-    () => {},
-  );
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
   return !!updateResult.nModified;
 };
 
@@ -98,24 +92,50 @@ const addTransaction = async (
 };
 
 const updateTransaction = async (
-  accountbookId: string,
+  accountBookId: string,
   transactionId: string,
   updateInfo: any,
 ): Promise<any> => {
-  const curAccountBook = await AccountBookModel.findOne({ _id: accountbookId });
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
     const index = curAccountBook.transactions
       .map(value => value._id)
       .indexOf(transactionId);
     curAccountBook.transactions[index] = updateInfo;
-    const updateResult = await AccountBookModel.update({_id : accountbookId}, {transactions : curAccountBook.transactions});
-    if(updateResult.nModified) {
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { transactions: curAccountBook.transactions },
+    );
+    if (updateResult.nModified) {
       return true;
     }
     return false;
   }
-  return false; 
+  return false;
 };
+
+const deleteTransaction = async (
+  accountBookId: string,
+  transactionId: string,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const index = curAccountBook.transactions
+      .map(value => value._id)
+      .indexOf(transactionId);
+    curAccountBook.transactions.splice(index, 1);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { transactions: curAccountBook.transactions },
+    );
+    if (updateResult.nModified) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
 export default {
   get,
   getDetail,
@@ -124,4 +144,5 @@ export default {
   del,
   addTransaction,
   updateTransaction,
+  deleteTransaction,
 };

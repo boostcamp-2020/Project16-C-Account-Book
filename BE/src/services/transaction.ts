@@ -30,7 +30,7 @@ const patch = async (ctx: Context): Promise<any> => {
   const accountBookId = ctx.params.accountbookid;
   const transactionId = ctx.params.transactionid;
   const updateInfo = {
-    _id : transactionId,
+    _id: transactionId,
     content: ctx.request.body.content,
     type: ctx.request.body.type,
     category: ctx.request.body.category,
@@ -43,16 +43,35 @@ const patch = async (ctx: Context): Promise<any> => {
     transactionId,
     updateInfo,
   );
-  if(updateResult) {
+  if (updateResult) {
     return {
-      message : 'success',
-      data : {}
-    }
+      message: 'success',
+      data: {},
+    };
   }
   return {
-    message : 'fail',
-    data : {}
-  }
+    message: 'fail',
+    data: {},
+  };
 };
 
-export default { post, patch };
+const del = async (ctx: Context): Promise<any> => {
+  const accountBookId = ctx.params.accountbookid;
+  const transactionId = ctx.params.transactionid;
+  const delResult = await accountBookModel.deleteTransaction(
+    accountBookId,
+    transactionId,
+  );
+  if (delResult) {
+    return {
+      message: 'success',
+      data: {},
+    };
+  }
+  return {
+    message: 'fail',
+    data: {},
+  };
+};
+
+export default { post, patch, del };
