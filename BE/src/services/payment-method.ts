@@ -2,22 +2,19 @@ import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
 
 const post = async (ctx: Context): Promise<any> => {
-  const transactionInfo = {
-    content: ctx.request.body.content,
-    type: ctx.request.body.type,
-    category: ctx.request.body.category,
-    cost: ctx.request.body.cost,
-    date: ctx.request.body.date,
-    payment: ctx.request.body.payment,
+  const paymentMethodInfo = {
+    name: ctx.request.body.name,
+    color: ctx.request.body.color,
+    desc: ctx.request.body.desc,
   };
-  const transaction = await accountBookModel.addTransaction(
+  const paymentMethod = await accountBookModel.addPaymentMethod(
     ctx.params.accountbookid,
-    transactionInfo,
+    paymentMethodInfo,
   );
-  if (transaction) {
+  if (paymentMethod) {
     return {
       message: 'success',
-      data: transaction,
+      data: paymentMethod,
     };
   }
   return {
@@ -28,19 +25,16 @@ const post = async (ctx: Context): Promise<any> => {
 
 const patch = async (ctx: Context): Promise<any> => {
   const accountBookId = ctx.params.accountbookid;
-  const transactionId = ctx.params.transactionid;
+  const paymentMethodId = ctx.params.paymentid;
   const updateInfo = {
-    _id: transactionId,
-    content: ctx.request.body.content,
-    type: ctx.request.body.type,
-    category: ctx.request.body.category,
-    cost: ctx.request.body.cost,
-    date: ctx.request.body.date,
-    payment: ctx.request.body.payment,
+    _id: paymentMethodId,
+    name: ctx.request.body.name,
+    color: ctx.request.body.color,
+    desc: ctx.request.body.desc,
   };
-  const updateResult = await accountBookModel.updateTransaction(
+  const updateResult = await accountBookModel.updatePaymentMethod(
     accountBookId,
-    transactionId,
+    paymentMethodId,
     updateInfo,
   );
   if (updateResult) {
@@ -57,10 +51,10 @@ const patch = async (ctx: Context): Promise<any> => {
 
 const del = async (ctx: Context): Promise<any> => {
   const accountBookId = ctx.params.accountbookid;
-  const transactionId = ctx.params.transactionid;
-  const delResult = await accountBookModel.deleteTransaction(
+  const paymentId = ctx.params.paymentid;
+  const delResult = await accountBookModel.deletePaymentMethod(
     accountBookId,
-    transactionId,
+    paymentId,
   );
   if (delResult) {
     return {

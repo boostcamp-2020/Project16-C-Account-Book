@@ -10,8 +10,6 @@ const get = async ({
   userid: string;
   social: string;
 }): Promise<AccountBook[]> => {
-  console.log(userid, social);
-
   const accountBooks = await AccountBookModel.find({
     'users.userid': userid,
     'users.social': social,
@@ -77,19 +75,136 @@ const addTransaction = async (
   accountBookId: string,
   transaction: any,
 ): Promise<any> => {
-  const id = accountBookId;
-  const curAccountBook = await AccountBookModel.findOne({ _id: id });
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
-    const curTransactions = [...curAccountBook.transactions];
+    const curTransactions = curAccountBook.transactions;
     curTransactions.push(transaction);
     const updateResult = await AccountBookModel.update(
-      { _id: id },
-      { transactions: curTransactions },
+      { _id: accountBookId },
+      { transactions: [...curTransactions, transaction] },
     );
-    console.log(updateResult);
-  } else {
-    console.log(`존재하지 않는 가계부`);
+    if (updateResult.nModified) {
+      return curTransactions[curTransactions.length - 1];
+    }
+    return false;
   }
+  return false;
 };
 
-export default { get, getDetail, create, update, del, addTransaction };
+const updateTransaction = async (
+  accountBookId: string,
+  transactionId: string,
+  updateInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const index = curAccountBook.transactions
+      .map(value => value._id)
+      .indexOf(transactionId);
+    curAccountBook.transactions[index] = updateInfo;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { transactions: curAccountBook.transactions },
+    );
+    if (updateResult.nModified) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
+const deleteTransaction = async (
+  accountBookId: string,
+  transactionId: string,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const index = curAccountBook.transactions
+      .map(value => value._id)
+      .indexOf(transactionId);
+    curAccountBook.transactions.splice(index, 1);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { transactions: curAccountBook.transactions },
+    );
+    if (updateResult.nModified) {
+      return true;
+    }
+    return false;
+  }
+  return false;
+};
+
+const addPaymentMethod = async (
+  accountBookId: string,
+  paymentMethod: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curPaymentMethod = curAccountBook.payments;
+    curPaymentMethod.push(paymentMethod);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { payments: curPaymentMethod },
+    );
+    if (updateResult) {
+      return curPaymentMethod[curPaymentMethod.length - 1];
+    }
+    return false;
+  }
+  return false;
+};
+
+const updatePaymentMethod = async (
+  accountBookId: string,
+  paymentMethodId: string,
+  updateInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curPayments = curAccountBook.payments;
+    const index = curPayments.map(value => value._id).indexOf(paymentMethodId);
+    curPayments[index] = updateInfo;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { payments: curPayments },
+    );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
+const deletePaymentMethod = async (
+  accountBookId: string,
+  paymentMethodId: string,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curPayments = curAccountBook.payments;
+    const index = curPayments.map(value => value._id).indexOf(paymentMethodId);
+    curPayments.splice(index, 1);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { payments: curPayments },
+    );
+    if (updateResult) return true;
+    return false;
+  }
+  return false;
+};
+
+export default {
+  get,
+  getDetail,
+  create,
+  update,
+  del,
+  addTransaction,
+  updateTransaction,
+  deleteTransaction,
+  addPaymentMethod,
+  updatePaymentMethod,
+  deletePaymentMethod,
+};
