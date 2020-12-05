@@ -3,7 +3,7 @@
 @mixin noSelectedButton($category) {
   width: 15em;
   padding: 0.7em 0;
-  border: none;
+  border: 2px solid #222;
 
   font-size: 1.2em;
   @if $category == category {
@@ -11,10 +11,14 @@
   } @else {
     border-radius: 0 6px 6px 0;
   }
+
   background-color: rgba(0, 0, 0, 0.5);
   outline: none;
-  color: white;
-  box-shadow: $noSelectedBoxShadow;
+  color: rgba(255, 255, 255, 0.7);
+  &:hover {
+    text-shadow: $selectedTextShadow;
+    color: white;
+  }
   cursor: pointer;
 }
 

@@ -1,10 +1,11 @@
 @use '../../../styles/values.scss' as *;
 
 @mixin calendar-total($type) {
-  width: 22%;
+  width: 20%;
   text-align: center;
   border-radius: 50px;
-  padding: 1em 5em;
+  padding: 1em 0;
+  font-weight: bolder;
   @if $type== income {
     border: 1.5px solid $income-color;
     color: $income-color;
@@ -17,6 +18,7 @@
 .calendar__total__price {
   position: absolute;
   width: 100%;
+  margin: auto;
   top: 25%;
   display: flex;
   justify-content: center;
