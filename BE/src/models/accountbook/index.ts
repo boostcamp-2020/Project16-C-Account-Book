@@ -155,6 +155,27 @@ const addPaymentMethod = async (
   }
   return false;
 };
+
+const updatePaymentMethod = async (
+  accountBookId: string,
+  paymentMethodId: string,
+  updateInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curPayments = curAccountBook.payments;
+    const index = curPayments.map(value => value._id).indexOf(paymentMethodId);
+    curPayments[index] = updateInfo;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { payments: curPayments },
+    );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
 export default {
   get,
   getDetail,
@@ -165,4 +186,5 @@ export default {
   updateTransaction,
   deleteTransaction,
   addPaymentMethod,
+  updatePaymentMethod,
 };

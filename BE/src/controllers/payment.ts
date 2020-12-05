@@ -9,8 +9,10 @@ const post = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
-const patch = (ctx: Context): Context['body'] => {
-  ctx.body = `PATCH ${ctx.url}`;
+const patch = async (ctx: Context): Context['body'] => {
+  const updateResult = await service.patch(ctx);
+  const res = response(200, updateResult.message, updateResult.data);
+  ctx.body = res;
   return ctx.body;
 };
 

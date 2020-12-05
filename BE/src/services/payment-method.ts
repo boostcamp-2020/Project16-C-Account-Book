@@ -23,7 +23,31 @@ const post = async (ctx: Context): Promise<any> => {
   };
 };
 
-const patch = async (ctx: Context): Promise<any> => {};
+const patch = async (ctx: Context): Promise<any> => {
+  const accountBookId = ctx.params.accountbookid;
+  const paymentMethodId = ctx.params.paymentid;
+  const updateInfo = {
+    _id: paymentMethodId,
+    name: ctx.request.body.name,
+    color: ctx.request.body.color,
+    desc: ctx.request.body.desc,
+  };
+  const updateResult = await accountBookModel.updatePaymentMethod(
+    accountBookId,
+    paymentMethodId,
+    updateInfo,
+  );
+  if (updateResult) {
+    return {
+      message: 'success',
+      data: {},
+    };
+  }
+  return {
+    message: 'success',
+    data: {},
+  };
+};
 
 const del = async (ctx: Context): Promise<any> => {};
 
