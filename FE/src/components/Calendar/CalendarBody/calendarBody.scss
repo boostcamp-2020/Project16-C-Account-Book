@@ -1,14 +1,8 @@
 @use '../../../styles/values' as *;
 @use '../../../styles/mixins' as *;
 
-th {
-  width: 14.2857%;
-  padding-bottom: 5px;
-  font-size: 16px;
-  font-weight: 900;
-}
 td {
-  padding: 3px 0;
+  padding: 5px 0;
   height: 80px;
 
   vertical-align: center;
@@ -23,6 +17,9 @@ td {
   }
 }
 .day {
+  color: $white;
+  background-color: #222;
+  border-radius: 6px;
   position: relative;
   cursor: pointer;
   &:hover {
