@@ -62,7 +62,11 @@ const update = async (
     description,
   };
 
-  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  const updateResult = await AccountBookModel.updateOne(
+    { _id },
+    updateData,
+    () => {},
+  );
   return !!updateResult.nModified;
 };
 
@@ -75,19 +79,41 @@ const addTransaction = async (
   accountBookId: string,
   transaction: any,
 ): Promise<any> => {
-  const id = accountBookId;
-  const curAccountBook = await AccountBookModel.findOne({ _id: id });
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
-    const curTransactions = [...curAccountBook.transactions];
+    const curTransactions = curAccountBook.transactions;
     curTransactions.push(transaction);
     const updateResult = await AccountBookModel.update(
-      { _id: id },
-      { transactions: curTransactions },
+      { _id: accountBookId },
+      { transactions: [...curTransactions, transaction] },
     );
-    console.log(updateResult);
-  } else {
-    console.log(`존재하지 않는 가계부`);
+    if (updateResult.nModified) {
+      return curTransactions[curTransactions.length - 1];
+    }
+    return false;
   }
+  return false;
 };
 
-export default { get, getDetail, create, update, del, addTransaction };
+const updateTransaction = async (
+  accountbookId: string,
+  transactionId: string,
+  updateInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountbookId });
+  console.log(curAccountBook);
+  if (curAccountBook) {
+    const index = curAccountBook.transactions
+      .map(value => value._id)
+      .indexOf(transactionId);
+  }
+};
+export default {
+  get,
+  getDetail,
+  create,
+  update,
+  del,
+  addTransaction,
+  updateTransaction,
+};
