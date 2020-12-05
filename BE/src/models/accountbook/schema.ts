@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { CategoryDoc, Schema as CategorySchema } from '@models/category/schema';
 import {
-  PaymentMethodDoc,
+  PaymentDoc,
   Schema as PaymentMethodSchema,
 } from '@models/paymentmethod/schema';
 import {
@@ -15,7 +15,7 @@ export interface AccountBookDoc extends AccountBook, mongoose.Document {
   name: string;
   description: string;
   categories: CategoryDoc[];
-  payments: PaymentMethodDoc[];
+  payments: PaymentDoc[];
   users: UserDoc[];
   transactions: TransactionDoc[];
 }
