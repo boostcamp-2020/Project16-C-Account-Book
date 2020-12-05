@@ -21,7 +21,6 @@ export const createStore = () => {
     },
 
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
-      console.log('hererehre');
       this.accountBook.payments = [data, ...this.accountBook.payments];
     },
 
