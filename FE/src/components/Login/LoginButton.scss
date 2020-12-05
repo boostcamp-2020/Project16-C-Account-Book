@@ -12,8 +12,13 @@ $github-color: black;
   height: 60px;
   border: none;
   margin-top: 20px;
+  cursor: pointer;
 
   .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(5px);
     font-weight: 900;
     font-size: 35px;
   }

@@ -1,23 +1,39 @@
+@use '../../styles/values.scss'as *;
+@use '../../styles/mixins.scss' as *;
+
 .container {
   width: 100vw;
   height: 100vh;
   margin: 0 0 0;
   position: relative;
+  background-color: rgba(0, 0, 0, 0.9);
 
   .title {
     position: absolute;
     top: 23%;
-    left: 16vw;
+    padding: 0.1em 0.2em;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: 1000;
-    font-size: 100px;
-    &::first-letter {
-      font-size: 150px;
+    font-size: 80px;
+    animation: titleShow 1.5s;
+    @keyframes titleShow {
+      from {
+        opacity: 0;
+        transform: translate(-500px, -50px);
+      }
     }
+    &::first-letter {
+      font-size: 100px;
+    }
+    text-shadow: $selectedTextShadow;
+    color: $white;
   }
 
   .login-button-container {
     position: absolute;
-    top: 65%;
-    left: 18vw;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
