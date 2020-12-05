@@ -44,6 +44,21 @@ const patch = async (ctx: Context): Promise<any> => {
   };
 };
 
-const del = async (ctx: Context): Promise<any> => {};
+const del = async (ctx: Context): Promise<any> => {
+  const delResult = await accountBookModel.deleteCategory(
+    ctx.params.accountbookid,
+    ctx.params.categoryid,
+  );
+  if (delResult) {
+    return {
+      message: 'success',
+      data: {},
+    };
+  }
+  return {
+    message: 'fail',
+    data: {},
+  };
+};
 
 export default { post, patch, del };
