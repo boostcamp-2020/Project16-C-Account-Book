@@ -16,7 +16,7 @@ export const createStore = () => {
 
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
-
+      accountBook.data.payments.reverse();
       this.accountBook = accountBook.data;
     },
 
