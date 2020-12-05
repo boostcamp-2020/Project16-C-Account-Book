@@ -106,6 +106,9 @@ const updateTransaction = async (
     const index = curAccountBook.transactions
       .map(value => value._id)
       .indexOf(transactionId);
+    curAccountBook.transactions[index] = updateInfo;
+    const updateResult = await AccountBookModel.update({_id : accountbookId}, {transactions : curAccountBook.transactions});
+    console.log(updateResult);
   }
 };
 export default {
