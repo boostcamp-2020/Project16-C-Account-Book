@@ -1,6 +1,6 @@
 .container {
   width: 50%;
-  height: 100%;
+  height: 850%;
   padding: 10px 5px;
   background-color: white;
   border: 1px dotted #cdcdcd;
@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 2em;
+  overflow-y: auto;
 
   &:last-child {
     margin-bottom: 5em;
