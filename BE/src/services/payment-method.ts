@@ -44,11 +44,28 @@ const patch = async (ctx: Context): Promise<any> => {
     };
   }
   return {
-    message: 'success',
+    message: 'fail',
     data: {},
   };
 };
 
-const del = async (ctx: Context): Promise<any> => {};
+const del = async (ctx: Context): Promise<any> => {
+  const accountBookId = ctx.params.accountbookid;
+  const paymentId = ctx.params.paymentid;
+  const delResult = await accountBookModel.deletePaymentMethod(
+    accountBookId,
+    paymentId,
+  );
+  if (delResult) {
+    return {
+      message: 'success',
+      data: {},
+    };
+  }
+  return {
+    message: 'fail',
+    data: {},
+  };
+};
 
 export default { post, patch, del };
