@@ -24,6 +24,19 @@ export const createStore = () => {
       this.accountBook.payments = [data, ...this.accountBook.payments];
     },
 
+    updatePaymentMethod(data: { id: string; desc: string }) {
+      console.log(data.desc);
+      const updatedPayments = [...this.accountBook.payments];
+      updatedPayments = updatedPayments.map(item => {
+        if (item._id === data.id) {
+          item = { ...item, desc: data.desc };
+        }
+        return item;
+      });
+      console.log(updatedPayments[0].desc);
+      this.accountBook.payments = updatedPayments;
+    },
+
     deletePaymentMethod(id) {
       this.accountBook.payments = this.accountBook.payments.filter(
         payment => payment._id !== id,
