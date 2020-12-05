@@ -1,5 +1,5 @@
 import accountBookModel from '@models/accountbook';
-import { Context } from 'vm';
+import { Context } from 'koa';
 
 const post = async (ctx: Context): Promise<any> => {
   const transactionInfo = {
