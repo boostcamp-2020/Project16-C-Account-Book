@@ -103,15 +103,18 @@ const updateTransaction = async (
   updateInfo: any,
 ): Promise<any> => {
   const curAccountBook = await AccountBookModel.findOne({ _id: accountbookId });
-  console.log(curAccountBook);
   if (curAccountBook) {
     const index = curAccountBook.transactions
       .map(value => value._id)
       .indexOf(transactionId);
     curAccountBook.transactions[index] = updateInfo;
     const updateResult = await AccountBookModel.update({_id : accountbookId}, {transactions : curAccountBook.transactions});
-    console.log(updateResult);
+    if(updateResult.nModified) {
+      return true;
+    }
+    return false;
   }
+  return false; 
 };
 export default {
   get,

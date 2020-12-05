@@ -11,7 +11,8 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 
 const patch = async (ctx: Context): Promise<Context['body']> => {
   const updateResult = await service.patch(ctx);
-  ctx.body = `PATCH ${ctx.url}`;
+  const res = response(200, updateResult.message, updateResult.data);
+  ctx.body = res;
   return ctx.body;
 };
 

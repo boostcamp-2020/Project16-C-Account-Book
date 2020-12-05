@@ -30,6 +30,7 @@ const patch = async (ctx: Context): Promise<any> => {
   const accountBookId = ctx.params.accountbookid;
   const transactionId = ctx.params.transactionid;
   const updateInfo = {
+    _id : transactionId,
     content: ctx.request.body.content,
     type: ctx.request.body.type,
     category: ctx.request.body.category,
@@ -42,6 +43,16 @@ const patch = async (ctx: Context): Promise<any> => {
     transactionId,
     updateInfo,
   );
+  if(updateResult) {
+    return {
+      message : 'success',
+      data : {}
+    }
+  }
+  return {
+    message : 'fail',
+    data : {}
+  }
 };
 
 export default { post, patch };
