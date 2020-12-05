@@ -69,9 +69,6 @@ export const createStore = () => {
         return acc;
       }, {});
 
-      console.log(categoryFiltered);
-      console.log(transactionsGroupByDate);
-
       this.filteredTransactions = transactionsGroupByDate;
     },
 

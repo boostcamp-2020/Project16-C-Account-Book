@@ -27,10 +27,39 @@
     .ac__title {
       font-size: 1.5em;
       font-weight: bold;
+      &.hidden {
+        display: none;
+      }
     }
     .ac__desc {
       margin-top: 2em;
       font-weight: 900;
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .acbook__title__input {
+      position: absolute;
+      top: 2.2em;
+      height: 2em;
+      width: 230px;
+      text-decoration: none;
+
+      &.hidden {
+        display: none;
+      }
+    }
+    .acbook__desc__input {
+      position: absolute;
+      top: 5.5em;
+      height: 5em;
+      width: 230px;
+
+      resize: none;
+      &.hidden {
+        display: none;
+      }
     }
 
     .fas.fa-edit {
