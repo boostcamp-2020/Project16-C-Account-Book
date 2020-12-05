@@ -1,7 +1,8 @@
 import React from 'react';
-import { useObserver } from 'mobx-react-lite';
-import { AccountBookContext } from './account-book.context';
-import { TStore } from './account-book.store';
+import { useObserver } from 'mobx-react';
+
+import { transactionInfoContext } from './accountBookDataContext';
+import { TStore } from './accountBookData';
 
 export const useStoreData = <Selection, ContextData, Store>(
   context: React.Context<ContextData>,
@@ -13,12 +14,15 @@ export const useStoreData = <Selection, ContextData, Store>(
 
   const store = storeSelector(value);
   return useObserver(() => {
-    console.log('obs', value, store);
     return dataSelector(store);
   });
 };
 
-export const useAccountBookData = <Selection>(
+export const useTransactionData = <Selection>(
   dataSelector: (store: TStore) => Selection,
 ) =>
-  useStoreData(AccountBookContext, contextData => contextData!, dataSelector);
+  useStoreData(
+    transactionInfoContext,
+    contextData => contextData!,
+    dataSelector,
+  );

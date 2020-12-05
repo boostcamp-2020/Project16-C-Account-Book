@@ -25,7 +25,6 @@ const update = async (ctx: Context): Promise<Context['body']> => {
   const res = response(200, updateResult.message, updateResult.data);
   ctx.status = res.status;
   ctx.body = res;
-
   return ctx.body;
 };
 

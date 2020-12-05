@@ -9,4 +9,6 @@ export const Schema = new mongoose.Schema({
   social: { type: String, required: true },
 });
 
+Schema.index({ userid: 1, social: 1 });
+
 export const UserModel = mongoose.model<UserDoc>('users', Schema);

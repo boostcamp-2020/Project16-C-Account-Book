@@ -4,14 +4,16 @@ import AccountBook from '@interfaces/accountbook';
 import { AccountBookModel } from './schema';
 
 const get = async ({
-  id,
+  userid,
   social,
 }: {
-  id: string;
+  userid: string;
   social: string;
 }): Promise<AccountBook[]> => {
+  console.log(userid, social);
+
   const accountBooks = await AccountBookModel.find({
-    'users.id': id,
+    'users.userid': userid,
     'users.social': social,
   });
   return accountBooks;

@@ -13,6 +13,7 @@ const post = async (ctx: Context): Promise<any> => {
     user: ctx.user,
   };
   const accountBook = await accountBookModel.create(createInfo);
+
   return accountBook;
 };
 

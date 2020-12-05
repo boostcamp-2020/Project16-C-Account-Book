@@ -1,0 +1,68 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+
+th {
+  width: 14.2857%;
+  padding-bottom: 5px;
+  font-size: 16px;
+  font-weight: 900;
+}
+td {
+  padding: 3px 0;
+  height: 80px;
+
+  vertical-align: center;
+
+  .income__info {
+    font-size: 0.8em;
+    color: $income-color;
+  }
+  .spending__info {
+    font-size: 0.8em;
+    color: $spending-color;
+  }
+}
+.day {
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    animation: dateHover 1s;
+  }
+  @keyframes dateHover {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+      transform-origin: 40% 50%;
+    }
+  }
+}
+.today {
+  background: rgb(235, 109, 109);
+  animation: todayColor 2s;
+  width: 40px;
+  height: 40px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  line-height: 40px;
+  border-radius: 50%;
+  color: $white;
+}
+
+@keyframes todayColor {
+  from {
+    transform: translate(-50px);
+    background: $white;
+  }
+}
+
+.has-event:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+}
