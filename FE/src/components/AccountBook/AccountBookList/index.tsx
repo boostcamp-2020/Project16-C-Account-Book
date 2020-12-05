@@ -58,6 +58,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
             {data.description}
           </div>
 
+          <i className="fas fa-edit" data-id={data._id} />
           <i
             className="fas fa-trash-alt"
             data-id={data._id}

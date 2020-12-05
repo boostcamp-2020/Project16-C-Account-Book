@@ -25,7 +25,6 @@ export const createStore = () => {
     },
 
     updatePaymentMethod(data: { id: string; desc: string }) {
-      console.log(data.desc);
       const updatedPayments = [...this.accountBook.payments];
       updatedPayments = updatedPayments.map(item => {
         if (item._id === data.id) {
@@ -33,7 +32,6 @@ export const createStore = () => {
         }
         return item;
       });
-      console.log(updatedPayments[0].desc);
       this.accountBook.payments = updatedPayments;
     },
 
