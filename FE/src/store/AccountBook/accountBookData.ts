@@ -24,6 +24,12 @@ export const createStore = () => {
       this.accountBook.payments = [data, ...this.accountBook.payments];
     },
 
+    deletePaymentMethod(id) {
+      this.accountBook.payments = this.accountBook.payments.filter(
+        payment => payment._id !== id,
+      );
+    },
+
     filterTransaction(
       category: string,
       year: number,

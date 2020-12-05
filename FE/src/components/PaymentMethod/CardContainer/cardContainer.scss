@@ -28,11 +28,6 @@
     border-radius: 6px;
     padding: 1.5em;
 
-    .card__cancel {
-      position: absolute;
-      right: 1.5em;
-      top: 1em;
-    }
     .card__title {
       font-size: 2em;
       padding: 0.2em 0;
@@ -41,6 +36,28 @@
 
     .card__desc {
       font-size: 1.2em;
+    }
+
+    .fas.fa-trash-alt {
+      position: absolute;
+      right: 1.2em;
+      top: 1.5em;
+      font-size: 1.5em;
+
+      &:hover {
+        color: black;
+
+        animation: deleteBtn 1s forwards;
+
+        @keyframes deleteBtn {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      }
     }
 
     &:hover {
