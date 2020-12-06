@@ -58,10 +58,11 @@ export const AccountBookList = ({ datas, setDatas }) => {
             name: titleEdit.value,
             description: descEdit.value,
           };
-          return item;
         }
+        return item;
       });
 
+      console.log(updatedAcBooks);
       setDatas(() => updatedAcBooks);
       title.classList.toggle('hidden');
       desc.classList.toggle('hidden');
