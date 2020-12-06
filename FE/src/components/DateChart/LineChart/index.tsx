@@ -22,7 +22,8 @@ export default function LineChart() {
     labels: days,
     datasets: [
       {
-        label: 'spending',
+        label: 'Spending',
+        labelColor: 'red',
         fill: false,
         lineTension: 0.5,
         borderColor: '#ee4337',
@@ -35,7 +36,7 @@ export default function LineChart() {
         pointHoverBorderColor: 'rgba(220,220,220,1)',
       },
       {
-        label: 'income',
+        label: 'Income',
         fill: false,
         lineTension: 0.5,
         borderColor: '#54aafc',
