@@ -6,13 +6,20 @@ export const createStore = () => {
       _id: null,
       name: null,
       description: null,
-      category: [],
+      categories: [],
       payments: [],
       user: [],
       transactions: [],
     },
 
     filteredTransactions: {},
+
+    addTransaction(transaction) {
+      this.accountBook.transactions = [
+        ...this.accountBook.transactions,
+        transaction,
+      ];
+    },
 
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
@@ -63,7 +70,7 @@ export const createStore = () => {
     },
 
     getTransactionsByYearMonth(year: number, month: number) {
-      const yearMonthDatas = this.accountBook.transactions.filter(
+      const yearMonthDatas = this.accountBook.transactions?.filter(
         item =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
