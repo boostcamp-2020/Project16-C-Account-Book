@@ -33,6 +33,26 @@
       text-shadow: $selectedTextShadow;
       color: white;
     }
+    .setting__navBtn {
+      @include buttonDefaultSetting;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1.5em;
+      text-align: center;
+      line-height: 1.5em;
+      width: 3.5em;
+      height: 1.5em;
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5em;
+      font-size: 1.5em;
+      box-shadow: $selectedBoxShadow;
+      text-shadow: $selectedTextShadow;
+      color: white;
+    }
     .menubar__navBtn {
       @include buttonDefaultSetting;
       text-align: center;
