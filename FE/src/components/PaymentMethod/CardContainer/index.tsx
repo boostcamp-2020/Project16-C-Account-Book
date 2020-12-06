@@ -15,20 +15,29 @@ export default React.memo(function CardContainer(): React.ReactElement {
   const updatePayment = useTransactionData(store => store.updatePaymentMethod);
   const deletePayment = useTransactionData(store => store.deletePaymentMethod);
 
+  const contentRefArr = [];
+  const editFormRefArr = [];
+  paymentMethods.forEach(() => {
+    contentRefArr.push(React.createRef());
+    editFormRefArr.push(React.createRef());
+  });
+
   const onClickModify = event => {
-    const editForm = event.target.previousSibling;
-    const content = editForm.previousSibling;
+    const index = event.target.dataset.turn;
+    const editForm = editFormRefArr[index];
+    const content = contentRefArr[index];
 
-    editForm.value = content.textContent;
+    editForm.current.value = content.current.textContent;
 
-    editForm.classList.toggle('hidden');
-    content.classList.toggle('hidden');
+    editForm.current.classList.toggle('hidden');
+    content.current.classList.toggle('hidden');
 
-    editForm.focus();
+    editForm.current.focus();
   };
 
   const onEnterEditForm = async event => {
-    const content = event.target.previousSibling;
+    const index = event.target.dataset.turn;
+    const content = contentRefArr[index];
 
     if (event.key === 'Enter') {
       await updatePaymentMethod({
@@ -39,12 +48,12 @@ export default React.memo(function CardContainer(): React.ReactElement {
         color: event.target.dataset.color,
       });
 
+      event.target.classList.toggle('hidden');
+      content.current.classList.toggle('hidden');
       updatePayment({
         id: event.target.dataset.cardid,
         desc: event.target.value,
       });
-      event.target.classList.toggle('hidden');
-      content.classList.toggle('hidden');
     }
   };
 
@@ -69,7 +78,9 @@ export default React.memo(function CardContainer(): React.ReactElement {
           }}
         >
           <div className="card__title">{card.name}</div>
-          <div className="card__desc">{card.desc}</div>
+          <div className="card__desc" ref={contentRefArr[i]}>
+            {card.desc}
+          </div>
 
           <input
             className="desc__input hidden"
@@ -77,12 +88,15 @@ export default React.memo(function CardContainer(): React.ReactElement {
             data-cardid={card._id}
             data-name={card.name}
             data-color={card.color}
+            data-turn={i}
+            ref={editFormRefArr[i]}
           />
 
           <i
             className="fas fa-edit"
             data-cardid={card._id}
             onClick={onClickModify}
+            data-turn={i}
           />
           <i
             className="fas fa-trash-alt"
