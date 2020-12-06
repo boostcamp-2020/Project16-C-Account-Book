@@ -24,6 +24,10 @@ export const Schema = new mongoose.Schema({
   payment: { type: PaymentSchema, required: true },
 });
 
+Schema.methods.getObjectId = function (): string {
+  return this._id;
+};
+
 export const TransactionModel = mongoose.model<TransactionDoc>(
   'transactions',
   Schema,

@@ -24,8 +24,10 @@
     }
   }
   .txt {
+    fill: white;
     animation: twinkle 1.5s forwards;
     animation-iteration-count: 1;
+
     @keyframes twinkle {
       0% {
         opacity: 0;

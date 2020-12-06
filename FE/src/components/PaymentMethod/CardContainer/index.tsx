@@ -1,11 +1,15 @@
 import React from 'react';
 import { v4 } from 'uuid';
 
+import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+
 import './cardContainer.scss';
 
-export default React.memo(function CardContainer({
-  paymentMethods,
-}): React.ReactElement {
+export default React.memo(function CardContainer(): React.ReactElement {
+  const paymentMethods = useTransactionData(
+    store => store.accountBook.payments,
+  );
+
   return (
     <div className="card__container" data-overlay>
       {paymentMethods.map((card, i) => (

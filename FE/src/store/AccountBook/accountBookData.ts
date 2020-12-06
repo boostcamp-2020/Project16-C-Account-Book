@@ -7,7 +7,7 @@ export const createStore = () => {
       name: null,
       description: null,
       category: [],
-      payment: [],
+      payments: [],
       user: [],
       transactions: [],
     },
@@ -18,6 +18,10 @@ export const createStore = () => {
       const accountBook = await getTargetAccountBook(id);
 
       this.accountBook = accountBook.data;
+    },
+
+    addPaymentMethod(data: { name: string; desc: string; color: string }) {
+      this.accountBook.payments = [data, ...this.accountBook.payments];
     },
 
     filterTransaction(

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
+import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
@@ -15,7 +16,7 @@ export default function AddTemplate({
   const methodInput = useRef();
   const store = useContext(paymentContext);
   const addTemplateData = useRootData(store => store.addTemplateData);
-  const addPaymentMethod = useRootData(store => store.addPaymentMethod);
+  const addPaymentMethod = useTransactionData(store => store.addPaymentMethod);
   const updateAddTemplate = useRootData(store => store.updateAddTemplate);
 
   const onChangeNick = (event: React.ChangeEvent<HTMLInputElement>) => {

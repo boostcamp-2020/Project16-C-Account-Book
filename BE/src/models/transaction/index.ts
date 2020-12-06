@@ -1,6 +1,6 @@
-import { Transaction, TransactionModel } from './schema';
+import { TransactionModel } from './schema';
 
-const get = async (): Promise<Transaction[]> => {
+const get = async (): Promise<any> => {
   const transactions = await TransactionModel.find();
   return transactions;
 };

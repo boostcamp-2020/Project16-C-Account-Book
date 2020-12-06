@@ -51,16 +51,4 @@ const getDetail = async (ctx: Context): Promise<any> => {
   return accountBook;
 };
 
-const addTransaction = async (body: Context['body']): Promise<any> => {
-  const transactionInfo = {
-    content: body.content,
-    type: body.type,
-    category: body.category,
-    cost: body.cost,
-    date: body.date,
-    payment: body.payment,
-  };
-  await accountBookModel.addTransaction(body.accountBookId, transactionInfo);
-};
-
-export default { get, getDetail, post, patch, del, addTransaction };
+export default { get, getDetail, post, patch, del };

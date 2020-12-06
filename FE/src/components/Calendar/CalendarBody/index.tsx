@@ -42,7 +42,7 @@ export default function CalendarBody() {
     <>
       {tableInfo.map((item, horizon) => {
         return (
-          <tr>
+          <tr key={horizon}>
             {item.map((day, index) => {
               if (horizon === 0 && !startCount && index === firstDay.getDay()) {
                 startCount = 1;
@@ -61,7 +61,7 @@ export default function CalendarBody() {
                 <>
                   {markToday && markToday === countDay ? (
                     <td
-                      key={v4()}
+                      key={`day${countDay}`}
                       className={`day ${countDay}`}
                       data-date={countDay}
                     >
@@ -75,21 +75,19 @@ export default function CalendarBody() {
                             {CommaMaker(
                               YearMonthTransactions[String(countDay)].income,
                             )}
-                            원
                           </div>
                           <div className="spending__info" data-date={countDay}>
                             -
                             {CommaMaker(
                               YearMonthTransactions[String(countDay)].spending,
                             )}
-                            원
                           </div>
                         </>
                       )}
                     </td>
                   ) : (
                     <td
-                      key={v4()}
+                      key={`day${countDay}`}
                       className={`day ${countDay}`}
                       data-date={countDay}
                     >
@@ -101,14 +99,12 @@ export default function CalendarBody() {
                             {CommaMaker(
                               YearMonthTransactions[String(countDay)].income,
                             )}
-                            원
                           </div>
                           <div className="spending__info" data-date={countDay}>
                             -
                             {CommaMaker(
                               YearMonthTransactions[String(countDay)].spending,
                             )}
-                            원
                           </div>
                         </>
                       )}

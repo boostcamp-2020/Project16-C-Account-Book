@@ -34,7 +34,7 @@ export default function Calendar() {
           <table className="cal-table">
             <thead>
               <tr>
-                <th>SUN</th>
+                <th className="sunday">SUN</th>
                 <th>MON</th>
                 <th>TUE</th>
                 <th>WED</th>

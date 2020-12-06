@@ -17,7 +17,7 @@ export default function TableChart({ chartInfo }) {
             key={DateInfo.year + DateInfo.month + el.category}
           >
             <span className="stat__category">{el.category}</span>
-            <span className="stat__percent"> {Math.floor(el.percent)}%</span>
+            <span className="stat__percent"> {el.percent.toFixed(1)}%</span>
             <span className="stat__background">
               <span
                 className="stat__color"
