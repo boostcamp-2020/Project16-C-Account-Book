@@ -11,10 +11,11 @@ import AccountBookListPage from './pages/AccountBook';
 import CalendarPage from './pages/Calendar';
 import LoginPage from './pages/Login';
 import TransactionPage from './pages/Transaction';
+import ChartPage from './pages/Chart';
+import SettingPage from './pages/SettingPage';
 
 import GithubLoginProcess from './pages/Login/GithubLoginProcess';
 import NaverLoginProcess from './pages/Login/NaverLoginProcess';
-import ChartPage from './pages/Chart';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
               </Route>
               <Route exact path="/transaction" component={TransactionPage} />
               <Route exact path="/chart" component={ChartPage} />
+              <Route exact path="/setting" component={SettingPage} />
             </Switch>
           </Router>
         </PaymentProvider>
