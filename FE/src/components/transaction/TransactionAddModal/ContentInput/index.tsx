@@ -2,13 +2,13 @@ import React from 'react';
 
 import './index.scss';
 
-const MemoInput = () => {
+const ContentInput = ({ onContentChange }) => {
   return (
     <div className="item memo__input">
       <div className="indicator">메모</div>
-      <input type="text" name="memo" />
+      <input type="text" name="memo" onChange={onContentChange} />
     </div>
   );
 };
 
-export default MemoInput;
+export default ContentInput;
