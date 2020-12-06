@@ -34,7 +34,10 @@ export default function TransactionComponent(props) {
       )}
 
       {transactionAddModal && (
-        <TransactionAddModal setTransactionAddModal={setTransactionAddModal} />
+        <TransactionAddModal
+          setTransactionAddModal={setTransactionAddModal}
+          accountbookId={accountBookId.id}
+        />
       )}
     </div>
   );
