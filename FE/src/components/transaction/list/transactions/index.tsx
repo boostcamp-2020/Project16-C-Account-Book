@@ -29,7 +29,7 @@ const Transactions = ({
     console.log('filter');
 
     filterTransaction(selectedCategory, year, month + 1, selectedTypes);
-  }, [selectedCategory, year, month, selectedTypes]);
+  }, [transactions, selectedCategory, year, month, selectedTypes]);
 
   return (
     <>
