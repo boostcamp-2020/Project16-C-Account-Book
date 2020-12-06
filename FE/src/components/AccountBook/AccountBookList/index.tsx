@@ -8,7 +8,6 @@ import {
   deleteAccountBook,
 } from '../../../api/accoun-book-list';
 
-import { findSibling } from '../../../util/findSibling';
 import './accountBookList.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
@@ -22,52 +21,54 @@ export const AccountBookList = ({ datas, setDatas }) => {
     setDatas(accountBooks.data);
   };
 
+  const titleRef = [];
+  const descRef = [];
+  const titleEditRef = [];
+  const descEditRef = [];
+  datas.forEach(() => {
+    titleRef.push(React.createRef());
+    descRef.push(React.createRef());
+    titleEditRef.push(React.createRef());
+    descEditRef.push(React.createRef());
+  });
+
   const onClickModify = event => {
-    const title = findSibling(event.target, 'ac__title');
-    const desc = findSibling(event.target, 'ac__desc');
-    const titleEdit = findSibling(event.target, 'acbook__title__input');
-    const descEdit = findSibling(event.target, 'acbook__desc__input');
+    const index = event.target.dataset.turn;
 
-    titleEdit.value = title.textContent;
-    descEdit.value = desc.textContent;
+    titleEditRef[index].current.value = titleRef[index].current.textContent;
+    descEditRef[index].current.value = descRef[index].current.textContent;
 
-    title.classList.toggle('hidden');
-    desc.classList.toggle('hidden');
-    titleEdit.classList.toggle('hidden');
-    descEdit.classList.toggle('hidden');
-    titleEdit.focus();
+    titleRef[index].current.classList.toggle('hidden');
+    descRef[index].current.classList.toggle('hidden');
+    titleEditRef[index].current.classList.toggle('hidden');
+    descEditRef[index].current.classList.toggle('hidden');
+    titleEditRef[index].current.focus();
   };
 
   const onEnterEditForm = async event => {
-    const title = findSibling(event.target, 'ac__title');
-    const desc = findSibling(event.target, 'ac__desc');
-    const titleEdit = findSibling(event.target, 'acbook__title__input');
-    const descEdit = findSibling(event.target, 'acbook__desc__input');
-
+    const index = event.target.dataset.turn;
     if (event.key === 'Enter') {
       await updateAccountBook({
         accountBookId: event.target.dataset.acbookid,
-        name: titleEdit.value,
-        description: descEdit.value,
+        name: titleEditRef[index].current.value,
+        description: descEditRef[index].current.value,
       });
 
       const updatedAcBooks = datas.map(item => {
         if (item._id === event.target.dataset.acbookid) {
           item = {
             ...item,
-            name: titleEdit.value,
-            description: descEdit.value,
+            name: titleEditRef[index].current.value,
+            description: descEditRef[index].current.value,
           };
         }
         return item;
       });
-
-      console.log(updatedAcBooks);
+      titleRef[index].current.classList.toggle('hidden');
+      descRef[index].current.classList.toggle('hidden');
+      titleEditRef[index].current.classList.toggle('hidden');
+      descEditRef[index].current.classList.toggle('hidden');
       setDatas(() => updatedAcBooks);
-      title.classList.toggle('hidden');
-      desc.classList.toggle('hidden');
-      titleEdit.classList.toggle('hidden');
-      descEdit.classList.toggle('hidden');
     }
   };
 
@@ -103,27 +104,42 @@ export const AccountBookList = ({ datas, setDatas }) => {
           onClick={linkToDetail}
           style={{ animationDelay: `${index * 0.08}s` }}
         >
-          <div className="ac__title link" data-acbookid={data._id}>
+          <div
+            className="ac__title link"
+            data-acbookid={data._id}
+            data-turn={index}
+            ref={titleRef[index]}
+          >
             {data.name}
           </div>
-          <div className="ac__desc link" data-acbookid={data._id}>
+          <div
+            className="ac__desc link"
+            data-acbookid={data._id}
+            data-turn={index}
+            ref={descRef[index]}
+          >
             {data.description}
           </div>
 
           <input
             className="acbook__title__input hidden"
             data-acbookid={data._id}
+            data-turn={index}
             onKeyPress={onEnterEditForm}
+            ref={titleEditRef[index]}
           />
           <textarea
             className="acbook__desc__input hidden"
             data-acbookid={data._id}
+            data-turn={index}
             onKeyPress={onEnterEditForm}
+            ref={descEditRef[index]}
           />
 
           <i
             className="fas fa-edit"
             data-id={data._id}
+            data-turn={index}
             onClick={onClickModify}
           />
           <i
