@@ -46,5 +46,9 @@
     .payment__card__item:hover ~ .payment__card__item {
       transform: translateX(105px);
     }
+
+    .no__payment {
+      color: red;
+    }
   }
 }
