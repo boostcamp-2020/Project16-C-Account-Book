@@ -18,6 +18,7 @@ const TransactionsOfOneDay = ({
           payment={t.payment}
           cost={t.cost}
           type={t.type}
+          key={t._id}
         />
       ))}
     </div>
