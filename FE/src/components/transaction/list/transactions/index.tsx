@@ -13,24 +13,35 @@ const Transactions = ({
   selectedTypes: string[];
 }) => {
   // axios로 비동기 처리
-  const { transactions, filterTransaction } = useTransactionData(store => ({
-    transactions: store.filteredTransactions,
+  const {
+    filteredTransactions,
+    filterTransaction,
+    transactions,
+  } = useTransactionData(store => ({
+    transactions: store.accountBook.transactions,
+    filteredTransactions: store.filteredTransactions,
     filterTransaction: store.filterTransaction,
   }));
 
   const { year, month } = useRootData(store => store.nowCalendarInfo);
 
   useEffect(() => {
+    console.log('filter');
+
     filterTransaction(selectedCategory, year, month + 1, selectedTypes);
   }, [selectedCategory, year, month, selectedTypes]);
 
   return (
     <>
-      {Object.keys(transactions)
+      {Object.keys(filteredTransactions)
         .sort()
         .reverse()
         .map(day => (
-          <TransactionsOfOneDay date={day} transactions={transactions[day]} />
+          <TransactionsOfOneDay
+            date={day}
+            transactions={filteredTransactions[day]}
+            key={day}
+          />
         ))}
     </>
   );
