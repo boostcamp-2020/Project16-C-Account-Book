@@ -1,0 +1,50 @@
+.payment__input {
+  .payment__card__container {
+    overflow-x: scroll;
+    display: flex;
+    padding: 15px;
+
+    .payment__card__item {
+      transition: 0.2s;
+
+      .payment__card__title {
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .payment__card__view {
+        min-width: 200px;
+        height: 128px;
+        border-radius: 16px;
+        box-shadow: 0rem 0px 3px 1px #bdbdbd;
+        background-color: white;
+        border: 1px solid;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      input[type='radio'] {
+        display: none;
+      }
+
+      input[type='radio']:checked + .payment__card__view {
+        border: 1px solid #23a3a7;
+        background: #23a3a7;
+        color: #fff;
+      }
+    }
+
+    .payment__card__item:not(:first-child) {
+      margin-left: -100px;
+    }
+
+    .payment__card__item:hover {
+      transform: translateY(-10px);
+    }
+
+    .payment__card__item:hover ~ .payment__card__item {
+      transform: translateX(105px);
+    }
+  }
+}
