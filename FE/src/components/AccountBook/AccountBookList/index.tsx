@@ -71,7 +71,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
   };
 
   const linkToDetail = async event => {
-    if (event.target.className === 'acbook') {
+    if (event.target.classList.contains('link')) {
       history.push({
         pathname: '/calendar',
         state: {
@@ -97,15 +97,15 @@ export const AccountBookList = ({ datas, setDatas }) => {
       {datas.map((data, index) => (
         <div
           key={data._id}
-          className="acbook"
+          className="acbook link"
           data-acbookid={data._id}
           onClick={linkToDetail}
           style={{ animationDelay: `${index * 0.08}s` }}
         >
-          <div className="ac__title" data-acbookid={data._id}>
+          <div className="ac__title link" data-acbookid={data._id}>
             {data.name}
           </div>
-          <div className="ac__desc" data-acbookid={data._id}>
+          <div className="ac__desc link" data-acbookid={data._id}>
             {data.description}
           </div>
 
