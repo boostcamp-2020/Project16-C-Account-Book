@@ -57,6 +57,10 @@ export default function LineChart() {
         legend: {
           display: true,
           position: 'right',
+          labels: {
+            fontSize: 12,
+            fontColor: 'white',
+          },
         },
         maintainAspectRatio: false,
         scales: {
@@ -64,6 +68,9 @@ export default function LineChart() {
             {
               ticks: {
                 min: 0,
+              },
+              gridLines: {
+                color: 'rgba(255,255,255,0.2)',
               },
             },
           ],
