@@ -7,10 +7,10 @@
     margin-right: 20px;
   }
 
-  input[type='radio'] + div {
+  input[type='radio'] + span {
     background: none;
     border: 1px solid #dfdfdf;
-    padding: 0px 10px;
+    padding: 10px 10px;
     text-align: center;
     height: 35px;
     line-height: 33px;
@@ -18,12 +18,12 @@
     cursor: pointer;
   }
 
-  input[type='radio'] + div:hover {
+  input[type='radio'] + span:hover {
     background: #5aa4a7;
     color: #fff;
   }
 
-  input[type='radio']:checked + div {
+  input[type='radio']:checked + span {
     border: 1px solid #23a3a7;
     background: #23a3a7;
     color: #fff;
@@ -32,4 +32,9 @@
   .no__category {
     color: red;
   }
+}
+
+#category__input__container {
+  flex-wrap: wrap;
+  line-height: 55px;
 }

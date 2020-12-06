@@ -4,28 +4,27 @@ import './index.scss';
 
 const CategoryInput = ({
   categoryPool,
-  category,
   onCategoryChange,
 }: {
   categoryPool: Array<any>;
-  category: string;
   onCategoryChange: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
 }) => {
   return (
     <div className="item category__input">
       <div className="indicator">카테고리</div>
 
-      <div className="row">
+      <div className="row" id="category__input__container">
         {categoryPool ? (
           categoryPool.map(({ name, icon }) => (
             <label key={name}>
               <input
                 type="radio"
                 name="category"
-                value={name}
+                data-name={name}
+                data-icon={icon}
                 onClick={onCategoryChange}
               />
-              <div>쇼핑</div>
+              <span>{name}</span>
             </label>
           ))
         ) : (
