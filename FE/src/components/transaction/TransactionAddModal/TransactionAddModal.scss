@@ -70,5 +70,31 @@
       outline: none;
       border-color: #5aa4a7;
     }
+
+    .transaction__button__container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .transaction__submit__button,
+    .transaction__cancel__button {
+      flex: 1;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 15px;
+      color: white;
+      margin: 0 5px;
+      font-weight: bold;
+      border: none;
+    }
+
+    .transaction__submit__button {
+      background-color: rgb(109, 214, 49);
+    }
+
+    .transaction__cancel__button {
+      background-color: rgb(253, 45, 45);
+    }
   }
 }
