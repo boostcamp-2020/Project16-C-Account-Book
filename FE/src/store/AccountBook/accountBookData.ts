@@ -6,9 +6,9 @@ export const createStore = () => {
       _id: null,
       name: null,
       description: null,
-      category: [],
+      categories: [],
       payments: [],
-      user: [],
+      users: [],
       transactions: [],
     },
 
