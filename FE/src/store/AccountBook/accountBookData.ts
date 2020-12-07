@@ -21,6 +21,14 @@ export const createStore = () => {
       ];
     },
 
+    updateTransaction(transaction) {
+      const rest = this.accountBook.transactions.filter(
+        item => item._id !== transaction._id,
+      );
+
+      this.accountBook.transactions = [...rest, transaction];
+    },
+
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
 
