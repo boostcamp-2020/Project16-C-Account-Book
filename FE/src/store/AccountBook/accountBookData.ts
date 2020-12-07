@@ -8,7 +8,7 @@ export const createStore = () => {
       description: null,
       categories: [],
       payments: [],
-      user: [],
+      users: [],
       transactions: [],
     },
 
