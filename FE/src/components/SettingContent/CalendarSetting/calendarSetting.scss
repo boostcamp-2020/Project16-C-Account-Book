@@ -13,7 +13,7 @@
     position: relative;
     width: 70%;
     height: 40%;
-    border: 1px solid #222;
+    border: 1px solid #979797;
     border-radius: 6px;
     background-color: transparent;
 
@@ -84,5 +84,21 @@
         box-shadow: $selectedBoxShadow;
       }
     }
+  }
+}
+.save__modal__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // background-color: rgba(0, 0, 0, 0.9);
+  .save__modal__content {
+    width: 50%;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #979797;
+    color: white;
   }
 }
