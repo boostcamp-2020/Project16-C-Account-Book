@@ -8,7 +8,7 @@ export const createStore = () => {
       description: null,
       categories: [],
       payments: [],
-      user: [],
+      users: [],
       transactions: [],
     },
 
@@ -23,12 +23,29 @@ export const createStore = () => {
 
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
-
+      accountBook.data.payments.reverse();
       this.accountBook = accountBook.data;
     },
 
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
       this.accountBook.payments = [data, ...this.accountBook.payments];
+    },
+
+    updatePaymentMethod(data: { id: string; desc: string }) {
+      const updatedPayments = [...this.accountBook.payments];
+      updatedPayments = updatedPayments.map(item => {
+        if (item._id === data.id) {
+          item = { ...item, desc: data.desc };
+        }
+        return item;
+      });
+      this.accountBook.payments = updatedPayments;
+    },
+
+    deletePaymentMethod(id) {
+      this.accountBook.payments = this.accountBook.payments.filter(
+        payment => payment._id !== id,
+      );
     },
 
     filterTransaction(
@@ -58,8 +75,6 @@ export const createStore = () => {
         acc[curr.date] = [...(acc[curr.date] || []), curr];
         return acc;
       }, {});
-
-      console.log(transactions);
 
       this.filteredTransactions = transactionsGroupByDate;
     },

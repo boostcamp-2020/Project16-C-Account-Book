@@ -1,7 +1,7 @@
 import CategoryModel from '@models/category';
 import { User } from '@interfaces/auth';
 import AccountBook from '@interfaces/accountbook';
-import { AccountBookModel } from './schema';
+import { AccountBookDoc, AccountBookModel } from './schema';
 
 const get = async ({
   userid,
@@ -9,7 +9,7 @@ const get = async ({
 }: {
   userid: string;
   social: string;
-}): Promise<AccountBook[]> => {
+}): Promise<AccountBookDoc[]> => {
   const accountBooks = await AccountBookModel.find({
     'users.userid': userid,
     'users.social': social,
@@ -32,10 +32,11 @@ const create = async ({
   name: string;
   description: string;
   user: User;
-}): Promise<AccountBook> => {
+}): Promise<any> => {
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
+    startday: 0,
     description,
     users: [user],
     categories: [...defaultCategory],
@@ -66,6 +67,22 @@ const update = async (
   return !!updateResult.nModified;
 };
 
+const updateStartday = async (
+  _id: string,
+  {
+    startday,
+  }: {
+    startday: string;
+  },
+): Promise<any> => {
+  const updateData = {
+    startday,
+  };
+
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  return !!updateResult.nModified;
+};
+
 const del = async (_id: string): Promise<any> => {
   const deleteResult = await AccountBookModel.deleteOne({ _id });
   return !!deleteResult.deletedCount;
@@ -78,7 +95,6 @@ const addTransaction = async (
   const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
     const curTransactions = curAccountBook.transactions;
-    curTransactions.push(transaction);
     const updateResult = await AccountBookModel.update(
       { _id: accountBookId },
       { transactions: [...curTransactions, transaction] },
@@ -189,6 +205,64 @@ const deletePaymentMethod = async (
       { _id: accountBookId },
       { payments: curPayments },
     );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
+const addCategory = async (
+  accountBookId: string,
+  categoryInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    curCategory.push(categoryInfo);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
+    if (updateResult.nModified) {
+      return curCategory[curCategory.length - 1];
+    }
+    return false;
+  }
+  return false;
+};
+
+const updateCategory = async (
+  accountBookId: string,
+  categoryInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    const index = curCategory.map(value => value._id).indexOf(categoryInfo._id);
+    curCategory[index] = categoryInfo;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
+    if (updateResult) return true;
+    return false;
+  }
+  return false;
+};
+
+const deleteCategory = async (
+  accountBookId: string,
+  categoryId: string,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    const index = curCategory.map(value => value._id).indexOf(categoryId);
+    curCategory.splice(index, 1);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
     if (updateResult) return true;
     return false;
   }
@@ -200,6 +274,7 @@ export default {
   getDetail,
   create,
   update,
+  updateStartday,
   del,
   addTransaction,
   updateTransaction,
@@ -207,4 +282,7 @@ export default {
   addPaymentMethod,
   updatePaymentMethod,
   deletePaymentMethod,
+  addCategory,
+  updateCategory,
+  deleteCategory,
 };

@@ -30,10 +30,14 @@
     border: 1px solid #979797;
     color: #979797;
 
-    animation: detailFormShow 1s;
+    animation: detailFormShow 1s ease;
     @keyframes detailFormShow {
       from {
+        opacity: 0;
         transform: translateY(500px);
+      }
+      to {
+        opacity: 1;
       }
     }
 
@@ -62,12 +66,15 @@
         background-color: #333;
         color: #979797;
         position: relative;
-        animation: specificDataShow 1s;
+        animation: specificDataShow 1s backwards;
 
         @keyframes specificDataShow {
           from {
             opacity: 0;
             transform: translateX(-100px);
+          }
+          to {
+            opacity: 1;
           }
         }
         .specific__content {

@@ -10,6 +10,7 @@ td {
   .income__info {
     font-size: 0.8em;
     color: $income-color;
+    // padding-top: 1em;
   }
   .spending__info {
     font-size: 0.8em;
@@ -21,6 +22,7 @@ td {
   background-color: #222;
   border-radius: 6px;
   position: relative;
+
   cursor: pointer;
   &:hover {
     animation: dateHover 1s;

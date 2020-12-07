@@ -28,6 +28,14 @@ const update = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
+const updateStartday = async (ctx: Context): Promise<Context['body']> => {
+  const updateResult = await service.patchStartday(ctx);
+  const res = response(200, updateResult.message, updateResult.data);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
+};
+
 const del = async (ctx: Context): Promise<Context['body']> => {
   const deleteResult = await service.del(ctx);
   const res = response(200, 'success', deleteResult);
@@ -44,4 +52,4 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
   ctx.body = res;
   return ctx.body;
 };
-export default { get, post, update, del, getDetail };
+export default { get, post, update, updateStartday, del, getDetail };

@@ -39,6 +39,29 @@ const patch = async (ctx: Context): Promise<any> => {
   };
 };
 
+const patchStartday = async (ctx: Context): Promise<any> => {
+  const { accountbookid } = ctx.params;
+  const updateInfo = {
+    startday: ctx.request.body.startday,
+  };
+  const updateResult = await accountBookModel.updateStartday(
+    accountbookid,
+    updateInfo,
+  );
+  if (updateResult)
+    return {
+      message: 'update',
+      data: {
+        _id: accountbookid,
+        startday: updateInfo.startday,
+      },
+    };
+  return {
+    message: 'not update',
+    data: {},
+  };
+};
+
 const del = async (ctx: Context): Promise<any> => {
   const deleteResult = await accountBookModel.del(ctx.params.accountbookid);
   return deleteResult;
@@ -51,4 +74,4 @@ const getDetail = async (ctx: Context): Promise<any> => {
   return accountBook;
 };
 
-export default { get, getDetail, post, patch, del };
+export default { get, getDetail, post, patch, patchStartday, del };

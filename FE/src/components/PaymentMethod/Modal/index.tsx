@@ -23,7 +23,7 @@ export default function PaymentModal({
   return (
     <>
       <div className="modal__wrapper" data-overlay onClick={onClickOverlay}>
-        <span className="title">Payment Method</span>
+        <span className="payment__title">Payment Method</span>
         <button type="button" onClick={onClickNew} className="new__button">
           Add
         </button>

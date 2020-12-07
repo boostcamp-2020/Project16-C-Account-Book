@@ -1,27 +1,28 @@
-@use '../../../styles/values' as *;
-@use '../../../styles/mixins' as *;
+@use '../../styles/values' as *;
+@use '../../styles/mixins' as *;
 
-.menubar__header {
+.settingbar__header {
   background-color: $black;
   width: 100%;
   height: 20%;
   padding: 2.5em 0;
   z-index: 2;
-  .menubar__buttons {
+  overflow-x: hidden;
+  .settingbar__buttons {
     display: flex;
     justify-content: center;
     gap: 3em;
     position: relative;
 
-    .back__navBtn {
+    .settingbar__back__navBtn {
       @include buttonDefaultSetting;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 1em;
+      left: 0.5em;
       text-align: center;
       line-height: 1.5em;
-      width: 3.5em;
+      width: 10em;
       height: 1.5em;
       background-color: transparent;
       display: flex;
@@ -33,27 +34,8 @@
       text-shadow: $selectedTextShadow;
       color: white;
     }
-    .setting__navBtn {
-      @include buttonDefaultSetting;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 1.5em;
-      text-align: center;
-      line-height: 1.5em;
-      width: 3.5em;
-      height: 1.5em;
-      background-color: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5em;
-      font-size: 1.5em;
-      box-shadow: $selectedBoxShadow;
-      text-shadow: $selectedTextShadow;
-      color: white;
-    }
-    .menubar__navBtn {
+
+    .settingbar__navBtn {
       @include buttonDefaultSetting;
       text-align: center;
       line-height: 2.5em;
@@ -76,7 +58,7 @@
     }
   }
 
-  .menubar__ctrBox {
+  .settingbar__ctrBox {
     margin-top: 1.5em;
     font-size: 20px;
     display: flex;
