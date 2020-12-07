@@ -7,12 +7,19 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
     setSaveModal(false);
   };
 
+  const onClickOverlay = event => {
+    console.log(event.target.classList.contains('save__modal__overlay'));
+    if (event.target.classList.contains('save__modal__overlay')) {
+      setSaveModal(false);
+    }
+  };
+
   const onClickSaveModalCancel = () => {
     setSaveModal(false);
   };
 
   return (
-    <div className="save__modal__overlay" onClick={() => setSaveModal(false)}>
+    <div className="save__modal__overlay" onClick={onClickOverlay}>
       <div className="save__modal__content">
         <div className="save__modal__title">변경사항을 저장 하시겠습니까?</div>
         <button className="save__ok__btn" onClick={onClickSaveModalOk}>
