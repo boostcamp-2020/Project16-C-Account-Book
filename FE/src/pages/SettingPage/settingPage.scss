@@ -1,3 +1,10 @@
 .setting__page__wrapper {
-  color: white;
+  animation: showSettingPage 1s ease;
+  @keyframes showSettingPage {
+    from {
+      opacity: 0;
+
+      transform: translateX(100%);
+    }
+  }
 }
