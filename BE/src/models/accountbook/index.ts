@@ -78,7 +78,6 @@ const addTransaction = async (
   const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
     const curTransactions = curAccountBook.transactions;
-    curTransactions.push(transaction);
     const updateResult = await AccountBookModel.update(
       { _id: accountBookId },
       { transactions: [...curTransactions, transaction] },
