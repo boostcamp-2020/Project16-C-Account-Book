@@ -11,7 +11,15 @@ import {
 import { UserDoc, Schema as UserSchema } from '@models/user/schema';
 import AccountBook from '@interfaces/accountbook';
 
-export interface AccountBookDoc extends AccountBook, mongoose.Document {}
+export interface AccountBookDoc extends AccountBook, mongoose.Document {
+  name: string;
+  startday: string;
+  description: string;
+  categories: CategoryDoc[];
+  payments: PaymentDoc[];
+  users: UserDoc[];
+  transactions: TransactionDoc[];
+}
 
 interface AccountBookMod extends mongoose.Model<AccountBookDoc> {
   transactions(): Promise<any>;
