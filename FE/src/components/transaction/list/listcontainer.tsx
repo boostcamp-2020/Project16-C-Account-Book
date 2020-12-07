@@ -10,11 +10,16 @@ const ListContainer = () => {
   const [selectedCategory, selectCategory] = useState('all');
   const [selectedTypes, selectType] = useState(['수입', '지출']);
 
-  const setTransactionAddModalVisible = useTransactionAddModalData(
-    store => store.setTransactionAddModalVisible,
-  );
+  const {
+    setTransactionAddModalVisible,
+    initInput,
+  } = useTransactionAddModalData(store => ({
+    setTransactionAddModalVisible: store.setTransactionAddModalVisible,
+    initInput: store.initInput,
+  }));
 
   const onAddButtonClicked = () => {
+    initInput();
     setTransactionAddModalVisible(true);
   };
 
