@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import './settingBar.scss';
 
-export default function SettingBar(props) {
+export default function SettingBar({ settingType, setSettingType }) {
   const history = useHistory();
   const id = history.location.state;
 
