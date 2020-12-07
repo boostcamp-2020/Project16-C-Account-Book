@@ -36,6 +36,7 @@ const create = async ({
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
+    startday: 0,
     description,
     users: [user],
     categories: [...defaultCategory],
@@ -51,14 +52,17 @@ const update = async (
   _id: string,
   {
     name,
+    startday,
     description,
   }: {
     name: string;
+    startday: number;
     description: string;
   },
 ): Promise<any> => {
   const updateData = {
     name,
+    startday,
     description,
   };
 
