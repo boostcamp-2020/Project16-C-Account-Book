@@ -13,11 +13,14 @@ const TransactionsOfOneDay = ({
       <div className={styles.daybar}>{date}일</div>
       {transactions.map(t => (
         <TransactionItem
+          date={date}
           category={t.category}
           content={t.content}
           payment={t.payment}
           cost={t.cost}
           type={t.type}
+          id={t._id}
+          key={t._id}
         />
       ))}
     </div>

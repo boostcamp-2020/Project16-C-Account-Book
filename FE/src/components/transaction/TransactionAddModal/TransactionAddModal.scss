@@ -1,0 +1,115 @@
+.transaction__modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.452);
+  cursor: pointer;
+
+  .form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 700px;
+    height: 80%;
+    background-color: white;
+    z-index: 2;
+    border-radius: 30px;
+    box-shadow: 0 0 6px 1px #1c1c1c;
+    cursor: default;
+    overflow-y: scroll;
+
+    h2 {
+      align-items: center;
+      width: 100%;
+      text-align: center;
+      padding-bottom: 10px;
+      box-shadow: 0px 2px 2px 0px grey;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 30px 60px 30px 60px;
+    }
+
+    .row {
+      display: flex;
+      flex: 1;
+    }
+
+    .item {
+      width: 100%;
+      margin-bottom: 10px;
+
+      .indicator {
+        font-size: 15px;
+        color: rgb(71, 71, 71);
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+    }
+
+    input[type='number'],
+    input[type='text'],
+    textarea {
+      width: 100%;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #5aa4a7;
+    }
+
+    .transaction__button__container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .transaction__submit__button,
+    .transaction__cancel__button {
+      flex: 1;
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 15px;
+      color: white;
+      margin: 0 5px;
+      font-weight: bold;
+      border: none;
+    }
+
+    .transaction__submit__button {
+      background-color: rgb(109, 214, 49);
+    }
+
+    .transaction__cancel__button {
+      background-color: rgb(253, 45, 45);
+    }
+
+    .message__input__button,
+    .message__input__back {
+      position: absolute;
+      top: 23px;
+      left: 19px;
+      border: none;
+      background-color: #fff0;
+      color: #0d7ee1;
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+}

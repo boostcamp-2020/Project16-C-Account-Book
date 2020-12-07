@@ -14,6 +14,13 @@ export const createStore = () => {
 
     filteredTransactions: {},
 
+    addTransaction(transaction) {
+      this.accountBook.transactions = [
+        ...this.accountBook.transactions,
+        transaction,
+      ];
+    },
+
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
       accountBook.data.payments.reverse();
@@ -77,7 +84,7 @@ export const createStore = () => {
     },
 
     getTransactionsByYearMonth(year: number, month: number) {
-      const yearMonthDatas = this.accountBook.transactions.filter(
+      const yearMonthDatas = this.accountBook.transactions?.filter(
         item =>
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
