@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
@@ -10,9 +10,7 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
     setInput: store.setInput,
   }));
 
-  const onCategoryChange = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
+  const onCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetElement = e.target as HTMLInputElement;
     const newCategory = {
       name: targetElement.dataset.name,
@@ -34,7 +32,8 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
                 name="category"
                 data-name={name}
                 data-icon={icon}
-                onClick={onCategoryChange}
+                onChange={onCategoryChange}
+                checked={name === input.category.name}
               />
               <span>{name}</span>
             </label>
