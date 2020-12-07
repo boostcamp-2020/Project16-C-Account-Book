@@ -4,6 +4,7 @@ import { Context } from 'koa';
 const post = async (ctx: Context): Promise<any> => {
   const categoryInfo = {
     name: ctx.request.body.name,
+    type: ctx.request.body.type,
     icon: ctx.request.body.icon,
   };
   const category = await accountBookModel.addCategory(
@@ -26,6 +27,7 @@ const patch = async (ctx: Context): Promise<any> => {
   const categoryInfo = {
     _id: ctx.params.categoryid,
     name: ctx.request.body.name,
+    type: ctx.request.body.type,
     icon: ctx.request.body.icon,
   };
   const updateResult = await accountBookModel.updateCategory(
