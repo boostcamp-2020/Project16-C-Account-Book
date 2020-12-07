@@ -12,6 +12,11 @@ export const createTransaction = async (accountbookId, transaction) => {
   return res;
 };
 
-export const updateTransaction = () => {};
+export const updateTransaction = async (accountbookId, transaction) => {
+  const url = `${process.env.SERVER_URL}/api/accountbook/${accountbookId}/transaction/${transaction._id}`;
+  const res = await updateFetch(url, transaction);
+
+  return res;
+};
 
 export const deleteTransaction = () => {};
