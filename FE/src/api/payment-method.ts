@@ -1,6 +1,6 @@
 import { postFetch, updateFetch, deleteFetch } from '../service/fetch';
 
-export const postPaymentMethod = ({ accountBookId, name, desc, color }) => {
+export const createPaymentMethod = ({ accountBookId, name, desc, color }) => {
   const data = postFetch(
     `${process.env.SERVER_URL}/api/accountbook/${accountBookId}/payment`,
     {
@@ -14,14 +14,14 @@ export const postPaymentMethod = ({ accountBookId, name, desc, color }) => {
 };
 
 export const updatePaymentMethod = ({
-  accountBookdId,
+  accountBookId,
   paymentId,
   name,
   desc,
   color,
 }) => {
   const res = updateFetch(
-    `${process.env.SERVER_URL}/api/accountbook/${accountBookdId}/payment/${paymentId}`,
+    `${process.env.SERVER_URL}/api/accountbook/${accountBookId}/payment/${paymentId}`,
     {
       name,
       desc,
