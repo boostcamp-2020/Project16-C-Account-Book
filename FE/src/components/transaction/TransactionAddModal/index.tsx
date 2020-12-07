@@ -38,6 +38,7 @@ const TransactionAddModal = ({
   const [payment, setPayment] = useState({});
   const [price, setPrice] = useState(0);
   const [content, setContent] = useState('');
+  const [messageInputVisible, setMessageInputVisible] = useState(false);
 
   const closeModal = () => {
     setTransactionAddModal(false);
@@ -45,37 +46,6 @@ const TransactionAddModal = ({
 
   const onOverLayClicked = (e: Event) => {
     if (e.target === e.currentTarget) setTransactionAddModal(false);
-  };
-
-  const onCategoryChange = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
-    const targetElement = e.target as HTMLInputElement;
-    const newCategory = {
-      name: targetElement.dataset.name,
-      icon: targetElement.dataset.icon,
-    };
-    setCategory(newCategory);
-  };
-
-  const onPaymentChange = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
-    const targetElement = e.target as HTMLInputElement;
-    const newPayment = {
-      name: targetElement.dataset.name,
-      description: targetElement.dataset.description,
-    };
-    console.log(newPayment);
-
-    setPayment(newPayment);
-  };
-
-  const onPriceChange = (e: Event) => {
-    if (e.target) {
-      const targetElement = e.target as HTMLInputElement;
-      setPrice(+targetElement.value);
-    }
   };
 
   const onContentChange = (e: Event) => {
@@ -87,7 +57,9 @@ const TransactionAddModal = ({
 
   const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const date = `${year}-${month + 1}-${day}`;
+    const date = `${year}-${(month + 1)
+      .toString()
+      .padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     const newTransaction = {
       date,
       type: '지출',
@@ -114,28 +86,41 @@ const TransactionAddModal = ({
     <div className="transaction__modal" onClick={onOverLayClicked}>
       <div className="form__container">
         <h2>거래내역 추가</h2>
-        <form onSubmit={onSubmitClicked}>
-          <DateInput
-            {...{ year, month, today, day, setYear, setMonth, setDay }}
-          />
-          <CategoryInput {...{ categoryPool, category, onCategoryChange }} />
-          <PaymentInput {...{ paymentPool, onPaymentChange }} />
-          <PriceInput {...{ onPriceChange }} />
-          <ContentInput {...{ onContentChange }} />
-          <MessageInput />
-
-          <div className="transaction__button__container">
-            <button type="submit" className="transaction__submit__button">
-              확인
+        {messageInputVisible ? (
+          <>
+            <button type="button" className="message__input__button">
+              메세지로 추가
             </button>
-            <input
-              type="reset"
-              className="transaction__cancel__button"
-              onClick={closeModal}
-              value="취소"
-            />
-          </div>
-        </form>
+            <form onSubmit={onSubmitClicked}>
+              <DateInput
+                {...{ year, month, today, day, setYear, setMonth, setDay }}
+              />
+              <CategoryInput {...{ categoryPool, setCategory }} />
+              <PaymentInput {...{ paymentPool, setPayment }} />
+              <PriceInput {...{ setPrice }} />
+              <ContentInput {...{ onContentChange }} />
+
+              <div className="transaction__button__container">
+                <button type="submit" className="transaction__submit__button">
+                  확인
+                </button>
+                <input
+                  type="reset"
+                  className="transaction__cancel__button"
+                  onClick={closeModal}
+                  value="취소"
+                />
+              </div>
+            </form>
+          </>
+        ) : (
+          <>
+            <button type="button" className="message__input__back">
+              뒤로가기
+            </button>
+            <MessageInput />
+          </>
+        )}
       </div>
     </div>
   );

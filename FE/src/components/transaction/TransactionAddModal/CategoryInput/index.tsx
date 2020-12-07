@@ -4,11 +4,22 @@ import './index.scss';
 
 const CategoryInput = ({
   categoryPool,
-  onCategoryChange,
+  setCategory,
 }: {
   categoryPool: Array<any>;
-  onCategoryChange: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+  setCategory: (value: any) => void;
 }) => {
+  const onCategoryChange = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+  ) => {
+    const targetElement = e.target as HTMLInputElement;
+    const newCategory = {
+      name: targetElement.dataset.name,
+      icon: targetElement.dataset.icon,
+    };
+    setCategory(newCategory);
+  };
+
   return (
     <div className="item category__input">
       <div className="indicator">카테고리</div>

@@ -2,7 +2,19 @@ import React from 'react';
 
 import './index.scss';
 
-const PaymentInput = ({ paymentPool, onPaymentChange }) => {
+const PaymentInput = ({ paymentPool, setPayment }) => {
+  const onPaymentChange = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+  ) => {
+    const targetElement = e.target as HTMLInputElement;
+    const newPayment = {
+      name: targetElement.dataset.name,
+      description: targetElement.dataset.description,
+    };
+
+    setPayment(newPayment);
+  };
+
   return (
     <div className="item payment__input">
       <div className="indicator">결제수단</div>

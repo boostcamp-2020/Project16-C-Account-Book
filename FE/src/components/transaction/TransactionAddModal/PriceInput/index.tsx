@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import './index.scss';
 
-const PriceInput = ({ onPriceChange }) => {
+const PriceInput = ({ setPrice }) => {
+  const onPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target) {
+      const targetElement = e.target as HTMLInputElement;
+      setPrice(+targetElement.value);
+    }
+  };
   return (
     <div className="item price__input">
       <div className="indicator">금액</div>
