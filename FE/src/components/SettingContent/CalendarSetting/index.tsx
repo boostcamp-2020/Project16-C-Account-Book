@@ -37,7 +37,7 @@ export default function CalendarSetting({
         <div className="select__startday">
           {weeks.map(day => {
             return (
-              <label>
+              <label key={day}>
                 {day}
                 <input
                   type="radio"
@@ -50,9 +50,13 @@ export default function CalendarSetting({
             );
           })}
         </div>
-        <div className="start__day__title">
-          <CalendarHeader startDay={startDay} />
-        </div>
+        <table className="start__day__title">
+          <thead>
+            <tr>
+              <CalendarHeader startDay={startDay} />
+            </tr>
+          </thead>
+        </table>
         <button className="calendar__setting__save" onClick={onClickSaveBtn}>
           Save
         </button>

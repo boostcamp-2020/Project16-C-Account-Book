@@ -8,7 +8,6 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
   };
 
   const onClickOverlay = event => {
-    console.log(event.target.classList.contains('save__modal__overlay'));
     if (event.target.classList.contains('save__modal__overlay')) {
       setSaveModal(false);
     }
