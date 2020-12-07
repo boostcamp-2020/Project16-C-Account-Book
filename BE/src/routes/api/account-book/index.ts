@@ -12,6 +12,7 @@ const router = new Router();
 router.get('/', controller.get);
 router.post('/', controller.post);
 router.patch('/:accountbookid', controller.update);
+router.patch('/:accountbookid/startday', controller.updateStartday);
 router.delete('/:accountbookid', controller.del);
 
 // GET accountbook detail
