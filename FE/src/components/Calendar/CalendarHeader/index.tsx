@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
-
-export default function CalendarHeader(props) {
-  const startDay = useTransactionData(store => store.accountBook.startday);
+export default function CalendarHeader({ startDay }) {
   return (
     <>
       {startDay === 'SUN' && (
