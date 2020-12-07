@@ -3,7 +3,10 @@ import service from '@services/transaction';
 import { response } from '@utils/response';
 
 const exportCSV = async (ctx: Context): Promise<Context['body']> => {
-  ctx.body = `/GET ${ctx.url}`;
+  const csv = await service.transactionCsv(ctx);
+  const res = response(200, csv.message, csv.data);
+  ctx.body = res;
+  // ctx.body = `/GET ${ctx.url}`;
   return ctx.body;
 };
 

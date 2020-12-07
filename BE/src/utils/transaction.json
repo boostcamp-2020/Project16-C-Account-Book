@@ -1,0 +1,47 @@
+[
+  {
+    "content": "QYek",
+    "type": "지출",
+    "cost": 22633,
+    "date": "2020-12-28",
+    "category": {
+      "name": "용돈",
+      "icon": 2,
+      "type": "지출"
+    },
+    "payment": {
+      "name": "Kakao",
+      "color": "hsla(40, 100%, 50%, 0.93)"
+    }
+  },
+  {
+    "content": "XCgZLnnNh",
+    "type": "지출",
+    "cost": 63127,
+    "date": "2020-12-4",
+    "category": {
+      "name": "미분류",
+      "icon": 10,
+      "type": "지출"
+    },
+    "payment": {
+      "name": "Hyundai",
+      "color": "hsla(280, 100%, 50%, 0.93)"
+    }
+  },
+  {
+    "content": "EASQAiXMsTu",
+    "type": "지출",
+    "cost": 29606,
+    "date": "2020-12-18",
+    "category": {
+      "name": "식비",
+      "icon": 4,
+      "type": "지출"
+    },
+    "payment": {
+      "name": "SC 제일은행",
+      "color": "hsla(80, 100%, 50%, 0.93)"
+    }
+  }
+]
