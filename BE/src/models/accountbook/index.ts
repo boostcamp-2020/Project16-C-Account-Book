@@ -36,6 +36,7 @@ const create = async ({
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
+    startday: 0,
     description,
     users: [user],
     categories: [...defaultCategory],
@@ -51,14 +52,17 @@ const update = async (
   _id: string,
   {
     name,
+    startday,
     description,
   }: {
     name: string;
+    startday: number;
     description: string;
   },
 ): Promise<any> => {
   const updateData = {
     name,
+    startday,
     description,
   };
 
@@ -78,7 +82,6 @@ const addTransaction = async (
   const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
     const curTransactions = curAccountBook.transactions;
-    curTransactions.push(transaction);
     const updateResult = await AccountBookModel.update(
       { _id: accountBookId },
       { transactions: [...curTransactions, transaction] },
@@ -189,6 +192,64 @@ const deletePaymentMethod = async (
       { _id: accountBookId },
       { payments: curPayments },
     );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
+const addCategory = async (
+  accountBookId: string,
+  categoryInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    curCategory.push(categoryInfo);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
+    if (updateResult.nModified) {
+      return curCategory[curCategory.length - 1];
+    }
+    return false;
+  }
+  return false;
+};
+
+const updateCategory = async (
+  accountBookId: string,
+  categoryInfo: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    const index = curCategory.map(value => value._id).indexOf(categoryInfo._id);
+    curCategory[index] = categoryInfo;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
+    if (updateResult) return true;
+    return false;
+  }
+  return false;
+};
+
+const deleteCategory = async (
+  accountBookId: string,
+  categoryId: string,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curCategory = curAccountBook.categories;
+    const index = curCategory.map(value => value._id).indexOf(categoryId);
+    curCategory.splice(index, 1);
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { categories: curCategory },
+    );
     if (updateResult) return true;
     return false;
   }
@@ -207,4 +268,7 @@ export default {
   addPaymentMethod,
   updatePaymentMethod,
   deletePaymentMethod,
+  addCategory,
+  updateCategory,
+  deleteCategory,
 };

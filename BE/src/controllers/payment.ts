@@ -1,6 +1,6 @@
 import { response } from '@utils/response';
 import { Context } from 'koa';
-import service from 'services/payment-method';
+import service from '@services/payment-method';
 
 const post = async (ctx: Context): Promise<Context['body']> => {
   const paymentMethod = await service.post(ctx);
