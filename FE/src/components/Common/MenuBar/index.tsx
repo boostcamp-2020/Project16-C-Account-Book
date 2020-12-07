@@ -16,10 +16,6 @@ const MenuBar = ({ id, setModal, pageType }) => {
   const btnPrevRef = useRef();
   const calMonRef = useRef();
   const calYearRef = useRef();
-  const transactionIconRef = useRef();
-  const calIconRef = useRef();
-  const chartIconRef = useRef();
-  const backIconRef = useRef();
 
   const setYearMonth = useCallback((year, month) => {
     const yy = year;
@@ -62,7 +58,6 @@ const MenuBar = ({ id, setModal, pageType }) => {
     <header className="menubar__header">
       <div className="menubar__buttons" ref={allBtnRef}>
         <div
-          ref={backIconRef}
           className={pageType === '/' ? 'back__navBtn checked' : 'back__navBtn'}
           data-type="/"
           onClick={onClickIcon}
@@ -71,7 +66,6 @@ const MenuBar = ({ id, setModal, pageType }) => {
           <span data-type="/">List</span>
         </div>
         <div
-          ref={transactionIconRef}
           className={
             pageType === 'transaction'
               ? 'menubar__navBtn checked'
@@ -83,7 +77,6 @@ const MenuBar = ({ id, setModal, pageType }) => {
           <i data-type="transaction" className="fas fa-history" />
         </div>
         <div
-          ref={calIconRef}
           className={
             pageType === 'calendar'
               ? 'menubar__navBtn checked'
@@ -95,7 +88,6 @@ const MenuBar = ({ id, setModal, pageType }) => {
           <i data-type="calendar" className="far fa-calendar-alt" />
         </div>
         <div
-          ref={chartIconRef}
           className={
             pageType === 'chart' ? 'menubar__navBtn checked' : 'menubar__navBtn'
           }
@@ -106,6 +98,19 @@ const MenuBar = ({ id, setModal, pageType }) => {
         </div>
         <div className="menubar__navBtn" onClick={onClickPayment}>
           <i className="fas fa-credit-card" />
+        </div>
+
+        <div
+          className={
+            pageType === '/setting'
+              ? 'setting__navBtn checked'
+              : 'setting__navBtn'
+          }
+          data-type="setting"
+          onClick={onClickIcon}
+        >
+          <span data-type="/setting">Setting</span>
+          <i data-type="/setting" className="fas fa-arrow-right" />
         </div>
       </div>
 

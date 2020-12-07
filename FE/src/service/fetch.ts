@@ -26,7 +26,7 @@ export const postFetch = async (query, body) => {
 
 export const updateFetch = async (query, body) => {
   const response = await fetch(`${query}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${window.localStorage.getItem('token')}`,

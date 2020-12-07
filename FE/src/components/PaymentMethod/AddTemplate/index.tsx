@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
-import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
 import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
 
+import { createPaymentMethod } from '../../../api/payment-method';
 import './addForm.scss';
 
 interface Card {
@@ -14,22 +14,27 @@ export default function AddTemplate({
 }: Card): React.ReactElement {
   const [methodNick, setMethodNick] = useState('');
   const methodInput = useRef();
-  const store = useContext(paymentContext);
+
   const addTemplateData = useRootData(store => store.addTemplateData);
-  const addPaymentMethod = useTransactionData(store => store.addPaymentMethod);
   const updateAddTemplate = useRootData(store => store.updateAddTemplate);
+
+  const addPaymentMethod = useTransactionData(store => store.addPaymentMethod);
+  const accountBookId = useTransactionData(store => store.accountBook._id);
 
   const onChangeNick = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMethodNick(event.target.value);
   };
 
-  const onAddCard = event => {
+  const onAddCard = async event => {
     if (event.key === 'Enter') {
-      addPaymentMethod({
+      const res = await createPaymentMethod({
+        accountBookId,
         name: addTemplateData.name,
         desc: `${methodNick}`,
         color: addTemplateData.color,
       });
+
+      addPaymentMethod(res.data);
 
       setAddFormModal(() => false);
       updateAddTemplate({ name: '', color: '' });
