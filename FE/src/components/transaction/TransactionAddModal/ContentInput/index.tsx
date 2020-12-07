@@ -20,7 +20,12 @@ const ContentInput = () => {
   return (
     <div className="item memo__input">
       <div className="indicator">메모</div>
-      <input type="text" name="memo" onChange={onContentChange} />
+      <input
+        type="text"
+        name="memo"
+        onChange={onContentChange}
+        value={input.content}
+      />
     </div>
   );
 };

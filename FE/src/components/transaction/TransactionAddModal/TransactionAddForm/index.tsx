@@ -12,12 +12,16 @@ import { useTransactionData } from '../../../../store/AccountBook/accountBookInf
 
 const TransactionAddForm = ({ accountbookId }) => {
   const {
+    input,
     setMessageVisible,
-    postTransaction,
+    submitPost,
+    submitUpdate,
     setTransactionAddModalVisible,
   } = useTransactionAddModalData(store => ({
+    input: store.input,
     setMessageVisible: store.setMessageVisible,
-    postTransaction: store.postTransaction,
+    submitPost: store.submitPost,
+    submitUpdate: store.submitUpdate,
     setTransactionAddModalVisible: store.setTransactionAddModalVisible,
   }));
 
@@ -25,25 +29,48 @@ const TransactionAddForm = ({ accountbookId }) => {
     categoryPool,
     paymentPool,
     accountbook,
-    addTransaction,
+    addTransactionToStore,
+    updateTransactionToStore,
   } = useTransactionData(store => ({
     accountbook: store.accountBook,
     categoryPool: store.accountBook.categories,
     paymentPool: store.accountBook.payments,
-    addTransaction: store.addTransaction,
+    addTransactionToStore: store.addTransaction,
+    updateTransactionToStore: store.updateTransaction,
   }));
 
-  const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const addTransaction = async () => {
     try {
-      const newTransaction = await postTransaction(accountbookId);
+      const newTransaction = await submitPost(accountbookId);
       console.log('newTransaction: ', newTransaction);
 
-      addTransaction(newTransaction);
+      addTransactionToStore(newTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {
       console.error(error);
       alert('거래내역 추가 실패');
+    }
+  };
+
+  const updateTransaction = async () => {
+    try {
+      const updatedTransaction = await submitUpdate(accountbookId);
+      console.log('updated Transaction: ', updatedTransaction);
+
+      updateTransactionToStore(updatedTransaction);
+      setTransactionAddModalVisible(false);
+    } catch (error) {
+      console.error(error);
+      alert('거래내역 수정 실패');
+    }
+  };
+
+  const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (input._id === '') {
+      addTransaction();
+    } else {
+      updateTransaction();
     }
   };
 
@@ -65,7 +92,7 @@ const TransactionAddForm = ({ accountbookId }) => {
 
         <div className="transaction__button__container">
           <button type="submit" className="transaction__submit__button">
-            확인
+            {input._id === '' ? '추가' : '수정'}
           </button>
           <input
             type="reset"

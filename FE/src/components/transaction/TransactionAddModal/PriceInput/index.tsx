@@ -20,7 +20,12 @@ const PriceInput = () => {
     <div className="item price__input">
       <div className="indicator">금액</div>
       <label>
-        <input type="number" name="price" onChange={onPriceChange} />
+        <input
+          type="number"
+          name="price"
+          onChange={onPriceChange}
+          value={input.cost}
+        />
       </label>
     </div>
   );
