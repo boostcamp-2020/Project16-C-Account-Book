@@ -1,14 +1,15 @@
 import React from 'react';
 
+import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+
 import './index.scss';
 
-const CategoryInput = ({
-  categoryPool,
-  setCategory,
-}: {
-  categoryPool: Array<any>;
-  setCategory: (value: any) => void;
-}) => {
+const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
+  const { input, setInput } = useTransactionAddModalData(store => ({
+    input: store.input,
+    setInput: store.setInput,
+  }));
+
   const onCategoryChange = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>,
   ) => {
@@ -17,7 +18,7 @@ const CategoryInput = ({
       name: targetElement.dataset.name,
       icon: targetElement.dataset.icon,
     };
-    setCategory(newCategory);
+    setInput({ ...input, category: { ...newCategory } });
   };
 
   return (

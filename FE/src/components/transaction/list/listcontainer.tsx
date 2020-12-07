@@ -4,17 +4,18 @@ import { PlusCircleIcon } from '@primer/octicons-react';
 
 import Filter from './filter/listfilter';
 import Transactions from './transactions';
+import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
 
-const ListContainer = ({
-  setTransactionAddModal,
-}: {
-  setTransactionAddModal: (value: boolean) => void;
-}) => {
+const ListContainer = () => {
   const [selectedCategory, selectCategory] = useState('all');
   const [selectedTypes, selectType] = useState(['수입', '지출']);
 
+  const setTransactionAddModalVisible = useTransactionAddModalData(
+    store => store.setTransactionAddModalVisible,
+  );
+
   const onAddButtonClicked = () => {
-    setTransactionAddModal(true);
+    setTransactionAddModalVisible(true);
   };
 
   return (

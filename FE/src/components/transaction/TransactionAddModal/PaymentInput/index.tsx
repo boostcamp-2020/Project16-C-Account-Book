@@ -1,8 +1,15 @@
 import React from 'react';
 
+import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+
 import './index.scss';
 
-const PaymentInput = ({ paymentPool, setPayment }) => {
+const PaymentInput = ({ paymentPool }) => {
+  const { input, setInput } = useTransactionAddModalData(store => ({
+    input: store.input,
+    setInput: store.setInput,
+  }));
+
   const onPaymentChange = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>,
   ) => {
@@ -12,7 +19,7 @@ const PaymentInput = ({ paymentPool, setPayment }) => {
       description: targetElement.dataset.description,
     };
 
-    setPayment(newPayment);
+    setInput({ ...input, payment: { ...newPayment } });
   };
 
   return (

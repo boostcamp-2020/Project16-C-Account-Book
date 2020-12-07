@@ -1,8 +1,15 @@
 import React, { ChangeEvent } from 'react';
 
+import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+
 import './index.scss';
 
-const MessageInput = ({ message, setMessage }) => {
+const MessageInput = () => {
+  const { message, setMessage } = useTransactionAddModalData(store => ({
+    messageVisible: store.messageVisible,
+    setMessage: store.setMessage,
+  }));
+
   const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target) {
       const targetElement = e.target as HTMLTextAreaElement;

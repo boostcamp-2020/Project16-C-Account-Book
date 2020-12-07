@@ -1,25 +1,32 @@
 import React, { ChangeEvent } from 'react';
 
 import calculateDate from '../../../../util/calculateDate';
+import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+
 import './index.scss';
 
-const DateInput = ({ year, month, today, day, setYear, setMonth, setDay }) => {
+const DateInput = () => {
+  const { input, setInput } = useTransactionAddModalData(store => ({
+    input: store.input,
+    setInput: store.setInput,
+  }));
+
   const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target) {
       const targetElement = e.target as HTMLSelectElement;
-      setYear(targetElement.value);
+      setInput({ ...input, year: targetElement.value });
     }
   };
   const onMonthChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target) {
       const targetElement = e.target as HTMLSelectElement;
-      setMonth(targetElement.value);
+      setInput({ ...input, month: targetElement.value });
     }
   };
   const onDayChange = (e: ChangeEvent<HTMLSelectElement>) => {
     if (e.target) {
       const targetElement = e.target as HTMLSelectElement;
-      setDay(targetElement.value);
+      setInput({ ...input, day: targetElement.value });
     }
   };
 
@@ -28,12 +35,16 @@ const DateInput = ({ year, month, today, day, setYear, setMonth, setDay }) => {
       <div className="indicator">날짜</div>
       <div className="row">
         <div className="row__item">
-          <select name="year" defaultValue={year} onChange={onYearChange}>
+          <select
+            name="year"
+            defaultValue={+input.year}
+            onChange={onYearChange}
+          >
             {Array.from(
               { length: 61 },
-              (_, i) => i + +(today.getFullYear() - 30),
+              (_, i) => i + +(new Date().getFullYear() - 30),
             ).map(item => (
-              <option value={item} selected={year === item} key={item}>
+              <option value={item} key={item}>
                 {item}
               </option>
             ))}
@@ -43,11 +54,11 @@ const DateInput = ({ year, month, today, day, setYear, setMonth, setDay }) => {
         <div className="row__item">
           <select
             name="month"
-            defaultValue={month + 1}
+            defaultValue={+input.month}
             onChange={onMonthChange}
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map(item => (
-              <option value={item} selected={month + 1 === item} key={item}>
+              <option value={item} key={item}>
                 {item}
               </option>
             ))}
@@ -55,9 +66,14 @@ const DateInput = ({ year, month, today, day, setYear, setMonth, setDay }) => {
           월
         </div>
         <div className="row__item">
-          <select name="date" defaultValue={day} onChange={onDayChange}>
+          <select name="date" defaultValue={+input.day} onChange={onDayChange}>
             {Array.from(
-              { length: calculateDate.getDaysInMonth(year, month + 1) },
+              {
+                length: calculateDate.getDaysInMonth(
+                  +input.year,
+                  +(input.month + 1),
+                ),
+              },
               (_, i) => i + 1,
             ).map(item => (
               <option value={item} key={item}>

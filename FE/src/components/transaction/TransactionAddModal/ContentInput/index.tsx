@@ -1,12 +1,19 @@
 import React, { ChangeEvent } from 'react';
 
+import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+
 import './index.scss';
 
-const ContentInput = ({ setContent }) => {
+const ContentInput = () => {
+  const { input, setInput } = useTransactionAddModalData(store => ({
+    input: store.input,
+    setInput: store.setInput,
+  }));
+
   const onContentChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target) {
       const targetElement = e.target as HTMLInputElement;
-      setContent(targetElement.value);
+      setInput({ ...input, content: targetElement.value });
     }
   };
 

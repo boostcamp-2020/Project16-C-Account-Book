@@ -11,6 +11,8 @@ import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 import useAccountBook from '../../service/useAccountBookSetting';
 
+import { useTransactionAddModalData } from '../../store/TransactionFormModal/TransactionFormModalHook';
+
 export default function TransactionComponent(props) {
   useLoginCheck();
 
@@ -19,7 +21,9 @@ export default function TransactionComponent(props) {
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const defaultMethod = useDefaultPayment();
-  const [transactionAddModal, setTransactionAddModal] = useState(false);
+  const transactionAddModalVisible = useTransactionAddModalData(
+    store => store.transactionAddModalVisible,
+  );
 
   return (
     <div className={styles.container}>
@@ -28,16 +32,13 @@ export default function TransactionComponent(props) {
         setModal={setPaymentMethodModal}
         pageType="transaction"
       />
-      <ListContainer setTransactionAddModal={setTransactionAddModal} />
+      <ListContainer />
       {paymentMethodModal && (
         <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
       )}
 
-      {transactionAddModal && (
-        <TransactionAddModal
-          setTransactionAddModal={setTransactionAddModal}
-          accountbookId={accountBookId.id}
-        />
+      {transactionAddModalVisible && (
+        <TransactionAddModal accountbookId={accountBookId.id} />
       )}
     </div>
   );
