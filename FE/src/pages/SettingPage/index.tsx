@@ -13,8 +13,21 @@ import './settingPage.scss';
 
 export default function SettingPage() {
   const [settingType, setSettingType] = useState('calendar');
+  const [saveModal, setSaveModal] = useState(false);
+  const [saveAction, setSaveAction] = useState(null);
+  const [updateData, setUpdateData] = useState({});
+
   const history = useHistory();
   const accountBookId = history.location.state;
+
+  const onClickSaveModalOk = () => {
+    saveAction(updateData);
+    setSaveModal(false);
+  };
+
+  const onClickSaveModalCancel = () => {
+    setSaveModal(false);
+  };
 
   useAccountBook(accountBookId);
   return (
@@ -26,10 +39,33 @@ export default function SettingPage() {
       />
       {settingType === 'user' && <UserSetting />}
       {settingType === 'calendar' && (
-        <CalendarSetting accountBookId={accountBookId.id} />
+        <CalendarSetting
+          accountBookId={accountBookId.id}
+          setSaveModal={setSaveModal}
+          setSaveAction={setSaveAction}
+          setUpdateData={setUpdateData}
+        />
       )}
       {settingType === 'category' && <CategorySetting />}
       {settingType === 'csv' && <CSVSetting />}
+      {saveModal && (
+        <div className="save__modal__overlay">
+          <div className="save__modal__content">
+            <div className="save__modal__title">
+              변경사항을 저장 하시겠습니까?
+            </div>
+            <button className="save__ok__btn" onClick={onClickSaveModalOk}>
+              Ok
+            </button>
+            <button
+              className="save__cancel__btn"
+              onClick={onClickSaveModalCancel}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
