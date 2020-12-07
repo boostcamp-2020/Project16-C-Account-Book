@@ -26,7 +26,17 @@ const TransactionItem = ({
     const year = dateArr[0];
     const month = dateArr[1];
     const day = dateArr[2];
-    setInput({ _id: id, category, payment, cost, type, year, month, day });
+    setInput({
+      _id: id,
+      category,
+      payment,
+      cost,
+      type,
+      year,
+      month,
+      day,
+      content,
+    });
     setTransactionAddModalVisible(true);
   };
 
