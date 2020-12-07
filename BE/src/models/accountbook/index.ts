@@ -1,7 +1,7 @@
 import CategoryModel from '@models/category';
 import { User } from '@interfaces/auth';
 import AccountBook from '@interfaces/accountbook';
-import { AccountBookModel } from './schema';
+import { AccountBookDoc, AccountBookModel } from './schema';
 
 const get = async ({
   userid,
@@ -9,7 +9,7 @@ const get = async ({
 }: {
   userid: string;
   social: string;
-}): Promise<AccountBook[]> => {
+}): Promise<AccountBookDoc[]> => {
   const accountBooks = await AccountBookModel.find({
     'users.userid': userid,
     'users.social': social,
@@ -32,7 +32,7 @@ const create = async ({
   name: string;
   description: string;
   user: User;
-}): Promise<AccountBook> => {
+}): Promise<any> => {
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
@@ -52,18 +52,31 @@ const update = async (
   _id: string,
   {
     name,
-    startday,
     description,
   }: {
     name: string;
-    startday: number;
     description: string;
   },
 ): Promise<any> => {
   const updateData = {
     name,
-    startday,
     description,
+  };
+
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  return !!updateResult.nModified;
+};
+
+const updateStartday = async (
+  _id: string,
+  {
+    startday,
+  }: {
+    startday: string;
+  },
+): Promise<any> => {
+  const updateData = {
+    startday,
   };
 
   const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
@@ -261,6 +274,7 @@ export default {
   getDetail,
   create,
   update,
+  updateStartday,
   del,
   addTransaction,
   updateTransaction,

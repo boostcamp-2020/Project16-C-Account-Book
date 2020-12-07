@@ -11,22 +11,14 @@ import {
 import { UserDoc, Schema as UserSchema } from '@models/user/schema';
 import AccountBook from '@interfaces/accountbook';
 
-export interface AccountBookDoc extends AccountBook, mongoose.Document {
-  name: string;
-  startday: number;
-  description: string;
-  categories: CategoryDoc[];
-  payments: PaymentDoc[];
-  users: UserDoc[];
-  transactions: TransactionDoc[];
-}
+export interface AccountBookDoc extends AccountBook, mongoose.Document {}
 
 interface AccountBookMod extends mongoose.Model<AccountBookDoc> {
   transactions(): Promise<any>;
 }
 const Schema = new mongoose.Schema({
   name: { type: String, required: true },
-  startday: { type: Number, required: true, default: 0 },
+  startday: { type: String, required: true, default: 'SUN', uppercase: true },
   description: { type: String, default: '' },
   categories: { type: [CategorySchema], default: [] },
   payments: { type: [PaymentMethodSchema], default: [] },
