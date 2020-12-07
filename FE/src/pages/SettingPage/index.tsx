@@ -25,7 +25,9 @@ export default function SettingPage() {
         setSettingType={setSettingType}
       />
       {settingType === 'user' && <UserSetting />}
-      {settingType === 'calendar' && <CalendarSetting />}
+      {settingType === 'calendar' && (
+        <CalendarSetting accountBookId={accountBookId.id} />
+      )}
       {settingType === 'category' && <CategorySetting />}
       {settingType === 'csv' && <CSVSetting />}
     </div>
