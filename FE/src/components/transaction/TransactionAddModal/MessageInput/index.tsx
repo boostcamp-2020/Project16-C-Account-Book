@@ -6,7 +6,7 @@ import './index.scss';
 
 const MessageInput = () => {
   const { message, setMessage } = useTransactionAddModalData(store => ({
-    messageVisible: store.messageVisible,
+    message: store.message,
     setMessage: store.setMessage,
   }));
 
