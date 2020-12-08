@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
-import { useRootData } from '../../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const Transactions = ({
@@ -23,7 +23,7 @@ const Transactions = ({
     filterTransaction: store.filterTransaction,
   }));
 
-  const { year, month } = useRootData(store => store.nowCalendarInfo);
+  const { year, month } = useDateInfoData(store => store.nowCalendarInfo);
 
   useEffect(() => {
     filterTransaction(selectedCategory, year, month + 1, selectedTypes);

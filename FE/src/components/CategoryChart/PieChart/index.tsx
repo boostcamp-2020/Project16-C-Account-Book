@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './pieChart.scss';
 
 export default function PieChart({ chartInfo, refArr }) {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
   const drawAnimation = () => {
     if (chartInfo.length !== 0) {

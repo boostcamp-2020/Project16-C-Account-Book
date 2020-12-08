@@ -1,15 +1,15 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 
 import './menubar.scss';
 import CalculateDate from '../../../util/calculateDate';
 
 const MenuBar = ({ id, setModal, pageType }) => {
   const history = useHistory();
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
-  const setDateInfo = useRootData(store => store.setCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
 
   const allBtnRef = useRef();
   const btnNextRef = useRef();

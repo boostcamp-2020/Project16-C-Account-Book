@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import './totalContent.scss';
 
 export default function TotalContent(props) {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
   const incomeTotal = useTransactionData(store =>
     store.getIncomeTotal(DateInfo.year, DateInfo.month + 1),
   );

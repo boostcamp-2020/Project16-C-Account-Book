@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './tableChart.scss';
 
 export default function TableChart({ chartInfo }) {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
   return (
     <div className="pie__table">

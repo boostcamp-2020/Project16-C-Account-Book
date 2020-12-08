@@ -1,7 +1,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
 import CalculateDate from '../../../util/calculateDate';
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 
@@ -9,7 +9,7 @@ import { StartDayMap, CalendarBodyTable } from '../../../util/calendarTemplate';
 import './calendarBody.scss';
 
 export default function CalendarBody() {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
   const YearMonthTransactions = useTransactionData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
