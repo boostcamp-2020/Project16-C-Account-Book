@@ -6,7 +6,10 @@ import userModel from '@models/user';
 import { User } from '@interfaces/auth';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
-const DAY = 86400;
+const SEC = 1;
+const MIN = SEC * 60;
+const HOUR = MIN * 60;
+const DAY = HOUR * 24;
 
 const makeToken = (userInfo: User, expTime: number): string => {
   const jwtKey = process.env.JWT_KEY || '';
@@ -30,7 +33,7 @@ const login = async (body: Context['body']): Promise<any> => {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken(userInfo, DAY);
+    const accessToken = makeToken(userInfo, MIN);
     const refreshToken = makeToken(userInfo, DAY * 10);
     const tokens = {
       access: accessToken,
