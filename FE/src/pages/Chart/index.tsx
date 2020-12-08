@@ -11,7 +11,7 @@ import LineChart from '../../components/DateChart/LineChart';
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 
-import { useRootData } from '../../store/DateInfo/dateInfoHook';
+import { useDateInfoData } from '../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../store/AccountBook/accountBookInfoHook';
 import useAccountBook from '../../service/useAccountBookSetting';
 
@@ -26,7 +26,7 @@ const Chart = props => {
   const [chartType, setChartType] = useState('category');
   const defaultMethod = useDefaultPayment();
 
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
   const ChartInfo = useTransactionData(
     store => store.getTransactionsForPieChart,
   );
