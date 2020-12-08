@@ -10,8 +10,10 @@ export default function CategorySetting({
   setUpdateData,
   setSaveAction,
 }) {
-  const [modal, setModal] = useState('create');
+  const [modal, setModal] = useState('');
   const [editContent, setEditContent] = useState('');
+  const [categoryType, setCategoryType] = useState('');
+
   const incomeCategories = useTransactionData(store =>
     store.getIncomeCategories(),
   );
@@ -27,7 +29,6 @@ export default function CategorySetting({
   };
 
   const modalSetting = () => {
-    console.log(createRef);
     if (modal === 'create') {
       createRef.current.focus();
     }
@@ -37,13 +38,28 @@ export default function CategorySetting({
     }
   };
 
-  const onClickAddBtn = () => {
-    setModal('create');
+  const onClickAddBtn = event => {
+    console.log(event.target.dataset.type);
+    setModal(() => 'create');
+    setCategoryType(() => event.target.dataset.type);
   };
 
   const onClickUnit = event => {
     setModal(() => 'update');
     setEditContent(() => event.target.textContent);
+  };
+
+  const onClickCreateBtn = () => {
+    setSaveModal(() => true);
+    setUpdateData(() => {
+      return {
+        accountBookId,
+        name: createRef.current.value,
+        type: categoryType,
+        icon: 1,
+      };
+    });
+    setSaveAction(() => createCategory);
   };
 
   useEffect(() => {
@@ -65,8 +81,12 @@ export default function CategorySetting({
                 {item.name}
               </div>
             ))}
-            <div className="category__unit__add" onClick={onClickAddBtn}>
-              <i className="fas fa-plus-circle" />
+            <div
+              className="category__unit__add"
+              data-type="수입"
+              onClick={onClickAddBtn}
+            >
+              <i data-type="수입" className="fas fa-plus-circle" />
             </div>
           </div>
         )}
@@ -84,8 +104,12 @@ export default function CategorySetting({
                 {item.name}
               </div>
             ))}
-            <div className="category__unit__add" onClick={onClickAddBtn}>
-              <i className="fas fa-plus-circle" />
+            <div
+              className="category__unit__add"
+              data-type="지출"
+              onClick={onClickAddBtn}
+            >
+              <i data-type="지출" className="fas fa-plus-circle" />
             </div>
           </div>
         )}
@@ -103,7 +127,12 @@ export default function CategorySetting({
                     className="create__category__input"
                     placeholder="Enter Category Name"
                   />
-                  <button className="category__create__btn">Create</button>
+                  <button
+                    className="category__create__btn"
+                    onClick={onClickCreateBtn}
+                  >
+                    Create
+                  </button>
                 </div>
               </>
             ) : (
