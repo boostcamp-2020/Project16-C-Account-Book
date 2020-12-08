@@ -68,8 +68,6 @@ export const getUserInfo = async (
     },
   });
 
-  console.log('data: ', data);
-
   if (social === 'github') {
     const userInfo = { userid: data.login, name: data.name, social };
     return userInfo;
@@ -80,7 +78,6 @@ export const getUserInfo = async (
       name: data.response.name,
       social,
     };
-    console.log(userInfo);
 
     return userInfo;
   }

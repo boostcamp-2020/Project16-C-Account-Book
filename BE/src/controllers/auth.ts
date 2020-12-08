@@ -5,10 +5,9 @@ import serviceAuthCheck from '@services/auth/check';
 import serviceLogin from '@services/auth/login';
 
 const login = async (ctx: Context): Promise<Context['body']> => {
-  const token = await serviceLogin.login(ctx.request.body);
-  console.log('token: ', token);
+  const tokens = await serviceLogin.login(ctx.request.body);
 
-  ctx.body = { token };
+  ctx.body = tokens;
 };
 
 const checkToken = async (
@@ -16,7 +15,6 @@ const checkToken = async (
   next: Next,
 ): Promise<Context['body']> => {
   const user = await serviceAuthCheck.checkToken(ctx.header);
-  console.log(`여기${user}`);
   if (!user) {
     const jwtError = createError(401, 'unauthorized');
     throw jwtError;

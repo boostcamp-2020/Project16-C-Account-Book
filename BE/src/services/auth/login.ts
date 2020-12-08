@@ -6,18 +6,21 @@ import userModel from '@models/user';
 import { User } from '@interfaces/auth';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
-const makeToken = (userInfo: User): string => {
-  const jwtKey = process.env.JWT_KEY || '';
+const DAY = 86400;
 
-  const token = jwt.sign(userInfo, jwtKey);
+const makeToken = (userInfo: User, expTime: number): string => {
+  const jwtKey = process.env.JWT_KEY || '';
+  const tokenInfo = {
+    ...userInfo,
+    exp: Math.floor(Date.now() / 1000) + expTime,
+  };
+  const token = jwt.sign(tokenInfo, jwtKey);
   return token;
 };
 
-const login = async (body: Context['body']): Promise<string> => {
+const login = async (body: Context['body']): Promise<any> => {
   try {
     const { code, social } = body;
-
-    console.log('social login: ', social);
 
     const githubAccessToken = await getAccessToken(code, social);
     const userInfo = await getUserInfo(githubAccessToken, social);
@@ -27,9 +30,13 @@ const login = async (body: Context['body']): Promise<string> => {
       await userModel.create(userInfo);
     }
 
-    const token = makeToken(userInfo);
-
-    return token;
+    const accessToken = makeToken(userInfo, DAY);
+    const refreshToken = makeToken(userInfo, DAY * 10);
+    const tokens = {
+      access: accessToken,
+      refresh: refreshToken,
+    };
+    return tokens;
   } catch (error) {
     console.error(error);
     const errorResponse = createError(501, error);
