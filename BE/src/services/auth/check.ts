@@ -31,7 +31,7 @@ const decodeToken = (token: string): User => {
     const user: User = jwt.verify(token, jwtKey) as User;
     return user;
   } catch (error) {
-    const jwtError = createError(401, 'jwt malformed');
+    const jwtError = createError(401, error);
     throw jwtError;
   }
 };
