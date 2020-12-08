@@ -87,12 +87,12 @@
       }
       .modal__contents {
         width: 100%;
-        position: relative;
+        height: 100%;
+        position: absolute;
         display: flex;
-        flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 1.5em;
+        gap: 7%;
 
         .create__category__input {
           width: 50%;
@@ -104,9 +104,18 @@
           @include input-form;
         }
 
-        .category__create__btn,
-        .category__update__btn,
-        .category__delete__btn {
+        .category__edit__btns {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+          gap: 5%;
+          .category__update__btn,
+          .category__delete__btn {
+            @include general-button-design;
+          }
+        }
+        .category__create__btn {
           @include general-button-design;
         }
       }

@@ -144,8 +144,10 @@ export default function CategorySetting({ accountBookId }) {
                     type="text"
                     className="edit__category__input"
                   />
-                  <button className="category__update__btn">Update</button>
-                  <button className="category__delete__btn">Delete</button>
+                  <div className="category__edit__btns">
+                    <button className="category__update__btn">Update</button>
+                    <button className="category__delete__btn">Delete</button>
+                  </div>
                 </div>
               </>
             )}
