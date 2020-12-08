@@ -11,9 +11,10 @@ import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 import useAccountBook from '../../service/useAccountBookSetting';
 
+import TransactionFormModalProvider from '../../store/TransactionFormModal/TransactionFormModalContext';
 import { useTransactionAddModalData } from '../../store/TransactionFormModal/TransactionFormModalHook';
 
-export default function TransactionComponent(props) {
+function TransactionComponent(props) {
   useLoginCheck();
 
   const accountBookId = useHistory().location.state;
@@ -43,3 +44,9 @@ export default function TransactionComponent(props) {
     </div>
   );
 }
+
+export default () => (
+  <TransactionFormModalProvider>
+    <TransactionComponent />
+  </TransactionFormModalProvider>
+);
