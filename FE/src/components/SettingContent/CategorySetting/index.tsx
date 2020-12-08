@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
-import { createCategory } from '../../../api/category';
+import { createCategory, deleteCategory } from '../../../api/category';
 import './categorySetting.scss';
 
 export default function CategorySetting({ accountBookId }) {
   const [modal, setModal] = useState('');
   const [editContent, setEditContent] = useState('');
   const [categoryType, setCategoryType] = useState('');
+  const [categoryId, setCategoryId] = useState('');
 
   const incomeCategories = useTransactionData(store =>
     store.getIncomeCategories(),
@@ -16,6 +17,7 @@ export default function CategorySetting({ accountBookId }) {
     store.getSpendingCategories(),
   );
   const changeCategories = useTransactionData(store => store.setCategories);
+  const deleteTarget = useTransactionData(store => store.deleteCategory);
 
   const createRef = useRef();
   const editRef = useRef();
@@ -43,6 +45,7 @@ export default function CategorySetting({ accountBookId }) {
   const onClickUnit = event => {
     setModal(() => 'update');
     setEditContent(() => event.target.textContent);
+    setCategoryId(() => event.target.dataset.categoryid);
   };
 
   const onClickCreateBtn = () => {
@@ -59,6 +62,12 @@ export default function CategorySetting({ accountBookId }) {
       icon: 1,
     });
 
+    setModal(() => '');
+  };
+
+  const onClickDeleteBtn = () => {
+    deleteCategory({ accountBookId, categoryId });
+    deleteTarget({ categoryId });
     setModal(() => '');
   };
 
@@ -146,7 +155,12 @@ export default function CategorySetting({ accountBookId }) {
                   />
                   <div className="category__edit__btns">
                     <button className="category__update__btn">Update</button>
-                    <button className="category__delete__btn">Delete</button>
+                    <button
+                      className="category__delete__btn"
+                      onClick={onClickDeleteBtn}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </>

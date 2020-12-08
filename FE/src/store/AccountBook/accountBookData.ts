@@ -213,6 +213,11 @@ export const createStore = () => {
     setCategories(data: { name: string; icon: number; type: string }) {
       this.accountBook.categories = [...this.accountBook.categories, data];
     },
+    deleteCategory(data: { categoryId: string }) {
+      this.accountBook.categories = this.accountBook.categories.filter(
+        item => item._id !== data.categoryId,
+      );
+    },
   };
 
   return store;
