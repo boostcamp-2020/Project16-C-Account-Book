@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './TransactionItem.module.scss';
+import './index.scss';
 import { iTransactionItem } from '../../../../types/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
@@ -41,14 +41,16 @@ const TransactionItem = ({
   };
 
   return (
-    <div className={styles.transaction} onClick={onTransactionClicked}>
-      <span className={styles.category}>{category.name}</span>
-      <span className={styles.description}>{content}</span>
-      <span className={styles.payment}>{payment.description}</span>
+    <div className="transaction__item" onClick={onTransactionClicked}>
+      <div className="transaction__item__category">
+        <span>{category.name}</span>
+      </div>
+      <div className="transaction__item__description">{content}</div>
+      <div className="transaction__item__payment">{payment.name}</div>
       {type === '지출' ? (
-        <span className={styles.cost}>{`-${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__out">{`-${cost}`}</span>
       ) : (
-        <span className={styles.cost}>{`+${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__in">{`+${cost}`}</span>
       )}
     </div>
   );
