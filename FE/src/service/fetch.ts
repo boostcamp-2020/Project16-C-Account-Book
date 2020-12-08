@@ -3,7 +3,7 @@ export const getFetch = async query => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;',
-      Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      Authorization: `Bearer ${window.localStorage.getItem('accesstoken')}`,
     },
   });
 
@@ -16,7 +16,7 @@ export const postFetch = async (query, body) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      Authorization: `Bearer ${window.localStorage.getItem('accesstoken')}`,
     },
     body: JSON.stringify(body),
   });
@@ -29,7 +29,7 @@ export const updateFetch = async (query, body) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      Authorization: `Bearer ${window.localStorage.getItem('accesstoken')}`,
     },
     body: JSON.stringify(body),
   });
@@ -42,7 +42,7 @@ export const deleteFetch = async (query, body) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+      Authorization: `Bearer ${window.localStorage.getItem('accesstoken')}`,
     },
     body: JSON.stringify(body),
   });
