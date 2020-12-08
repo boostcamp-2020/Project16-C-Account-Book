@@ -32,11 +32,11 @@ const App = () => {
               <Route exact path="/calendar">
                 <CalendarPage />
               </Route>
+              <Route exact path="/chart" component={ChartPage} />
+              <Route exact path="/setting" component={SettingPage} />
               <TransactionFormModalProvider>
                 <Route exact path="/transaction" component={TransactionPage} />
               </TransactionFormModalProvider>
-              <Route exact path="/chart" component={ChartPage} />
-              <Route exact path="/setting" component={SettingPage} />
             </Switch>
           </Router>
         </PaymentProvider>
