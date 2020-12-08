@@ -96,21 +96,28 @@ export default function CategorySetting({
             {modal === 'create' ? (
               <>
                 <div className="modal__title">Create</div>
-                <input
-                  ref={createRef}
-                  type="text"
-                  className="create__category__input"
-                  placeholder="Enter Category Name"
-                />
+                <div className="modal__contents">
+                  <input
+                    ref={createRef}
+                    type="text"
+                    className="create__category__input"
+                    placeholder="Enter Category Name"
+                  />
+                  <button className="category__create__btn">Create</button>
+                </div>
               </>
             ) : (
               <>
                 <div className="modal__title">Edit</div>
-                <input
-                  ref={editRef}
-                  type="text"
-                  className="edit__category__input"
-                />
+                <div className="modal__contents">
+                  <input
+                    ref={editRef}
+                    type="text"
+                    className="edit__category__input"
+                  />
+                  <button className="category__update__btn">Update</button>
+                  <button className="category__delete__btn">Delete</button>
+                </div>
               </>
             )}
           </div>

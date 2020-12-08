@@ -1,3 +1,5 @@
+@use './values.scss' as *;
+
 @mixin buttonDefaultSetting {
   cursor: pointer;
   outline: none;
@@ -20,5 +22,21 @@
     box-shadow: 0 0 1.5em #9ecaed;
     -webkit-transition: 0.5s;
     transition: 0.5s;
+  }
+}
+
+@mixin general-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $white;
+  color: $white;
+  width: 5em;
+  height: 30px;
+  background-color: $modal-button-background;
+  font-size: 1em;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
   }
 }
