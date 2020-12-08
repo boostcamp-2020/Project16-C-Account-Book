@@ -19,8 +19,13 @@ export default function CategorySetting(props) {
         {incomeCategories && (
           <div className="category__list">
             {incomeCategories.map(item => (
-              <div>{item.name}</div>
+              <div className="category__unit" data-categoryid={item._id}>
+                {item.name}
+              </div>
             ))}
+            <div className="category__unit__add">
+              <i className="fas fa-plus-circle" />
+            </div>
           </div>
         )}
       </div>
@@ -29,8 +34,13 @@ export default function CategorySetting(props) {
         {spendingCategories && (
           <div className="category__list">
             {spendingCategories.map(item => (
-              <div>{item.name}</div>
+              <div className="category__unit" data-categoryid={item._id}>
+                {item.name}
+              </div>
             ))}
+            <div className="category__unit__add">
+              <i className="fas fa-plus-circle" />
+            </div>
           </div>
         )}
       </div>

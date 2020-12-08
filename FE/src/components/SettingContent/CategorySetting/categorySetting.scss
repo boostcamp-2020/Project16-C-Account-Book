@@ -1,6 +1,17 @@
 @use '../../../styles/values.scss' as *;
 @use '../../../styles/mixins.scss' as *;
 
+@mixin categoryUnit {
+  padding: 0.5em 1.5em;
+  border: 1px solid #979797;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
 @mixin categorySettingBox {
   width: 55%;
   height: 40%;
@@ -16,6 +27,17 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 1em;
+
+    .category__unit {
+      @include categoryUnit;
+    }
+
+    .category__unit__add {
+      @include categoryUnit;
+      .fas.fa-plus-circle {
+        color: white;
+      }
+    }
   }
 }
 
