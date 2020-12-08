@@ -4,12 +4,7 @@ import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHo
 import { createCategory } from '../../../api/category';
 import './categorySetting.scss';
 
-export default function CategorySetting({
-  accountBookId,
-  setSaveModal,
-  setUpdateData,
-  setSaveAction,
-}) {
+export default function CategorySetting({ accountBookId }) {
   const [modal, setModal] = useState('');
   const [editContent, setEditContent] = useState('');
   const [categoryType, setCategoryType] = useState('');
@@ -20,6 +15,7 @@ export default function CategorySetting({
   const spendingCategories = useTransactionData(store =>
     store.getSpendingCategories(),
   );
+  const changeCategories = useTransactionData(store => store.setCategories);
 
   const createRef = useRef();
   const editRef = useRef();
@@ -50,21 +46,25 @@ export default function CategorySetting({
   };
 
   const onClickCreateBtn = () => {
-    setSaveModal(() => true);
-    setUpdateData(() => {
-      return {
-        accountBookId,
-        name: createRef.current.value,
-        type: categoryType,
-        icon: 1,
-      };
+    createCategory({
+      accountBookId,
+      name: createRef.current.value,
+      type: categoryType,
+      icon: 1,
     });
-    setSaveAction(() => createCategory);
+
+    changeCategories({
+      name: createRef.current.value,
+      type: categoryType,
+      icon: 1,
+    });
+
+    setModal(() => '');
   };
 
   useEffect(() => {
     modalSetting();
-  }, [modal]);
+  }, [modal, incomeCategories, spendingCategories]);
 
   return (
     <div className="category__setting__container">

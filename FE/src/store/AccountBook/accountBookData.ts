@@ -210,6 +210,9 @@ export const createStore = () => {
     getSpendingCategories() {
       return this.accountBook.categories.filter(item => item.type === '지출');
     },
+    setCategories(data: { name: string; icon: number; type: string }) {
+      this.accountBook.categories = [...this.accountBook.categories, data];
+    },
   };
 
   return store;

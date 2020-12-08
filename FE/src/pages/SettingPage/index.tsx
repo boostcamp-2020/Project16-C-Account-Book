@@ -39,12 +39,7 @@ export default function SettingPage() {
         />
       )}
       {settingType === 'category' && (
-        <CategorySetting
-          accountBookId={accountBookId.id}
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
-        />
+        <CategorySetting accountBookId={accountBookId.id} />
       )}
       {settingType === 'csv' && <CSVSetting />}
       {saveModal && (

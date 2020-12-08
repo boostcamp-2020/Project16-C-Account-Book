@@ -5,6 +5,8 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
   const onClickSaveModalOk = () => {
     saveAction(updateData);
     setSaveModal(false);
+
+    return 'oK';
   };
 
   const onClickOverlay = event => {
