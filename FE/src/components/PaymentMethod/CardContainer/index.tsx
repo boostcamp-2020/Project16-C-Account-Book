@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import {
   updatePaymentMethod,
   deletePaymentMethod,
@@ -8,12 +8,12 @@ import {
 import './cardContainer.scss';
 
 export default React.memo(function CardContainer(): React.ReactElement {
-  const accountBookId = useTransactionData(store => store.accountBook._id);
-  const paymentMethods = useTransactionData(
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
+  const paymentMethods = useAccountBookData(
     store => store.accountBook.payments,
   );
-  const updatePayment = useTransactionData(store => store.updatePaymentMethod);
-  const deletePayment = useTransactionData(store => store.deletePaymentMethod);
+  const updatePayment = useAccountBookData(store => store.updatePaymentMethod);
+  const deletePayment = useAccountBookData(store => store.deletePaymentMethod);
 
   const contentRefArr = [];
   const editFormRefArr = [];

@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import './totalContent.scss';
 
 export default function TotalContent(props) {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-  const incomeTotal = useTransactionData(store =>
+  const incomeTotal = useAccountBookData(store =>
     store.getIncomeTotal(DateInfo.year, DateInfo.month + 1),
   );
-  const spendingTotal = useTransactionData(store =>
+  const spendingTotal = useAccountBookData(store =>
     store.getSpendingTotal(DateInfo.year, DateInfo.month + 1),
   );
 

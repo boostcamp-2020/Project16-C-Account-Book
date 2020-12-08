@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import { useDefaultPaymentData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import { createPaymentMethod } from '../../../api/payment-method';
@@ -20,8 +20,8 @@ export default function AddTemplate({
     store => store.updateAddTemplate,
   );
 
-  const addPaymentMethod = useTransactionData(store => store.addPaymentMethod);
-  const accountBookId = useTransactionData(store => store.accountBook._id);
+  const addPaymentMethod = useAccountBookData(store => store.addPaymentMethod);
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
 
   const onChangeNick = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMethodNick(event.target.value);

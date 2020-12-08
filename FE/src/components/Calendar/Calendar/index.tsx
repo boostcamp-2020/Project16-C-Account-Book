@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
@@ -16,7 +16,7 @@ export default function Calendar() {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
   const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
 
-  const startDay = useTransactionData(store => store.accountBook.startday);
+  const startDay = useAccountBookData(store => store.accountBook.startday);
 
   const onClickCalBody = useCallback(
     event => {

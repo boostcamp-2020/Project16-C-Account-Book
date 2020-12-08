@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
 import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const Transactions = ({
   selectedCategory,
@@ -17,7 +17,7 @@ const Transactions = ({
     filteredTransactions,
     filterTransaction,
     transactions,
-  } = useTransactionData(store => ({
+  } = useAccountBookData(store => ({
     transactions: store.accountBook.transactions,
     filteredTransactions: store.filteredTransactions,
     filterTransaction: store.filterTransaction,

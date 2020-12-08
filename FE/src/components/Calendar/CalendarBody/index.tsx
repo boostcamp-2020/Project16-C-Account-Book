@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 } from 'uuid';
 import CalculateDate from '../../../util/calculateDate';
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 
 import { StartDayMap, CalendarBodyTable } from '../../../util/calendarTemplate';
@@ -11,10 +11,10 @@ import './calendarBody.scss';
 export default function CalendarBody() {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
-  const YearMonthTransactions = useTransactionData(store =>
+  const YearMonthTransactions = useAccountBookData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
-  const startDay = useTransactionData(store => store.accountBook.startday);
+  const startDay = useAccountBookData(store => store.accountBook.startday);
 
   const yy = DateInfo.year;
   const mm = DateInfo.month;

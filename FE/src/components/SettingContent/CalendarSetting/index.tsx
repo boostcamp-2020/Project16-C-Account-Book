@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 import CalendarHeader from '../../Calendar/CalendarHeader';
 
@@ -13,7 +13,7 @@ export default function CalendarSetting({
   setUpdateData,
   setSaveAction,
 }) {
-  const start = useTransactionData(store => store.accountBook.startday);
+  const start = useAccountBookData(store => store.accountBook.startday);
 
   const [startDay, setStartDay] = useState('');
   const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

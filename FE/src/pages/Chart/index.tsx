@@ -12,7 +12,7 @@ import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
 
 import { useDateInfoData } from '../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../store/AccountBook/accountBookInfoHook';
 import useAccountBook from '../../service/useAccountBookSetting';
 
 import './chart.scss';
@@ -27,7 +27,7 @@ const Chart = props => {
   const defaultMethod = useDefaultPayment();
 
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-  const ChartInfo = useTransactionData(
+  const ChartInfo = useAccountBookData(
     store => store.getTransactionsForPieChart,
   );
 
