@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
+import { useDefaultPaymentData } from '../../../store/PaymentMethod/paymentMethodHook';
 import './newMethod.scss';
 
 interface SetData {
@@ -10,7 +10,9 @@ interface SetData {
 export default function NewMethod({
   defaultMethod,
 }: SetData): React.ReactElement {
-  const updateAddTemplate = useRootData(store => store.updateAddTemplate);
+  const updateAddTemplate = useDefaultPaymentData(
+    store => store.updateAddTemplate,
+  );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const carousel = useRef();
 

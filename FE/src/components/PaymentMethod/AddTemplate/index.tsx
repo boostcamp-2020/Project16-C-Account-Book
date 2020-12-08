@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
-import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
+import { useDefaultPaymentData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import { createPaymentMethod } from '../../../api/payment-method';
 import './addForm.scss';
@@ -15,8 +15,10 @@ export default function AddTemplate({
   const [methodNick, setMethodNick] = useState('');
   const methodInput = useRef();
 
-  const addTemplateData = useRootData(store => store.addTemplateData);
-  const updateAddTemplate = useRootData(store => store.updateAddTemplate);
+  const addTemplateData = useDefaultPaymentData(store => store.addTemplateData);
+  const updateAddTemplate = useDefaultPaymentData(
+    store => store.updateAddTemplate,
+  );
 
   const addPaymentMethod = useTransactionData(store => store.addPaymentMethod);
   const accountBookId = useTransactionData(store => store.accountBook._id);
