@@ -18,14 +18,12 @@ export default function DetailModal({ setDetailModal }) {
   );
 
   const onClickDetailOverlay = event => {
-    if (event.target.classList.contains('detail-info-overlay')) {
-      setDetailModal(false);
-    }
+    setDetailModal(false);
   };
 
   return (
     <div className="detail-info-overlay" onClick={onClickDetailOverlay}>
-      <div className="clicked-date">
+      <div className="clicked-date" onClick={e => e.stopPropagation()}>
         <div className="cal-date-info">
           <span className="cal-year">{DateInfo.year}년</span>
           <span className="cal-month">{DateInfo.month + 1}월</span>
