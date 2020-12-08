@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
-
+import HeaderButton from '../HeaderButton';
 import './menubar.scss';
 import CalculateDate from '../../../util/calculateDate';
 
@@ -65,40 +65,51 @@ const MenuBar = ({ id, setModal, pageType }) => {
           <i data-type="/" className="fas fa-arrow-left" />
           <span data-type="/">List</span>
         </div>
-        <div
-          className={
-            pageType === 'transaction'
-              ? 'menubar__navBtn checked'
-              : 'menubar__navBtn'
-          }
-          data-type="transaction"
-          onClick={onClickIcon}
-        >
-          <i data-type="transaction" className="fas fa-history" />
-        </div>
-        <div
-          className={
-            pageType === 'calendar'
-              ? 'menubar__navBtn checked'
-              : 'menubar__navBtn'
-          }
-          data-type="calendar"
-          onClick={onClickIcon}
-        >
-          <i data-type="calendar" className="far fa-calendar-alt" />
-        </div>
-        <div
-          className={
-            pageType === 'chart' ? 'menubar__navBtn checked' : 'menubar__navBtn'
-          }
-          data-type="chart"
-          onClick={onClickIcon}
-        >
-          <i data-type="chart" className="far fa-chart-bar" />
-        </div>
-        <div className="menubar__navBtn" onClick={onClickPayment}>
-          <i className="fas fa-credit-card" />
-        </div>
+        {pageType === 'transaction' ? (
+          <HeaderButton
+            buttonType="transaction"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="transaction"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+        {pageType === 'calendar' ? (
+          <HeaderButton
+            buttonType="calendar"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="calendar"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+        {pageType === 'chart' ? (
+          <HeaderButton
+            buttonType="chart"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="chart"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+
+        <HeaderButton
+          buttonType="paymentMethod"
+          isChecked={false}
+          onClickIcon={onClickPayment}
+        />
 
         <div
           className={

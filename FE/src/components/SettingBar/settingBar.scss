@@ -34,28 +34,6 @@
       text-shadow: $selectedTextShadow;
       color: white;
     }
-
-    .settingbar__navBtn {
-      @include buttonDefaultSetting;
-      text-align: center;
-      line-height: 2.5em;
-      width: 2.5em;
-      height: 2.5em;
-      background-color: transparent;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 1.5em;
-      // box-shadow: $noSelectedBoxShadow;
-      &:hover {
-        box-shadow: $selectedBoxShadow;
-        text-shadow: $selectedTextShadow;
-        color: white;
-      }
-      &.checked {
-        box-shadow: $selectedBoxShadow;
-        text-shadow: $selectedTextShadow;
-        color: white;
-      }
-    }
   }
 
   .settingbar__ctrBox {
