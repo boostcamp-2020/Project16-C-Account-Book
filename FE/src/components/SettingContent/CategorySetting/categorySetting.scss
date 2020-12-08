@@ -1,6 +1,24 @@
 @use '../../../styles/values.scss' as *;
 @use '../../../styles/mixins.scss' as *;
 
+@mixin categorySettingBox {
+  width: 55%;
+  height: 40%;
+  border: 1px solid #979797;
+  border-radius: 6px;
+  .category__title {
+    font-size: 1.5em;
+    padding: 1em;
+    text-shadow: $selectedTextShadow;
+  }
+  .category__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+}
+
 .category__setting__container {
   width: 100%;
   height: 100%;
@@ -12,25 +30,9 @@
   gap: 3em;
 
   .income__category__setting {
-    width: 55%;
-    height: 40%;
-    border: 1px solid #979797;
-    border-radius: 6px;
-    .category__title {
-      font-size: 1.5em;
-      padding: 1em;
-      text-shadow: $selectedTextShadow;
-    }
+    @include categorySettingBox;
   }
   .spending__category__setting {
-    width: 55%;
-    height: 40%;
-    border: 1px solid #979797;
-    border-radius: 6px;
-    .category__title {
-      font-size: 1.5em;
-      padding: 1em;
-      text-shadow: $selectedTextShadow;
-    }
+    @include categorySettingBox;
   }
 }

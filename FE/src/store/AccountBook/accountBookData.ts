@@ -203,6 +203,13 @@ export const createStore = () => {
 
       return chartInfoArray;
     },
+
+    getIncomeCategories() {
+      return this.accountBook.categories.filter(item => item.type === '수입');
+    },
+    getSpendingCategories() {
+      return this.accountBook.categories.filter(item => item.type === '지출');
+    },
   };
 
   return store;
