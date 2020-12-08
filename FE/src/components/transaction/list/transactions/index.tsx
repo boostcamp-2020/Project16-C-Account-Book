@@ -6,10 +6,10 @@ import { useRootData } from '../../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const Transactions = ({
-  selectedCategory,
+  selectedCategories,
   selectedTypes,
 }: {
-  selectedCategory: string;
+  selectedCategories: string[];
   selectedTypes: string[];
 }) => {
   // axios로 비동기 처리
@@ -26,8 +26,8 @@ const Transactions = ({
   const { year, month } = useRootData(store => store.nowCalendarInfo);
 
   useEffect(() => {
-    filterTransaction(selectedCategory, year, month + 1, selectedTypes);
-  }, [transactions, selectedCategory, year, month, selectedTypes]);
+    filterTransaction(selectedCategories, year, month + 1, selectedTypes);
+  }, [transactions, selectedCategories, year, month, selectedTypes]);
 
   return (
     <>

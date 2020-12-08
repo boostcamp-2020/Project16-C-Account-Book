@@ -7,8 +7,8 @@ import Transactions from './transactions';
 import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
 
 const ListContainer = () => {
-  const [selectedCategory, selectCategory] = useState('all');
-  const [selectedTypes, selectType] = useState(['수입', '지출']);
+  const [selectedCategories, selectCategories] = useState([]);
+  const [selectedTypes, selectType] = useState([]);
 
   const {
     setTransactionAddModalVisible,
@@ -27,13 +27,13 @@ const ListContainer = () => {
     <>
       <div className="transaction__list__container">
         <Filter
-          selectedCategory={selectedCategory}
-          selectCategory={selectCategory}
+          selectedCategories={selectedCategories}
+          selectCategories={selectCategories}
           selectedTypes={selectedTypes}
           selectType={selectType}
         />
         <Transactions
-          selectedCategory={selectedCategory}
+          selectedCategories={selectedCategories}
           selectedTypes={selectedTypes}
         />
       </div>
