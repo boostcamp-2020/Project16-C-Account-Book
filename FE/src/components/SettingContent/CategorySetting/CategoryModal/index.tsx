@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
 import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
-
+import ActionButton from '../../../Common/ActionButton';
 import {
   createCategory,
   updateCategory,
@@ -104,12 +104,12 @@ export default function CategoryModal({
                 className="create__category__input"
                 placeholder="Enter Category Name"
               />
-              <button
-                className="category__create__btn"
-                onClick={onClickCreateBtn}
-              >
-                Create
-              </button>
+
+              <ActionButton
+                type="general"
+                content="Create"
+                action={onClickCreateBtn}
+              />
             </div>
           </>
         ) : (
@@ -122,18 +122,16 @@ export default function CategoryModal({
                 className="edit__category__input"
               />
               <div className="category__edit__btns">
-                <button
-                  className="category__update__btn"
-                  onClick={onClickUpdateBtn}
-                >
-                  Update
-                </button>
-                <button
-                  className="category__delete__btn"
-                  onClick={onClickDeleteBtn}
-                >
-                  Delete
-                </button>
+                <ActionButton
+                  type="general"
+                  content="Update"
+                  action={onClickUpdateBtn}
+                />
+                <ActionButton
+                  type="general"
+                  content="Delete"
+                  action={onClickDeleteBtn}
+                />
               </div>
             </div>
           </>

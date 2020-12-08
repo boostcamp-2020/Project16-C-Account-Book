@@ -30,9 +30,28 @@
   border: 1px solid $white;
   color: $white;
   width: 5em;
-  height: 30px;
+  height: 40px;
   background-color: $modal-button-background;
   font-size: 1em;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
+
+@mixin large-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $white;
+  color: $white;
+
+  background-color: $modal-button-background;
+
+  width: 8em;
+  height: 50px;
+  font-size: 1em;
+  z-index: 4;
 
   &:hover {
     background-color: $light-black;

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import AddTemplate from '../AddTemplate';
 import CardContainer from '../CardContainer';
 import NewMethod from '../NewMethod';
-
+import ActionButton from '../../Common/ActionButton';
 import './modal.scss';
 
 export default function PaymentModal({
@@ -24,9 +24,10 @@ export default function PaymentModal({
     <>
       <div className="modal__wrapper" data-overlay onClick={onClickOverlay}>
         <span className="payment__title">Payment Method</span>
-        <button type="button" onClick={onClickNew} className="new__button">
-          Add
-        </button>
+        <div className="payment__add__btn">
+          <ActionButton type="large" content="Add" action={onClickNew} />
+        </div>
+
         <CardContainer />
       </div>
       {addFormModal && <NewMethod defaultMethod={defaultMethod} />}
