@@ -210,8 +210,21 @@ export const createStore = () => {
     getSpendingCategories() {
       return this.accountBook.categories.filter(item => item.type === '지출');
     },
-    setCategories(data: { name: string; icon: number; type: string }) {
+    createCategories(data: { name: string; icon: number; type: string }) {
       this.accountBook.categories = [...this.accountBook.categories, data];
+    },
+    updateCategory(data: {
+      categoryId: string;
+      name: string;
+      icon: number;
+      type: string;
+    }) {
+      this.accountBook.categories = this.accountBook.categories.map(item => {
+        if (item._id === data.categoryId) {
+          item = { ...item, name: data.name, icon: data.icon, type: data.type };
+        }
+        return item;
+      });
     },
     deleteCategory(data: { categoryId: string }) {
       this.accountBook.categories = this.accountBook.categories.filter(

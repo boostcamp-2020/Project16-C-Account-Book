@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
-import { createCategory, deleteCategory } from '../../../api/category';
+import {
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from '../../../api/category';
 import './categorySetting.scss';
 
 export default function CategorySetting({ accountBookId }) {
@@ -16,7 +20,8 @@ export default function CategorySetting({ accountBookId }) {
   const spendingCategories = useTransactionData(store =>
     store.getSpendingCategories(),
   );
-  const changeCategories = useTransactionData(store => store.setCategories);
+  const changeCategories = useTransactionData(store => store.createCategories);
+  const updateTarget = useTransactionData(store => store.updateCategory);
   const deleteTarget = useTransactionData(store => store.deleteCategory);
 
   const createRef = useRef();
@@ -37,7 +42,6 @@ export default function CategorySetting({ accountBookId }) {
   };
 
   const onClickAddBtn = event => {
-    console.log(event.target.dataset.type);
     setModal(() => 'create');
     setCategoryType(() => event.target.dataset.type);
   };
@@ -45,6 +49,7 @@ export default function CategorySetting({ accountBookId }) {
   const onClickUnit = event => {
     setModal(() => 'update');
     setEditContent(() => event.target.textContent);
+    setCategoryType(() => event.target.dataset.type);
     setCategoryId(() => event.target.dataset.categoryid);
   };
 
@@ -58,6 +63,25 @@ export default function CategorySetting({ accountBookId }) {
 
     changeCategories({
       name: createRef.current.value,
+      type: categoryType,
+      icon: 1,
+    });
+
+    setModal(() => '');
+  };
+
+  const onClickUpdateBtn = () => {
+    updateCategory({
+      accountBookId,
+      categoryId,
+      name: editRef.current.value,
+      type: categoryType,
+      icon: 1,
+    });
+
+    updateTarget({
+      categoryId,
+      name: editRef.current.value,
       type: categoryType,
       icon: 1,
     });
@@ -85,6 +109,7 @@ export default function CategorySetting({ accountBookId }) {
               <div
                 className="category__unit"
                 data-categoryid={item._id}
+                data-type={item.type}
                 onClick={onClickUnit}
               >
                 {item.name}
@@ -154,7 +179,12 @@ export default function CategorySetting({ accountBookId }) {
                     className="edit__category__input"
                   />
                   <div className="category__edit__btns">
-                    <button className="category__update__btn">Update</button>
+                    <button
+                      className="category__update__btn"
+                      onClick={onClickUpdateBtn}
+                    >
+                      Update
+                    </button>
                     <button
                       className="category__delete__btn"
                       onClick={onClickDeleteBtn}
