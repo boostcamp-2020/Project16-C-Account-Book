@@ -8,9 +8,8 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
   };
 
   const onClickOverlay = event => {
-    if (event.target.classList.contains('save__modal__overlay')) {
-      setSaveModal(false);
-    }
+    setSaveModal(false);
+    event.nativeEvent.stopPropagtion();
   };
 
   const onClickSaveModalCancel = () => {
@@ -19,7 +18,7 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
 
   return (
     <div className="save__modal__overlay" onClick={onClickOverlay}>
-      <div className="save__modal__content">
+      <div className="save__modal__content" onClick={e => e.stopPropagation()}>
         <div className="save__modal__title">변경사항을 저장 하시겠습니까?</div>
         <button className="save__ok__btn" onClick={onClickSaveModalOk}>
           Ok
