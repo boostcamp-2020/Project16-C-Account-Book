@@ -36,15 +36,14 @@ const ListContainer = () => {
           selectedCategories={selectedCategories}
           selectedTypes={selectedTypes}
         />
+        <button
+          className="transaction__add__button"
+          type="button"
+          onClick={onAddButtonClicked}
+        >
+          <PlusCircleIcon className="icon" />
+        </button>
       </div>
-      <button
-        className="transaction__add__button"
-        type="button"
-        onClick={onAddButtonClicked}
-      >
-        <PlusCircleIcon className="icon" />
-        거래내역 추가
-      </button>
     </>
   );
 };
