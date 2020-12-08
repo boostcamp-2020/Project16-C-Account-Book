@@ -7,9 +7,10 @@ const login = async (code: string, social: string) => {
   const tokenGetUrl = `${serverUrl}/api/auth/login`;
 
   try {
-    const { token } = await postFetch(tokenGetUrl, { code, social });
-    window.localStorage.setItem('token', token);
-    return token;
+    const { access, refresh } = await postFetch(tokenGetUrl, { code, social });
+    window.localStorage.setItem('accesstoken', access);
+    window.localStorage.setItem('refreshtoken', refresh);
+    return { access, refresh };
   } catch (error) {
     console.error(error);
   }
