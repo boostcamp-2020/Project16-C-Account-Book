@@ -33,6 +33,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
   });
 
   const onClickModify = event => {
+    event.stopPropagation();
     const index = event.target.dataset.turn;
 
     titleEditRef[index].current.value = titleRef[index].current.textContent;
@@ -73,17 +74,16 @@ export const AccountBookList = ({ datas, setDatas }) => {
   };
 
   const linkToDetail = async event => {
-    if (event.target.classList.contains('link')) {
-      history.push({
-        pathname: '/calendar',
-        state: {
-          id: event.target.dataset.acbookid,
-        },
-      });
-    }
+    history.push({
+      pathname: '/calendar',
+      state: {
+        id: event.target.dataset.acbookid,
+      },
+    });
   };
 
   const onClickDelete = async event => {
+    event.stopPropagation();
     const accountBookId = event.target.dataset.id;
     const res = await deleteAccountBook(accountBookId);
 
