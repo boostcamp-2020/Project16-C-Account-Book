@@ -2,9 +2,11 @@
   color: white;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 
   .csv__export {
     background: transparent;
+    height: 54px;
     color: white;
     border: 1px 0 0 10px #219cf3 solid;
     box-shadow: none;
@@ -15,15 +17,25 @@
     text-shadow: 0 0 10px #219cf3, 0 0 10px #219cf3;
   }
 
-  .csv__import {
-    background: transparent;
-    color: white;
-    border: 1px 0 0 10px #219cf3 solid;
-    box-shadow: none;
-    border-radius: 16px;
-    padding: 16px;
-    overflow: visible;
-    cursor: pointer;
-    text-shadow: 0 0 10px #219cf3, 0 0 10px #219cf3;
+  .csv__import__form {
+    display: flex;
+    flex-direction: column;
+
+    > input {
+      margin-bottom: 10px;
+    }
+
+    .csv__import {
+      background: transparent;
+      color: white;
+      width: 216px;
+      border: 1px 0 0 10px #219cf3 solid;
+      box-shadow: none;
+      border-radius: 16px;
+      padding: 16px;
+      overflow: visible;
+      cursor: pointer;
+      text-shadow: 0 0 10px #219cf3, 0 0 10px #219cf3;
+    }
   }
 }

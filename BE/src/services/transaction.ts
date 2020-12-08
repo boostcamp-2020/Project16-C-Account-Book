@@ -1,5 +1,6 @@
 import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
+
 const { Parser } = require('json2csv');
 
 const post = async (ctx: Context): Promise<any> => {
@@ -75,7 +76,7 @@ const del = async (ctx: Context): Promise<any> => {
   };
 };
 
-const transactionCsv = async (ctx: Context): Promise<any> => {
+const exportCSV = async (ctx: Context): Promise<any> => {
   const accountBook = await accountBookModel.getDetail(
     ctx.params.accountbookid,
   );
@@ -107,4 +108,18 @@ const transactionCsv = async (ctx: Context): Promise<any> => {
   };
 };
 
-export default { post, patch, del, transactionCsv };
+const importCSV = async (ctx: Context): Promise<any> => {
+  if (ctx) {
+    console.log(ctx.request.files);
+    return {
+      message: 'success',
+      data: ctx.request.files,
+    };
+  }
+  return {
+    message: 'fail',
+    data: {},
+  };
+};
+
+export default { post, patch, del, exportCSV, importCSV };
