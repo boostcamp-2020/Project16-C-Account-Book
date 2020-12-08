@@ -24,7 +24,9 @@ const PriceInput = () => {
           type="number"
           name="price"
           onChange={onPriceChange}
-          value={input.cost}
+          min="1"
+          placeholder="0"
+          value={!!input.cost && input.cost}
         />
       </label>
     </div>

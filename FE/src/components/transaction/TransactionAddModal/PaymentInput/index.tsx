@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
@@ -10,9 +10,7 @@ const PaymentInput = ({ paymentPool }) => {
     setInput: store.setInput,
   }));
 
-  const onPaymentChange = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
+  const onPaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetElement = e.target as HTMLInputElement;
     const newPayment = {
       name: targetElement.dataset.name,
@@ -28,13 +26,13 @@ const PaymentInput = ({ paymentPool }) => {
       <div className="payment__card__container">
         {paymentPool.length ? (
           paymentPool.map(({ name, desc }) => (
-            <label className="payment__card__item">
+            <label className="payment__card__item" key={`${name}-${desc}`}>
               <input
                 type="radio"
                 name="payment"
                 data-name={name}
                 data-description={desc}
-                onClick={onPaymentChange}
+                onChange={onPaymentChange}
                 checked={name === input.payment.name}
               />
               <div className="payment__card__view">
