@@ -94,13 +94,13 @@ const addTransaction = async (
 ): Promise<any> => {
   const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
   if (curAccountBook) {
-    const curTransactions = curAccountBook.transactions;
+    const newTransactions = [...curAccountBook.transactions, transaction];
     const updateResult = await AccountBookModel.update(
       { _id: accountBookId },
-      { transactions: [...curTransactions, transaction] },
+      { transactions: newTransactions },
     );
     if (updateResult.nModified) {
-      return curTransactions[curTransactions.length - 1];
+      return newTransactions[newTransactions.length - 1];
     }
     return false;
   }
