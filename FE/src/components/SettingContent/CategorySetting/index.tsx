@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 
+import IncomeCategory from './IncomeCategory';
+import SpendingCategory from './SpendingCategory';
 import CategoryModal from './CategoryModal';
 
 import './categorySetting.scss';
@@ -36,49 +38,21 @@ export default function CategorySetting({ accountBookId }) {
       <div className="income__category__setting">
         <div className="category__title">Income Category</div>
         {incomeCategories && (
-          <div className="category__list">
-            {incomeCategories.map(item => (
-              <div
-                className="category__unit"
-                data-categoryid={item._id}
-                data-type={item.type}
-                onClick={onClickUnit}
-              >
-                {item.name}
-              </div>
-            ))}
-            <div
-              className="category__unit__add"
-              data-type="수입"
-              onClick={onClickAddBtn}
-            >
-              <i data-type="수입" className="fas fa-plus-circle" />
-            </div>
-          </div>
+          <IncomeCategory
+            incomeCategories={incomeCategories}
+            onClickUnit={onClickUnit}
+            onClickAddBtn={onClickAddBtn}
+          />
         )}
       </div>
       <div className="spending__category__setting">
         <div className="category__title">Spending Category</div>
         {spendingCategories && (
-          <div className="category__list">
-            {spendingCategories.map(item => (
-              <div
-                className="category__unit"
-                data-categoryid={item._id}
-                data-type={item.type}
-                onClick={onClickUnit}
-              >
-                {item.name}
-              </div>
-            ))}
-            <div
-              className="category__unit__add"
-              data-type="지출"
-              onClick={onClickAddBtn}
-            >
-              <i data-type="지출" className="fas fa-plus-circle" />
-            </div>
-          </div>
+          <SpendingCategory
+            spendingCategories={spendingCategories}
+            onClickUnit={onClickUnit}
+            onClickAddBtn={onClickAddBtn}
+          />
         )}
       </div>
       {modal && (
