@@ -80,7 +80,7 @@ const transactionCsv = async (ctx: Context): Promise<any> => {
     ctx.params.accountbookid,
   );
   const transactions = accountBook.transactions;
-  console.log('transactions', typeof transactions);
+  console.log('transactions', transactions);
 
   if (transactions) {
     const fields = [
@@ -96,10 +96,9 @@ const transactionCsv = async (ctx: Context): Promise<any> => {
     ];
     const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(transactions);
-    console.log(csv);
     return {
       message: 'success',
-      data: transactions,
+      data: csv,
     };
   }
   return {
