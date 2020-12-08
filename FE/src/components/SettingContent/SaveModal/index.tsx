@@ -9,7 +9,6 @@ export default function SaveModal({ saveAction, updateData, setSaveModal }) {
 
   const onClickOverlay = event => {
     setSaveModal(false);
-    event.nativeEvent.stopPropagtion();
   };
 
   const onClickSaveModalCancel = () => {
