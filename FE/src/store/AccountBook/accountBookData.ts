@@ -33,6 +33,12 @@ export const createStore = () => {
       this.accountBook.transactions = [...rest, transaction];
     },
 
+    deleteTransaction(id) {
+      this.accountBook.transactions = this.accountBook.transactions.filter(
+        ({ _id }) => id !== _id,
+      );
+    },
+
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
       accountBook.data.payments.reverse();
