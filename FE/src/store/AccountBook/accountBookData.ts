@@ -264,6 +264,9 @@ export const createStore = () => {
         item => item._id !== data.categoryId,
       );
     },
+    getPaymentByName(name: string) {
+      return this.accountBook.payments.find(payment => payment.name === name);
+    },
   };
 
   return store;
