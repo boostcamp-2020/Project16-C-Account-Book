@@ -1,32 +1,47 @@
-import React, { useCallback } from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import styles from './listfilter.modules.scss';
 
+import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import CommaMaker from '../../../../util/commaForMoney';
+
 const Filter = ({
-  selectedCategory,
-  selectCategory,
+  selectedCategories,
+  selectCategories,
   selectedTypes,
   selectType,
 }: {
-  selectedCategory: string;
-  selectCategory: (value: string) => void;
+  selectedCategories: string[];
+  selectCategories: (value: string[]) => void;
   selectedTypes: string[];
   selectType: (values: string[]) => void;
 }) => {
-  const onCategoryClicked = useCallback(
-    (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const {
+    categoryPool,
+    filteredPriceIn,
+    filteredPriceOut,
+  } = useTransactionData(store => ({
+    categoryPool: store.accountBook.categories,
+    filteredPriceIn: store.filteredPriceIn,
+    filteredPriceOut: store.filteredPriceOut,
+  }));
+
+  const onCategoryChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
       const targetElement = e.target as HTMLInputElement;
-      if (selectedCategory === targetElement.value) {
-        selectCategory('all');
-        targetElement.checked = false;
+      if (selectedCategories.includes(targetElement.value)) {
+        const rest = selectedCategories.filter(
+          category => category !== targetElement.value,
+        );
+        selectCategories(rest);
       } else {
-        selectCategory(targetElement.value);
+        selectCategories([...selectedCategories, targetElement.value]);
       }
     },
-    [selectedCategory, selectCategory],
+    [selectedCategories, selectedCategories],
   );
 
   const onTypeClicked = useCallback(
-    (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const targetElement = e.target as HTMLInputElement;
       if (selectedTypes.includes(targetElement.value)) {
         const rest = selectedTypes.filter(type => type !== targetElement.value);
@@ -34,6 +49,7 @@ const Filter = ({
       } else {
         selectType([...selectedTypes, targetElement.value]);
       }
+      console.log('click ', selectedTypes);
     },
     [selectedTypes, selectType],
   );
@@ -41,84 +57,41 @@ const Filter = ({
   return (
     <div className={styles.container}>
       <div className={styles.inoutFilter}>
-        <div>
-          <input
-            type="checkbox"
-            name="inout"
-            id="in"
-            value="수입"
-            checked={selectedTypes.includes('수입')}
-            onClick={onTypeClicked}
-          />
-          <label htmlFor="in">
-            <span>+ 0</span>
+        {['수입', '지출'].map(type => (
+          <label key={type}>
+            <input
+              type="checkbox"
+              name="type"
+              value={type}
+              checked={selectedTypes.includes(type)}
+              onChange={onTypeClicked}
+            />
+            <span>
+              {type === '지출'
+                ? `-${CommaMaker(filteredPriceOut)}`
+                : `+${CommaMaker(filteredPriceIn)}`}
+            </span>
           </label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            name="inout"
-            id="out"
-            value="지출"
-            checked={selectedTypes.includes('지출')}
-            onClick={onTypeClicked}
-          />
-          <label htmlFor="out">
-            <span>- 0</span>
-          </label>
-        </div>
+        ))}
       </div>
       <div className={styles.categoryFilter}>
-        <label htmlFor="shopping">
-          <input
-            type="radio"
-            id="shopping"
-            name="category"
-            value="쇼핑"
-            onClick={onCategoryClicked}
-          />
-          쇼핑
-        </label>
-        <label htmlFor="movie">
-          <input
-            type="radio"
-            id="movie"
-            name="category"
-            value="영화"
-            onClick={onCategoryClicked}
-          />
-          영화
-        </label>
-        <label htmlFor="music">
-          <input
-            type="radio"
-            id="music"
-            name="category"
-            value="음악"
-            onClick={onCategoryClicked}
-          />
-          음악
-        </label>
-        <label htmlFor="food">
-          <input
-            type="radio"
-            id="food"
-            name="category"
-            value="음식"
-            onClick={onCategoryClicked}
-          />
-          음식
-        </label>
-        <label htmlFor="any">
-          <input
-            type="radio"
-            id="any"
-            name="category"
-            value="기타"
-            onClick={onCategoryClicked}
-          />
-          기타
-        </label>
+        {categoryPool
+          .filter(
+            ({ type }) =>
+              selectedTypes.length === 0 || selectedTypes.includes(type),
+          )
+          .map(({ name }) => (
+            <label key={name}>
+              <input
+                type="checkbox"
+                name="category"
+                value={name}
+                onChange={onCategoryChange}
+                checked={selectedCategories.includes(name)}
+              />
+              <span>{name}</span>
+            </label>
+          ))}
       </div>
     </div>
   );

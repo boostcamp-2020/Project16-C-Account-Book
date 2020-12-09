@@ -18,23 +18,47 @@
     cursor: pointer;
   }
 
-  input[type='radio'] + span:hover {
+  input[type='radio'][name='category'] + span:hover {
     background: #5aa4a7;
     color: #fff;
   }
 
-  input[type='radio']:checked + span {
+  input[type='radio'][name='category']:checked + span {
     border: 1px solid #23a3a7;
     background: #23a3a7;
+    color: #fff;
+  }
+
+  input[type='radio'][name='type'] + span:hover {
+    background: #f04419;
+    color: #fff;
+  }
+
+  input[type='radio'][name='type']:checked + span {
+    border: 1px solid #f04419;
+    background: #f04419;
     color: #fff;
   }
 
   .no__category {
     color: red;
   }
-}
-
-#category__input__container {
-  flex-wrap: wrap;
-  line-height: 55px;
+  .vertical__line {
+    border-right: 1px solid lightgrey;
+    height: 60%;
+  }
+  .category__input__container {
+    padding-left: 23px;
+    border-left: 1px solid lightgrey;
+  }
+  .type__input__conatiner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .category__input__container,
+  .type__input__conatiner {
+    flex-wrap: wrap;
+    line-height: 55px;
+  }
 }

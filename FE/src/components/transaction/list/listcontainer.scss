@@ -2,36 +2,29 @@
   width: 900px;
   height: 100%;
   padding: 10px 5px;
-  background-color: white;
-  border: 1px dotted #cdcdcd;
+  background-color: rgb(0, 0, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2em;
-
-  &:last-child {
-    margin-bottom: 5em;
-  }
+  padding-top: 2em;
+  overflow: scroll;
+  position: relative;
+  padding-bottom: 5em;
 }
 
 .transaction__add__button {
-  position: fixed;
-  bottom: 20px;
+  position: sticky;
+  bottom: -8%;
+  right: 0;
   border-radius: 30px;
-  background-color: white;
-  border: 3px solid #3eb924;
-  box-sizing: border-box;
-  height: 40px;
-  font-size: 20px;
+  background-color: #ffffff00;
+  border: none;
+  height: 60px;
+  width: 60px;
   color: #3eb924;
-  font-weight: 900;
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  align-items: center;
 
   .icon {
-    height: 25px;
-    width: 25px;
-    margin-right: 3px;
+    height: 100%;
+    width: 100%;
   }
 }

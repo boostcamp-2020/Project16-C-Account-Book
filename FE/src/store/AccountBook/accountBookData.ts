@@ -15,11 +15,23 @@ export const createStore = () => {
 
     filteredTransactions: {},
 
+    filteredPriceIn: 0,
+
+    filteredPriceOut: 0,
+
     addTransaction(transaction) {
       this.accountBook.transactions = [
         ...this.accountBook.transactions,
         transaction,
       ];
+    },
+
+    updateTransaction(transaction) {
+      const rest = this.accountBook.transactions.filter(
+        item => item._id !== transaction._id,
+      );
+
+      this.accountBook.transactions = [...rest, transaction];
     },
 
     async setAccountBook(id) {
@@ -49,30 +61,45 @@ export const createStore = () => {
       );
     },
 
+    initPrices() {
+      this.filteredPriceIn = 0;
+      this.filteredPriceOut = 0;
+    },
+
     filterTransaction(
-      category: string,
+      categories: string[],
       year: number,
       month: number,
       types: string[],
     ) {
       const transactions = this.getTransactionsByYearMonth(year, month);
 
-      const typeFiltered = transactions.filter(
-        (transaction: { type: string }) => {
-          return types.includes(transaction.type);
-        },
-      );
-
       const categoryFiltered =
-        category === 'all'
-          ? typeFiltered
-          : typeFiltered.filter(
+        categories.length === 0
+          ? transactions
+          : transactions.filter(
               (transaction: { category: { name: string } }) => {
-                return transaction.category.name === category;
+                return categories.includes(transaction.category.name);
               },
             );
 
-      const transactionsGroupByDate = categoryFiltered.reduce((acc, curr) => {
+      this.initPrices();
+      categoryFiltered.forEach(transaction => {
+        if (transaction.type === '지출') {
+          this.filteredPriceOut += transaction.cost;
+        } else if (transaction.type === '수입') {
+          this.filteredPriceIn += transaction.cost;
+        }
+      });
+
+      const typeFiltered =
+        types.length === 0
+          ? categoryFiltered
+          : categoryFiltered.filter((transaction: { type: string }) => {
+              return types.includes(transaction.type);
+            });
+
+      const transactionsGroupByDate = typeFiltered.reduce((acc, curr) => {
         acc[curr.date] = [...(acc[curr.date] || []), curr];
         return acc;
       }, {});

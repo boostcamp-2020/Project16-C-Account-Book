@@ -7,14 +7,19 @@ import Transactions from './transactions';
 import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
 
 const ListContainer = () => {
-  const [selectedCategory, selectCategory] = useState('all');
-  const [selectedTypes, selectType] = useState(['수입', '지출']);
+  const [selectedCategories, selectCategories] = useState([]);
+  const [selectedTypes, selectType] = useState([]);
 
-  const setTransactionAddModalVisible = useTransactionAddModalData(
-    store => store.setTransactionAddModalVisible,
-  );
+  const {
+    setTransactionAddModalVisible,
+    initInput,
+  } = useTransactionAddModalData(store => ({
+    setTransactionAddModalVisible: store.setTransactionAddModalVisible,
+    initInput: store.initInput,
+  }));
 
   const onAddButtonClicked = () => {
+    initInput();
     setTransactionAddModalVisible(true);
   };
 
@@ -22,24 +27,23 @@ const ListContainer = () => {
     <>
       <div className="transaction__list__container">
         <Filter
-          selectedCategory={selectedCategory}
-          selectCategory={selectCategory}
+          selectedCategories={selectedCategories}
+          selectCategories={selectCategories}
           selectedTypes={selectedTypes}
           selectType={selectType}
         />
         <Transactions
-          selectedCategory={selectedCategory}
+          selectedCategories={selectedCategories}
           selectedTypes={selectedTypes}
         />
+        <button
+          className="transaction__add__button"
+          type="button"
+          onClick={onAddButtonClicked}
+        >
+          <PlusCircleIcon className="icon" />
+        </button>
       </div>
-      <button
-        className="transaction__add__button"
-        type="button"
-        onClick={onAddButtonClicked}
-      >
-        <PlusCircleIcon className="icon" />
-        거래내역 추가
-      </button>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
@@ -10,9 +10,7 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
     setInput: store.setInput,
   }));
 
-  const onCategoryChange = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  ) => {
+  const onCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetElement = e.target as HTMLInputElement;
     const newCategory = {
       name: targetElement.dataset.name,
@@ -21,27 +19,57 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
     setInput({ ...input, category: { ...newCategory } });
   };
 
+  const onTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const targetElement = e.target as HTMLInputElement;
+
+    setInput({ ...input, type: targetElement.value });
+    console.log(input.type);
+  };
+
   return (
     <div className="item category__input">
       <div className="indicator">카테고리</div>
 
-      <div className="row" id="category__input__container">
-        {categoryPool ? (
-          categoryPool.map(({ name, icon }) => (
-            <label key={name}>
+      <div className="row">
+        <div className="type__input__conatiner">
+          {['수입', '지출'].map(type => (
+            <label key={type}>
               <input
                 type="radio"
-                name="category"
-                data-name={name}
-                data-icon={icon}
-                onClick={onCategoryChange}
+                name="type"
+                value={type}
+                onChange={onTypeChange}
+                checked={type === input.type}
               />
-              <span>{name}</span>
+              <span>{type}</span>
             </label>
-          ))
-        ) : (
-          <h3 className="no__category">카테고리를 설정해주세요.</h3>
-        )}
+          ))}
+        </div>
+        <div className="vertical__line" />
+        <div
+          className="row category__input__container"
+          id="category__input__container"
+        >
+          {categoryPool ? (
+            categoryPool
+              .filter(({ type }) => type === input.type)
+              .map(({ name, icon }) => (
+                <label key={name}>
+                  <input
+                    type="radio"
+                    name="category"
+                    data-name={name}
+                    data-icon={icon}
+                    onChange={onCategoryChange}
+                    checked={name === input.category.name}
+                  />
+                  <span>{name}</span>
+                </label>
+              ))
+          ) : (
+            <h3 className="no__category">카테고리를 설정해주세요.</h3>
+          )}
+        </div>
       </div>
     </div>
   );

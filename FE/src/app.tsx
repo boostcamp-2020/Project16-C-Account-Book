@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PaymentProvider from './store/PaymentMethod/paymentMethodContext';
 import DateInfoProvider from './store/DateInfo/dateInfoContext';
 import TransactionInfoProvider from './store/AccountBook/accountBookDataContext';
-import TransactionFormModalProvider from './store/TransactionFormModal/TransactionFormModalContext';
 
 import './app.scss';
 
@@ -32,11 +31,9 @@ const App = () => {
               <Route exact path="/calendar">
                 <CalendarPage />
               </Route>
+              <Route exact path="/transaction" component={TransactionPage} />
               <Route exact path="/chart" component={ChartPage} />
               <Route exact path="/setting" component={SettingPage} />
-              <TransactionFormModalProvider>
-                <Route exact path="/transaction" component={TransactionPage} />
-              </TransactionFormModalProvider>
             </Switch>
           </Router>
         </PaymentProvider>
