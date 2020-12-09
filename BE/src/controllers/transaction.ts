@@ -13,6 +13,7 @@ const exportCSV = async (ctx: Context): Promise<Context['body']> => {
 const importCSV = async (ctx: Context): Promise<Context['body']> => {
   const result = await service.importCSV(ctx);
   const csv = result.data;
+  console.log('!', csv);
   for (var token of csv) {
     console.log('나와');
   }

@@ -109,8 +109,12 @@ const exportCSV = async (ctx: Context): Promise<any> => {
 };
 
 const importCSV = async (ctx: Context): Promise<any> => {
-  if (ctx) {
-    console.log(ctx.request.files);
+  if (ctx) {    
+    const csvDatas = ctx.request.body;
+    const csvLength = ctx.request.body.csvLength;
+    console.log(csvDatas, csvLength);
+    // console.log(csvDatas.split(','));
+
     return {
       message: 'success',
       data: ctx.request.files,
