@@ -15,7 +15,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-weight: 1000;
-    font-size: 80px;
+    font-size: 8vh;
     animation: titleShow 1.5s;
     @keyframes titleShow {
       from {
@@ -24,7 +24,7 @@
       }
     }
     &::first-letter {
-      font-size: 100px;
+      font-size: 10vh;
     }
     text-shadow: $selectedTextShadow;
     color: $dark-emphasize-font-color;
