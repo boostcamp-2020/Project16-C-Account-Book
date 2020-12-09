@@ -5,6 +5,7 @@ export const createStore = () => {
     accountBook: {
       _id: null,
       name: null,
+      startday: null,
       description: null,
       categories: [],
       payments: [],

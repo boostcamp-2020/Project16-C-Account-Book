@@ -31,9 +31,7 @@ const App = () => {
               <Route exact path="/calendar">
                 <CalendarPage />
               </Route>
-
               <Route exact path="/transaction" component={TransactionPage} />
-
               <Route exact path="/chart" component={ChartPage} />
               <Route exact path="/setting" component={SettingPage} />
             </Switch>

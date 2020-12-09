@@ -36,7 +36,7 @@ const create = async ({
   const defaultCategory = await CategoryModel.get();
   const information = {
     name,
-    startday: 0,
+    startday: 'SUN',
     description,
     users: [user],
     categories: [...defaultCategory],

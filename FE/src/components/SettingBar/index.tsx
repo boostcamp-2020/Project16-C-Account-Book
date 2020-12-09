@@ -3,9 +3,12 @@ import { useHistory } from 'react-router-dom';
 
 import './settingBar.scss';
 
-export default function SettingBar({ settingType, setSettingType }) {
+export default function SettingBar({
+  accountBookId,
+  settingType,
+  setSettingType,
+}) {
   const history = useHistory();
-  const accountBookId = history.location.state.id;
 
   const onClickBackBtn = event => {
     history.push({

@@ -1,3 +1,6 @@
+@use '../../styles/mixins.scss' as *;
+@use '../../styles/values.scss' as *;
+
 .setting__page__wrapper {
   position: absolute;
   width: 100%;
