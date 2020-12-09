@@ -1,12 +1,12 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 export default function LineChart() {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
-  const YearMonthTransactions = useTransactionData(store =>
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const YearMonthTransactions = useAccountBookData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ActionButton from '../../Common/ActionButton';
 import './accountBookControl.scss';
 
 export default function AccountBookControl({ setCreate }) {
@@ -10,14 +11,9 @@ export default function AccountBookControl({ setCreate }) {
   return (
     <div className="acbook__container">
       <div className="acbook__title">Account Book List</div>
-
-      <button
-        type="button"
-        onClick={createAccountBook}
-        className="new__accountbook"
-      >
-        Add
-      </button>
+      <div className="acbook__add__btn">
+        <ActionButton type="large" content="Add" action={createAccountBook} />
+      </div>
     </div>
   );
 }

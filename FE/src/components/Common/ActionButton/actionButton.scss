@@ -1,0 +1,11 @@
+@use '../../../styles/mixins.scss' as *;
+@use '../../../styles/values.scss' as *;
+
+.action__button {
+  &.large {
+    @include large-button-design;
+  }
+  &.general {
+    @include general-button-design;
+  }
+}

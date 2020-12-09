@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback } from 'react';
 import styles from './listfilter.modules.scss';
 
-import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
 const Filter = ({
@@ -19,7 +19,7 @@ const Filter = ({
     categoryPool,
     filteredPriceIn,
     filteredPriceOut,
-  } = useTransactionData(store => ({
+  } = useAccountBookData(store => ({
     categoryPool: store.accountBook.categories,
     filteredPriceIn: store.filteredPriceIn,
     filteredPriceOut: store.filteredPriceOut,

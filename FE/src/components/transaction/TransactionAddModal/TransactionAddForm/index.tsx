@@ -8,7 +8,7 @@ import ContentInput from '../ContentInput';
 import './index.scss';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
-import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const TransactionAddForm = ({ accountbookId }) => {
   const {
@@ -31,7 +31,7 @@ const TransactionAddForm = ({ accountbookId }) => {
     accountbook,
     addTransactionToStore,
     updateTransactionToStore,
-  } = useTransactionData(store => ({
+  } = useAccountBookData(store => ({
     accountbook: store.accountBook,
     categoryPool: store.accountBook.categories,
     paymentPool: store.accountBook.payments,
