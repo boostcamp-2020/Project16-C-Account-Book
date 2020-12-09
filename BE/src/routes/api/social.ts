@@ -6,6 +6,6 @@ const router = new Router();
 
 // api/social
 
-router.post('/user/accountbook', controller.post);
-router.delete('/user/accountbook/:accountbookid', controller.del);
+router.post('/user', controller.post);
+router.delete('/:accountbookid/user', controller.del);
 export default router;

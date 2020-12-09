@@ -83,4 +83,30 @@ const getCode = async (ctx: Context): Promise<any> => {
   return false;
 };
 
-export default { get, getDetail, post, patch, patchStartday, del, getCode };
+const addUser = async (ctx: Context): Promise<any> => {
+  const { code } = ctx.request.body;
+  const userInfo = ctx.user;
+  const updateResult = await accountBookModel.addUser(code, userInfo);
+  if (updateResult) return true;
+  return false;
+};
+
+const delUser = async (ctx: Context): Promise<any> => {
+  const accountBookId = ctx.params.accountbookid;
+  const userInfo = ctx.user;
+  const updateResult = await accountBookModel.delUser(accountBookId, userInfo);
+  if (updateResult) return true;
+  return false;
+};
+
+export default {
+  get,
+  getDetail,
+  post,
+  patch,
+  patchStartday,
+  del,
+  getCode,
+  addUser,
+  delUser,
+};

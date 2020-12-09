@@ -275,6 +275,37 @@ const deleteCategory = async (
   return false;
 };
 
+const addUser = async (code: string, userInfo: any): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ code });
+  if (curAccountBook) {
+    const curUser = curAccountBook.users;
+    curUser.push(userInfo);
+    const updateResult = await AccountBookModel.update(
+      { code },
+      { users: curUser },
+    );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
+const delUser = async (_id: string, userInfo: any): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id });
+  if (curAccountBook) {
+    const newUsers = curAccountBook.users.filter(
+      value => value.userid !== userInfo.userid,
+    );
+    const updateResult = await AccountBookModel.update(
+      { _id },
+      { users: newUsers },
+    );
+    if (updateResult.nModified) return true;
+    return false;
+  }
+  return false;
+};
+
 export default {
   get,
   getDetail,
@@ -292,4 +323,6 @@ export default {
   updateCategory,
   deleteCategory,
   updateCode,
+  addUser,
+  delUser,
 };
