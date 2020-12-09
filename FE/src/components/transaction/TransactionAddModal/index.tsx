@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
 import TransactionAddForm from './TransactionAddForm';
-import MessageInput from './MessageInput';
+import MessageInputForm from './MessageInputForm';
 
 import './TransactionAddModal.scss';
 
@@ -37,30 +37,7 @@ const TransactionAddModal = ({ accountbookId }: { accountbookId: string }) => {
         {!messageVisible ? (
           <TransactionAddForm accountbookId={accountbookId} />
         ) : (
-          <>
-            <button
-              type="button"
-              className="message__input__back"
-              onClick={() => setMessageVisible(false)}
-            >
-              뒤로가기
-            </button>
-            <div className="form">
-              <MessageInput />
-              <div className="transaction__button__container">
-                <button type="button" className="transaction__submit__button">
-                  확인
-                </button>
-                <button
-                  type="button"
-                  className="transaction__cancel__button"
-                  onClick={() => setMessage('')}
-                >
-                  지우기
-                </button>
-              </div>
-            </div>
-          </>
+          <MessageInputForm />
         )}
       </div>
     </div>
