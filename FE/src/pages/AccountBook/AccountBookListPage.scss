@@ -5,6 +5,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+
   background-color: $dark-background-color;
   animation: showPage 1s ease;
 
@@ -12,5 +13,12 @@
     from {
       transform: translateX(-100%);
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .acbook__list__container {
+    position: inherit;
+    flex-direction: column;
   }
 }

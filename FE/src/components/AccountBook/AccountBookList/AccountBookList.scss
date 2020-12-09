@@ -105,4 +105,15 @@
       }
     }
   }
+  @media screen and (max-width: 768px) {
+    .acbook {
+      width: 200px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .acbook__list {
+    padding: 0;
+  }
 }
