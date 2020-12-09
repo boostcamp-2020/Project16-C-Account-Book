@@ -13,7 +13,7 @@ import SaveModal from '../../components/SettingContent/SaveModal';
 import './settingPage.scss';
 
 export default function SettingPage() {
-  const [settingType, setSettingType] = useState('calendar');
+  const [settingType, setSettingType] = useState('category');
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);
   const [updateData, setUpdateData] = useState({});
@@ -38,7 +38,9 @@ export default function SettingPage() {
           setUpdateData={setUpdateData}
         />
       )}
-      {settingType === 'category' && <CategorySetting />}
+      {settingType === 'category' && (
+        <CategorySetting accountBookId={accountBookId.id} />
+      )}
       {settingType === 'csv' && <CSVSetting />}
       {saveModal && (
         <SaveModal
