@@ -4,7 +4,7 @@ import './index.scss';
 import { useHistory } from 'react-router-dom';
 import { iTransactionItem } from '../../../../types/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
-import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
 
 const TransactionItem = ({
@@ -26,7 +26,7 @@ const TransactionItem = ({
 
   const accountBookId = useHistory().location.state.id;
 
-  const deleteTransactionInStore = useTransactionData(
+  const deleteTransactionInStore = useAccountBookData(
     store => store.deleteTransaction,
   );
 
