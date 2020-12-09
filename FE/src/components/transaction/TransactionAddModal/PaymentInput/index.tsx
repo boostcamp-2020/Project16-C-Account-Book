@@ -33,7 +33,7 @@ const PaymentInput = ({ paymentPool }) => {
                 data-name={name}
                 data-description={desc}
                 onChange={onPaymentChange}
-                checked={name === input.payment.name}
+                checked={name === input.payment?.name}
               />
               <div className="payment__card__view">
                 <div className="payment__card__title">{name}</div>
