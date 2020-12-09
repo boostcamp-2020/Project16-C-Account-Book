@@ -34,7 +34,7 @@
     .category__unit__add {
       @include categoryUnit;
       .fas.fa-plus-circle {
-        color: white;
+        color: $white;
       }
     }
   }
