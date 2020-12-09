@@ -43,7 +43,7 @@
 
 @mixin large-button-design {
   @include buttonDefaultSetting;
-  border: 1px solid $white;
+  border: 1px solid $dark-emphasize-font-color;
   color: $white;
 
   background-color: $modal-button-background;

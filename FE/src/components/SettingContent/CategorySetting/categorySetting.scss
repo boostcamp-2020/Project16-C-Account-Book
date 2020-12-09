@@ -3,19 +3,18 @@
 
 @mixin categoryUnit {
   padding: 0.5em 1.5em;
-  border: 1px solid #979797;
+  border: 1px solid $dark-border-color;
   border-radius: 20px;
   cursor: pointer;
   &:hover {
     background-color: $light-black;
     text-shadow: $selectedTextShadow;
-    box-shadow: $selectedBoxShadow;
   }
 }
 @mixin categorySettingBox {
   width: 55%;
   height: 40%;
-  border: 1px solid #979797;
+  border: 1px solid $dark-border-color;
   border-radius: 6px;
   .category__title {
     font-size: 1.5em;
