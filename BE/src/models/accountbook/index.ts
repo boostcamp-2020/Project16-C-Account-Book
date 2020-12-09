@@ -67,6 +67,12 @@ const update = async (
   return !!updateResult.nModified;
 };
 
+const updateCode = async (_id: string, code: string): Promise<any> => {
+  const updateData = { code };
+  const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  return !!updateResult.nModified;
+};
+
 const updateStartday = async (
   _id: string,
   {
@@ -285,4 +291,5 @@ export default {
   addCategory,
   updateCategory,
   deleteCategory,
+  updateCode,
 };
