@@ -19,4 +19,9 @@ export const updateTransaction = async (accountbookId, transaction) => {
   return res;
 };
 
-export const deleteTransaction = () => {};
+export const deleteTransaction = async (accountbookId, transactionId) => {
+  const url = `${process.env.SERVER_URL}/api/accountbook/${accountbookId}/transaction/${transactionId}`;
+  const res = await deleteFetch(url, {});
+
+  return res;
+};
