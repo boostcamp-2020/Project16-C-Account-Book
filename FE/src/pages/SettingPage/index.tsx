@@ -14,6 +14,7 @@ import useLoginCheck from '../../service/useLoginCheck';
 import './settingPage.scss';
 
 export default function SettingPage() {
+
   useLoginCheck();
 
   const [settingType, setSettingType] = useState('category');
@@ -41,6 +42,7 @@ export default function SettingPage() {
           setUpdateData={setUpdateData}
         />
       )}
+
       {settingType === 'category' && (
         <CategorySetting accountBookId={accountBookId.id} />
       )}

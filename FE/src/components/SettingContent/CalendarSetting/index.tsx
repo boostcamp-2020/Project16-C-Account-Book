@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 import DayRadioButton from './DayRadioButton';
@@ -15,9 +16,11 @@ export default function CalendarSetting({
   setUpdateData,
   setSaveAction,
 }) {
+
   const start = useAccountBookData(store => store.accountBook.startday);
 
   const [startDay, setStartDay] = useState('');
+
 
   const onClickSaveBtn = () => {
     setSaveModal(() => true);
@@ -35,6 +38,7 @@ export default function CalendarSetting({
     <div className="calendar__setting__container">
       <div className="calendar__setting__startday">
         <div className="calendar__setting__title">Start Day</div>
+
         <DayRadioButton startDay={startDay} setStartDay={setStartDay} />
         <WeekHeader startDay={startDay} />
         <div className="calendar__save__btn">

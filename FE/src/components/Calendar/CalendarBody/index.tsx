@@ -14,6 +14,7 @@ export default function CalendarBody() {
   const YearMonthTransactions = useAccountBookData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
+
   const startDay = useAccountBookData(store => store.accountBook.startday);
 
   const yy = DateInfo.year;
