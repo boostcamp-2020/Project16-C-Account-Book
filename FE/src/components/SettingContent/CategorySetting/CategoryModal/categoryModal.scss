@@ -39,11 +39,13 @@
 
       .create__category__input {
         width: 50%;
+        background-color: $input-background-color;
         @include input-form;
       }
 
       .edit__category__input {
         width: 50%;
+        background-color: $input-background-color;
         @include input-form;
       }
 

@@ -1,7 +1,10 @@
+@use '../../../../styles/mixins.scss' as *;
+
 select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
+  @include input-form;
 }
 
 .row__item {
