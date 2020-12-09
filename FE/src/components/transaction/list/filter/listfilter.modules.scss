@@ -69,7 +69,8 @@
       display: none;
     }
 
-    input:checked + span {
+    input:checked + span,
+    input:hover + span {
       padding: 3px;
       border-bottom: 2px solid lightseagreen;
       color: lightseagreen;
