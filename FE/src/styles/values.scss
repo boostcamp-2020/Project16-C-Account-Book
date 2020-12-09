@@ -17,7 +17,10 @@ $spending-color: #ee4337;
 $spinner-background-color: #bbbbbb;
 $spin-color: #282727;
 
+//transaction
 $transaction-add-btn-color: #3eb924;
+$transaction-category-hover-color: lightseagreen;
+$transaction-delete-button-color: rgb(212, 49, 49);
 // modal
 $modal-background: rgba(0, 0, 0, 0.9);
 $modal-button-background: rgba(0, 0, 0, 0.1);
@@ -28,5 +31,5 @@ $basic-border-radius: 6px;
 // dark-mode
 $dark-background-color: #111111;
 $dark-emphasize-font-color: #f1f1f1;
-$dark-general-font-color: #bbb;
+$dark-general-font-color: #eee;
 $dark-border-color: #979797;
