@@ -6,7 +6,7 @@
   height: 100vh;
   margin: 0 0 0;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: $dark-background-color;
 
   .title {
     position: absolute;
@@ -27,7 +27,7 @@
       font-size: 100px;
     }
     text-shadow: $selectedTextShadow;
-    color: $white;
+    color: $dark-emphasize-font-color;
   }
 
   .login-button-container {
