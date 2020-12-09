@@ -9,10 +9,13 @@ import CategorySetting from '../../components/SettingContent/CategorySetting';
 import CSVSetting from '../../components/SettingContent/CSVSetting';
 import useAccountBook from '../../service/useAccountBookSetting';
 import SaveModal from '../../components/SettingContent/SaveModal';
+import useLoginCheck from '../../service/useLoginCheck';
 
 import './settingPage.scss';
 
 export default function SettingPage() {
+  useLoginCheck();
+
   const [settingType, setSettingType] = useState('category');
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);

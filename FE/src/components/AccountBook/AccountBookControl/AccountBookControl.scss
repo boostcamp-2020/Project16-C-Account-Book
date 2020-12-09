@@ -19,23 +19,9 @@
     cursor: pointer;
   }
 
-  .new__accountbook {
-    @include buttonDefaultSetting;
-    border: 1px solid $white;
-    color: $white;
+  .acbook__add__btn {
     position: absolute;
     top: 15em;
     left: 23em;
-    width: 8em;
-    height: 50px;
-    background-color: $modal-button-background;
-
-    font-size: 1em;
-    z-index: 3;
-    &:hover {
-      background-color: $light-black;
-      text-shadow: $selectedTextShadow;
-      box-shadow: $selectedBoxShadow;
-    }
   }
 }

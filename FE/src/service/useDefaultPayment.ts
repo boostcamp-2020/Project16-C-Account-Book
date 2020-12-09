@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-import { useRootData } from '../store/PaymentMethod/paymentMethodHook';
+import { useDefaultPaymentData } from '../store/PaymentMethod/paymentMethodHook';
 
 const useDefaultPayment = () => {
-  const defaultMethod = useRootData(store => store.defaultMethods);
-  const initialDefaultMethods = useRootData(store => store.initialMethods);
+  const defaultMethod = useDefaultPaymentData(store => store.defaultMethods);
+  const initialDefaultMethods = useDefaultPaymentData(
+    store => store.initialMethods,
+  );
 
   const getDefaultMethod = () => {
     initialDefaultMethods();

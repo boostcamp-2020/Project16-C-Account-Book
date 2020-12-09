@@ -1,0 +1,16 @@
+.select__startday {
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  padding: 0 2em;
+  gap: 9.5%;
+  position: relative;
+
+  label {
+    position: relative;
+  }
+
+  input {
+    position: absolute;
+  }
+}

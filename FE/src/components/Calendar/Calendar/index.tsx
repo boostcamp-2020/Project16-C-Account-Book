@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
@@ -13,10 +13,10 @@ import './calendar.scss';
 export default function Calendar() {
   const [detailModal, setDetailModal] = useState(false);
 
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
-  const setDateInfo = useRootData(store => store.setCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
 
-  const startDay = useTransactionData(store => store.accountBook.startday);
+  const startDay = useAccountBookData(store => store.accountBook.startday);
 
   const onClickCalBody = useCallback(
     event => {

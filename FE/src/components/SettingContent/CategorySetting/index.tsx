@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 
 import IncomeCategory from './IncomeCategory';
 import SpendingCategory from './SpendingCategory';
@@ -14,10 +14,10 @@ export default function CategorySetting({ accountBookId }) {
   const [categoryType, setCategoryType] = useState('');
   const [categoryId, setCategoryId] = useState('');
 
-  const incomeCategories = useTransactionData(store =>
+  const incomeCategories = useAccountBookData(store =>
     store.getIncomeCategories(),
   );
-  const spendingCategories = useTransactionData(store =>
+  const spendingCategories = useAccountBookData(store =>
     store.getSpendingCategories(),
   );
 
