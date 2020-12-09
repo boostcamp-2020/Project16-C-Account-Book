@@ -27,8 +27,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #979797;
-    color: #979797;
+    border: 1px solid $dark-border-color;
+    color: $dark-border-color;
 
     animation: detailFormShow 1s ease;
     @keyframes detailFormShow {
@@ -45,7 +45,7 @@
       display: flex;
       gap: 1em;
       font-size: 1.2em;
-      color: white;
+      color: $dark-general-font-color;
       text-shadow: $selectedTextShadow;
     }
     .cal-transition {
@@ -61,10 +61,10 @@
         width: 100%;
         display: flex;
         padding: 1em;
-        border: 1px solid #979797;
+        border: 1px solid $dark-border-color;
         border-radius: $basic-border-radius;
         background-color: #333;
-        color: #979797;
+        color: $dark-emphasize-font-color;
         position: relative;
         animation: specificDataShow 1s backwards;
 
@@ -104,7 +104,7 @@
         text-align: center;
         font-size: 3em;
         border-radius: $basic-border-radius;
-        color: white;
+        color: $dark-emphasize-font-color;
 
         text-shadow: $selectedTextShadow;
       }

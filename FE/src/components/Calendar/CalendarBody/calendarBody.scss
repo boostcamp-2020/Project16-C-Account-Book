@@ -19,7 +19,7 @@ td {
 }
 .day {
   color: $white;
-  background-color: #222;
+  background-color: $light-black;
   border-radius: 6px;
   position: relative;
 
@@ -38,7 +38,7 @@ td {
   }
 }
 .today {
-  background: rgb(235, 109, 109);
+  background: $calendar-today-color;
   animation: todayColor 2s;
   width: 40px;
   height: 40px;
