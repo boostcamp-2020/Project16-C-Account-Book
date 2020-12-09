@@ -4,6 +4,7 @@ import controller from '@controllers/account-book';
 import transactionRouter from './transaction';
 import paymentRouter from './payment';
 import categoryRouter from './category';
+import socialRouter from './social';
 
 const router = new Router();
 
@@ -21,4 +22,5 @@ router.get('/:accountbookid', controller.getDetail);
 router.use('/:accountbookid/transaction', transactionRouter.routes());
 router.use('/:accountbookid/payment', paymentRouter.routes());
 router.use('/:accountbookid/category', categoryRouter.routes());
+router.use('/:accountbookid/social', socialRouter.routes());
 export default router;

@@ -24,7 +24,7 @@ const ContentInput = () => {
         type="text"
         name="memo"
         onChange={onContentChange}
-        value={input.content}
+        value={input.content || ''}
       />
     </div>
   );

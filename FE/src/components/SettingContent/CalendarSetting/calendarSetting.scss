@@ -11,7 +11,7 @@
 
   .calendar__setting__startday {
     position: relative;
-    width: 70%;
+    width: 55%;
     height: 40%;
     border: 1px solid #979797;
     border-radius: 6px;
@@ -24,22 +24,6 @@
       text-shadow: $selectedTextShadow;
     }
 
-    .select__startday {
-      justify-content: center;
-      width: 100%;
-      display: flex;
-      padding: 0 2em;
-      gap: 9.5%;
-      position: relative;
-
-      label {
-        position: relative;
-      }
-
-      input {
-        position: absolute;
-      }
-    }
     .start__day__title {
       position: absolute;
       width: 100%;
@@ -64,25 +48,12 @@
         }
       }
     }
-    .calendar__setting__save {
-      @include buttonDefaultSetting;
-      border: 1px solid $white;
-      color: $white;
+
+    .calendar__save__btn {
       position: absolute;
       top: 2em;
-      right: 3em;
+      right: 0;
       transform: translateX(-50%);
-      width: 5em;
-      height: 30px;
-      background-color: $modal-button-background;
-
-      font-size: 1em;
-
-      &:hover {
-        background-color: $light-black;
-        text-shadow: $selectedTextShadow;
-        box-shadow: $selectedBoxShadow;
-      }
     }
   }
 }

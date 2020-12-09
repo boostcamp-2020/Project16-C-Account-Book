@@ -1,3 +1,5 @@
+//개수가 고정이기 때문에 특정값을 넣어 관리할 수 있다.
+
 @mixin default-card {
   .carousel__cell:nth-child(1) {
     transform: rotateY(0deg) translateZ(288px);

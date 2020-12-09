@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 
 import './index.scss';
+import { useHistory } from 'react-router-dom';
 import { iTransactionItem } from '../../../../types/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
 
 const TransactionItem = ({
-  id,
+  id: transactionId,
   date,
   category,
   content,
@@ -23,6 +26,12 @@ const TransactionItem = ({
     setInput: store.setInput,
   }));
 
+  const accountBookId = useHistory().location.state.id;
+
+  const deleteTransactionInStore = useAccountBookData(
+    store => store.deleteTransaction,
+  );
+
   const onTransactionClicked = () => {
     if (buttonReveal === 'reveal') setButtonReveal('hide');
     else setButtonReveal('reveal');
@@ -34,7 +43,7 @@ const TransactionItem = ({
     const month = dateArr[1];
     const day = dateArr[2];
     setInput({
-      _id: id,
+      _id: transactionId,
       category,
       payment,
       cost,
@@ -45,6 +54,22 @@ const TransactionItem = ({
       content,
     });
     setTransactionAddModalVisible(true);
+  };
+
+  const onDeleteButtonClicked = async e => {
+    e.stopPropagation();
+    try {
+      const { status } = await deleteTransactionApi(
+        accountBookId,
+        transactionId,
+      );
+
+      if (status !== 200) throw new Error();
+      deleteTransactionInStore(transactionId);
+    } catch (error) {
+      console.error(error);
+      alert('삭제에 실패했습니다.');
+    }
   };
 
   return (

@@ -34,6 +34,12 @@ export const createStore = () => {
       this.accountBook.transactions = [...rest, transaction];
     },
 
+    deleteTransaction(id) {
+      this.accountBook.transactions = this.accountBook.transactions.filter(
+        ({ _id }) => id !== _id,
+      );
+    },
+
     async setAccountBook(id) {
       const accountBook = await getTargetAccountBook(id);
       accountBook.data.payments.reverse();
@@ -229,6 +235,34 @@ export const createStore = () => {
       }
 
       return chartInfoArray;
+    },
+
+    getIncomeCategories() {
+      return this.accountBook.categories.filter(item => item.type === '수입');
+    },
+    getSpendingCategories() {
+      return this.accountBook.categories.filter(item => item.type === '지출');
+    },
+    createCategories(data: { name: string; icon: number; type: string }) {
+      this.accountBook.categories = [...this.accountBook.categories, data];
+    },
+    updateCategory(data: {
+      categoryId: string;
+      name: string;
+      icon: number;
+      type: string;
+    }) {
+      this.accountBook.categories = this.accountBook.categories.map(item => {
+        if (item._id === data.categoryId) {
+          item = { ...item, name: data.name, icon: data.icon, type: data.type };
+        }
+        return item;
+      });
+    },
+    deleteCategory(data: { categoryId: string }) {
+      this.accountBook.categories = this.accountBook.categories.filter(
+        item => item._id !== data.categoryId,
+      );
     },
   };
 

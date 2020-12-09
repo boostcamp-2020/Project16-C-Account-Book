@@ -9,11 +9,15 @@ import CategorySetting from '../../components/SettingContent/CategorySetting';
 import CSVSetting from '../../components/SettingContent/CSVSetting';
 import useAccountBook from '../../service/useAccountBookSetting';
 import SaveModal from '../../components/SettingContent/SaveModal';
+import useLoginCheck from '../../service/useLoginCheck';
 
 import './settingPage.scss';
 
 export default function SettingPage() {
-  const [settingType, setSettingType] = useState('calendar');
+
+  useLoginCheck();
+
+  const [settingType, setSettingType] = useState('category');
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);
   const [updateData, setUpdateData] = useState({});
@@ -38,7 +42,10 @@ export default function SettingPage() {
           setUpdateData={setUpdateData}
         />
       )}
-      {settingType === 'category' && <CategorySetting />}
+
+      {settingType === 'category' && (
+        <CategorySetting accountBookId={accountBookId.id} />
+      )}
       {settingType === 'csv' && <CSVSetting />}
       {saveModal && (
         <SaveModal

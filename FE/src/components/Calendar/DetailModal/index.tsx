@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
 import './detailModal.scss';
 
 export default function DetailModal({ setDetailModal }) {
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
-  const SpecificTransactions = useTransactionData(
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const SpecificTransactions = useAccountBookData(
     store => store.getSpecificTransactions,
   );
 

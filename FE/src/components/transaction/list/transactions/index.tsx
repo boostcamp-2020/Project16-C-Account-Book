@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
-import { useRootData } from '../../../../store/DateInfo/dateInfoHook';
-import { useTransactionData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const Transactions = ({
   selectedCategories,
@@ -17,13 +17,13 @@ const Transactions = ({
     filteredTransactions,
     filterTransaction,
     transactions,
-  } = useTransactionData(store => ({
+  } = useAccountBookData(store => ({
     transactions: store.accountBook.transactions,
     filteredTransactions: store.filteredTransactions,
     filterTransaction: store.filterTransaction,
   }));
 
-  const { year, month } = useRootData(store => store.nowCalendarInfo);
+  const { year, month } = useDateInfoData(store => store.nowCalendarInfo);
 
   useEffect(() => {
     filterTransaction(selectedCategories, year, month + 1, selectedTypes);
