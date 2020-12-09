@@ -1,5 +1,4 @@
 import React from 'react';
-import { PlusCircleIcon } from '@primer/octicons-react';
 
 import './accountBookControl.scss';
 

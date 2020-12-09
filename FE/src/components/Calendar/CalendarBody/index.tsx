@@ -4,6 +4,8 @@ import CalculateDate from '../../../util/calculateDate';
 import { useRootData } from '../../../store/DateInfo/dateInfoHook';
 import { useTransactionData } from '../../../store/AccountBook/accountBookInfoHook';
 import CommaMaker from '../../../util/commaForMoney';
+
+import { StartDayMap, CalendarBodyTable } from '../../../util/calendarTemplate';
 import './calendarBody.scss';
 
 export default function CalendarBody() {
@@ -12,6 +14,7 @@ export default function CalendarBody() {
   const YearMonthTransactions = useTransactionData(store =>
     store.getTransactionsForCalendar(DateInfo.year, DateInfo.month + 1),
   );
+  const startDay = useTransactionData(store => store.accountBook.startday);
 
   const yy = DateInfo.year;
   const mm = DateInfo.month;
@@ -29,93 +32,95 @@ export default function CalendarBody() {
   let startCount;
   const countDay = 0;
 
-  const tableInfo = [
-    [0, 1, 2, 3, 4, 5, 6],
-    [0, 1, 2, 3, 4, 5, 6],
-    [0, 1, 2, 3, 4, 5, 6],
-    [0, 1, 2, 3, 4, 5, 6],
-    [0, 1, 2, 3, 4, 5, 6],
-    [0, 1, 2, 3, 4, 5, 6],
-  ];
+  const tableInfo = CalendarBodyTable[StartDayMap[startDay]];
 
   return (
     <>
-      {tableInfo.map((item, horizon) => {
-        return (
-          <tr key={horizon}>
-            {item.map((day, index) => {
-              if (horizon === 0 && !startCount && index === firstDay.getDay()) {
-                startCount = 1;
-              }
-              if (!startCount) {
-                return <td key={v4()} />;
-              }
+      {tableInfo &&
+        tableInfo.map((item, horizon) => {
+          return (
+            <tr key={horizon}>
+              {item.map(day => {
+                if (horizon === 0 && !startCount && day === firstDay.getDay()) {
+                  startCount = 1;
+                }
+                if (!startCount) {
+                  return <td key={v4()} />;
+                }
 
-              ++countDay;
+                ++countDay;
 
-              if (countDay === lastDay.getDate()) {
-                startCount = 0;
-              }
+                if (countDay === lastDay.getDate()) {
+                  startCount = 0;
+                }
 
-              return (
-                <>
-                  {markToday && markToday === countDay ? (
-                    <td
-                      key={`day${countDay}`}
-                      className={`day ${countDay}`}
-                      data-date={countDay}
-                    >
-                      <div className="today" data-date={countDay}>
+                return (
+                  <>
+                    {markToday && markToday === countDay ? (
+                      <td
+                        key={`day${countDay}`}
+                        className={`day ${countDay}`}
+                        data-date={countDay}
+                      >
+                        <div className="today" data-date={countDay}>
+                          {countDay}
+                        </div>
+                        {YearMonthTransactions[String(countDay)] && (
+                          <>
+                            <div className="income__info" data-date={countDay}>
+                              +
+                              {CommaMaker(
+                                YearMonthTransactions[String(countDay)].income,
+                              )}
+                            </div>
+                            <div
+                              className="spending__info"
+                              data-date={countDay}
+                            >
+                              -
+                              {CommaMaker(
+                                YearMonthTransactions[String(countDay)]
+                                  .spending,
+                              )}
+                            </div>
+                          </>
+                        )}
+                      </td>
+                    ) : (
+                      <td
+                        key={`day${countDay}`}
+                        className={`day ${countDay}`}
+                        data-date={countDay}
+                      >
                         {countDay}
-                      </div>
-                      {YearMonthTransactions[String(countDay)] && (
-                        <>
-                          <div className="income__info" data-date={countDay}>
-                            +
-                            {CommaMaker(
-                              YearMonthTransactions[String(countDay)].income,
-                            )}
-                          </div>
-                          <div className="spending__info" data-date={countDay}>
-                            -
-                            {CommaMaker(
-                              YearMonthTransactions[String(countDay)].spending,
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </td>
-                  ) : (
-                    <td
-                      key={`day${countDay}`}
-                      className={`day ${countDay}`}
-                      data-date={countDay}
-                    >
-                      {countDay}
-                      {YearMonthTransactions[String(countDay)] && (
-                        <>
-                          <div className="income__info" data-date={countDay}>
-                            +
-                            {CommaMaker(
-                              YearMonthTransactions[String(countDay)].income,
-                            )}
-                          </div>
-                          <div className="spending__info" data-date={countDay}>
-                            -
-                            {CommaMaker(
-                              YearMonthTransactions[String(countDay)].spending,
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </td>
-                  )}
-                </>
-              );
-            })}
-          </tr>
-        );
-      })}
+                        {YearMonthTransactions[String(countDay)] && (
+                          <>
+                            <div className="income__info" data-date={countDay}>
+                              +
+                              {CommaMaker(
+                                YearMonthTransactions[String(countDay)].income,
+                              )}
+                            </div>
+                            <div
+                              className="spending__info"
+                              data-date={countDay}
+                            >
+                              -
+                              {CommaMaker(
+                                YearMonthTransactions[String(countDay)]
+                                  .spending,
+                              )}
+                            </div>
+                          </>
+                        )}
+                      </td>
+                    )}
+                  </>
+                );
+              })}
+            </tr>
+          );
+        })}
     </>
   );
 }
