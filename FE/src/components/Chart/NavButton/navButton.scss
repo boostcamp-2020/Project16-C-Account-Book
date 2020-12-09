@@ -3,7 +3,7 @@
 @mixin noSelectedButton($category) {
   width: 15em;
   padding: 0.7em 0;
-  border: 2px solid #222;
+  border: 2px solid $light-black;
 
   font-size: 1.2em;
   @if $category == category {
@@ -12,22 +12,21 @@
     border-radius: 0 6px 6px 0;
   }
 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: $dark-background-color;
   outline: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: $dark-general-font-color;
   &:hover {
     text-shadow: $selectedTextShadow;
-    color: white;
+    color: $dark-emphasize-font-color;
   }
   cursor: pointer;
 }
 
 @mixin selectedButton {
   &.selected {
-    background-color: #222;
-    box-shadow: $selectedBoxShadow;
+    background-color: $black;
     text-shadow: $selectedTextShadow;
-    color: white;
+    color: $dark-general-font-color;
   }
 }
 
