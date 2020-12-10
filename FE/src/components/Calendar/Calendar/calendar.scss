@@ -1,12 +1,15 @@
 @use '../../../styles/values' as *;
 @use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .calendar-container {
   width: 100%;
+
   // height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 3%;
 
   .my-calendar {
     width: 100%;
@@ -25,8 +28,8 @@
 
         th {
           width: 14.2857%;
-          padding: 15px 0;
-          font-size: 16px;
+          padding: 1rem 0;
+          font-size: 1rem;
           font-weight: 900;
           color: $white;
 
@@ -34,6 +37,11 @@
             color: $spending-color;
           }
         }
+      }
+    }
+    @include mobile {
+      .calendar-box {
+        width: 100%;
       }
     }
   }

@@ -1,27 +1,27 @@
 @use '../../../styles/values' as *;
 @use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
 
 td {
-  padding: 5px 0;
-  height: 80px;
-
   vertical-align: center;
 
   .income__info {
     font-size: 0.8em;
     color: $income-color;
-    // padding-top: 1em;
   }
   .spending__info {
     font-size: 0.8em;
     color: $spending-color;
   }
 }
+
 .day {
+  padding: 0.5em 0;
+
+  height: 6rem;
   color: $white;
   background-color: $light-black;
   border-radius: 6px;
-  position: relative;
 
   cursor: pointer;
   &:hover {
@@ -36,7 +36,11 @@ td {
       transform-origin: 40% 50%;
     }
   }
+  &.td__hidden {
+    height: 0;
+  }
 }
+
 .today {
   background: $calendar-today-color;
   animation: todayColor 2s;
@@ -56,12 +60,12 @@ td {
   }
 }
 
-.has-event:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 4px;
+@include mobile {
+  .day {
+    height: 4rem;
+    font-size: 0.6rem;
+  }
+  .today {
+    font-size: 0.6rem;
+  }
 }
