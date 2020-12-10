@@ -8,7 +8,7 @@ import {
   deleteAccountBook,
 } from '../../../api/accoun-book-list';
 
-import './accountBookList.scss';
+import './index.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
