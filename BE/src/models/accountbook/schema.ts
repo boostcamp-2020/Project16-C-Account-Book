@@ -13,6 +13,7 @@ import AccountBook from '@interfaces/accountbook';
 
 export interface AccountBookDoc extends AccountBook, mongoose.Document {
   name: string;
+  code: string;
   startday: string;
   description: string;
   categories: CategoryDoc[];
@@ -26,6 +27,7 @@ interface AccountBookMod extends mongoose.Model<AccountBookDoc> {
 }
 const Schema = new mongoose.Schema({
   name: { type: String, required: true },
+  code: { type: String, default: '' },
   startday: { type: String, required: true, default: 'SUN', uppercase: true },
   description: { type: String, default: '' },
   categories: { type: [CategorySchema], default: [] },
