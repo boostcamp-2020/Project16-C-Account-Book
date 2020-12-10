@@ -1,9 +1,8 @@
 import { Context } from 'koa';
 import createError from 'http-errors';
-import jwt from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 
 import userModel from '@models/user';
-import { User } from '@interfaces/auth';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
 const SEC = 1;
@@ -11,10 +10,12 @@ const MIN = SEC * 60;
 const HOUR = MIN * 60;
 const DAY = HOUR * 24;
 
-const makeToken = (userInfo: User, expTime: number): string => {
+const refreshTokens = new Map();
+
+const makeToken = (info: any, expTime: number): string => {
   const jwtKey = process.env.JWT_KEY || '';
   const tokenInfo = {
-    ...userInfo,
+    ...info,
     exp: Math.floor(Date.now() / 1000) + expTime,
   };
   const token = jwt.sign(tokenInfo, jwtKey);
@@ -27,14 +28,16 @@ const login = async (body: Context['body']): Promise<any> => {
 
     const githubAccessToken = await getAccessToken(code, social);
     const userInfo = await getUserInfo(githubAccessToken, social);
+    const refreshInfo = {};
     const isUserInDB = !!(await userModel.get(userInfo));
 
     if (!isUserInDB) {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken(userInfo, MIN);
-    const refreshToken = makeToken(userInfo, DAY * 10);
+    const accessToken = makeToken(userInfo, 10 * SEC);
+    const refreshToken = makeToken(refreshInfo, DAY * 10);
+    refreshTokens.set(refreshToken, userInfo);
     const tokens = {
       access: accessToken,
       refresh: refreshToken,
@@ -47,4 +50,16 @@ const login = async (body: Context['body']): Promise<any> => {
   }
 };
 
-export default { login };
+const refresh = (body: Context['body']): any => {
+  const { refreshToken } = body;
+
+  try {
+    const accessToken = makeToken(refreshTokens.get(refreshToken), MIN);
+    return accessToken;
+  } catch (error) {
+    const jwtError = createError(401, error);
+    throw jwtError;
+  }
+};
+
+export default { login, refresh };

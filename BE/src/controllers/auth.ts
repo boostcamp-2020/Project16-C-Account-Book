@@ -10,6 +10,15 @@ const login = async (ctx: Context): Promise<Context['body']> => {
   ctx.body = tokens;
 };
 
+const refresh = (ctx: Context): Context['body'] => {
+  console.log(ctx.request.body);
+  const token = serviceLogin.refresh(ctx.request.body);
+  console.log(`new access token : ${token}`);
+  ctx.body = { token };
+  console.log(ctx.body);
+  return ctx.body;
+};
+
 const checkToken = async (
   ctx: Context,
   next: Next,
@@ -23,4 +32,4 @@ const checkToken = async (
   await next();
 };
 
-export default { login, checkToken };
+export default { login, refresh, checkToken };
