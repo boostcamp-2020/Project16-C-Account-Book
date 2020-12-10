@@ -22,9 +22,9 @@ export default function CSVSetting(props) {
     setFile(uploadFile);
   };
 
-  const onClickHandler = event => {
+  const onClickHandler = async event => {
     if (file !== '') {
-      postTransactionCSV(accountBookId, file);
+      await postTransactionCSV(accountBookId, file);
     }
   };
 

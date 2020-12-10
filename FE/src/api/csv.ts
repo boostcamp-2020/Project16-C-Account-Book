@@ -8,17 +8,10 @@ export const getTransactionCSV = id => {
   return data;
 };
 
-export const postTransactionCSV = (id, body) => {
-  const data = fetch(
+export const postTransactionCSV = async (id, body) => {
+  const data = await postFetch(
     `${process.env.SERVER_URL}/api/accountbook/${id}/transaction/csv`,
-    {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Cotent-type': 'application/json',
-        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
-      },
-    },
+    body,
   );
 
   return data;
