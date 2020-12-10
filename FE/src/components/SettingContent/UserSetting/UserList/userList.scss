@@ -2,6 +2,7 @@
 
 .user__list__box {
   @include settingBox;
+  position: relative;
 
   .profile__image {
     width: 40px;
@@ -9,5 +10,8 @@
     border-radius: 50%;
     border: none;
     outline: none;
+  }
+  .drop__btn {
+    position: absolute;
   }
 }

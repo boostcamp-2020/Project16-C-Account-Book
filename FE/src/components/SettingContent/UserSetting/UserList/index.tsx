@@ -24,7 +24,9 @@ export default function UserList(props) {
             <div>{user.name}</div>
           </div>
         ))}
-      <ActionButton content="탈퇴하기" type="large" action={onClickDropBtn} />
+      <div className="drop__btn">
+        <ActionButton content="탈퇴하기" type="large" action={onClickDropBtn} />
+      </div>
     </div>
   );
 }
