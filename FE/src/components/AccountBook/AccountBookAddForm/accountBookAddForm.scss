@@ -7,8 +7,6 @@
   border: 1px solid transparent;
   border-radius: 15px;
   padding: 2em 1em;
-  // transition-duration: 0.3s;
-  animation: cardShow 1s backwards;
 
   .fas.fa-minus-circle {
     position: absolute;
@@ -21,6 +19,16 @@
   .input__name {
     position: absolute;
     top: 1.3em;
+    height: 2em;
+    width: 260px;
+    text-decoration: none;
+    margin: 5px;
+  }
+
+  .input__code {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     height: 2em;
     width: 260px;
     text-decoration: none;

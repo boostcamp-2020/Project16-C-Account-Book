@@ -14,10 +14,9 @@ import useLoginCheck from '../../service/useLoginCheck';
 import './settingPage.scss';
 
 export default function SettingPage() {
-
   useLoginCheck();
 
-  const [settingType, setSettingType] = useState('category');
+  const [settingType, setSettingType] = useState('user');
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);
   const [updateData, setUpdateData] = useState({});
@@ -33,7 +32,14 @@ export default function SettingPage() {
         settingType={settingType}
         setSettingType={setSettingType}
       />
-      {settingType === 'user' && <UserSetting />}
+      {settingType === 'user' && (
+        <UserSetting
+          accountBookId={accountBookId.id}
+          setSaveModal={setSaveModal}
+          setSaveAction={setSaveAction}
+          setUpdateData={setUpdateData}
+        />
+      )}
       {settingType === 'calendar' && (
         <CalendarSetting
           accountBookId={accountBookId.id}

@@ -9,21 +9,22 @@ import './accountBookListPage.scss';
 
 export default function AccountBookListPage() {
   useLoginChcek();
-  const [isCreate, setIsCreate] = useState(false);
+  const [createForm, setCreateForm] = useState(false);
   const [listDatas, setListDatas] = useState([]);
 
   const onClickOverlay = event => {
     if (event.target.classList.contains('acbook__container')) {
-      setIsCreate(false);
+      setCreateForm(false);
     }
   };
   return (
     <div className="acbook__list__container" onClick={onClickOverlay}>
-      <AccountBookControl setCreate={setIsCreate} />
+      <AccountBookControl setCreateForm={setCreateForm} />
       <div className="acbook__list">
-        {isCreate && (
+        {createForm && (
           <AccountBookAddForm
-            setCreate={setIsCreate}
+            setCreate={setCreateForm}
+            createForm={createForm}
             datas={listDatas}
             setDatas={setListDatas}
           />
