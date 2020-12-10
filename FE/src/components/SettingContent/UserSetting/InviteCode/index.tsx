@@ -19,17 +19,24 @@ export default function InviteCode(props) {
 
   return (
     <div className="invite__code__box">
-      <div className="get__code__button">
-        <ActionButton
-          type="large"
-          content="Invite Code"
-          action={onClickGetCode}
-        />
+      <div className="invite__code__title">Invite Code</div>
+      <div className="invite__code__desc">
+        You can get invite code to invite someone.
       </div>
 
-      {codeVisible && (
-        <div className="invite__code__content">{codeContent}</div>
-      )}
+      <div className="invite__code__content">
+        <div className="get__code__button">
+          <ActionButton
+            type="large"
+            content="Invite Code"
+            action={onClickGetCode}
+          />
+        </div>
+
+        {codeVisible && (
+          <div className="invite__code__content">{codeContent}</div>
+        )}
+      </div>
     </div>
   );
 }

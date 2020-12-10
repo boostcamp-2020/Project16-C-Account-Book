@@ -3,22 +3,29 @@
 
 .invite__code__box {
   @include settingBox;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  .get__code__button {
-    position: absolute;
-    top: 5%;
+  .invite__code__title {
+    @include settingTitle;
   }
+
+  .invite__code__desc {
+    @include settingDesc;
+  }
+
   .invite__code__content {
-    position: absolute;
-    font-size: 3vh;
-    padding-bottom: 1em;
-    border-bottom: 1px solid $dark-emphasize-font-color;
-    &.hidden {
-      display: none;
+    display: flex;
+    justify-content: center;
+    gap: 15%;
+
+    .get__code__button {
+      font-size: 1.5vh;
+    }
+    .invite__code__content {
+      padding-bottom: 1em;
+      border-bottom: 1px solid $dark-emphasize-font-color;
+      &.hidden {
+        display: none;
+      }
     }
   }
 }
