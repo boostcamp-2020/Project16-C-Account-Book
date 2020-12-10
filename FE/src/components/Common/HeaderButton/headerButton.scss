@@ -5,8 +5,9 @@
 .header__navBtn {
   @include buttonDefaultSetting;
   text-align: center;
-  width: 5%;
-  padding: 1.5% 0;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
   background-color: transparent;
   color: $dark-font-color;
   font-size: 1.5rem;
@@ -22,3 +23,4 @@
     color: $dark-general-font-color;
   }
 }
+@

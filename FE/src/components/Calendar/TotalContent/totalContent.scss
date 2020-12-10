@@ -14,13 +14,14 @@
     border: 1.5px solid $spending-color;
     color: $spending-color;
   }
+  @include mobile {
+    padding: 0.5em 0;
+  }
 }
 
 .calendar__total__price {
   width: 100%;
-  margin: auto;
-  margin-top: 3%;
-
+  padding: 1.5% 0;
   display: flex;
   justify-content: center;
   gap: 5em;

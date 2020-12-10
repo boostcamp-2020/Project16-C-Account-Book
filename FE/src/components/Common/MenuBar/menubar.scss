@@ -68,7 +68,7 @@
   }
 
   .menubar__ctrBox {
-    padding-top: 3%;
+    padding-top: 1.5%;
     font-size: 1.3rem;
     display: flex;
     justify-content: center;
@@ -117,7 +117,14 @@
   }
   @include mobile {
     .menubar__ctrBox {
+      padding: 5%;
       font-size: 1rem;
     }
+  }
+}
+
+@include mobile {
+  .menubar__header {
+    padding: 5% 0;
   }
 }
