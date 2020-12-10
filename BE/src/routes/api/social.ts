@@ -4,9 +4,8 @@ import controller from '@controllers/social';
 
 const router = new Router();
 
-// api/accountbook/:accountbookid/social
+// api/social
 
-router.get('/code', controller.get);
 router.post('/user', controller.post);
-router.delete('/user', controller.del);
+router.delete('/:accountbookid/user', controller.del);
 export default router;
