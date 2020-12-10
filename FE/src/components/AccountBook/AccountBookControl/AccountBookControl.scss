@@ -1,5 +1,7 @@
 @use '../../../styles/values.scss' as *;
 @use '../../../styles/mixins.scss' as *;
+@use '../../../styles/mediaQuery.scss' as *;
+
 .acbook__container {
   position: absolute;
 
@@ -30,7 +32,7 @@
     font-size: 2vh;
   }
 }
-@media screen and (max-width: 768px) {
+@include mobile {
   .acbook__container {
     position: inherit;
     padding: 0;

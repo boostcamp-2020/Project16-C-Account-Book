@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .addform__wrapper {
   width: 333px;
@@ -40,7 +41,7 @@
     border: none;
   }
 }
-@media screen and (max-width: 768px) {
+@include mobile {
   .addform__wrapper {
     opacity: 0;
   }

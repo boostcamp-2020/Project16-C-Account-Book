@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .modal__wrapper {
   position: absolute;
@@ -28,7 +29,7 @@
     font-size: 2vh;
     z-index: 3;
   }
-  @media screen and (max-width: 768px) {
+  @include mobile {
     .payment__add__btn {
       display: none;
     }

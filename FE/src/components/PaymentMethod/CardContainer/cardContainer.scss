@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .card__container {
   position: fixed;
@@ -105,7 +106,7 @@
       margin-bottom: 3em;
     }
   }
-  @media screen and (max-width: 768px) {
+  @include mobile {
     .card__container__card {
       width: 250px;
       .fas.fa-edit {
@@ -116,6 +117,7 @@
       }
     }
   }
+
   @keyframes cardShow {
     from {
       opacity: 0;
@@ -128,7 +130,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .card__container {
     position: inherit;
     display: flex;

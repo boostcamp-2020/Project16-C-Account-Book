@@ -1,6 +1,7 @@
 @use '../../../styles/defaultCards' as *;
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .new__method__wrapper {
   bottom: 1px;
@@ -71,7 +72,7 @@
     color: $white;
   }
 }
-@media screen and (max-width: 768px) {
+@include mobile {
   .new__method__wrapper {
     opacity: 0;
   }
