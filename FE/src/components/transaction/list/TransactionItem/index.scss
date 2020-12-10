@@ -1,3 +1,5 @@
+@use '../../../../styles/values.scss' as *;
+
 .transaction__item {
   position: relative;
   width: 100%;
@@ -7,8 +9,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 10px;
-  color: white;
+  padding: 2em 1em;
+  color: $dark-emphasize-font-color;
   cursor: pointer;
 
   .transaction__item__button__container {
@@ -42,8 +44,15 @@
   }
 
   .transaction__item__delete__button {
-    border: 1px solid red;
-    background-color: red;
+
+    display: none;
+    position: absolute;
+    right: 10px;
+    border: 1px solid $transaction-delete-button-color;
+    background-color: $transaction-delete-button-color;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
     box-shadow: 0 0 5px 1px red;
   }
 
@@ -54,7 +63,7 @@
   }
 
   &:not(:last-child) {
-    border-bottom: 1px dotted rgb(143, 143, 143);
+    border-bottom: 1px dotted $dark-border-color;
   }
 
   div {
@@ -68,8 +77,7 @@
     span {
       padding: 6px 10px;
       border-radius: 20px;
-      border: 1.4px solid white;
-      text-shadow: 0 0 10px #64cc9c;
+      border: 1.4px solid $dark-emphasize-font-color;
     }
   }
   .transaction__item__description {
@@ -84,11 +92,11 @@
   }
 
   .transaction__item__in {
-    color: #54aafc;
+    color: $income-color;
   }
 
   .transaction__item__out {
-    color: #ee4337;
+    color: $spending-color;
   }
 }
 

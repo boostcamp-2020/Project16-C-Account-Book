@@ -63,7 +63,9 @@ const MenuBar = ({ id, setModal, pageType }) => {
           onClick={onClickIcon}
         >
           <i data-type="/" className="fas fa-arrow-left" />
-          <span data-type="/">List</span>
+          <span className="navigation__content" data-type="/">
+            List
+          </span>
         </div>
         {pageType === 'transaction' ? (
           <HeaderButton
@@ -120,7 +122,9 @@ const MenuBar = ({ id, setModal, pageType }) => {
           data-type="setting"
           onClick={onClickIcon}
         >
-          <span data-type="/setting">Setting</span>
+          <span className="navigation__content" data-type="/setting">
+            Setting
+          </span>
           <i data-type="/setting" className="fas fa-arrow-right" />
         </div>
       </div>

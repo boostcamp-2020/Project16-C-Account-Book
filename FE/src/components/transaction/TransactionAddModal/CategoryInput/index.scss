@@ -1,3 +1,5 @@
+@use '../../../../styles/mixins.scss' as *;
+@use '../../../../styles/values.scss' as *;
 .category__input {
   input[type='radio'] {
     display: none;
@@ -9,7 +11,8 @@
 
   input[type='radio'] + span {
     background: none;
-    border: 1px solid #dfdfdf;
+    border: 1px solid $dark-border-color;
+    border-radius: 6px;
     padding: 10px 10px;
     text-align: center;
     height: 35px;
@@ -19,37 +22,37 @@
   }
 
   input[type='radio'][name='category'] + span:hover {
-    background: #5aa4a7;
+    background: $transaction-category-hover-color;
     color: #fff;
   }
 
   input[type='radio'][name='category']:checked + span {
-    border: 1px solid #23a3a7;
-    background: #23a3a7;
+    border: 1px solid $transaction-category-hover-color;
+    background: $transaction-selected-item-color;
     color: #fff;
   }
 
   input[type='radio'][name='type'] + span:hover {
-    background: #f04419;
+    background: $transaction-modal-spending-category-color;
     color: #fff;
   }
 
   input[type='radio'][name='type']:checked + span {
-    border: 1px solid #f04419;
-    background: #f04419;
+    border: 1px solid $transaction-modal-spending-category-color;
+    background: $transaction-modal-spending-category-color;
     color: #fff;
   }
 
   .no__category {
-    color: red;
+    color: $transaction-modal-spending-category-color;
   }
   .vertical__line {
-    border-right: 1px solid lightgrey;
+    border-right: 1px solid $dark-border-color;
     height: 60%;
   }
   .category__input__container {
     padding-left: 23px;
-    border-left: 1px solid lightgrey;
+    border-left: 1px solid $dark-border-color;
   }
   .type__input__conatiner {
     display: flex;

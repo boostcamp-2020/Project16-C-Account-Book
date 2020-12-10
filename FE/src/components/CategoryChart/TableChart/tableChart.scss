@@ -1,13 +1,15 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mediaQuery.scss' as *;
+
 .pie__table {
   position: absolute;
   right: 8%;
   top: 45%;
-  color: white;
+  color: $dark-general-font-color;
   width: 40%;
   height: 50%;
 
   .stat__unit {
-    border-top: 1px solid rgba(0, 0, 0, 0.3);
     padding: 15px 0;
     display: flex;
     align-items: center;
@@ -19,7 +21,7 @@
     left: 22%;
     width: 60%;
     height: 20px;
-    background-color: #222;
+    background-color: $light-black;
 
     .stat__color {
       position: absolute;
@@ -46,5 +48,14 @@
   .stat__price {
     position: absolute;
     right: 0;
+  }
+}
+
+@include mobile {
+  .pie__table {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

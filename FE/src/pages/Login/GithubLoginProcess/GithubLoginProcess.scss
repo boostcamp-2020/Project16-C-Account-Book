@@ -1,3 +1,5 @@
+@use '../../../styles/values.scss' as *;
+
 .spinner__container {
   display: flex;
   flex-direction: column;
@@ -13,8 +15,8 @@
   }
 
   .spinner {
-    border: 20px solid #bbbbbb;
-    border-top: 20px solid #282727;
+    border: 20px solid $spinner-background-color;
+    border-top: 20px solid $spin-color;
     border-radius: 50%;
     width: 100px;
     height: 100px;

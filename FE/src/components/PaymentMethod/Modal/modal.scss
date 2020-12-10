@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .modal__wrapper {
   position: absolute;
@@ -8,18 +9,29 @@
   background-color: $modal-background;
   padding: 7em;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
   .payment__title {
     display: inline-block;
     color: $white;
-    font-size: 5em;
-    width: 100%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-size: 5vw;
+
     text-shadow: $selectedTextShadow;
   }
 
   .payment__add__btn {
     position: absolute;
-    top: 15em;
-    left: 23em;
+    top: 30%;
+    left: 20%;
+    font-size: 2vh;
     z-index: 3;
+  }
+  @include mobile {
+    .payment__add__btn {
+      display: none;
+    }
   }
 }

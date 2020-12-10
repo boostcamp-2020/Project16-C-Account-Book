@@ -1,12 +1,16 @@
+@use '../../../../styles/values.scss' as *;
+
 .container {
   width: 100%;
 
   .inoutFilter {
     width: 100%;
-    height: 50px;
+    margin: auto;
+    top: 25%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    gap: 5em;
+
     label {
       width: 20vw;
       height: 100%;
@@ -26,22 +30,22 @@
       }
       &:first-child {
         input:checked + span {
-          background-color: #54aafc;
-          color: white;
+          background-color: $income-color;
+          color: $dark-emphasize-font-color;
         }
         span {
-          border: 3px solid #54aafc;
-          color: #54aafc;
+          border: 1px solid $income-color;
+          color: $income-color;
         }
       }
       &:last-child {
         input:checked + span {
-          background-color: #ee4337;
-          color: white;
+          background-color: $spending-color;
+          color: $dark-emphasize-font-color;
         }
         span {
-          border: 3px solid #ee4337;
-          color: #ee4337;
+          border: 1px solid $spending-color;
+          color: $spending-color;
         }
       }
     }
@@ -72,16 +76,16 @@
     input:checked + span,
     input:hover + span {
       padding: 3px;
-      border-bottom: 2px solid lightseagreen;
-      color: lightseagreen;
+      border-bottom: 2px solid $transaction-category-hover-color;
+      color: $transaction-category-hover-color;
     }
 
     label {
       cursor: pointer;
     }
     span {
-      color: white;
-      font-size: 20px;
+      color: $dark-general-font-color;
+      font-size: 1em;
       padding: 3px;
       margin: 0 10px 0 10px;
     }

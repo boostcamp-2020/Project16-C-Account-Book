@@ -1,4 +1,5 @@
-@use '../../../styles/values.scss' as *;
+@use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 @mixin calendar-total($type) {
   width: 20%;
@@ -13,13 +14,14 @@
     border: 1.5px solid $spending-color;
     color: $spending-color;
   }
+  @include mobile {
+    padding: 0.5em 0;
+  }
 }
 
 .calendar__total__price {
-  position: absolute;
   width: 100%;
-  margin: auto;
-  top: 25%;
+  padding: 1.5% 0;
   display: flex;
   justify-content: center;
   gap: 5em;
@@ -29,5 +31,18 @@
   }
   .calendar__spending__total {
     @include calendar-total(spending);
+  }
+
+  @include mobile {
+    .calendar__income__total,
+    .calendar__spending__total {
+      width: 45%;
+    }
+  }
+}
+
+@include mobile {
+  .calendar__total__price {
+    gap: 1em;
   }
 }

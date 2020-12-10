@@ -3,7 +3,7 @@
 .calendar__setting__container {
   width: 100%;
   height: 100%;
-  color: white;
+  color: $dark-general-font-color;
   display: flex;
   justify-content: center;
 
@@ -13,7 +13,7 @@
     position: relative;
     width: 55%;
     height: 40%;
-    border: 1px solid #979797;
+    border: 1px solid $dark-border-color;
     border-radius: 6px;
     background-color: transparent;
 
@@ -68,8 +68,8 @@
   .save__modal__content {
     width: 50%;
     height: 20%;
-    background-color: rgba(0, 0, 0, 0.9);
-    border: 1px solid #979797;
-    color: white;
+    background-color: $modal-background;
+    border: 1px solid $dark-border-color;
+    color: $dark-general-font-color;
   }
 }
