@@ -30,6 +30,9 @@
     top: 30%;
     left: 20%;
     font-size: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
   }
 }
 @include mobile {
