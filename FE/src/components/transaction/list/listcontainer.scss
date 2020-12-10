@@ -2,7 +2,7 @@
 @use '../../../styles/mixins.scss' as *;
 
 .transaction__list__container {
-  width: 900px;
+  width: 60%;
   height: 100%;
   padding: 10px 5px;
   background-color: $dark-background-color;
@@ -13,6 +13,7 @@
   overflow: scroll;
   position: relative;
   padding-bottom: 5em;
+  gap: 1.5em;
 }
 
 .transaction__add__button {
