@@ -1,0 +1,12 @@
+@use '../../../../styles/values'as *;
+@use '../../../../styles/mixins'as *;
+
+.csv__export__box {
+  @include settingBox;
+
+  .csv__export__title {
+    font-size: 1.5em;
+    padding: 1em;
+    text-shadow: $selectedTextShadow;
+  }
+}
