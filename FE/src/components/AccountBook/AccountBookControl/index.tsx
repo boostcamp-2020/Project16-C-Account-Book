@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ActionButton from '../../Common/ActionButton';
-import './accountBookControl.scss';
+import './index.scss';
 
 export default function AccountBookControl({ setCreateForm }) {
   const createAccountBook = () => {

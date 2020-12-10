@@ -5,7 +5,7 @@ import AccountBookList from '../../components/AccountBook/AccountBookList';
 import AccountBookAddForm from '../../components/AccountBook/AccountBookAddForm';
 import useLoginChcek from '../../service/useLoginCheck';
 
-import './accountBookListPage.scss';
+import './index.scss';
 
 export default function AccountBookListPage() {
   useLoginChcek();
