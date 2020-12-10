@@ -54,8 +54,8 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const getCode = async (ctx: Context): Promise<Context['body']> => {
-  const code = await service.getCode(ctx);
-  const res = response(200, 'success', code);
+  const accountData = await service.getCode(ctx);
+  const res = response(200, 'success', accountData);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;

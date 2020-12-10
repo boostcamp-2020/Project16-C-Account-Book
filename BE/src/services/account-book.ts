@@ -79,7 +79,7 @@ const getCode = async (ctx: Context): Promise<any> => {
   const id = ctx.params.accountbookid;
   const code = Random.randomStr(10);
   const updateResult = await accountBookModel.updateCode(id, code);
-  if (updateResult) return code;
+  if (updateResult) return updateResult;
   return false;
 };
 

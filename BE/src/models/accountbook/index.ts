@@ -70,6 +70,10 @@ const update = async (
 const updateCode = async (_id: string, code: string): Promise<any> => {
   const updateData = { code };
   const updateResult = await AccountBookModel.updateOne({ _id }, updateData);
+  if (updateResult.nModified) {
+    const accountBookData = await AccountBookModel.findOne({ _id });
+    return accountBookData;
+  }
   return !!updateResult.nModified;
 };
 
