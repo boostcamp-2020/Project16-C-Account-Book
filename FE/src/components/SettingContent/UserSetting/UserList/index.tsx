@@ -19,7 +19,8 @@ export default function UserList(props) {
       {users &&
         users.map(user => (
           <div className="user__info">
-            <div>프로필사진</div>
+            <img src={user.profile} className="profile__image" />
+
             <div>{user.name}</div>
           </div>
         ))}
