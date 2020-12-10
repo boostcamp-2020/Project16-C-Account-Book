@@ -71,3 +71,8 @@
     color: $white;
   }
 }
+@media screen and (max-width: 768px) {
+  .new__method__wrapper {
+    opacity: 0;
+  }
+}
