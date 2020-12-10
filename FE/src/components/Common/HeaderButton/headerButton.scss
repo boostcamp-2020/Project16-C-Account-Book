@@ -22,14 +22,3 @@
     color: $dark-general-font-color;
   }
 }
-
-@include mobile {
-  .header__navBtn {
-    &:hover {
-      box-shadow: none;
-    }
-    &.checked {
-      box-shadow: none;
-    }
-  }
-}
