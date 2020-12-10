@@ -1,0 +1,12 @@
+@use '../../../../styles/mixins' as *;
+
+.invite__code__box {
+  @include settingBox;
+  display: flex;
+
+  .invite__code__content {
+    &.hidden {
+      display: none;
+    }
+  }
+}
