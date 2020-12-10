@@ -1,5 +1,6 @@
 @use '../../styles/values' as *;
 @use '../../styles/mixins' as *;
+@use '../../styles/mediaQuery' as *;
 
 .settingbar__header {
   background-color: $dark-background-color;
@@ -19,7 +20,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 2%;
+      left: 5%;
       text-align: center;
       line-height: 1.5em;
 
@@ -33,6 +34,21 @@
 
       text-shadow: $selectedTextShadow;
       color: $dark-emphasize-font-color;
+    }
+    @include mobile {
+      .settingbar__back__navBtn {
+        .nav__accountbook__btn {
+          display: none;
+        }
+        .fas.fa-arrow-left {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  @include mobile {
+    .settingbar__buttons {
+      gap: 1em;
     }
   }
 }
