@@ -7,6 +7,7 @@ export const Schema = new mongoose.Schema({
   userid: { type: String, required: true },
   name: { type: String, required: true, default: '' },
   social: { type: String, required: true },
+  profile: { type: String, required: true },
 });
 
 Schema.index({ userid: 1, social: 1 });

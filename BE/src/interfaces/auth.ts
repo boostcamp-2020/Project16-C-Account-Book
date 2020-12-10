@@ -10,6 +10,7 @@ export interface User {
   userid: string;
   social: string;
   name?: string;
+  profile: string;
 }
 
 export interface iOAuth {
