@@ -1,3 +1,5 @@
+import refresh from '../util/refresh-token';
+
 export const getFetch = async query => {
   const response = await fetch(`${query}`, {
     method: 'GET',
@@ -6,7 +8,7 @@ export const getFetch = async query => {
       Authorization: `Bearer ${window.localStorage.getItem('accesstoken')}`,
     },
   });
-
+  if (response.status === 401) await refresh();
   const json = response.json();
   return json;
 };
