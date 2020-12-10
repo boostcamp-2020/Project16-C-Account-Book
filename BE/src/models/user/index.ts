@@ -16,12 +16,14 @@ const create = async ({
   userid,
   name,
   social,
+  profile,
 }: {
   userid: string;
   name?: string;
   social: string;
+  profile: string;
 }): Promise<string> => {
-  const userData = new UserModel({ userid, name, social });
+  const userData = new UserModel({ userid, name, social, profile });
   const user = await userData.save();
 
   return user.id;

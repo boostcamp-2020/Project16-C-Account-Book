@@ -9,6 +9,7 @@ export interface iTokenGetParams {
 export interface User {
   userid: string;
   social: string;
+  profile: string;
   name?: string;
 }
 
