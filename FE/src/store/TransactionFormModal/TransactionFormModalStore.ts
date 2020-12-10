@@ -29,6 +29,7 @@ export const createStore = () => {
         cost: 0,
         content: '',
       };
+      this.message = '';
     },
 
     setMessageVisible(visible: boolean) {
