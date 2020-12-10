@@ -88,14 +88,14 @@
 
     .transaction__submit__button,
     .transaction__cancel__button {
+      @include buttonDefaultSetting;
       flex: 1;
-      border-radius: 5px;
+
       padding: 10px;
       font-size: 15px;
       color: $white;
       margin: 0 5px;
       font-weight: bold;
-      border: none;
     }
 
     .transaction__submit__button {
