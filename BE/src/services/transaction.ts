@@ -93,6 +93,7 @@ const exportCSV = async (ctx: Context): Promise<any> => {
       'category.type',
       'payment.name',
       'payment.color',
+      'payment.desc',
     ];
     const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(transactions);
