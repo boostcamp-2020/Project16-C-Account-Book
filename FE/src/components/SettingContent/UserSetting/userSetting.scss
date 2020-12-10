@@ -3,8 +3,4 @@
 
 .user__setting__container {
   @include settingContainer;
-
-  .user__list__box {
-    @include settingBox;
-  }
 }
