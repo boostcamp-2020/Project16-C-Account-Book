@@ -14,7 +14,8 @@ const PaymentInput = ({ paymentPool }) => {
     const targetElement = e.target as HTMLInputElement;
     const newPayment = {
       name: targetElement.dataset.name,
-      description: targetElement.dataset.description,
+      desc: targetElement.dataset.description,
+      color: targetElement.dataset.color,
     };
 
     setInput({ ...input, payment: { ...newPayment } });
@@ -25,13 +26,14 @@ const PaymentInput = ({ paymentPool }) => {
       <div className="indicator">결제수단</div>
       <div className="payment__card__container">
         {paymentPool.length ? (
-          paymentPool.map(({ name, desc }) => (
+          paymentPool.map(({ name, desc, color }) => (
             <label className="payment__card__item" key={`${name}-${desc}`}>
               <input
                 type="radio"
                 name="payment"
                 data-name={name}
                 data-description={desc}
+                data-color={color}
                 onChange={onPaymentChange}
                 checked={name === input.payment?.name}
               />

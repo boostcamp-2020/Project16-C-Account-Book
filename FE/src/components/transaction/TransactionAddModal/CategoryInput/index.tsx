@@ -15,6 +15,7 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
     const newCategory = {
       name: targetElement.dataset.name,
       icon: targetElement.dataset.icon,
+      type: targetElement.dataset.type,
     };
     setInput({ ...input, category: { ...newCategory } });
   };
@@ -22,7 +23,11 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
   const onTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetElement = e.target as HTMLInputElement;
 
-    setInput({ ...input, type: targetElement.value });
+    setInput({
+      ...input,
+      type: targetElement.value,
+      category: { ...input.category, type: targetElement.value },
+    });
     console.log(input.type);
   };
 
@@ -53,13 +58,14 @@ const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
           {categoryPool ? (
             categoryPool
               .filter(({ type }) => type === input.type)
-              .map(({ name, icon }) => (
+              .map(({ name, icon, type }) => (
                 <label key={name}>
                   <input
                     type="radio"
                     name="category"
                     data-name={name}
                     data-icon={icon}
+                    data-type={type}
                     onChange={onCategoryChange}
                     checked={name === input.category.name}
                   />

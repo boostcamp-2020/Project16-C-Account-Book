@@ -13,7 +13,7 @@ const exportCSV = async (ctx: Context): Promise<Context['body']> => {
 const importCSV = async (ctx: Context): Promise<Context['body']> => {
   const csv = await service.importCSV(ctx);
   if (csv.message === 'success') {
-    const res = response(200, csv.message, csv.data);
+    const res = response(200, csv.message);
     ctx.body = res;
 
     return ctx.body;

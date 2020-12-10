@@ -129,7 +129,7 @@ const addTransactions = async (
       { transactions: [...curTransactions, ...transactionArray] },
     );
     if (updateResult.nModified) {
-      return curTransactions[curTransactions.length - 1];
+      return true;
     }
     return false;
   }

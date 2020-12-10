@@ -81,6 +81,7 @@ const exportCSV = async (ctx: Context): Promise<any> => {
     ctx.params.accountbookid,
   );
   const transactions = accountBook.transactions;
+  console.log(transactions);
 
   if (transactions) {
     const fields = [
@@ -93,6 +94,7 @@ const exportCSV = async (ctx: Context): Promise<any> => {
       'category.type',
       'payment.name',
       'payment.color',
+      'payment.desc',
     ];
     const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(transactions);
@@ -108,8 +110,8 @@ const exportCSV = async (ctx: Context): Promise<any> => {
 };
 
 const importCSV = async (ctx: Context): Promise<any> => {
-  const csvDatas = ctx.request.body;
-  const csvArray = JSON.parse(csvDatas);
+  const csvArray = ctx.request.body;
+
   const failMessage = { message: 'csv 형식이 올바르지 않습니다.', data: {} };
   const fields = {
     content: 1,
@@ -140,20 +142,18 @@ const importCSV = async (ctx: Context): Promise<any> => {
     transactionArray.push(tempTransaction);
   }
 
-  const transaction = await accountBookModel.addTransactions(
+  const result = await accountBookModel.addTransactions(
     ctx.params.accountbookid,
     transactionArray,
   );
 
-  if (transaction) {
+  if (result) {
     return {
       message: 'success',
-      data: transaction,
     };
   }
   return {
     message: 'fail',
-    data: {},
   };
 };
 
