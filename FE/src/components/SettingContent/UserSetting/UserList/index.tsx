@@ -16,17 +16,16 @@ export default function UserList(props) {
   };
   return (
     <div className="user__list__box">
+      <div className="drop__btn">
+        <ActionButton content="탈퇴하기" type="large" action={onClickDropBtn} />
+      </div>
       {users &&
         users.map(user => (
           <div className="user__info">
             <img src={user.profile} className="profile__image" />
-
             <div>{user.name}</div>
           </div>
         ))}
-      <div className="drop__btn">
-        <ActionButton content="탈퇴하기" type="large" action={onClickDropBtn} />
-      </div>
     </div>
   );
 }

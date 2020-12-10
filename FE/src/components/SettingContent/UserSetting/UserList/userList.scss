@@ -3,15 +3,29 @@
 .user__list__box {
   @include settingBox;
   position: relative;
-
-  .profile__image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  .user__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15%;
+    .profile__image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      margin-bottom: 1em;
+    }
   }
+
   .drop__btn {
     position: absolute;
+    right: 5%;
+    top: 5%;
   }
 }
