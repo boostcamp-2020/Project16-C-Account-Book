@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import CSVReader from 'react-csv-reader'
+import CSVReader from 'react-csv-reader';
 
 import './csvSetting.scss';
 import { getTransactionCSV, postTransactionCSV } from '../../../api/csv';
@@ -15,7 +15,7 @@ export default function CSVSetting(props) {
     exportToCSV(csv);
   };
 
-  const [file, setFile] = useState('import하고싶다');
+  const [file, setFile] = useState('');
 
   const fileChangeHandler = data => {
     const uploadFile = data;
@@ -23,7 +23,9 @@ export default function CSVSetting(props) {
   };
 
   const onClickHandler = event => {
-    postTransactionCSV(accountBookId, file);
+    if (file !== '') {
+      postTransactionCSV(accountBookId, file);
+    }
   };
 
   return (
@@ -32,11 +34,10 @@ export default function CSVSetting(props) {
         거래내역 CSV File로 다운받기
       </button>
       <div className="csv__import__form">
-        <input type="file" multiple onChange={fileChangeHandler} />
+        <CSVReader onFileLoaded={data => fileChangeHandler(data)} />
         <button className="csv__import" onClick={onClickHandler}>
           거래내역 CSV File로 추가하기
         </button>
-        <CSVReader onFileLoaded={(data) => fileChangeHandler(data)} />
       </div>
     </div>
   );

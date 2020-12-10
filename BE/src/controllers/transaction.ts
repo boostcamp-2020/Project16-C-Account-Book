@@ -11,16 +11,14 @@ const exportCSV = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const importCSV = async (ctx: Context): Promise<Context['body']> => {
-  const result = await service.importCSV(ctx);
-  const csv = result.data;
-  console.log('!', csv);
-  for (var token of csv) {
-    console.log('나와');
-  }
-  const res = response(200, result.message, result.data);
-  ctx.body = res;
+  const csv = await service.importCSV(ctx);
+  if (csv.message === 'success') {
+    const res = response(200, csv.message, csv.data);
+    ctx.body = res;
 
-  return ctx.body;
+    return ctx.body;
+  }
+  ctx.throw(400, csv.message);
 };
 
 const post = async (ctx: Context): Promise<Context['body']> => {

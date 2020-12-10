@@ -81,7 +81,6 @@ const exportCSV = async (ctx: Context): Promise<any> => {
     ctx.params.accountbookid,
   );
   const transactions = accountBook.transactions;
-  console.log('transactions', transactions);
 
   if (transactions) {
     const fields = [
@@ -109,15 +108,47 @@ const exportCSV = async (ctx: Context): Promise<any> => {
 };
 
 const importCSV = async (ctx: Context): Promise<any> => {
-  if (ctx) {    
-    const csvDatas = ctx.request.body;
-    const csvLength = ctx.request.body.csvLength;
-    console.log(csvDatas, csvLength);
-    // console.log(csvDatas.split(','));
+  const csvDatas = ctx.request.body;
+  const csvArray = JSON.parse(csvDatas);
+  const failMessage = { message: 'csv 형식이 올바르지 않습니다.', data: {} };
+  const fields = {
+    content: 1,
+    type: 1,
+    cost: 1,
+    date: 1,
+    category: 1,
+    payment: 1,
+  };
+  const transactionArray = [];
 
+  for (let index = 1; index < csvArray.length; index++) {
+    const tempTransaction: any = { category: {}, payment: {} };
+
+    for (let i = 0; i < csvArray[0].length; i++) {
+      const splitArray = csvArray[0][i].split('.');
+
+      if (splitArray.length === 1) {
+        if (!(csvArray[0][i] in fields)) return failMessage;
+
+        tempTransaction[csvArray[0][i]] = csvArray[index][i];
+      } else if (splitArray.length === 2) {
+        if (!(splitArray[0] in fields)) return failMessage;
+
+        tempTransaction[splitArray[0]][splitArray[1]] = csvArray[index][i];
+      }
+    }
+    transactionArray.push(tempTransaction);
+  }
+
+  const transaction = await accountBookModel.addTransactions(
+    ctx.params.accountbookid,
+    transactionArray,
+  );
+
+  if (transaction) {
     return {
       message: 'success',
-      data: ctx.request.files,
+      data: transaction,
     };
   }
   return {
