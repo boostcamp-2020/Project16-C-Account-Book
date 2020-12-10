@@ -1,10 +1,22 @@
 @use '../../../../styles/mixins' as *;
+@use '../../../../styles/values' as *;
 
 .invite__code__box {
   @include settingBox;
+  position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
 
+  .get__code__button {
+    position: absolute;
+    top: 5%;
+  }
   .invite__code__content {
+    position: absolute;
+    font-size: 3vh;
+    padding-bottom: 1em;
+    border-bottom: 1px solid $dark-emphasize-font-color;
     &.hidden {
       display: none;
     }

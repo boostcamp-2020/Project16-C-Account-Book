@@ -8,6 +8,7 @@ export const Schema = new mongoose.Schema({
   name: { type: String, required: true, default: '' },
   profile: { type: String, required: true },
   social: { type: String, required: true },
+  profile: { type: String, required: true },
 });
 
 Schema.index({ userid: 1, social: 1 });
