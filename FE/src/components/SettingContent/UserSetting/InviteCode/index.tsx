@@ -12,7 +12,8 @@ export default function InviteCode(props) {
 
   const onClickGetCode = async () => {
     const res = await getInviteCode({ accountBookId });
-    setCodeContet(res.data);
+
+    setCodeContet(res.data.code);
     setCodeVisible(() => true);
   };
 
