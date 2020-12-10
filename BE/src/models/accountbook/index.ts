@@ -113,6 +113,25 @@ const addTransaction = async (
   return false;
 };
 
+const addTransactions = async (
+  accountBookId: string,
+  transactionArray: any,
+): Promise<any> => {
+  const curAccountBook = await AccountBookModel.findOne({ _id: accountBookId });
+  if (curAccountBook) {
+    const curTransactions = curAccountBook.transactions;
+    const updateResult = await AccountBookModel.update(
+      { _id: accountBookId },
+      { transactions: [...curTransactions, ...transactionArray] },
+    );
+    if (updateResult.nModified) {
+      return curTransactions[curTransactions.length - 1];
+    }
+    return false;
+  }
+  return false;
+};
+
 const updateTransaction = async (
   accountBookId: string,
   transactionId: string,
@@ -314,6 +333,7 @@ export default {
   updateStartday,
   del,
   addTransaction,
+  addTransactions,
   updateTransaction,
   deleteTransaction,
   addPaymentMethod,

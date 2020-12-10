@@ -20,6 +20,7 @@ export const postFetch = async (query, body) => {
     },
     body: JSON.stringify(body),
   });
+
   const json = response.json();
   return json;
 };
@@ -33,8 +34,9 @@ export const updateFetch = async (query, body) => {
     },
     body: JSON.stringify(body),
   });
-  const json = response.json();
-  return json;
+
+  // const json = response.json();
+  return response;
 };
 
 export const deleteFetch = async (query, body) => {
@@ -46,6 +48,7 @@ export const deleteFetch = async (query, body) => {
     },
     body: JSON.stringify(body),
   });
+
   const json = response.json();
   return json;
 };
