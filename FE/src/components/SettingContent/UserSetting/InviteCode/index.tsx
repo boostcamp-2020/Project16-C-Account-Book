@@ -7,7 +7,7 @@ import './inviteCode.scss';
 
 export default function InviteCode(props) {
   const accountBookId = useAccountBookData(store => store.accountBook._id);
-  const [codeVisible, setCodeVisible] = useState(false);
+  const [codeVisible, setCodeVisible] = useState(true);
   const [codeContent, setCodeContet] = useState('');
 
   const onClickGetCode = async () => {
@@ -18,11 +18,13 @@ export default function InviteCode(props) {
 
   return (
     <div className="invite__code__box">
-      <ActionButton
-        type="large"
-        content="Invite Code"
-        action={onClickGetCode}
-      />
+      <div className="get__code__button">
+        <ActionButton
+          type="large"
+          content="Invite Code"
+          action={onClickGetCode}
+        />
+      </div>
 
       {codeVisible && (
         <div className="invite__code__content">{codeContent}</div>
