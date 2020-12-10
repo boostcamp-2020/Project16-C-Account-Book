@@ -11,7 +11,6 @@ export interface User {
   social: string;
   profile: string;
   name?: string;
-  profile: string;
 }
 
 export interface iOAuth {

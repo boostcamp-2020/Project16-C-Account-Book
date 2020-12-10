@@ -12,4 +12,4 @@ export const Schema = new mongoose.Schema({
 
 Schema.index({ userid: 1, social: 1 });
 
-export const UserModel = mongoose.model<UserDoc>('users', Schema);
+export const UserModel = mongoose.model<UserDoc>('Users', Schema);
