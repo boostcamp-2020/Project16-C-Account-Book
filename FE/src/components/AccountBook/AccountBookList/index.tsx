@@ -127,6 +127,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
             data-turn={index}
             onKeyPress={onEnterEditForm}
             ref={titleEditRef[index]}
+            onClick={event => event.stopPropagation()}
           />
           <textarea
             className="acbook__desc__input hidden"
@@ -134,6 +135,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
             data-turn={index}
             onKeyPress={onEnterEditForm}
             ref={descEditRef[index]}
+            onClick={event => event.stopPropagation()}
           />
 
           <i
