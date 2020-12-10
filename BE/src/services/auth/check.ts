@@ -38,7 +38,6 @@ const decodeToken = (token: string): User => {
 
 const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
-  console.log('token: ', token);
 
   const user = decodeToken(token);
   const isUserInDB = !!(await userModel.get(user));

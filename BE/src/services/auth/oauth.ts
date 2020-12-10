@@ -68,14 +68,22 @@ export const getUserInfo = async (
     },
   });
 
+  console.log(data);
+
   if (social === 'github') {
-    const userInfo = { userid: data.login, name: data.name, social };
+    const userInfo = {
+      userid: data.login,
+      name: data.name,
+      profile: data.avatar_url,
+      social,
+    };
     return userInfo;
   }
   if (social === 'naver') {
     const userInfo = {
       userid: data.response.email,
       name: data.response.name,
+      profile: data.response.profile_image,
       social,
     };
 
