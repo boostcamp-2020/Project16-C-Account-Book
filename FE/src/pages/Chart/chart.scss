@@ -30,4 +30,11 @@
     text-shadow: $selectedTextShadow;
     font-size: 1.5em;
   }
+
+  @media screen and (max-width: 768px) {
+    .category__charts {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

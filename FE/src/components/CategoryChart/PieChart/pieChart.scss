@@ -7,7 +7,7 @@
   left: 20%;
   top: 45%;
   text-align: center;
-
+  zoom: 1;
   .donut {
     stroke-width: 50;
     fill: transparent;
@@ -36,5 +36,10 @@
         opacity: 1;
       }
     }
+  }
+}
+@media screen and (max-width: 768px) {
+  .s_donut {
+    opacity: 0;
   }
 }

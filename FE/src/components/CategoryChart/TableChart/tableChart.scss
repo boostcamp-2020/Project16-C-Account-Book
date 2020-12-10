@@ -49,3 +49,11 @@
     right: 0;
   }
 }
+@media screen and (max-width: 768px) {
+  .pie__table {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
