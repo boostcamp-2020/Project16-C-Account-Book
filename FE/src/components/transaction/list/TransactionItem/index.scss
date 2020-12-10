@@ -33,7 +33,7 @@
     display: flex;
     animation: button__out;
     animation-duration: 0.3s;
-    right: -15%;
+    right: -100%;
   }
 
   .transaction__item__delete__button,
@@ -115,6 +115,6 @@
 
   100% {
     opacity: 0;
-    right: -15%;
+    left: 105%;
   }
 }
