@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 import { createAccountBook } from '../../../api/accoun-book-list';
+import { joinAccountBook } from '../../../api/social';
 import './accountBookAddForm.scss';
 
 export default function AccountBookAddForm({
@@ -24,6 +25,16 @@ export default function AccountBookAddForm({
     }
   };
 
+  const onJoinAccountBook = async event => {
+    if (event.key === 'Enter') {
+      const res = await joinAccountBook({
+        code: inviteCodeInput.current.value,
+      });
+      console.log(res);
+      setCreate(false);
+      setDatas([{ name, description, _id: res.data._id }, ...datas]);
+    }
+  };
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -36,6 +47,14 @@ export default function AccountBookAddForm({
     setCreate(false);
   };
 
+  useEffect(() => {
+    if (createForm === 'create') {
+      accountBookInput.current.focus();
+    }
+    if (createForm === 'join') {
+      inviteCodeInput.current.focus();
+    }
+  }, [createForm]);
   return (
     <div className="create__acbook">
       {createForm === 'create' ? (
@@ -49,6 +68,7 @@ export default function AccountBookAddForm({
             placeholder="Enter AccountBook Title"
             onKeyPress={onCreateAccountBook}
             onChange={onChangeName}
+            autoFocus
           />
           <textarea
             className="input__description"
@@ -68,8 +88,9 @@ export default function AccountBookAddForm({
             type="text"
             name="title"
             placeholder="Enter Invite Code"
-            onKeyPress={onCreateAccountBook}
+            onKeyPress={onJoinAccountBook}
             onChange={onChangeName}
+            autoFocus
           />
         </>
       )}

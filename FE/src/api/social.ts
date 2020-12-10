@@ -1,9 +1,9 @@
 import { postFetch, deleteFetch } from '../service/fetch';
 
-export const joinAccountBook = () => {
+export const joinAccountBook = ({ code }) => {
   const data = postFetch(
     `${process.env.SERVER_URL}/api/social/accountbook/user`,
-    {},
+    { code },
   );
   return data;
 };
