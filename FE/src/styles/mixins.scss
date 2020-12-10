@@ -79,3 +79,45 @@
   border: 1px solid $dark-border-color;
   border-radius: 6px;
 }
+
+// header
+@mixin headerSetting {
+  position: relative;
+  background-color: $dark-background-color;
+  width: 100%;
+
+  padding-top: 2.5%;
+  z-index: 2;
+}
+
+@mixin headerButtons {
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  position: relative;
+}
+
+@mixin headerNavigationButtons($type) {
+  @include buttonDefaultSetting;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  text-align: center;
+  line-height: 1.5em;
+  @if $type == left {
+    left: 5%;
+  } @else {
+    right: 5%;
+  }
+  height: 1.5em;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.5em;
+
+  text-shadow: $selectedTextShadow;
+  color: $dark-emphasize-font-color;
+}
