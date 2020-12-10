@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './index.scss';
 import { useHistory } from 'react-router-dom';
@@ -16,6 +16,8 @@ const TransactionItem = ({
   cost,
   type,
 }: iTransactionItem) => {
+  const [buttonReveal, setButtonReveal] = useState('');
+
   const {
     setTransactionAddModalVisible,
     setInput,
@@ -31,6 +33,11 @@ const TransactionItem = ({
   );
 
   const onTransactionClicked = () => {
+    if (buttonReveal === 'reveal') setButtonReveal('hide');
+    else setButtonReveal('reveal');
+  };
+
+  const onModifyButtonClicked = () => {
     const dateArr = date.split('-');
     const year = dateArr[0];
     const month = dateArr[1];
@@ -77,13 +84,22 @@ const TransactionItem = ({
       ) : (
         <span className="transaction__item__cost transaction__item__in">{`+${cost}`}</span>
       )}
-      <button
-        type="button"
-        className="transaction__item__delete__button"
-        onClick={onDeleteButtonClicked}
-      >
-        삭제
-      </button>
+      <div className={`transaction__item__button__container ${buttonReveal}`}>
+        <button
+          type="button"
+          className="transaction__item__modify__button"
+          onClick={onModifyButtonClicked}
+        >
+          수정
+        </button>
+        <button
+          type="button"
+          className="transaction__item__delete__button"
+          onClick={onDeleteButtonClicked}
+        >
+          삭제
+        </button>
+      </div>
     </div>
   );
 };
