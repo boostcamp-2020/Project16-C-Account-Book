@@ -40,3 +40,8 @@
     border: none;
   }
 }
+@media screen and (max-width: 768px) {
+  .addform__wrapper {
+    opacity: 0;
+  }
+}
