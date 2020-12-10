@@ -5,7 +5,7 @@ import './LoginButton.scss';
 const Button = () => {
   const baseUrl = 'https://nid.naver.com/oauth2.0/authorize';
   const naverClientId = process.env.NAVER_CLIENT_ID;
-  const redirectUrl = 'http://118.67.135.19/:8080/auth/naver';
+  const redirectUrl = 'http://118.67.135.19:80/auth/naver';
   const requestUserIdentityUrl = `${baseUrl}?client_id=${naverClientId}&redirect_uri=${redirectUrl}&response_type=code`;
 
   const onNaverLoginButtonClicked = (e: React.MouseEvent<HTMLElement>) => {
