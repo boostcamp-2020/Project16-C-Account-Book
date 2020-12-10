@@ -2,9 +2,11 @@
 @use '../../../styles/mixins.scss' as *;
 
 @mixin categoryUnit {
-  padding: 0.5em 1.5em;
+  height: 5vh;
+  line-height: 5vh;
   border: 1px solid $dark-border-color;
   border-radius: 20px;
+  text-align: center;
   cursor: pointer;
   &:hover {
     background-color: $light-black;
@@ -27,12 +29,14 @@
 
     .category__unit {
       @include categoryUnit;
+      width: 10vw;
     }
 
     .category__unit__add {
       @include categoryUnit;
       .fas.fa-plus-circle {
         color: $white;
+        width: 7vw;
       }
     }
   }

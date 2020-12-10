@@ -16,7 +16,7 @@ import './settingPage.scss';
 export default function SettingPage() {
   useLoginCheck();
 
-  const [settingType, setSettingType] = useState('user');
+  const [settingType, setSettingType] = useState('category');
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);
   const [updateData, setUpdateData] = useState({});
