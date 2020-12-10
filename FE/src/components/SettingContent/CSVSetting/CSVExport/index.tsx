@@ -15,7 +15,12 @@ export default function CSVExport({ accountBookId }) {
   return (
     <div className="csv__export__box">
       <div className="csv__export__title">Export</div>
-      <ActionButton content="Export" action={downloadCSV} type="large" />
+      <div className="csv__export__desc">
+        You can get all Transactions in this Account Book.
+      </div>
+      <div className="csv__export__btn">
+        <ActionButton content="Export" action={downloadCSV} type="general" />
+      </div>
     </div>
   );
 }

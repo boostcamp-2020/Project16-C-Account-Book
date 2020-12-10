@@ -5,8 +5,13 @@
   @include settingBox;
 
   .csv__export__title {
-    font-size: 1.5em;
-    padding: 1em;
-    text-shadow: $selectedTextShadow;
+    @include settingTitle;
+  }
+  .csv__export__desc {
+    @include settingDesc;
+  }
+  .csv__export__btn {
+    display: flex;
+    justify-content: center;
   }
 }

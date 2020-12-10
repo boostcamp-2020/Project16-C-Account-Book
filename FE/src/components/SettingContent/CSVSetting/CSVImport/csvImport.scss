@@ -5,29 +5,36 @@
   @include settingBox;
 
   .csv__import__title {
-    font-size: 1.5em;
-    padding: 1em;
-    text-shadow: $selectedTextShadow;
+    @include settingTitle;
   }
 
-  .csv-input {
-    border-radius: 1px solid $dark-border-color;
-    margin-bottom: 10px;
+  .csv__import__desc {
+    @include settingDesc;
   }
 
-  .csv__import__filebtn {
+  .csv__import__filebox {
     display: flex;
-    background-color: transparent;
-    flex-direction: column;
-  }
+    justify-content: center;
+    align-items: center;
 
-  .csv__import__input {
+    width: 30%;
+    border-radius: 6px;
     background-color: transparent;
-    color: $dark-emphasize-font-color;
   }
+  .csv__import__content {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
 
-  .csv__import__filebtn {
-    background-color: transparent;
-    background-color: #219cf3;
+    .csv__import__btn {
+    }
+    .csv__import__input {
+      button {
+        background-color: transparent;
+      }
+
+      font-size: 1.5vh;
+      color: $dark-emphasize-font-color;
+    }
   }
 }
