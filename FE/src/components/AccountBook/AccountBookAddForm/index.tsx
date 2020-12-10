@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { createAccountBook } from '../../../api/accoun-book-list';
 import { joinAccountBook } from '../../../api/social';
-import './accountBookAddForm.scss';
+import './index.scss';
 
 export default function AccountBookAddForm({
   setCreate,
