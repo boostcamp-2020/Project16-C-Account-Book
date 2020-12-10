@@ -1,3 +1,5 @@
+@use '../../../../styles/values.scss' as *;
+
 .payment__input {
   .payment__card__container {
     overflow-x: scroll;
@@ -16,9 +18,10 @@
         min-width: 200px;
         height: 128px;
         border-radius: 16px;
-        box-shadow: 0rem 0px 3px 1px #bdbdbd;
-        background-color: white;
-        border: 1px solid;
+
+        color: $light-black;
+        background-color: $little-white;
+        border: 1px solid $dark-border-color;
         display: flex;
         flex-direction: column;
         padding: 15px;
@@ -29,9 +32,9 @@
       }
 
       input[type='radio']:checked + .payment__card__view {
-        border: 1px solid #23a3a7;
-        background: #23a3a7;
-        color: #fff;
+        border: 1px solid $dark-border-color;
+        background: $transaction-selected-item-color;
+        color: $little-white;
       }
     }
 
@@ -48,7 +51,7 @@
     }
 
     .no__payment {
-      color: red;
+      color: $spending-color;
     }
   }
 }

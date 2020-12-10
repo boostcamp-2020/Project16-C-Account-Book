@@ -1,3 +1,5 @@
+@use '../../../../styles/values.scss' as *;
+
 .transaction__item {
   position: relative;
   width: 100%;
@@ -7,30 +9,61 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 10px;
-  color: white;
+  padding: 2em 1em;
+  color: $dark-emphasize-font-color;
   cursor: pointer;
 
-  &:hover > .transaction__item__delete__button {
-    display: block;
+  .transaction__item__button__container {
+    display: none;
+    position: absolute;
+  }
+
+  .reveal {
+    display: flex;
     animation: button__in;
     animation-duration: 0.3s;
+    right: 10px;
+    width: 20%;
+    justify-content: space-evenly;
+    background-color: #000000ab;
+  }
+
+  .hide {
+    display: flex;
+    animation: button__out;
+    animation-duration: 0.3s;
+    right: -15%;
+  }
+
+  .transaction__item__delete__button,
+  .transaction__item__modify__button {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
     cursor: pointer;
   }
+
   .transaction__item__delete__button {
+
     display: none;
     position: absolute;
     right: 10px;
-    border: 1px solid red;
-    background-color: red;
+    border: 1px solid $transaction-delete-button-color;
+    background-color: $transaction-delete-button-color;
     color: white;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 0 5px 1px red;
   }
 
+  .transaction__item__modify__button {
+    border: 1px solid rgb(64, 255, 47);
+    background-color: rgb(64, 255, 47);
+    box-shadow: 0 0 5px 1px rgb(64, 255, 47);
+  }
+
   &:not(:last-child) {
-    border-bottom: 1px dotted rgb(143, 143, 143);
+    border-bottom: 1px dotted $dark-border-color;
   }
 
   div {
@@ -44,8 +77,7 @@
     span {
       padding: 6px 10px;
       border-radius: 20px;
-      border: 1.4px solid white;
-      text-shadow: 0 0 10px #64cc9c;
+      border: 1.4px solid $dark-emphasize-font-color;
     }
   }
   .transaction__item__description {
@@ -60,22 +92,34 @@
   }
 
   .transaction__item__in {
-    color: #54aafc;
+    color: $income-color;
   }
 
   .transaction__item__out {
-    color: #ee4337;
+    color: $spending-color;
   }
 }
 
 @keyframes button__in {
   0% {
     opacity: 0;
-    right: -80%;
+    right: -15%;
   }
 
   100% {
     opacity: 1;
     right: 10px;
+  }
+}
+
+@keyframes button__out {
+  0% {
+    opacity: 1;
+    right: 10px;
+  }
+
+  100% {
+    opacity: 0;
+    right: -15%;
   }
 }

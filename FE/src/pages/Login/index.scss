@@ -6,7 +6,7 @@
   height: 100vh;
   margin: 0 0 0;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: $dark-background-color;
 
   .title {
     position: absolute;
@@ -15,7 +15,7 @@
     left: 50%;
     transform: translateX(-50%);
     font-weight: 1000;
-    font-size: 80px;
+    font-size: 8vh;
     animation: titleShow 1.5s;
     @keyframes titleShow {
       from {
@@ -24,10 +24,10 @@
       }
     }
     &::first-letter {
-      font-size: 100px;
+      font-size: 10vh;
     }
     text-shadow: $selectedTextShadow;
-    color: $white;
+    color: $dark-emphasize-font-color;
   }
 
   .login-button-container {

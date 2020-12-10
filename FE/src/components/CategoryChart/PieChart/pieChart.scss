@@ -1,3 +1,5 @@
+@use '../../../styles/mediaQuery.scss' as *;
+
 :root {
   --result: 0;
 }
@@ -7,7 +9,7 @@
   left: 20%;
   top: 45%;
   text-align: center;
-
+  zoom: 1;
   .donut {
     stroke-width: 50;
     fill: transparent;
@@ -36,5 +38,10 @@
         opacity: 1;
       }
     }
+  }
+}
+@include mobile {
+  .s_donut {
+    opacity: 0;
   }
 }

@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .card__container {
   position: fixed;
@@ -80,7 +81,7 @@
       font-size: 1.5em;
 
       &:hover {
-        color: black;
+        color: $black;
 
         animation: deleteBtn 1s forwards;
 
@@ -105,6 +106,17 @@
       margin-bottom: 3em;
     }
   }
+  @include mobile {
+    .card__container__card {
+      width: 250px;
+      .fas.fa-edit {
+        display: none;
+      }
+      .fas.fa-trash-alt {
+        display: none;
+      }
+    }
+  }
 
   @keyframes cardShow {
     from {
@@ -115,5 +127,13 @@
     to {
       opacity: 1;
     }
+  }
+}
+
+@include mobile {
+  .card__container {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
   }
 }

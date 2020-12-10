@@ -2,7 +2,7 @@
 @use '../../styles/mixins' as *;
 
 .settingbar__header {
-  background-color: $black;
+  background-color: $dark-background-color;
   width: 100%;
   height: 20%;
   padding: 2.5em 0;
@@ -19,10 +19,10 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 0.5em;
+      left: 2%;
       text-align: center;
       line-height: 1.5em;
-      width: 10em;
+
       height: 1.5em;
       background-color: transparent;
       display: flex;
@@ -30,58 +30,9 @@
       align-items: center;
       gap: 0.5em;
       font-size: 1.5em;
-      box-shadow: $selectedBoxShadow;
+
       text-shadow: $selectedTextShadow;
-      color: white;
-    }
-  }
-
-  .settingbar__ctrBox {
-    margin-top: 1.5em;
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-    font-weight: 900;
-    color: white;
-    text-shadow: $selectedTextShadow;
-
-    .btn-cal {
-      @include buttonDefaultSetting;
-      position: relative;
-      float: left;
-      width: 25px;
-      height: 25px;
-      margin-top: 5px;
-      font-size: 16px;
-      background: none;
-      font-weight: 900;
-      color: white;
-      text-shadow: $selectedTextShadow;
-    }
-    .btn-cal:after {
-      content: '<';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      line-height: 25px;
-      font-weight: bold;
-      font-size: 20px;
-    }
-    .btn-cal.next {
-      float: right;
-    }
-    .btn-cal.next:after {
-      content: '>';
-    }
-
-    .year-month {
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: $dark-emphasize-font-color;
     }
   }
 }

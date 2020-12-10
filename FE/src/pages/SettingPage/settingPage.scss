@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   animation: showSettingPage 1s ease;
-  color: white;
+  color: $dark-emphasize-font-color;
 
   @keyframes showSettingPage {
     from {

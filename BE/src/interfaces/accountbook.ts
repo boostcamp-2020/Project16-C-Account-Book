@@ -5,6 +5,7 @@ import Transaction from '@interfaces/transaction';
 
 export default interface AccountBook {
   name: string;
+  code: string;
   startday: string;
   description: string;
   categories: Category[];

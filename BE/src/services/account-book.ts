@@ -1,5 +1,6 @@
 import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
+import Random from '@utils/random';
 
 const get = async (ctx: Context): Promise<any> => {
   const accountBooks = await accountBookModel.get(ctx.user);
@@ -74,4 +75,38 @@ const getDetail = async (ctx: Context): Promise<any> => {
   return accountBook;
 };
 
-export default { get, getDetail, post, patch, patchStartday, del };
+const getCode = async (ctx: Context): Promise<any> => {
+  const id = ctx.params.accountbookid;
+  const code = Random.randomStr(10);
+  const updateResult = await accountBookModel.updateCode(id, code);
+  if (updateResult) return code;
+  return false;
+};
+
+const addUser = async (ctx: Context): Promise<any> => {
+  const { code } = ctx.request.body;
+  const userInfo = ctx.user;
+  const updateResult = await accountBookModel.addUser(code, userInfo);
+  if (updateResult) return true;
+  return false;
+};
+
+const delUser = async (ctx: Context): Promise<any> => {
+  const accountBookId = ctx.params.accountbookid;
+  const userInfo = ctx.user;
+  const updateResult = await accountBookModel.delUser(accountBookId, userInfo);
+  if (updateResult) return true;
+  return false;
+};
+
+export default {
+  get,
+  getDetail,
+  post,
+  patch,
+  patchStartday,
+  del,
+  getCode,
+  addUser,
+  delUser,
+};

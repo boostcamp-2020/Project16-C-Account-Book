@@ -1,18 +1,19 @@
 import { Context } from 'koa';
+import service from '@services/account-book';
+import { response } from '@utils/response';
 
-const get = (ctx: Context): Context['body'] => {
-  ctx.body = `/GET ${ctx.url}`;
+const post = async (ctx: Context): Promise<Context['body']> => {
+  const result = await service.addUser(ctx);
+  const res = response(200, 'success', result);
+  ctx.body = res;
   return ctx.body;
 };
 
-const post = (ctx: Context): Context['body'] => {
-  ctx.body = `/POST ${ctx.url}`;
+const del = async (ctx: Context): Promise<Context['body']> => {
+  const result = await service.delUser(ctx);
+  const res = response(200, 'success', result);
+  ctx.body = res;
   return ctx.body;
 };
 
-const del = (ctx: Context): Context['body'] => {
-  ctx.body = `/DELETE ${ctx.url}`;
-  return ctx.body;
-};
-
-export default { get, post, del };
+export default { post, del };

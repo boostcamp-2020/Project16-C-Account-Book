@@ -1,5 +1,6 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
 
 .addform__wrapper {
   width: 333px;
@@ -38,5 +39,10 @@
     font-size: 0.8em;
     color: $black;
     border: none;
+  }
+}
+@include mobile {
+  .addform__wrapper {
+    opacity: 0;
   }
 }

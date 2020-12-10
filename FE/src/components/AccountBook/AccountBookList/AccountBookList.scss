@@ -1,4 +1,5 @@
 @use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery.scss' as *;
 
 .acbook__list {
   display: flex;
@@ -104,5 +105,15 @@
         opacity: 1;
       }
     }
+  }
+  @include mobile {
+    .acbook {
+      width: 200px;
+    }
+  }
+}
+@include mobile {
+  .acbook__list {
+    padding: 0;
   }
 }

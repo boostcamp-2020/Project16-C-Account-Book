@@ -52,4 +52,13 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
   ctx.body = res;
   return ctx.body;
 };
-export default { get, post, update, updateStartday, del, getDetail };
+
+const getCode = async (ctx: Context): Promise<Context['body']> => {
+  const code = await service.getCode(ctx);
+  const res = response(200, 'success', code);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
+};
+
+export default { get, post, update, updateStartday, del, getDetail, getCode };
