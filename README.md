@@ -1,6 +1,7 @@
 # 내돈내쓴
 ### 내가 쓴 돈💸 내가 쓴다✍
 
+### - [배포 링크](http://101.101.217.148:8080/)
 ### - [Team Wiki](https://github.com/boostcamp-2020/Project16-C-Account-Book/wiki)
 ### - [Project](https://github.com/boostcamp-2020/Project16-C-Account-Book/projects)
 
@@ -28,6 +29,7 @@
 ![NodeJS](https://img.shields.io/badge/node.js-v14.5.0-green?logo=node.js)
 ![Koa](https://img.shields.io/badge/koa-v2.13.0-white?logo=koa)
 ![MongoDB](https://img.shields.io/badge/MongoDB-v2.6.10-blue?logo=MongoDB)
+![Mongoose](https://img.shields.io/badge/Mongoose-v5.10.15-blue?logo=Mongoose)
 ![Jest](https://img.shields.io/badge/Jest-v26.6.3-C21325?logo=jest)
 
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/boostcamp-2020/Project16-C-Account-Book?color=green)](https://github.com/boostcamp-2020/Project16-C-Account-Book/issues)

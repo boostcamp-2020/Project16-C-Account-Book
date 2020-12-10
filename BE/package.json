@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsc && set PRODUCTION=true && node -r ./tsconfig-paths-bootstrap.js build/index.js",
+    "start": "tsc && export PRODUCTION=true && node -r ./tsconfig-paths-bootstrap.js build/index.js",
     "dev": "nodemon"
   },
   "author": "",
