@@ -105,7 +105,17 @@
       margin-bottom: 3em;
     }
   }
-
+  @media screen and (max-width: 768px) {
+    .card__container__card {
+      width: 250px;
+      .fas.fa-edit {
+        display: none;
+      }
+      .fas.fa-trash-alt {
+        display: none;
+      }
+    }
+  }
   @keyframes cardShow {
     from {
       opacity: 0;
@@ -115,5 +125,13 @@
     to {
       opacity: 1;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card__container {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
   }
 }
