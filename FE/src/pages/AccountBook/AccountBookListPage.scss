@@ -1,0 +1,25 @@
+@use '../../styles/values' as *;
+@use '../../styles/mediaQuery' as *;
+
+.acbook__list__container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  background-color: $dark-background-color;
+  animation: showPage 1s ease;
+
+  @keyframes showPage {
+    from {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+@include mobile {
+  .acbook__list__container {
+    position: inherit;
+    flex-direction: column;
+  }
+}

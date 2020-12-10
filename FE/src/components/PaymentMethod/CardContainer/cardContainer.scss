@@ -1,0 +1,139 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
+
+.card__container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-x: hidden;
+  flex: 1;
+  z-index: 2;
+  margin-top: 3em;
+
+  .card__container__card {
+    position: relative;
+    color: $white;
+    width: 333px;
+    min-height: 195px;
+    margin-top: 4em;
+
+    animation: cardShow 1s backwards;
+    transition: transform 500ms ease;
+    transform: translateX(35px);
+
+    border-radius: 6px;
+    padding: 1.5em;
+
+    .card__title {
+      font-size: 2em;
+      padding: 0.2em 0;
+      font-weight: bold;
+    }
+
+    .card__desc {
+      font-size: 1.2em;
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .desc__input {
+      width: 200px;
+      text-decoration: none;
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    .fas.fa-edit {
+      position: absolute;
+      right: 1em;
+      top: 1.5em;
+      font-size: 1.5em;
+
+      &:hover {
+        color: black;
+
+        animation: deleteBtn 1s forwards;
+
+        @keyframes deleteBtn {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+
+    .fas.fa-trash-alt {
+      position: absolute;
+      right: 1.2em;
+      top: 3.5em;
+      font-size: 1.5em;
+
+      &:hover {
+        color: $black;
+
+        animation: deleteBtn 1s forwards;
+
+        @keyframes deleteBtn {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transition: transform 500ms ease;
+      transform: translateX(-50px);
+    }
+
+    &:last-child {
+      margin-bottom: 3em;
+    }
+  }
+  @include mobile {
+    .card__container__card {
+      width: 250px;
+      .fas.fa-edit {
+        display: none;
+      }
+      .fas.fa-trash-alt {
+        display: none;
+      }
+    }
+  }
+
+  @keyframes cardShow {
+    from {
+      opacity: 0;
+      transform: translateX(300px);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@include mobile {
+  .card__container {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+}

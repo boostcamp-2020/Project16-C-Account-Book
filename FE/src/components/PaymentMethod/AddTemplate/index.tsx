@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useContext, useState } from 'react';
-import { paymentContext } from '../../../store/PaymentMethod/paymentMethodContext';
-import { useRootData } from '../../../store/PaymentMethod/paymentMethodHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useDefaultPaymentData } from '../../../store/PaymentMethod/paymentMethodHook';
 
-import styles from './addForm.module.scss';
+import { createPaymentMethod } from '../../../api/payment-method';
+import './addForm.scss';
 
 interface Card {
   setAddFormModal: (data: boolean) => void;
@@ -13,22 +14,29 @@ export default function AddTemplate({
 }: Card): React.ReactElement {
   const [methodNick, setMethodNick] = useState('');
   const methodInput = useRef();
-  const store = useContext(paymentContext);
-  const addTemplateData = useRootData(store => store.addTemplateData);
-  const addPaymentMethod = useRootData(store => store.addPaymentMethod);
-  const updateAddTemplate = useRootData(store => store.updateAddTemplate);
+
+  const addTemplateData = useDefaultPaymentData(store => store.addTemplateData);
+  const updateAddTemplate = useDefaultPaymentData(
+    store => store.updateAddTemplate,
+  );
+
+  const addPaymentMethod = useAccountBookData(store => store.addPaymentMethod);
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
 
   const onChangeNick = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMethodNick(event.target.value);
   };
 
-  const onAddCard = event => {
+  const onAddCard = async event => {
     if (event.key === 'Enter') {
-      addPaymentMethod({
+      const res = await createPaymentMethod({
+        accountBookId,
         name: addTemplateData.name,
         desc: `${methodNick}`,
         color: addTemplateData.color,
       });
+
+      addPaymentMethod(res.data);
 
       setAddFormModal(() => false);
       updateAddTemplate({ name: '', color: '' });
@@ -44,7 +52,11 @@ export default function AddTemplate({
 
   return (
     <div
-      className={styles.wrapper}
+      className={
+        addTemplateData.name.length === 0
+          ? 'addform__wrapper'
+          : 'addform__wrapper selected'
+      }
       style={{ background: `${addTemplateData.color}` }}
     >
       {addTemplateData.name || '아래에서 카드를 선택해주세요.'}
@@ -52,7 +64,7 @@ export default function AddTemplate({
         <input
           ref={methodInput}
           value={methodNick}
-          className={styles.methodName}
+          className="addform__method__name"
           type="text"
           placeholder="Enter Method Nickname"
           onChange={onChangeNick}

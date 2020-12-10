@@ -1,24 +1,21 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useRootData } from '../../../store/DateInfo/dateInfoHook';
-
-import styles from './menubar.module.scss';
+import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import HeaderButton from '../HeaderButton';
+import './menubar.scss';
 import CalculateDate from '../../../util/calculateDate';
 
-const MenuBar = ({ setModal, pageType }) => {
+const MenuBar = ({ id, setModal, pageType }) => {
   const history = useHistory();
-  const DateInfo = useRootData(store => store.nowCalendarInfo);
-  const setDateInfo = useRootData(store => store.setCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
 
   const allBtnRef = useRef();
   const btnNextRef = useRef();
   const btnPrevRef = useRef();
   const calMonRef = useRef();
   const calYearRef = useRef();
-  const transactionIconRef = useRef();
-  const calIconRef = useRef();
-  const chartIconRef = useRef();
 
   const setYearMonth = useCallback((year, month) => {
     const yy = year;
@@ -41,79 +38,114 @@ const MenuBar = ({ setModal, pageType }) => {
   }, []);
 
   const onClickIcon = useCallback(event => {
-    history.push(event.target.dataset.type);
+    history.push({
+      pathname: event.target.dataset.type,
+      state: {
+        id,
+      },
+    });
   }, []);
 
   const onClickPayment = useCallback(() => {
     setModal(true);
   }, []);
 
-  const setIcon = useCallback(pageType => {
-    if (pageType === 'transaction') {
-      transactionIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'calendar') {
-      calIconRef.current.classList.toggle(styles.checked);
-    }
-    if (pageType === 'chart') {
-      chartIconRef.current.classList.toggle(styles.checked);
-    }
-  }, pageType);
-
   useEffect(() => {
-    setIcon(pageType);
     setYearMonth(DateInfo.year, DateInfo.month);
   }, [pageType]);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.buttons} ref={allBtnRef}>
+    <header className="menubar__header">
+      <div className="menubar__buttons" ref={allBtnRef}>
         <div
-          ref={transactionIconRef}
-          className={styles.navBtn}
-          data-type="transaction"
+          className={pageType === '/' ? 'back__navBtn checked' : 'back__navBtn'}
+          data-type="/"
           onClick={onClickIcon}
         >
-          <i data-type="transaction" className="fas fa-history" />
+          <i data-type="/" className="fas fa-arrow-left" />
+          <span className="navigation__content" data-type="/">
+            List
+          </span>
         </div>
+        {pageType === 'transaction' ? (
+          <HeaderButton
+            buttonType="transaction"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="transaction"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+        {pageType === 'calendar' ? (
+          <HeaderButton
+            buttonType="calendar"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="calendar"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+        {pageType === 'chart' ? (
+          <HeaderButton
+            buttonType="chart"
+            isChecked
+            onClickIcon={onClickIcon}
+          />
+        ) : (
+          <HeaderButton
+            buttonType="chart"
+            isChecked={false}
+            onClickIcon={onClickIcon}
+          />
+        )}
+
+        <HeaderButton
+          buttonType="paymentMethod"
+          isChecked={false}
+          onClickIcon={onClickPayment}
+        />
+
         <div
-          ref={calIconRef}
-          className={styles.navBtn}
-          data-type="calendar"
+          className={
+            pageType === '/setting'
+              ? 'setting__navBtn checked'
+              : 'setting__navBtn'
+          }
+          data-type="setting"
           onClick={onClickIcon}
         >
-          <i data-type="calendar" className="far fa-calendar-alt" />
-        </div>
-        <div
-          ref={chartIconRef}
-          className={styles.navBtn}
-          data-type="chart"
-          onClick={onClickIcon}
-        >
-          <i data-type="chart" className="far fa-chart-bar" />
-        </div>
-        <div className={styles.navBtn} onClick={onClickPayment}>
-          <i className="fas fa-credit-card" />
+          <span className="navigation__content" data-type="/setting">
+            Setting
+          </span>
+          <i data-type="/setting" className="fas fa-arrow-right" />
         </div>
       </div>
 
-      <div className={styles.ctrBox}>
+      <div className="menubar__ctrBox">
         <button
           type="button"
           title="prev"
-          className={`${styles['btn-cal']} ${styles.prev}`}
+          className="btn-cal prev"
           onClick={onClickPrevMonth}
           ref={btnPrevRef}
         />
-        <div className={styles['year-month']}>
-          <span className={styles['cal-year']} ref={calYearRef} />
-          <span className={styles['cal-month']} ref={calMonRef} />
+        <div className="year-month">
+          <span className="cal-year" ref={calYearRef} />
+          <span className="cal-month" ref={calMonRef} />
         </div>
 
         <button
           type="button"
           title="next"
-          className={`${styles['btn-cal']} ${styles.next}`}
+          className="btn-cal next"
           onClick={onClickNextMonth}
           ref={btnNextRef}
         />

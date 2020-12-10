@@ -1,0 +1,113 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+
+.detail-info-overlay {
+  position: fixed;
+  width: 100%;
+  height: 140%;
+  background-color: $modal-background;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+
+  &.hidden {
+    display: none;
+  }
+
+  .clicked-date {
+    position: absolute;
+    border-radius: $basic-border-radius;
+    width: 45%;
+    height: 55%;
+    background-color: transparent;
+    padding: 2em 0;
+    margin-top: 10%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $dark-border-color;
+    color: $dark-border-color;
+
+    animation: detailFormShow 1s ease;
+    @keyframes detailFormShow {
+      from {
+        opacity: 0;
+        transform: translateY(500px);
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .cal-date-info {
+      display: flex;
+      gap: 1em;
+      font-size: 1.2em;
+      color: $dark-general-font-color;
+      text-shadow: $selectedTextShadow;
+    }
+    .cal-transition {
+      margin-top: 2em;
+      width: 100%;
+      height: 100%;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      .specific__transaction__unit {
+        width: 100%;
+        display: flex;
+        padding: 1em;
+        border: 1px solid $dark-border-color;
+        border-radius: $basic-border-radius;
+        background-color: #333;
+        color: $dark-emphasize-font-color;
+        position: relative;
+        animation: specificDataShow 1s backwards;
+
+        @keyframes specificDataShow {
+          from {
+            opacity: 0;
+            transform: translateX(-100px);
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        .specific__content {
+          position: absolute;
+          left: 30%;
+        }
+
+        .specific__payment {
+          position: absolute;
+          right: 30%;
+        }
+
+        .specific__cost {
+          position: absolute;
+          right: 5%;
+
+          &.income {
+            color: $income-color;
+          }
+          &.spending {
+            color: $spending-color;
+          }
+        }
+      }
+
+      .no__specific__data {
+        text-align: center;
+        font-size: 3em;
+        border-radius: $basic-border-radius;
+        color: $dark-emphasize-font-color;
+
+        text-shadow: $selectedTextShadow;
+      }
+    }
+  }
+}

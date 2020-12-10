@@ -1,0 +1,43 @@
+$naver-color: #1ec800;
+$github-color: black;
+
+@mixin LoginButton($color) {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $color;
+  color: white;
+  box-shadow: 0 0 5px 1px grey;
+  width: 300px;
+  height: 60px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(5px);
+    font-weight: 900;
+    font-size: 35px;
+  }
+
+  .divider {
+    height: 100%;
+    box-shadow: 0 0 1px 0.2px white;
+  }
+
+  .button-text {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+.GithubLoginButton {
+  @include LoginButton($github-color);
+}
+
+.NaverLoginButton {
+  @include LoginButton($naver-color);
+}

@@ -1,44 +1,97 @@
-import React from 'react';
+import React, { ChangeEvent, useCallback } from 'react';
 import styles from './listfilter.modules.scss';
 
-const Filter = props => {
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
+import CommaMaker from '../../../../util/commaForMoney';
+
+const Filter = ({
+  selectedCategories,
+  selectCategories,
+  selectedTypes,
+  selectType,
+}: {
+  selectedCategories: string[];
+  selectCategories: (value: string[]) => void;
+  selectedTypes: string[];
+  selectType: (values: string[]) => void;
+}) => {
+  const {
+    categoryPool,
+    filteredPriceIn,
+    filteredPriceOut,
+  } = useAccountBookData(store => ({
+    categoryPool: store.accountBook.categories,
+    filteredPriceIn: store.filteredPriceIn,
+    filteredPriceOut: store.filteredPriceOut,
+  }));
+
+  const onCategoryChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const targetElement = e.target as HTMLInputElement;
+      if (selectedCategories.includes(targetElement.value)) {
+        const rest = selectedCategories.filter(
+          category => category !== targetElement.value,
+        );
+        selectCategories(rest);
+      } else {
+        selectCategories([...selectedCategories, targetElement.value]);
+      }
+    },
+    [selectedCategories, selectedCategories],
+  );
+
+  const onTypeClicked = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const targetElement = e.target as HTMLInputElement;
+      if (selectedTypes.includes(targetElement.value)) {
+        const rest = selectedTypes.filter(type => type !== targetElement.value);
+        selectType(rest);
+      } else {
+        selectType([...selectedTypes, targetElement.value]);
+      }
+      console.log('click ', selectedTypes);
+    },
+    [selectedTypes, selectType],
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.inoutFilter}>
-        <div>
-          <input type="radio" name="inout" id="in" />
-          <label htmlFor="in">
-            <span>+ 0</span>
+        {['수입', '지출'].map(type => (
+          <label key={type}>
+            <input
+              type="checkbox"
+              name="type"
+              value={type}
+              checked={selectedTypes.includes(type)}
+              onChange={onTypeClicked}
+            />
+            <span>
+              {type === '지출'
+                ? `-${CommaMaker(filteredPriceOut)}`
+                : `+${CommaMaker(filteredPriceIn)}`}
+            </span>
           </label>
-        </div>
-        <div>
-          <input type="radio" name="inout" id="out" />
-          <label htmlFor="out">
-            <span>- 0</span>
-          </label>
-        </div>
+        ))}
       </div>
       <div className={styles.categoryFilter}>
-        <label htmlFor="shopping">
-          <input type="checkbox" id="shopping" />
-          쇼핑
-        </label>
-        <label htmlFor="movie">
-          <input type="checkbox" id="movie" />
-          영화
-        </label>
-        <label htmlFor="music">
-          <input type="checkbox" id="music" />
-          음악
-        </label>
-        <label htmlFor="food">
-          <input type="checkbox" id="food" />
-          음식
-        </label>
-        <label htmlFor="any">
-          <input type="checkbox" id="any" />
-          기타
-        </label>
+        {categoryPool
+          .filter(
+            ({ type }) =>
+              selectedTypes.length === 0 || selectedTypes.includes(type),
+          )
+          .map(({ name }) => (
+            <label key={name}>
+              <input
+                type="checkbox"
+                name="category"
+                value={name}
+                onChange={onCategoryChange}
+                checked={selectedCategories.includes(name)}
+              />
+              <span>{name}</span>
+            </label>
+          ))}
       </div>
     </div>
   );

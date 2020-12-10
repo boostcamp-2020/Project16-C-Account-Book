@@ -1,0 +1,25 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
+
+.header__navBtn {
+  @include buttonDefaultSetting;
+  text-align: center;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  background-color: transparent;
+  color: $dark-font-color;
+  font-size: 1.5rem;
+  // box-shadow: $noSelectedBoxShadow;
+  &:hover {
+    box-shadow: $selectedBoxShadow;
+    text-shadow: $selectedTextShadow;
+    color: $dark-general-font-color;
+  }
+  &.checked {
+    box-shadow: $selectedBoxShadow;
+    text-shadow: $selectedTextShadow;
+    color: $dark-general-font-color;
+  }
+}

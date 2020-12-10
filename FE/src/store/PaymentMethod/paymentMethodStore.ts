@@ -1,5 +1,8 @@
+import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+
 export const createStore = () => {
   const store = {
+    defaultMethods: [],
     addTemplateData: { name: '', color: '' },
     paymentMethod: [
       {
@@ -9,6 +12,11 @@ export const createStore = () => {
       },
       { name: 'Kakao', desc: 'sub method', color: 'hsla(40, 100%, 50%, 0.93)' },
     ],
+
+    async initialMethods() {
+      this.defaultMethods = await getDefaultMethods();
+    },
+
     addPaymentMethod(data: { name: string; desc: string; color: string }) {
       this.paymentMethod = [data, ...this.paymentMethod];
     },

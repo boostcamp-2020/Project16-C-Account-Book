@@ -1,0 +1,41 @@
+@use '../../styles/values' as *;
+@use '../../styles/mediaQuery' as *;
+.chart__wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .category__charts {
+    width: 100%;
+    height: 100%;
+  }
+
+  .date__charts {
+    padding: 2em 10em;
+    width: 100%;
+    height: 100%;
+  }
+
+  .no__data {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-10%);
+    border-radius: 6px;
+    margin: auto;
+    color: $dark-emphasize-font-color;
+    text-shadow: $selectedTextShadow;
+    font-size: 1.5em;
+  }
+
+  @include mobile {
+    .category__charts {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

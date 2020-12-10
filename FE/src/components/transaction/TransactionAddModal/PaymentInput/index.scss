@@ -1,0 +1,57 @@
+@use '../../../../styles/values.scss' as *;
+
+.payment__input {
+  .payment__card__container {
+    overflow-x: scroll;
+    display: flex;
+    padding: 15px;
+
+    .payment__card__item {
+      transition: 0.2s;
+
+      .payment__card__title {
+        margin-bottom: 4px;
+        font-weight: bold;
+      }
+
+      .payment__card__view {
+        min-width: 200px;
+        height: 128px;
+        border-radius: 16px;
+
+        color: $light-black;
+        background-color: $little-white;
+        border: 1px solid $dark-border-color;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      input[type='radio'] {
+        display: none;
+      }
+
+      input[type='radio']:checked + .payment__card__view {
+        border: 1px solid $dark-border-color;
+        background: $transaction-selected-item-color;
+        color: $little-white;
+      }
+    }
+
+    .payment__card__item:not(:first-child) {
+      margin-left: -100px;
+    }
+
+    .payment__card__item:hover {
+      transform: translateY(-10px);
+    }
+
+    .payment__card__item:hover ~ .payment__card__item {
+      transform: translateX(105px);
+    }
+
+    .no__payment {
+      color: $spending-color;
+    }
+  }
+}

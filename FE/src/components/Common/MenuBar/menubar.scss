@@ -1,0 +1,130 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
+
+@mixin navigationButton($type) {
+  @include buttonDefaultSetting;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  text-align: center;
+  line-height: 1.5em;
+  @if $type== list {
+    left: 5%;
+  } @else {
+    right: 5%;
+  }
+  height: 1.5em;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.5em;
+
+  text-shadow: $selectedTextShadow;
+  color: white;
+  @include mobile {
+    .navigation__content {
+      display: none;
+    }
+    .fas.fa-arrow-right {
+      right: 5%;
+    }
+  }
+}
+
+.menubar__header {
+  position: relative;
+  background-color: $dark-background-color;
+  width: 100%;
+
+  padding-top: 2.5%;
+  z-index: 2;
+  .menubar__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+    position: relative;
+
+    .back__navBtn {
+      @include navigationButton(list);
+    }
+    .setting__navBtn {
+      @include navigationButton(setting);
+    }
+    @include mobile {
+      .back__navBtn,
+      .setting__navBtn {
+        font-size: 1rem;
+      }
+    }
+  }
+  @include mobile {
+    .menubar__buttons {
+      gap: 2em;
+    }
+  }
+
+  .menubar__ctrBox {
+    padding-top: 1.5%;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    font-weight: 900;
+    color: white;
+    text-shadow: $selectedTextShadow;
+
+    .btn-cal {
+      @include buttonDefaultSetting;
+      position: relative;
+      float: left;
+      width: 25px;
+      height: 25px;
+      margin-top: 5px;
+      font-size: 16px;
+      background: none;
+      font-weight: 900;
+      color: white;
+      text-shadow: $selectedTextShadow;
+    }
+    .btn-cal:after {
+      content: '<';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      line-height: 25px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .btn-cal.next {
+      float: right;
+    }
+    .btn-cal.next:after {
+      content: '>';
+    }
+
+    .year-month {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @include mobile {
+    .menubar__ctrBox {
+      padding: 5%;
+      font-size: 1rem;
+    }
+  }
+}
+
+@include mobile {
+  .menubar__header {
+    padding: 5% 0;
+  }
+}

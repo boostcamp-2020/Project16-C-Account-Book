@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import Modal from '../../components/PaymentMethod/Modal';
+import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
-import Calendar from '../../components/Calendar';
-import styles from './calendar.module.scss';
-import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+import TotalContent from '../../components/Calendar/TotalContent';
+import Calendar from '../../components/Calendar/Calendar';
+import './calendar.scss';
+import useDefaultPayment from '../../service/useDefaultPayment';
+import useLoginCheck from '../../service/useLoginCheck';
+import useAccountBook from '../../service/useAccountBookSetting';
 
 export default function CalendarPage() {
-  const [modal, setModal] = useState(false);
-  const [defaultMethod, setDefaultMethod] = useState([]);
+  const accountBookId = useHistory().location.state;
 
-  const getData = async () => {
-    const datas = await getDefaultMethods();
-    setDefaultMethod(datas);
-  };
+  useLoginCheck();
+  useAccountBook(accountBookId);
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const [paymentMethodModal, setPaymentMethodModal] = useState(false);
+  const defaultMethod = useDefaultPayment();
 
   return (
-    <div className={styles.wrapper}>
-      <MenuBar setModal={setModal} pageType="calendar" />
+    <div className="calendar__wrapper">
+      <MenuBar
+        id={accountBookId.id}
+        setModal={setPaymentMethodModal}
+        pageType="calendar"
+      />
+      <TotalContent />
       <Calendar />
-      {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      {paymentMethodModal && (
+        <PaymentModal
+          setModal={setPaymentMethodModal}
+          defaultMethod={defaultMethod}
+        />
+      )}
     </div>
   );
 }

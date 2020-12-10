@@ -1,0 +1,47 @@
+@use '../../../styles/mediaQuery.scss' as *;
+
+:root {
+  --result: 0;
+}
+
+.s_donut {
+  position: absolute;
+  left: 20%;
+  top: 45%;
+  text-align: center;
+  zoom: 1;
+  .donut {
+    stroke-width: 50;
+    fill: transparent;
+    animation: drawDonut 1.5s forwards;
+    animation-iteration-count: 1;
+    @keyframes drawDonut {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+        stroke-dashoffset: var(--result);
+      }
+    }
+  }
+  .txt {
+    fill: white;
+    animation: twinkle 1.5s forwards;
+    animation-iteration-count: 1;
+
+    @keyframes twinkle {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+  }
+}
+@include mobile {
+  .s_donut {
+    opacity: 0;
+  }
+}

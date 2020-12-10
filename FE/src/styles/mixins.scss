@@ -1,0 +1,81 @@
+@use './values.scss' as *;
+
+@mixin buttonDefaultSetting {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+@mixin input-form {
+  padding: 0.5em 1em;
+
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1em;
+  background-color: #fff;
+
+  &:focus {
+    background-color: #fff;
+    border: 1px solid #77aedb;
+    box-shadow: 0 0 1em #71a1c9;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+}
+
+@mixin general-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $white;
+  color: $white;
+  width: 5em;
+  height: 30px;
+  background-color: $modal-button-background;
+  font-size: 1em;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
+
+@mixin large-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $dark-emphasize-font-color;
+  color: $white;
+
+  background-color: $modal-button-background;
+
+  width: 8em;
+  height: 50px;
+  font-size: 1em;
+  z-index: 4;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
+
+// setting tab
+
+@mixin settingContainer {
+  width: 100%;
+  height: 100%;
+  color: $dark-general-font-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
+@mixin settingBox {
+  width: 55%;
+  height: 40%;
+  border: 1px solid $dark-border-color;
+  border-radius: 6px;
+}

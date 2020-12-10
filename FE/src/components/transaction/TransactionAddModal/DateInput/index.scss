@@ -1,0 +1,21 @@
+@use '../../../../styles/mixins.scss' as *;
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  @include input-form;
+}
+
+.row__item {
+  margin-right: 20px;
+  font-size: 18px;
+
+  select {
+    font-size: inherit;
+    line-height: 1.5;
+    padding: 0.3em 1em 0.3em 0.7em;
+    border: none;
+    border-bottom: 2px solid;
+  }
+}

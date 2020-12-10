@@ -1,0 +1,50 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+
+@mixin categoryUnit {
+  padding: 0.5em 1.5em;
+  border: 1px solid $dark-border-color;
+  border-radius: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+  }
+}
+
+@mixin categorySettingBox {
+  @include settingBox;
+  .category__title {
+    font-size: 1.5em;
+    padding: 1em;
+    text-shadow: $selectedTextShadow;
+  }
+  .category__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+
+    .category__unit {
+      @include categoryUnit;
+    }
+
+    .category__unit__add {
+      @include categoryUnit;
+      .fas.fa-plus-circle {
+        color: $white;
+      }
+    }
+  }
+}
+
+.category__setting__container {
+  @include settingContainer;
+
+  .income__category__setting {
+    @include categorySettingBox;
+  }
+  .spending__category__setting {
+    @include categorySettingBox;
+  }
+}

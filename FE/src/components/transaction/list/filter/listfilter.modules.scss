@@ -1,58 +1,55 @@
+@use '../../../../styles/values.scss' as *;
+
 .container {
   width: 100%;
-  height: 100px;
 
   .inoutFilter {
     width: 100%;
-    height: 50px;
+    margin: auto;
+    top: 25%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    div {
-      width: 40%;
+    gap: 5em;
+
+    label {
+      width: 20vw;
       height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-weight: 600;
-      font-size: 24px;
-    }
-    div:first-child {
-      input:checked + label {
-        background-color: rgb(30, 200, 0);
-        color: white;
-      }
-      label {
-        width: auto;
+      font-size: 20px;
+      span {
+        width: 100%;
         padding: 10px 15px;
         height: 50px;
         line-height: 30px;
-        border: 3px solid rgb(30, 200, 0);
-        color: rgb(30, 200, 0);
-        border-radius: 10px;
+        border-radius: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
       }
-    }
-    div:last-child {
-      input:checked + label {
-        background-color: #e84118;
-        color: white;
+      &:first-child {
+        input:checked + span {
+          background-color: $income-color;
+          color: $dark-emphasize-font-color;
+        }
+        span {
+          border: 1px solid $income-color;
+          color: $income-color;
+        }
       }
-      label {
-        width: auto;
-        padding: 10px 15px;
-        height: 50px;
-        line-height: 30px;
-        border: 3px solid #e84118;
-        color: #e84118;
-        border-radius: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      &:last-child {
+        input:checked + span {
+          background-color: $spending-color;
+          color: $dark-emphasize-font-color;
+        }
+        span {
+          border: 1px solid $spending-color;
+          color: $spending-color;
+        }
       }
     }
+
     input {
       display: none;
     }
@@ -64,14 +61,33 @@
     }
   }
   .categoryFilter {
-    width: 100%;
-    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50px;
+    margin: 15px 15px;
+
+    input {
+      display: none;
+    }
+
+    input:checked + span,
+    input:hover + span {
+      padding: 3px;
+      border-bottom: 2px solid $transaction-category-hover-color;
+      color: $transaction-category-hover-color;
+    }
+
     label {
-      width: 70px;
       cursor: pointer;
+    }
+    span {
+      color: $dark-general-font-color;
+      font-size: 1em;
+      padding: 3px;
+      margin: 0 10px 0 10px;
     }
   }
 }

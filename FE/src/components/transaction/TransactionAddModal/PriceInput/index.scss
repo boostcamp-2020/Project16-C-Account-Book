@@ -1,0 +1,7 @@
+@use '../../../../styles/mixins.scss' as *;
+
+.price__input {
+  input {
+    @include input-form;
+  }
+}

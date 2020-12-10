@@ -1,0 +1,53 @@
+// morphism design - shadow
+
+$noSelectedBoxShadow: inset -1px -1px 20px rgba(0, 0, 0, 0.5), inset 3px 3px 3px;
+$selectedBoxShadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
+  3px 3px 3px rgba(255, 255, 255, 0.07);
+$selectedTextShadow: 0 0 10px rgba(33, 156, 243, 1),
+  0 0 10px rgba(33, 156, 243, 1);
+
+// color
+$black: black;
+$light-black: #222;
+$white: white;
+$little-white: #fff;
+$light-grey: lightgrey;
+$income-color: #54aafc;
+$spending-color: #ee4337;
+
+$spinner-background-color: #bbbbbb;
+$spin-color: #282727;
+
+//transaction
+$transaction-add-btn-color: #3eb924;
+$transaction-category-hover-color: rgb(39, 165, 159);
+$transaction-delete-button-color: rgb(212, 49, 49);
+
+$transaction-modal-income-category-color: #54aafc;
+$transaction-modal-spending-category-color: #ee4337;
+
+$transaction-selected-item-color: rgb(39, 165, 159);
+
+$transaction-modal-add-btn-color: rgb(131, 199, 92);
+$transaction-modal-cancel-btn-color: rgb(224, 65, 65);
+
+$transaction-modal-message-btn-color: #0d7ee1;
+
+//calendar
+$calendar-today-color: rgb(231, 93, 93);
+// modal
+$modal-background: rgba(0, 0, 0, 0.9);
+$modal-button-background: rgba(0, 0, 0, 0.1);
+
+// border-radius
+$basic-border-radius: 6px;
+
+// dark-mode
+$dark-background-color: #111111;
+$dark-emphasize-font-color: #f1f1f1;
+$dark-general-font-color: #eee;
+$dark-font-color: #999;
+$dark-border-color: #979797;
+
+//input tag
+$input-background-color: #eee;
