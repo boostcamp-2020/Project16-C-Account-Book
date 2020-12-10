@@ -1,20 +1,11 @@
 @use '../../../styles/values.scss' as *;
 @use '../../../styles/mixins.scss' as *;
 .calendar__setting__container {
-  width: 100%;
-  height: 100%;
-  color: $dark-general-font-color;
-  display: flex;
-  justify-content: center;
-
-  gap: 3em;
-
+  @include settingContainer;
+  transform: translateY(-10%);
   .calendar__setting__startday {
+    @include settingBox;
     position: relative;
-    width: 55%;
-    height: 40%;
-    border: 1px solid $dark-border-color;
-    border-radius: 6px;
     background-color: transparent;
 
     .calendar__setting__title {
@@ -24,12 +15,12 @@
       text-shadow: $selectedTextShadow;
     }
 
-    .start__day__title {
+    .start__day__header {
       position: absolute;
       width: 100%;
       display: flex;
       justify-content: center;
-      font-size: 1.5em;
+      font-size: 1.5vw;
       margin-top: 3em;
       th {
         color: $white;

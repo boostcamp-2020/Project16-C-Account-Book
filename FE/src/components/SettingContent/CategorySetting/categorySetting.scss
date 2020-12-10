@@ -11,11 +11,9 @@
     text-shadow: $selectedTextShadow;
   }
 }
+
 @mixin categorySettingBox {
-  width: 55%;
-  height: 40%;
-  border: 1px solid $dark-border-color;
-  border-radius: 6px;
+  @include settingBox;
   .category__title {
     font-size: 1.5em;
     padding: 1em;
@@ -41,14 +39,7 @@
 }
 
 .category__setting__container {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 3em;
+  @include settingContainer;
 
   .income__category__setting {
     @include categorySettingBox;
