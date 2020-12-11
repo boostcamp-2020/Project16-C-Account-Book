@@ -2,43 +2,18 @@
 @use '../../../styles/mixins.scss' as *;
 .calendar__setting__container {
   @include settingContainer;
-  transform: translateY(-10%);
+
+  .calendar__setting__title {
+    @include settingTitle;
+  }
+  .calendar__setting__desc {
+    @include settingDesc;
+  }
+
   .calendar__setting__startday {
     @include settingBox;
     position: relative;
     background-color: transparent;
-
-    .calendar__setting__title {
-      text-align: center;
-      line-height: 3.5em;
-      font-size: 2em;
-      text-shadow: $selectedTextShadow;
-    }
-
-    .start__day__header {
-      position: absolute;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      font-size: 1.5vw;
-      margin-top: 3em;
-      th {
-        color: $white;
-
-        margin-left: 10px;
-        &.sunday {
-          color: $spending-color;
-        }
-
-        &::before {
-          content: '|';
-          padding: 0 1em;
-        }
-        &:first-child::before {
-          content: none;
-        }
-      }
-    }
 
     .calendar__save__btn {
       position: absolute;

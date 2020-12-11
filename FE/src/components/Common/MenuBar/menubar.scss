@@ -3,28 +3,8 @@
 @use '../../../styles/mediaQuery' as *;
 
 @mixin navigationButton($type) {
-  @include buttonDefaultSetting;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  @include headerNavigationButtons($type);
 
-  text-align: center;
-  line-height: 1.5em;
-  @if $type== list {
-    left: 5%;
-  } @else {
-    right: 5%;
-  }
-  height: 1.5em;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5em;
-  font-size: 1.5em;
-
-  text-shadow: $selectedTextShadow;
-  color: white;
   @include mobile {
     .navigation__content {
       display: none;
@@ -36,23 +16,14 @@
 }
 
 .menubar__header {
-  position: relative;
-  background-color: $dark-background-color;
-  width: 100%;
-
-  padding-top: 2.5%;
-  z-index: 2;
+  @include headerSetting;
   .menubar__buttons {
-    display: flex;
-    justify-content: center;
-    gap: 3em;
-    position: relative;
-
+    @include headerButtons;
     .back__navBtn {
-      @include navigationButton(list);
+      @include navigationButton(left);
     }
     .setting__navBtn {
-      @include navigationButton(setting);
+      @include navigationButton(right);
     }
     @include mobile {
       .back__navBtn,
@@ -74,7 +45,7 @@
     justify-content: center;
     gap: 2em;
     font-weight: 900;
-    color: white;
+    color: $dark-emphasize-font-color;
     text-shadow: $selectedTextShadow;
 
     .btn-cal {
@@ -87,7 +58,7 @@
       font-size: 16px;
       background: none;
       font-weight: 900;
-      color: white;
+      color: $dark-emphasize-font-color;
       text-shadow: $selectedTextShadow;
     }
     .btn-cal:after {
