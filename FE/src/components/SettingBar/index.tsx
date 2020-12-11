@@ -33,7 +33,9 @@ export default function SettingBar({
           onClick={onClickBackBtn}
         >
           <i data-type="/calendar" className="fas fa-arrow-left" />
-          <span data-type="/calendar">Account Book</span>
+          <span className="nav__accountbook__btn" data-type="/calendar">
+            Account Book
+          </span>
         </div>
         {settingType === 'user' ? (
           <HeaderButton buttonType="user" isChecked onClickIcon={onClickIcon} />

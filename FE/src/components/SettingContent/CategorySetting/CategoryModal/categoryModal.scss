@@ -2,10 +2,10 @@
 @use '../../../../styles/mixins.scss' as *;
 
 .category__modal__overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
-  transform: translateY(-10%);
+
   background-color: $modal-background;
   z-index: 2;
   display: flex;
