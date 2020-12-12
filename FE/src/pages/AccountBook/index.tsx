@@ -17,6 +17,7 @@ export default function AccountBookListPage() {
       setCreateForm(false);
     }
   };
+
   return (
     <div className="acbook__list__container" onClick={onClickOverlay}>
       <AccountBookControl setCreateForm={setCreateForm} />

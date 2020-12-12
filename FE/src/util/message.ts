@@ -1,3 +1,3 @@
 export const ResponseMessage = {
-  success: 'success',
+  success: 200,
 };
