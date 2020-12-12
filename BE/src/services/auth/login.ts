@@ -10,6 +10,8 @@ const MIN = SEC * 60;
 const HOUR = MIN * 60;
 const DAY = HOUR * 24;
 
+const refreshTokens = new Map();
+
 const makeToken = (userInfo: any, exp: any): string => {
   const jwtKey = process.env.JWT_KEY || '';
   const jwtInfo = { ...userInfo, exp };
@@ -32,6 +34,7 @@ const login = async (body: Context['body']): Promise<any> => {
 
     const accessToken = makeToken(userInfo, MIN);
     const refreshToken = makeToken(refreshInfo, 10 * MIN);
+    refreshTokens.set(refreshToken, userInfo);
 
     return { accessToken, refreshToken };
   } catch (error) {
