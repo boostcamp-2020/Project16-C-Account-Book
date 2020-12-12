@@ -4,15 +4,22 @@ import ActionButton from '../../../Common/ActionButton';
 import { dropAccountBook } from '../../../../api/social';
 import './userList.scss';
 import { useHistory } from 'react-router-dom';
+import { ResponseMessage } from 'src/util/message';
 
 export default function UserList(props) {
   const history = useHistory();
   const users = useAccountBookData(store => store.accountBook.users);
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const onClickDropBtn = async () => {
-    const res = await dropAccountBook({ accountBookId });
-
-    history.push('/');
+    try {
+      const res = await dropAccountBook({ accountBookId });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      history.push('/');
+    } catch (error) {
+      throw new Error();
+    }
   };
   return (
     <div className="user__list__box">

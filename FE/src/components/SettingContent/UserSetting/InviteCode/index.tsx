@@ -4,6 +4,7 @@ import ActionButton from '../../../Common/ActionButton';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { getInviteCode } from '../../../../api/invite-code';
 import './inviteCode.scss';
+import { ResponseMessage } from 'src/util/message';
 
 export default function InviteCode(props) {
   const accountBookId = useAccountBookData(store => store.accountBook._id);
@@ -12,10 +13,16 @@ export default function InviteCode(props) {
   const [clipBoardMessage, setClipBoardMessage] = useState(false);
 
   const onClickGetCode = async () => {
-    const res = await getInviteCode({ accountBookId });
-
-    setCodeContet(res.data.code);
-    setCodeVisible(() => true);
+    try {
+      const res = await getInviteCode({ accountBookId });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      setCodeContet(res.data.code);
+      setCodeVisible(() => true);
+    } catch (error) {
+      throw new Error();
+    }
   };
 
   const onClicClipBoard = () => {
