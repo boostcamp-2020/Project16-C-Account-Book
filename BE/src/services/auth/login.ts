@@ -6,6 +6,7 @@ import { promisify } from 'util';
 
 import userModel from '@models/user';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
+import serviceAuthCheck from '@services/auth/check';
 
 const SEC = 1;
 const MIN = SEC * 60;
@@ -13,7 +14,8 @@ const HOUR = MIN * 60;
 const DAY = HOUR * 24;
 
 const redisDB = redis.createClient();
-const getAsync = promisify(redisDB.hgetall).bind(redisDB);
+const getAccessInfo = promisify(redisDB.hgetall).bind(redisDB);
+const getBlockInfo = promisify(redisDB.get).bind(redisDB);
 
 const makeToken = (Info: any, expire: any): string => {
   const jwtKey = process.env.JWT_KEY || '';
@@ -28,11 +30,24 @@ const slidingSession = (Info: any): string => {
   return accessToken;
 };
 
-const refresh = async (body: Context['body']): Promise<string> => {
-  redisDB.select(0);
-  const userInfo = await getAsync(body.refreshToken);
-  const accessToken = makeToken(userInfo, MIN);
-  return accessToken;
+const refresh = async (body: Context['body']): Promise<any> => {
+  try {
+    serviceAuthCheck.decodeToken(body.refreshToken);
+    redisDB.select(1);
+
+    const blocked = await getBlockInfo(body.refreshToken);
+    if (blocked) return '';
+
+    redisDB.select(0);
+    const userInfo = await getAccessInfo(body.refreshToken);
+    const accessToken = makeToken(userInfo, MIN);
+    return accessToken;
+  } catch (error) {
+    redisDB.select(1);
+    redisDB.set(body.refreshToken, 'true');
+    const jwtError = createError(401, error);
+    throw jwtError;
+  }
 };
 
 const login = async (body: Context['body']): Promise<any> => {
@@ -48,8 +63,8 @@ const login = async (body: Context['body']): Promise<any> => {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken(userInfo, MIN);
-    const refreshToken = makeToken(refreshInfo, DAY);
+    const accessToken = makeToken(userInfo, 10 * SEC);
+    const refreshToken = makeToken(refreshInfo, MIN);
     redisDB.select(0);
     redisDB.hmset(
       refreshToken,
