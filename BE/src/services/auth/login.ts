@@ -1,6 +1,8 @@
 import { Context } from 'koa';
 import createError from 'http-errors';
 import jwt from 'jsonwebtoken';
+import redis from 'redis';
+import { promisify } from 'util';
 
 import userModel from '@models/user';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
@@ -10,7 +12,8 @@ const MIN = SEC * 60;
 const HOUR = MIN * 60;
 const DAY = HOUR * 24;
 
-const refreshTokens = new Map();
+const redisDB = redis.createClient();
+const getAsync = promisify(redisDB.hgetall).bind(redisDB);
 
 const makeToken = (Info: any, expire: any): string => {
   const jwtKey = process.env.JWT_KEY || '';
@@ -25,8 +28,9 @@ const slidingSession = (Info: any): string => {
   return accessToken;
 };
 
-const refresh = (body: Context['body']): string => {
-  const userInfo = refreshTokens.get(body.refreshToken);
+const refresh = async (body: Context['body']): Promise<string> => {
+  redisDB.select(0);
+  const userInfo = await getAsync(body.refreshToken);
   const accessToken = makeToken(userInfo, MIN);
   return accessToken;
 };
@@ -46,7 +50,18 @@ const login = async (body: Context['body']): Promise<any> => {
 
     const accessToken = makeToken(userInfo, MIN);
     const refreshToken = makeToken(refreshInfo, DAY);
-    refreshTokens.set(refreshToken, userInfo);
+    redisDB.select(0);
+    redisDB.hmset(
+      refreshToken,
+      'userid',
+      userInfo.userid,
+      'name',
+      userInfo.name,
+      'profile',
+      userInfo.profile,
+      'social',
+      userInfo.social,
+    );
 
     return { accessToken, refreshToken };
   } catch (error) {
