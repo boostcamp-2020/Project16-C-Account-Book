@@ -5,9 +5,14 @@ const refresh = async () => {
   const tokenGetUrl = `${serverUrl}/api/auth/refresh`;
   const refreshToken = window.localStorage.getItem('refreshToken');
   try {
-    const token = await postFetch(tokenGetUrl, { refreshToken });
-    console.log(token);
-    window.localStorage.setItem('accessToken', token.newAccessToken);
+    const response = await postFetch(tokenGetUrl, { refreshToken });
+    window.localStorage.setItem('accessToken', response.newAccessToken);
+    if (response.status === 401) {
+      window.localStorage.removeItem('accessToken');
+      window.localStorage.removeItem('refreshToken');
+      return false;
+    }
+    return true;
   } catch (err) {
     console.error(err);
   }
