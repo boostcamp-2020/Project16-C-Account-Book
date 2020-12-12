@@ -2,13 +2,21 @@
 
 <p align="center"><img  width="640" alt="스크린샷 2020-12-12 오후 8 17 55" src="https://user-images.githubusercontent.com/49441876/101984209-42af3500-3cc3-11eb-9cf6-b7317170f523.png"></p>
 
-## 📌 서비스 소개
+## 📌 서비스 소개<br>
+
 `내돈내쓴` 개인의 입출금 및 가계재정을 시각화 및 분석할 수 있는 `인터랙티브`한  웹 서비스입니다.
 
-## 🔗 배포URL
-- [배포 링크](http://118.67.135.19/)
+#### 자세한 사항은 [wiki](https://github.com/boostcamp-2020/Project16-C-Account-Book/wiki) 참고
 
-## 테스터 계정
+
+
+## 🔗 배포URL<br>
+
+[배포URL](http://118.67.135.19/)
+
+
+
+## 테스터 계정<br>
 
 ```
 GitHub ID : account-book-c
@@ -16,7 +24,6 @@ GitHub ID : account-book-c
 GitHub Password: boostcamp16c!
 ```
 
-## [📝 Team Wiki](https://github.com/boostcamp-2020/Project16-C-Account-Book/wiki)
 
 
 ## 🧑🏻‍💻 팀원소개
@@ -25,6 +32,8 @@ GitHub Password: boostcamp16c!
 | ![](https://i.imgur.com/ytSC8lm.png)     | ![](https://i.imgur.com/JmlXqG4.png) | ![](https://i.imgur.com/86MMg8O.jpg)| ![](https://i.imgur.com/YgGqQvQ.png) |
 |[**@msmk530**](https://github.com/msmk530) |[**@j03y14**](https://github.com/j03y14)  |  [**@yoonwoo123**](https://github.com/yoonwoo123)  | [**@hi0826**](https://github.com/hi0826)|
 |*'신'인 개발자가 되고 싶은 <br> '신인' 개발자.* | *이것도 만들고 싶고<br> 저것도 만들고 싶다...*| *한마디 "주장"보다 <br>한마디 "배려"하자.*| *"아무거나"와 <br>"다 좋습니다"는 없습니다.* | 
+
+
 
 ## 💻 사용방법
 
@@ -36,41 +45,27 @@ GitHub Password: boostcamp16c!
   git clone https://github.com/boostcamp-2020/Project16-C-Account-Book.git
   ```
 
-<br>
 
 ### FrontEnd
 
 - FE module Install
-
   ```
   npm i
   ```
-
-<br>
-
 - FE `dotenv` template
-
   ```
   GITHUB_CLIENT_ID=[Gihub OAuth Client ID]
   NAVER_CLIENT_ID=[Naver Client ID]
   SERVER_URL=[서버 URL]
   ```
 
-<br>
-
-
 ### BackEnd
 
 - BE module Install
-
   ```
   npm i
   ```
-
-<br>
-
 - BE `dotenv` template
-
   ```
   PORT=[백엔드 서버 PORT]
   DATABASE_URL=[몽고DB URL]
@@ -80,9 +75,7 @@ GitHub Password: boostcamp16c!
   NAVER_CLIENT_SECRET=[Naver Client Secret]
   JWT_KEY=[JWT 토큰 생성 시 Key 값]
   ```
-
-<br>
-
+ 
 ### 실행
 
 - FrontEnd 실행 스크립트
@@ -95,6 +88,7 @@ GitHub Password: boostcamp16c!
   ```
   npm run start
   ```
+
 
 ## 📚 기술스택
 
@@ -114,11 +108,13 @@ GitHub Password: boostcamp16c!
 ![MongoDB](https://img.shields.io/badge/MongoDB-^3.6.3-blue?logo=MongoDB)
 ![Mongoose](https://img.shields.io/badge/Mongoose-v5.10.15-blue?logo=Mongoose)
 
+</div>
 
-## Issues
+## ！Issues
+
+<div align="center">
+  
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/boostcamp-2020/Project16-C-Account-Book?color=green)](https://github.com/boostcamp-2020/Project16-C-Account-Book/issues)
 [![GitHub Closed Issues](https://img.shields.io/github/issues-closed-raw/boostcamp-2020/Project16-C-Account-Book?color=red)](https://github.com/boostcamp-2020/Project16-C-Account-Book/issues)
 
-
 </div>
-
