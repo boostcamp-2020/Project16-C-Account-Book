@@ -3,6 +3,7 @@ import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHo
 import { useDefaultPaymentData } from '../../../store/PaymentMethod/paymentMethodHook';
 
 import { createPaymentMethod } from '../../../api/payment-method';
+import { ResponseMessage } from '../../../util/message';
 import './addForm.scss';
 
 interface Card {
@@ -29,18 +30,24 @@ export default function AddTemplate({
 
   const onAddCard = async event => {
     if (event.key === 'Enter') {
-      const res = await createPaymentMethod({
-        accountBookId,
-        name: addTemplateData.name,
-        desc: `${methodNick}`,
-        color: addTemplateData.color,
-      });
+      try {
+        const res = await createPaymentMethod({
+          accountBookId,
+          name: addTemplateData.name,
+          desc: `${methodNick}`,
+          color: addTemplateData.color,
+        });
+        if (res.status !== ResponseMessage.success) {
+          throw new Error();
+        }
+        addPaymentMethod(res.data);
 
-      addPaymentMethod(res.data);
-
-      setAddFormModal(() => false);
-      updateAddTemplate({ name: '', color: '' });
-      setMethodNick(() => '');
+        setAddFormModal(() => false);
+        updateAddTemplate({ name: '', color: '' });
+        setMethodNick(() => '');
+      } catch (error) {
+        throw new Error();
+      }
     }
   };
 
