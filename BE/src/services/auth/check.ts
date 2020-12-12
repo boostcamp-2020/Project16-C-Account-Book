@@ -31,15 +31,13 @@ const decodeToken = (token: string): User => {
     const user: User = jwt.verify(token, jwtKey) as User;
     return user;
   } catch (error) {
-    const jwtError = createError(401, 'jwt malformed');
+    const jwtError = createError(401, error);
     throw jwtError;
   }
 };
 
 const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
-  console.log('token: ', token);
-
   const user = decodeToken(token);
   const isUserInDB = !!(await userModel.get(user));
   return isUserInDB ? user : null;
