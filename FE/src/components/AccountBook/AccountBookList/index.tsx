@@ -8,17 +8,28 @@ import {
   deleteAccountBook,
 } from '../../../api/accoun-book-list';
 
+import { ResponseMessage } from '../../../util/message';
+
 import './index.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
 
   const setAccountBookList = async () => {
-    const accountBooks = await getAccountBookList();
-    accountBooks.data.sort((a, b) => {
-      return b.transactions.length - a.transactions.length;
-    });
-    setDatas(accountBooks.data);
+    try {
+      const accountBooks = await getAccountBookList();
+
+      if (accountBooks.message !== ResponseMessage.success) {
+        throw new Error();
+      }
+
+      accountBooks.data.sort((a, b) => {
+        return b.transactions.length - a.transactions.length;
+      });
+      setDatas(accountBooks.data);
+    } catch (err) {
+      throw new Error();
+    }
   };
 
   const titleRef = [];
