@@ -4,7 +4,7 @@ import ActionButton from '../../../Common/ActionButton';
 import { dropAccountBook } from '../../../../api/social';
 import './userList.scss';
 import { useHistory } from 'react-router-dom';
-import { ResponseMessage } from 'src/util/message';
+import { ResponseMessage } from '../../../../util/message';
 
 export default function UserList(props) {
   const history = useHistory();

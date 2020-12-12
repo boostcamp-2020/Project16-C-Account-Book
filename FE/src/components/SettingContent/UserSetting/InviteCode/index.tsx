@@ -4,7 +4,7 @@ import ActionButton from '../../../Common/ActionButton';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { getInviteCode } from '../../../../api/invite-code';
 import './inviteCode.scss';
-import { ResponseMessage } from 'src/util/message';
+import { ResponseMessage } from '../../../../util/message';
 
 export default function InviteCode(props) {
   const accountBookId = useAccountBookData(store => store.accountBook._id);
