@@ -1,22 +1,26 @@
-# 내가 쓴 돈을 💸  내가 쓴다 ✍!
+# 내가 쓴 돈을 💸  내가 쓴다 ✍! 
+
+<br>
+<br>
 
 <p align="center"><img  width="640" alt="스크린샷 2020-12-12 오후 8 17 55" src="https://user-images.githubusercontent.com/49441876/101984209-42af3500-3cc3-11eb-9cf6-b7317170f523.png"></p>
 
-## 📌 서비스 소개<br>
+
+## 📌 서비스 소개 
 
 `내돈내쓴` 개인의 입출금 및 가계재정을 시각화 및 분석할 수 있는 `인터랙티브`한  웹 서비스입니다.
 
 #### 자세한 사항은 [wiki](https://github.com/boostcamp-2020/Project16-C-Account-Book/wiki) 참고
 
 
+<br>
+<br>
 
-## 🔗 배포URL<br>
+## 🔗 배포URL
 
 [배포URL](http://118.67.135.19/)
 
-
-
-## 테스터 계정<br>
+### 테스터 계정<br>
 
 ```
 GitHub ID : account-book-c
@@ -24,6 +28,8 @@ GitHub ID : account-book-c
 GitHub Password: boostcamp16c!
 ```
 
+<br>
+<br>
 
 
 ## 🧑🏻‍💻 팀원소개
@@ -34,6 +40,8 @@ GitHub Password: boostcamp16c!
 |*'신'인 개발자가 되고 싶은 <br> '신인' 개발자.* | *이것도 만들고 싶고<br> 저것도 만들고 싶다...*| *한마디 "주장"보다 <br>한마디 "배려"하자.*| *"아무거나"와 <br>"다 좋습니다"는 없습니다.* | 
 
 
+<br>
+<br>
 
 ## 💻 사용방법
 
@@ -90,6 +98,9 @@ GitHub Password: boostcamp16c!
   ```
 
 
+<br>
+<br>
+
 ## 📚 기술스택
 
 <div align="center">
@@ -109,6 +120,10 @@ GitHub Password: boostcamp16c!
 ![Mongoose](https://img.shields.io/badge/Mongoose-v5.10.15-blue?logo=Mongoose)
 
 </div>
+
+
+<br>
+<br>
 
 ## ！Issues
 
