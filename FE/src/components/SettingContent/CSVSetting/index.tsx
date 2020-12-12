@@ -11,7 +11,7 @@ export default function CSVSetting(props) {
 
   return (
     <div className="csv__setting__container">
-      <CSVImport />
+      <CSVImport accountBookId={accountBookId} />
       <CSVExport accountBookId={accountBookId} />
     </div>
   );

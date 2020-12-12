@@ -8,17 +8,28 @@ import {
   deleteAccountBook,
 } from '../../../api/accoun-book-list';
 
+import { ResponseMessage } from '../../../util/message';
+
 import './index.scss';
 
 export const AccountBookList = ({ datas, setDatas }) => {
   const history = useHistory();
 
   const setAccountBookList = async () => {
-    const accountBooks = await getAccountBookList();
-    accountBooks.data.sort((a, b) => {
-      return b.transactions.length - a.transactions.length;
-    });
-    setDatas(accountBooks.data);
+    try {
+      const accountBooks = await getAccountBookList();
+
+      if (accountBooks.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+
+      accountBooks.data.sort((a, b) => {
+        return b.transactions.length - a.transactions.length;
+      });
+      setDatas(accountBooks.data);
+    } catch (err) {
+      throw new Error();
+    }
   };
 
   const titleRef = [];
@@ -49,27 +60,35 @@ export const AccountBookList = ({ datas, setDatas }) => {
   const onEnterEditForm = async event => {
     const index = event.target.dataset.turn;
     if (event.key === 'Enter') {
-      await updateAccountBook({
-        accountBookId: event.target.dataset.acbookid,
-        name: titleEditRef[index].current.value,
-        description: descEditRef[index].current.value,
-      });
+      try {
+        const res = await updateAccountBook({
+          accountBookId: event.target.dataset.acbookid,
+          name: titleEditRef[index].current.value,
+          description: descEditRef[index].current.value,
+        });
 
-      const updatedAcBooks = datas.map(item => {
-        if (item._id === event.target.dataset.acbookid) {
-          item = {
-            ...item,
-            name: titleEditRef[index].current.value,
-            description: descEditRef[index].current.value,
-          };
+        if (res.status !== ResponseMessage.success) {
+          throw new Error();
         }
-        return item;
-      });
-      titleRef[index].current.classList.toggle('hidden');
-      descRef[index].current.classList.toggle('hidden');
-      titleEditRef[index].current.classList.toggle('hidden');
-      descEditRef[index].current.classList.toggle('hidden');
-      setDatas(() => updatedAcBooks);
+
+        const updatedAcBooks = datas.map(item => {
+          if (item._id === event.target.dataset.acbookid) {
+            item = {
+              ...item,
+              name: titleEditRef[index].current.value,
+              description: descEditRef[index].current.value,
+            };
+          }
+          return item;
+        });
+        titleRef[index].current.classList.toggle('hidden');
+        descRef[index].current.classList.toggle('hidden');
+        titleEditRef[index].current.classList.toggle('hidden');
+        descEditRef[index].current.classList.toggle('hidden');
+        setDatas(() => updatedAcBooks);
+      } catch (err) {
+        throw new Error();
+      }
     }
   };
 
@@ -85,9 +104,15 @@ export const AccountBookList = ({ datas, setDatas }) => {
   const onClickDelete = async event => {
     event.stopPropagation();
     const accountBookId = event.target.dataset.id;
-    const res = await deleteAccountBook(accountBookId);
-
-    setDatas(datas.filter(data => data._id !== accountBookId));
+    try {
+      const res = await deleteAccountBook(accountBookId);
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      setDatas(datas.filter(data => data._id !== accountBookId));
+    } catch (error) {
+      throw new Error();
+    }
   };
 
   useEffect(() => {

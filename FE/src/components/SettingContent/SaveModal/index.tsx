@@ -1,13 +1,20 @@
 import React from 'react';
 
-
 import ActionButton from '../../Common/ActionButton';
+import { ResponseMessage } from '../../../util/message';
 import './saveModal.scss';
 
 export default function SaveModal({ saveAction, updateData, setSaveModal }) {
-  const onClickSaveModalOk = () => {
-    saveAction(updateData);
-    setSaveModal(false);
+  const onClickSaveModalOk = async () => {
+    try {
+      const res = await saveAction(updateData);
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      setSaveModal(false);
+    } catch (error) {
+      throw new Error();
+    }
   };
 
   const onClickOverlay = event => {
