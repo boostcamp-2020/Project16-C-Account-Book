@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { postFetch } from '../service/fetch';
 
 const login = async (code: string, social: string) => {
@@ -7,7 +5,6 @@ const login = async (code: string, social: string) => {
   const tokenGetUrl = `${serverUrl}/api/auth/login`;
   try {
     const token = await postFetch(tokenGetUrl, { code, social });
-    console.log(token);
     window.localStorage.setItem('accessToken', token.accessToken);
     window.localStorage.setItem('refreshToken', token.refreshToken);
     return token;
