@@ -4,12 +4,20 @@ import './csvExport.scss';
 import exportToCSV from '../../../../service/export';
 import ActionButton from '../../../Common/ActionButton';
 import { getTransactionCSV } from '../../../../api/csv';
+import { ResponseMessage } from '../../../../util/message';
 
 export default function CSVExport({ accountBookId }) {
   const downloadCSV = async () => {
-    const response = await getTransactionCSV(accountBookId);
-    const csv = response.data;
-    exportToCSV(csv);
+    try {
+      const res = await getTransactionCSV(accountBookId);
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      const csv = res.data;
+      exportToCSV(csv);
+    } catch (error) {
+      throw new Error();
+    }
   };
 
   return (

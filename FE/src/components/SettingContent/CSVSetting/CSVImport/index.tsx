@@ -4,13 +4,22 @@ import CSVReader from 'react-csv-reader';
 import ActionButton from '../../../Common/ActionButton';
 import './csvImport.scss';
 import { postTransactionCSV } from '../../../../api/csv';
+import { ResponseMessage } from '../../../../util/message';
 
-export default function CSVImport(props) {
+export default function CSVImport({ accountBookId }) {
   const [file, setFile] = useState('');
 
   const onClickHandler = async event => {
     if (file !== '') {
-      await postTransactionCSV(accountBookId, file);
+      try {
+        const res = await postTransactionCSV(accountBookId, file);
+        console.log(res);
+        if (res.status !== ResponseMessage.success) {
+          throw new Error();
+        }
+      } catch (err) {
+        throw new Error();
+      }
     }
   };
 
