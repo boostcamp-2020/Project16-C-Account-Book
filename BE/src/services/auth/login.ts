@@ -3,13 +3,17 @@ import createError from 'http-errors';
 import jwt from 'jsonwebtoken';
 
 import userModel from '@models/user';
-import { User } from '@interfaces/auth';
 import { getAccessToken, getUserInfo } from '@services/auth/oauth';
 
-const makeToken = (userInfo: any): string => {
-  const jwtKey = process.env.JWT_KEY || '';
+const SEC = 1;
+const MIN = SEC * 60;
+const HOUR = MIN * 60;
+const DAY = HOUR * 24;
 
-  const token = jwt.sign(userInfo, jwtKey);
+const makeToken = (userInfo: any, exp: any): string => {
+  const jwtKey = process.env.JWT_KEY || '';
+  const jwtInfo = { ...userInfo, exp };
+  const token = jwt.sign(jwtInfo, jwtKey);
   return token;
 };
 
@@ -26,8 +30,8 @@ const login = async (body: Context['body']): Promise<any> => {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken(userInfo);
-    const refreshToken = makeToken(refreshInfo);
+    const accessToken = makeToken(userInfo, MIN);
+    const refreshToken = makeToken(refreshInfo, 10 * MIN);
 
     return { accessToken, refreshToken };
   } catch (error) {
