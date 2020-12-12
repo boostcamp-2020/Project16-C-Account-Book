@@ -25,6 +25,7 @@ const checkToken = async (
     const jwtError = createError(401, 'unauthorized');
     throw jwtError;
   }
+  ctx.accessToken = serviceLogin.slidingSession(user);
   ctx.user = user;
   await next();
 };
