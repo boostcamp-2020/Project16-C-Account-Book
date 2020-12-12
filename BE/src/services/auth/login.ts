@@ -12,11 +12,18 @@ const DAY = HOUR * 24;
 
 const refreshTokens = new Map();
 
-const makeToken = (userInfo: any, exp: any): string => {
+const makeToken = (userInfo: any, expire: any): string => {
   const jwtKey = process.env.JWT_KEY || '';
+  const exp = Math.floor(new Date().valueOf() / 1000) + expire;
   const jwtInfo = { ...userInfo, exp };
   const token = jwt.sign(jwtInfo, jwtKey);
   return token;
+};
+
+const refresh = (body: Context['body']): string => {
+  const userInfo = refreshTokens.get(body.refreshToken);
+  const accessToken = makeToken(userInfo, MIN);
+  return accessToken;
 };
 
 const login = async (body: Context['body']): Promise<any> => {
@@ -32,8 +39,8 @@ const login = async (body: Context['body']): Promise<any> => {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken(userInfo, MIN);
-    const refreshToken = makeToken(refreshInfo, 10 * MIN);
+    const accessToken = makeToken(userInfo, 10 * SEC);
+    const refreshToken = makeToken(refreshInfo, DAY);
     refreshTokens.set(refreshToken, userInfo);
 
     return { accessToken, refreshToken };
@@ -44,4 +51,4 @@ const login = async (body: Context['body']): Promise<any> => {
   }
 };
 
-export default { login };
+export default { login, refresh };
