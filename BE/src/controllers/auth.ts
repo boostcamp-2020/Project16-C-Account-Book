@@ -5,10 +5,8 @@ import serviceAuthCheck from '@services/auth/check';
 import serviceLogin from '@services/auth/login';
 
 const login = async (ctx: Context): Promise<Context['body']> => {
-  const token = await serviceLogin.login(ctx.request.body);
-  console.log('token: ', token);
-
-  ctx.body = { token };
+  const tokens = await serviceLogin.login(ctx.request.body);
+  ctx.body = tokens;
 };
 
 const checkToken = async (
