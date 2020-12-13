@@ -53,7 +53,6 @@ const Chart = props => {
       {chartInfo.length !== 0 && chartType === 'category' && (
         <div className="data__type">
           <label key="Income">
-            수입
             <input
               type="radio"
               name="startday"
@@ -61,9 +60,9 @@ const Chart = props => {
               checked={dataType === '수입'}
               onChange={e => setDataType(e.target.value)}
             />
+            <span className="filter__income">수입</span>
           </label>
           <label key="Spending">
-            지출
             <input
               type="radio"
               name="startday"
@@ -71,6 +70,7 @@ const Chart = props => {
               checked={dataType === '지출'}
               onChange={e => setDataType(e.target.value)}
             />
+            <span className="filter__spending">지출</span>
           </label>
         </div>
       )}
