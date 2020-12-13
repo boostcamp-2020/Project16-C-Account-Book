@@ -18,10 +18,11 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import './chart.scss';
 
 const Chart = props => {
-  const accountBookId = useHistory().location.state;
-
-  useAccountBook(accountBookId);
   useLoginCheck();
+
+  const accountBookId = useHistory().location.state;
+  useAccountBook(accountBookId);
+
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [chartType, setChartType] = useState('category');
   const defaultMethod = useDefaultPayment();
