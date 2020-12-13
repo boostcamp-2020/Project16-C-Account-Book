@@ -95,6 +95,29 @@
   }
 }
 
+.on__dragged__in {
+  border-radius: 10px;
+  box-shadow: $dragboxShadow;
+}
+
+.on__drag {
+  animation-name: air;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes air {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 @keyframes button__in {
   0% {
     opacity: 0;

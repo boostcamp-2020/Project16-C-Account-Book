@@ -15,6 +15,8 @@ const TransactionItem = ({
   payment,
   cost,
   type,
+  setDraggedItem,
+  dragObject,
 }: iTransactionItem) => {
   const [buttonReveal, setButtonReveal] = useState('');
 
@@ -28,8 +30,11 @@ const TransactionItem = ({
 
   const accountBookId = useHistory().location.state.id;
 
-  const deleteTransactionInStore = useAccountBookData(
-    store => store.deleteTransaction,
+  const { deleteTransactionInStore, getTransactionById } = useAccountBookData(
+    store => ({
+      deleteTransactionInStore: store.deleteTransaction,
+      getTransactionById: store.getTransactionById,
+    }),
   );
 
   const onTransactionClicked = () => {
@@ -72,8 +77,29 @@ const TransactionItem = ({
     }
   };
 
+  const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log('on drag start');
+    e.target.classList.add('on__drag');
+
+    e.dataTransfer.setData('transactionId', transactionId);
+    const movedTransaction = getTransactionById(transactionId);
+
+    setDraggedItem(movedTransaction);
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    e.target.classList.remove('on__drag');
+  };
+
   return (
-    <div className="transaction__item" onClick={onTransactionClicked}>
+    <div
+      className={`transaction__item${dragObject ? ' on__dragged__in' : ''}`}
+      onClick={onTransactionClicked}
+      draggable
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
       <div className="transaction__item__category">
         <span>{category.name}</span>
       </div>
