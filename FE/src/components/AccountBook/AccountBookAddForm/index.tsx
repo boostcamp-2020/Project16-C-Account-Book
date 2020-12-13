@@ -30,9 +30,16 @@ export default function AccountBookAddForm({
       const res = await joinAccountBook({
         code: inviteCodeInput.current.value,
       });
-      console.log(res);
-      setCreate(false);
-      setDatas([{ name, description, _id: res.data._id }, ...datas]);
+
+      if (res.data === true) {
+        setCreate(false);
+        setDatas([
+          { name: res.name, description: res.description, _id: res.data._id },
+          ...datas,
+        ]);
+      } else {
+        alert('Invalid Invite Code!!');
+      }
     }
   };
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
