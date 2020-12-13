@@ -9,11 +9,15 @@ import './cardContainer.scss';
 import { ResponseMessage } from '../../../util/message';
 
 export default React.memo(function CardContainer({
-  setSaveModal,
-  setSaveAction,
-  setUpdateData,
-  setModalTitle,
+  confirmModal,
 }): React.ReactElement {
+  const {
+    setSaveModal,
+    setSaveAction,
+    setUpdateData,
+    setModalTitle,
+  } = confirmModal;
+
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const paymentMethods = useAccountBookData(
     store => store.accountBook.payments,

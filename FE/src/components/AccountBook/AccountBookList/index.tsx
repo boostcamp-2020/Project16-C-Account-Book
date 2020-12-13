@@ -12,14 +12,14 @@ import { ResponseMessage } from '../../../util/message';
 
 import './index.scss';
 
-export const AccountBookList = ({
-  datas,
-  setDatas,
-  setSaveModal,
-  setSaveAction,
-  setUpdateData,
-  setModalTitle,
-}) => {
+export const AccountBookList = ({ datas, setDatas, confirmModal }) => {
+  const {
+    setSaveModal,
+    setSaveAction,
+    setUpdateData,
+    setModalTitle,
+  } = confirmModal;
+
   const history = useHistory();
 
   const setAccountBookList = async () => {
