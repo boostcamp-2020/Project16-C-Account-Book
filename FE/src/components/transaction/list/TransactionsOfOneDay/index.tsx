@@ -63,7 +63,6 @@ const TransactionsOfOneDay = ({
         }`}
         onDrop={onDrop}
         onDragOver={onDragOver}
-        onDragLeave={onDragLeave}
       >
         <label className="transactions__oneday__daybar">{date}일</label>
         <ul className="transactions__oneday__container">

@@ -17,6 +17,7 @@ const TransactionItem = ({
   type,
   setDraggedItem,
   dragObject,
+  setDraggedInDate,
 }: iTransactionItem) => {
   const [buttonReveal, setButtonReveal] = useState('');
 
@@ -78,18 +79,20 @@ const TransactionItem = ({
   };
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log('on drag start');
     e.target.classList.add('on__drag');
 
     e.dataTransfer.setData('transactionId', transactionId);
     const movedTransaction = getTransactionById(transactionId);
 
     setDraggedItem(movedTransaction);
-    e.dataTransfer.dropEffect = 'move';
   };
 
   const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
     e.target.classList.remove('on__drag');
+    console.log('on end', e.dataTransfer.dropEffect);
+    setTimeout(() => {
+      setDraggedInDate('');
+    }, 50);
   };
 
   return (
