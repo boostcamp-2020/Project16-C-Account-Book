@@ -1,5 +1,6 @@
 export default interface Response {
   status: number;
   message: string;
-  data: JSON | undefined;
+  accessToken: string;
+  data: any;
 }
