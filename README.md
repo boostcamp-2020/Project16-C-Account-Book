@@ -37,7 +37,7 @@ GitHub Password: boostcamp16c!
 | -------- | -------- | -------- |-------- |
 | ![](https://i.imgur.com/ytSC8lm.png)     | ![](https://i.imgur.com/JmlXqG4.png) | ![](https://i.imgur.com/86MMg8O.jpg)| ![](https://i.imgur.com/YgGqQvQ.png) |
 |[**@msmk530**](https://github.com/msmk530) |[**@j03y14**](https://github.com/j03y14)  |  [**@yoonwoo123**](https://github.com/yoonwoo123)  | [**@hi0826**](https://github.com/hi0826)|
-|*'신'인 개발자가 되고 싶은 <br> '신인' 개발자.* | *이것도 만들고 싶고<br> 저것도 만들고 싶다...*| *한마디 "주장"보다 <br>한마디 "배려"하자.*| *"아무거나"와 <br>"다 좋습니다"는 없습니다.* | 
+|*'근본' 과 '이유'가 있는<br> 개발이 하고 싶습니다.* | *이것도 만들고 싶고<br> 저것도 만들고 싶다...*| *한마디 "주장"보다 <br>한마디 "배려"하자.*| *"아무거나"와 <br>"다 좋습니다"는 없습니다.* | 
 
 
 <br>
