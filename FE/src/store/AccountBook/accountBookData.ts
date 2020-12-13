@@ -177,7 +177,6 @@ export const createStore = () => {
     },
 
     getTransactionsForPieChart(year: number, month: number, dataType: string) {
-      console.log('herherhe');
       const chartInfo = {};
       let accumDeg = 0;
 

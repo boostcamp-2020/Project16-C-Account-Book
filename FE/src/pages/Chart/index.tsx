@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import NavButton from '../../components/Chart/NavButton';
+import FilteringButton from '../../components/Chart/FilteringButton';
 import PieChart from '../../components/CategoryChart/PieChart';
 import TableChart from '../../components/CategoryChart/TableChart';
 import LineChart from '../../components/DateChart/LineChart';
@@ -51,28 +52,7 @@ const Chart = props => {
 
       {chartInfo.length === 0 && <div className="no__data">No Data</div>}
       {chartInfo.length !== 0 && chartType === 'category' && (
-        <div className="data__type">
-          <label key="Income">
-            <input
-              type="radio"
-              name="startday"
-              value="수입"
-              checked={dataType === '수입'}
-              onChange={e => setDataType(e.target.value)}
-            />
-            <span className="filter__income">수입</span>
-          </label>
-          <label key="Spending">
-            <input
-              type="radio"
-              name="startday"
-              value="지출"
-              checked={dataType === '지출'}
-              onChange={e => setDataType(e.target.value)}
-            />
-            <span className="filter__spending">지출</span>
-          </label>
-        </div>
+        <FilteringButton dataType={dataType} setDataType={setDataType} />
       )}
       {chartType === 'category' && chartInfo.length !== 0 && (
         <div className="category__charts">
