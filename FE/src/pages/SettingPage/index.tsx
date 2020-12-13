@@ -10,17 +10,14 @@ import CSVSetting from '../../components/SettingContent/CSVSetting';
 import useAccountBook from '../../service/useAccountBookSetting';
 import SaveModal from '../../components/Common/SaveModal';
 import useLoginCheck from '../../service/useLoginCheck';
-
+import useSaveModal from '../../service/useSaveModal';
 import './settingPage.scss';
 
 export default function SettingPage() {
   useLoginCheck();
 
   const [settingType, setSettingType] = useState('user');
-  const [saveModal, setSaveModal] = useState(false);
-  const [saveAction, setSaveAction] = useState(null);
-  const [updateData, setUpdateData] = useState({});
-  const [modalTitle, setModalTitle] = useState('');
+  const confirmModal = useSaveModal();
 
   const history = useHistory();
   const accountBookId = history.location.state;
@@ -36,18 +33,20 @@ export default function SettingPage() {
       {settingType === 'user' && (
         <UserSetting
           accountBookId={accountBookId.id}
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setModalTitle={setModalTitle}
+          confirmModal={confirmModal}
+          // setSaveModal={setSaveModal}
+          // setSaveAction={setSaveAction}
+          // setModalTitle={setModalTitle}
         />
       )}
       {settingType === 'calendar' && (
         <CalendarSetting
           accountBookId={accountBookId.id}
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
-          setModalTitle={setModalTitle}
+          confirmModal={confirmModal}
+          // setSaveModal={setSaveModal}
+          // setSaveAction={setSaveAction}
+          // setUpdateData={setUpdateData}
+          // setModalTitle={setModalTitle}
         />
       )}
 
@@ -55,12 +54,12 @@ export default function SettingPage() {
         <CategorySetting accountBookId={accountBookId.id} />
       )}
       {settingType === 'csv' && <CSVSetting />}
-      {saveModal && (
+      {confirmModal.saveModal && (
         <SaveModal
-          saveAction={saveAction}
-          updateData={updateData}
-          setSaveModal={setSaveModal}
-          title={modalTitle}
+          saveAction={confirmModal.saveAction}
+          updateData={confirmModal.updateData}
+          setSaveModal={confirmModal.setSaveModal}
+          title={confirmModal.modalTitle}
         />
       )}
     </div>

@@ -6,15 +6,12 @@ import './userList.scss';
 import { useHistory } from 'react-router-dom';
 import { ResponseMessage } from '../../../../util/message';
 
-export default function UserList({
-  accountBookId,
-  setSaveModal,
-  setSaveAction,
+export default function UserList({ confirmModal }) {
+  const { setSaveModal, setSaveAction, setModalTitle } = confirmModal;
 
-  setModalTitle,
-}) {
   const history = useHistory();
   const users = useAccountBookData(store => store.accountBook.users);
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
 
   const dropAction = async () => {
     try {
