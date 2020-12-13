@@ -5,23 +5,21 @@
 
   .calendar__setting__title {
     @include settingTitle;
-  }
-  .calendar__setting__desc {
-    @include settingDesc;
-  }
-
-  .calendar__setting__startday {
-    @include settingBox;
-    position: relative;
-    background-color: transparent;
-
     .calendar__save__btn {
       position: absolute;
-      top: 2em;
-      right: 0;
-      transform: translateX(-50%);
+      right: 5%;
+      font-size: 1.5vh;
     }
   }
+}
+.calendar__setting__desc {
+  @include settingDesc;
+}
+
+.calendar__setting__startday {
+  @include settingBox;
+  position: relative;
+  background-color: transparent;
 }
 .save__modal__overlay {
   position: absolute;

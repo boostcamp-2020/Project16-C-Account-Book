@@ -10,6 +10,13 @@
 
   .user__list__title {
     @include settingTitle;
+    position: relative;
+    .drop__btn {
+      position: absolute;
+
+      right: 5%;
+      font-size: 1.5vh;
+    }
   }
   .user__list__desc {
     @include settingDesc;
@@ -28,11 +35,5 @@
       outline: none;
       margin-bottom: 1em;
     }
-  }
-
-  .drop__btn {
-    position: absolute;
-    right: 5%;
-    top: 5%;
   }
 }
