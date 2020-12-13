@@ -9,15 +9,16 @@ import ActionButton from '../../Common/ActionButton';
 import { updateStartDay } from '../../../api/calendar-startday';
 import './calendarSetting.scss';
 
-export default function CalendarSetting({
-  accountBookId,
-  setSaveModal,
-  setUpdateData,
-  setSaveAction,
-  setModalTitle,
-}) {
-  const start = useAccountBookData(store => store.accountBook.startday);
+export default function CalendarSetting({ confirmModal }) {
+  const {
+    setSaveModal,
+    setSaveAction,
+    setUpdateData,
+    setModalTitle,
+  } = confirmModal;
 
+  const start = useAccountBookData(store => store.accountBook.startday);
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
   const [startDay, setStartDay] = useState('');
 
   const onClickSaveBtn = () => {

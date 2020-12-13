@@ -30,24 +30,9 @@ export default function SettingPage() {
         settingType={settingType}
         setSettingType={setSettingType}
       />
-      {settingType === 'user' && (
-        <UserSetting
-          accountBookId={accountBookId.id}
-          confirmModal={confirmModal}
-          // setSaveModal={setSaveModal}
-          // setSaveAction={setSaveAction}
-          // setModalTitle={setModalTitle}
-        />
-      )}
+      {settingType === 'user' && <UserSetting confirmModal={confirmModal} />}
       {settingType === 'calendar' && (
-        <CalendarSetting
-          accountBookId={accountBookId.id}
-          confirmModal={confirmModal}
-          // setSaveModal={setSaveModal}
-          // setSaveAction={setSaveAction}
-          // setUpdateData={setUpdateData}
-          // setModalTitle={setModalTitle}
-        />
+        <CalendarSetting confirmModal={confirmModal} />
       )}
 
       {settingType === 'category' && (
