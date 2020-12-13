@@ -8,7 +8,9 @@ import CategoryModal from './CategoryModal';
 
 import './categorySetting.scss';
 
-export default function CategorySetting({ accountBookId }) {
+export default function CategorySetting() {
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
+
   const [modal, setModal] = useState('');
   const [editContent, setEditContent] = useState('');
   const [categoryType, setCategoryType] = useState('');

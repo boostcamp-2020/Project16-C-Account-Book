@@ -25,19 +25,13 @@ export default function SettingPage() {
   useAccountBook(accountBookId);
   return (
     <div className="setting__page__wrapper">
-      <SettingBar
-        accountBookId={accountBookId.id}
-        settingType={settingType}
-        setSettingType={setSettingType}
-      />
+      <SettingBar settingType={settingType} setSettingType={setSettingType} />
       {settingType === 'user' && <UserSetting confirmModal={confirmModal} />}
       {settingType === 'calendar' && (
         <CalendarSetting confirmModal={confirmModal} />
       )}
 
-      {settingType === 'category' && (
-        <CategorySetting accountBookId={accountBookId.id} />
-      )}
+      {settingType === 'category' && <CategorySetting />}
       {settingType === 'csv' && <CSVSetting />}
       {confirmModal.saveModal && (
         <SaveModal

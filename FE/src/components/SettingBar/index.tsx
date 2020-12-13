@@ -1,16 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAccountBookData } from '../../store/AccountBook/accountBookInfoHook';
 
 import HeaderButton from '../Common/HeaderButton';
 import './settingBar.scss';
 
-export default function SettingBar({
-  accountBookId,
-  settingType,
-  setSettingType,
-}) {
+export default function SettingBar({ settingType, setSettingType }) {
   const history = useHistory();
-
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
   const onClickBackBtn = event => {
     history.push({
       pathname: event.target.dataset.type,
