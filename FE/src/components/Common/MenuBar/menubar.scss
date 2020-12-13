@@ -2,41 +2,8 @@
 @use '../../../styles/mixins' as *;
 @use '../../../styles/mediaQuery' as *;
 
-@mixin navigationButton($type) {
-  @include headerNavigationButtons($type);
-
-  @include mobile {
-    .navigation__content {
-      display: none;
-    }
-    .fas.fa-arrow-right {
-      right: 5%;
-    }
-  }
-}
-
 .menubar__header {
   @include headerSetting;
-  .menubar__buttons {
-    @include headerButtons;
-    .back__navBtn {
-      @include navigationButton(left);
-    }
-    .setting__navBtn {
-      @include navigationButton(right);
-    }
-    @include mobile {
-      .back__navBtn,
-      .setting__navBtn {
-        font-size: 1rem;
-      }
-    }
-  }
-  @include mobile {
-    .menubar__buttons {
-      gap: 2em;
-    }
-  }
 
   .menubar__ctrBox {
     padding-top: 1.5%;
