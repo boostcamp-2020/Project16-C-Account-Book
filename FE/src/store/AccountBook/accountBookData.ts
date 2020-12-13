@@ -20,6 +20,12 @@ export const createStore = () => {
 
     filteredPriceOut: 0,
 
+    getTransactionById(transactionId) {
+      return this.accountBook.transactions.find(
+        item => item._id === transactionId,
+      );
+    },
+
     addTransaction(transaction) {
       this.accountBook.transactions = [
         ...this.accountBook.transactions,
@@ -28,11 +34,14 @@ export const createStore = () => {
     },
 
     updateTransaction(transaction) {
-      const rest = this.accountBook.transactions.filter(
-        item => item._id !== transaction._id,
+      const newTransactions = [...this.accountBook.transactions];
+      const index = this.accountBook.transactions.findIndex(
+        item => item._id === transaction._id,
       );
 
-      this.accountBook.transactions = [...rest, transaction];
+      newTransactions.splice(index, 1, transaction);
+
+      this.accountBook.transactions = newTransactions;
     },
 
     deleteTransaction(id) {
