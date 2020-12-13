@@ -8,10 +8,10 @@ import './totalContent.scss';
 export default function TotalContent(props) {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
   const incomeTotal = useAccountBookData(store =>
-    store.getIncomeTotal(DateInfo.year, DateInfo.month + 1),
+    store.getTotal(DateInfo.year, DateInfo.month + 1, '수입'),
   );
   const spendingTotal = useAccountBookData(store =>
-    store.getSpendingTotal(DateInfo.year, DateInfo.month + 1),
+    store.getTotal(DateInfo.year, DateInfo.month + 1, '지출'),
   );
 
   return (
