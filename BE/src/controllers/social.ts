@@ -4,14 +4,14 @@ import response from '@utils/response';
 
 const post = async (ctx: Context): Promise<Context['body']> => {
   const result = await service.addUser(ctx);
-  const res = response(200, 'success', '', result);
+  const res = response(200, '', result);
   ctx.body = res;
   return ctx.body;
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
   const result = await service.delUser(ctx);
-  const res = response(200, 'success', '', result);
+  const res = response(200, '', result);
   ctx.body = res;
   return ctx.body;
 };
