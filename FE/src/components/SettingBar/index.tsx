@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useAccountBookData } from '../../store/AccountBook/accountBookInfoHook';
 
 import HeaderButton from '../Common/HeaderButton';
+import SettingButtons from './SettingButtons';
 import './settingBar.scss';
 
 export default function SettingBar({ settingType, setSettingType }) {
@@ -15,10 +16,6 @@ export default function SettingBar({ settingType, setSettingType }) {
         id: accountBookId,
       },
     });
-  };
-
-  const onClickIcon = event => {
-    setSettingType(event.target.dataset.type);
   };
 
   return (
@@ -34,53 +31,10 @@ export default function SettingBar({ settingType, setSettingType }) {
             Account Book
           </span>
         </div>
-        {settingType === 'user' ? (
-          <HeaderButton buttonType="user" isChecked onClickIcon={onClickIcon} />
-        ) : (
-          <HeaderButton
-            buttonType="user"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-
-        {settingType === 'calendar' ? (
-          <HeaderButton
-            buttonType="calendar"
-            isChecked
-            onClickIcon={onClickIcon}
-          />
-        ) : (
-          <HeaderButton
-            buttonType="calendar"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-
-        {settingType === 'category' ? (
-          <HeaderButton
-            buttonType="category"
-            isChecked
-            onClickIcon={onClickIcon}
-          />
-        ) : (
-          <HeaderButton
-            buttonType="category"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-
-        {settingType === 'csv' ? (
-          <HeaderButton buttonType="csv" isChecked onClickIcon={onClickIcon} />
-        ) : (
-          <HeaderButton
-            buttonType="csv"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
+        <SettingButtons
+          settingType={settingType}
+          setSettingType={setSettingType}
+        />
       </div>
     </header>
   );
