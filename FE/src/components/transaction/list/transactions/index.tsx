@@ -13,6 +13,7 @@ const Transactions = ({
   selectedTypes: string[];
 }) => {
   const [draggedItem, setDraggedItem] = useState({});
+  const [draggedInDate, setDraggedInDate] = useState('');
 
   const {
     filteredTransactions,
@@ -42,6 +43,8 @@ const Transactions = ({
             key={day}
             draggedItem={draggedItem}
             setDraggedItem={setDraggedItem}
+            draggedInDate={draggedInDate}
+            setDraggedInDate={setDraggedInDate}
           />
         ))}
     </>

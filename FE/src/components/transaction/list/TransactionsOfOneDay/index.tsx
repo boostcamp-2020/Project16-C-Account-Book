@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './index.scss';
 
 import { useHistory } from 'react-router-dom';
@@ -13,8 +13,9 @@ const TransactionsOfOneDay = ({
   transactions,
   draggedItem,
   setDraggedItem,
+  draggedInDate,
+  setDraggedInDate,
 }: iTransactionsOfOneDay) => {
-  const [draggedIn, setDraggedIn] = useState(false);
   const accountBookId = useHistory().location.state.id;
 
   const { getTransactionById, updateTransactionInStore } = useAccountBookData(
@@ -27,16 +28,7 @@ const TransactionsOfOneDay = ({
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    setDraggedIn(() => true);
-  };
-
-  const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    const elementBox = e.currentTarget.getBoundingClientRect();
-    const cursor = { clientX: e.clientX, clientY: e.clientY };
-
-    if (!cursorInElement(cursor, elementBox)) {
-      setDraggedIn(() => false);
-    }
+    setDraggedInDate(date);
   };
 
   const updateTransaction = async movedTransaction => {
@@ -48,24 +40,26 @@ const TransactionsOfOneDay = ({
     if (status !== 200) return alert('이동에 실패했습니다.');
 
     updateTransactionInStore(movedTransaction);
+    setDraggedInDate('');
   };
 
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const movedTransactionId = e.dataTransfer.getData('transactionId');
     const movedTransaction = getTransactionById(movedTransactionId);
-    setDraggedIn(false);
-    if (movedTransaction.date === date) return;
+
+    console.log('on drop');
+
+    if (draggedItem.date === date) return setDraggedInDate('');
     movedTransaction.date = date;
     updateTransaction(movedTransaction);
-    console.log('on drop:', movedTransactionId);
   };
 
   return useMemo(
     () => (
       <div
         className={`transactions__oneday__day${
-          draggedIn ? ' transactions__oneday__day__draggedIn' : ''
+          draggedInDate === date ? ' transactions__oneday__day__draggedIn' : ''
         }`}
         onDrop={onDrop}
         onDragOver={onDragOver}
@@ -85,9 +79,10 @@ const TransactionsOfOneDay = ({
               id={t._id}
               key={t._id}
               setDraggedItem={setDraggedItem}
+              setDraggedInDate={setDraggedInDate}
             />
           ))}
-          {draggedIn && draggedItem.date !== date && (
+          {draggedInDate === date && draggedItem?.date !== date && (
             <TransactionItem
               dragObject
               date={date}
@@ -102,7 +97,7 @@ const TransactionsOfOneDay = ({
         </ul>
       </div>
     ),
-    [transactions, draggedIn],
+    [transactions, draggedInDate],
   );
 };
 
