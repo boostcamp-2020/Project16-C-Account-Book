@@ -129,17 +129,6 @@ export const AccountBookList = ({
       return event;
     });
     setSaveAction(() => deleteProcess);
-    // event.stopPropagation();
-    // const accountBookId = event.target.dataset.id;
-    // try {
-    //   const res = await deleteAccountBook(accountBookId);
-    //   if (res.status !== ResponseMessage.success) {
-    //     throw new Error();
-    //   }
-    //   setDatas(datas.filter(data => data._id !== accountBookId));
-    // } catch (error) {
-    //   throw new Error();
-    // }
   };
 
   useEffect(() => {
