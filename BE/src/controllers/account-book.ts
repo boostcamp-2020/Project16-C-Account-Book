@@ -1,10 +1,10 @@
 import { Context } from 'koa';
 import service from '@services/account-book';
-import { response } from '@utils/response';
+import response from '@utils/response';
 
 const get = async (ctx: Context): Promise<Context['body']> => {
   const accountBooks = await service.get(ctx);
-  const res = response(200, 'success', accountBooks);
+  const res = response(200, 'success', '', accountBooks);
   ctx.status = res.status;
   ctx.body = res;
 
@@ -13,7 +13,7 @@ const get = async (ctx: Context): Promise<Context['body']> => {
 
 const post = async (ctx: Context): Promise<Context['body']> => {
   const accountBook = await service.post(ctx);
-  const res = response(200, 'success', accountBook);
+  const res = response(200, 'success', '', accountBook);
   ctx.status = res.status;
   ctx.body = res;
 
@@ -22,7 +22,7 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 
 const update = async (ctx: Context): Promise<Context['body']> => {
   const updateResult = await service.patch(ctx);
-  const res = response(200, updateResult.message, updateResult.data);
+  const res = response(200, updateResult.message, '', updateResult.data);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
@@ -30,7 +30,7 @@ const update = async (ctx: Context): Promise<Context['body']> => {
 
 const updateStartday = async (ctx: Context): Promise<Context['body']> => {
   const updateResult = await service.patchStartday(ctx);
-  const res = response(200, updateResult.message, updateResult.data);
+  const res = response(200, updateResult.message, '', updateResult.data);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
@@ -38,7 +38,7 @@ const updateStartday = async (ctx: Context): Promise<Context['body']> => {
 
 const del = async (ctx: Context): Promise<Context['body']> => {
   const deleteResult = await service.del(ctx);
-  const res = response(200, 'success', deleteResult);
+  const res = response(200, 'success', '', deleteResult);
   ctx.status = res.status;
   ctx.body = res;
 
@@ -47,7 +47,7 @@ const del = async (ctx: Context): Promise<Context['body']> => {
 
 const getDetail = async (ctx: Context): Promise<Context['body']> => {
   const accountBook = await service.getDetail(ctx);
-  const res = response(200, 'success', accountBook);
+  const res = response(200, 'success', '', accountBook);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
@@ -55,7 +55,7 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
 
 const getCode = async (ctx: Context): Promise<Context['body']> => {
   const accountData = await service.getCode(ctx);
-  const res = response(200, 'success', accountData);
+  const res = response(200, 'success', '', accountData);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
