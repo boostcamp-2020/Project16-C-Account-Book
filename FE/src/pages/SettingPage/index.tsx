@@ -8,7 +8,7 @@ import CalendarSetting from '../../components/SettingContent/CalendarSetting';
 import CategorySetting from '../../components/SettingContent/CategorySetting';
 import CSVSetting from '../../components/SettingContent/CSVSetting';
 import useAccountBook from '../../service/useAccountBookSetting';
-import SaveModal from '../../components/SettingContent/SaveModal';
+import SaveModal from '../../components/Common/SaveModal';
 import useLoginCheck from '../../service/useLoginCheck';
 
 import './settingPage.scss';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActionButton from '../../Common/ActionButton';
+import ActionButton from '../ActionButton';
 import { ResponseMessage } from '../../../util/message';
 import './saveModal.scss';
 
