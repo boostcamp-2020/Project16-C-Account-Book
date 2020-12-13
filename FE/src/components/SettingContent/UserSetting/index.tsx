@@ -4,10 +4,21 @@ import UserList from './UserList';
 import InviteCode from './InviteCode';
 import './userSetting.scss';
 
-export default function UserSetting(props) {
+export default function UserSetting({
+  accountBookId,
+  setSaveModal,
+  setSaveAction,
+
+  setModalTitle,
+}) {
   return (
     <div className="user__setting__container">
-      <UserList />
+      <UserList
+        accountBookId={accountBookId}
+        setSaveModal={setSaveModal}
+        setSaveAction={setSaveAction}
+        setModalTitle={setModalTitle}
+      />
       <InviteCode />
     </div>
   );

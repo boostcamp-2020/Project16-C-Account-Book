@@ -20,6 +20,7 @@ export default function SettingPage() {
   const [saveModal, setSaveModal] = useState(false);
   const [saveAction, setSaveAction] = useState(null);
   const [updateData, setUpdateData] = useState({});
+  const [modalTitle, setModalTitle] = useState('');
 
   const history = useHistory();
   const accountBookId = history.location.state;
@@ -37,7 +38,7 @@ export default function SettingPage() {
           accountBookId={accountBookId.id}
           setSaveModal={setSaveModal}
           setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
+          setModalTitle={setModalTitle}
         />
       )}
       {settingType === 'calendar' && (
@@ -46,6 +47,7 @@ export default function SettingPage() {
           setSaveModal={setSaveModal}
           setSaveAction={setSaveAction}
           setUpdateData={setUpdateData}
+          setModalTitle={setModalTitle}
         />
       )}
 
@@ -58,6 +60,7 @@ export default function SettingPage() {
           saveAction={saveAction}
           updateData={updateData}
           setSaveModal={setSaveModal}
+          title={modalTitle}
         />
       )}
     </div>

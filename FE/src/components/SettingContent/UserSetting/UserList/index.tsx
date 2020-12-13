@@ -6,11 +6,17 @@ import './userList.scss';
 import { useHistory } from 'react-router-dom';
 import { ResponseMessage } from '../../../../util/message';
 
-export default function UserList(props) {
+export default function UserList({
+  accountBookId,
+  setSaveModal,
+  setSaveAction,
+
+  setModalTitle,
+}) {
   const history = useHistory();
   const users = useAccountBookData(store => store.accountBook.users);
-  const accountBookId = useAccountBookData(store => store.accountBook._id);
-  const onClickDropBtn = async () => {
+
+  const dropAction = async () => {
     try {
       const res = await dropAccountBook({ accountBookId });
       if (res.status !== ResponseMessage.success) {
@@ -21,6 +27,12 @@ export default function UserList(props) {
       throw new Error();
     }
   };
+  const onClickDropBtn = async () => {
+    setModalTitle(() => '정말 이 가계부에서 탈퇴하시겠습니까?');
+    setSaveModal(() => true);
+    setSaveAction(() => dropAction);
+  };
+
   return (
     <div className="user__list__box">
       <div className="user__list__title">
@@ -40,7 +52,11 @@ export default function UserList(props) {
       {users &&
         users.map(user => (
           <div className="user__info">
-            <img src={user.profile} className="profile__image" />
+            <img
+              src={user.profile}
+              className="profile__image"
+              alt="profile__avatar"
+            />
             <div className="user__name">{user.name}</div>
           </div>
         ))}

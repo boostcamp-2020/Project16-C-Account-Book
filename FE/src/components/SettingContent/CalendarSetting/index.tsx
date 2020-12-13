@@ -14,12 +14,14 @@ export default function CalendarSetting({
   setSaveModal,
   setUpdateData,
   setSaveAction,
+  setModalTitle,
 }) {
   const start = useAccountBookData(store => store.accountBook.startday);
 
   const [startDay, setStartDay] = useState('');
 
   const onClickSaveBtn = () => {
+    setModalTitle(() => '변경사항을 저장하시겠습니까?');
     setSaveModal(() => true);
     setUpdateData(() => {
       return { accountBookId, startday: startDay };
