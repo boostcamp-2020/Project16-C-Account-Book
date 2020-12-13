@@ -161,26 +161,11 @@ export const createStore = () => {
       return specificDatas;
     },
 
-    getSpendingTotal(year, month) {
+    getTotal(year, month, dataType) {
       let sum = 0;
       this.accountBook.transactions.forEach(item => {
         if (
-          item.type === '지출' &&
-          Number(item.date.split('-')[0]) === year &&
-          Number(item.date.split('-')[1]) === month
-        ) {
-          sum += item.cost;
-        }
-      });
-
-      return sum;
-    },
-    getIncomeTotal(year, month) {
-      let sum = 0;
-
-      this.accountBook.transactions.forEach(item => {
-        if (
-          item.type === '수입' &&
+          item.type === dataType &&
           Number(item.date.split('-')[0]) === year &&
           Number(item.date.split('-')[1]) === month
         ) {
@@ -191,13 +176,14 @@ export const createStore = () => {
       return sum;
     },
 
-    getTransactionsForPieChart(year: number, month: number) {
+    getTransactionsForPieChart(year: number, month: number, dataType: string) {
+      console.log('herherhe');
       const chartInfo = {};
       let accumDeg = 0;
 
       const datas = this.accountBook.transactions.filter(
         item =>
-          item.type === '지출' &&
+          item.type === dataType &&
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );
@@ -213,18 +199,18 @@ export const createStore = () => {
 
       for (const key in chartInfo) {
         chartInfo[key].percent =
-          (100 * chartInfo[key].cost) / this.getSpendingTotal(year, month);
+          (100 * chartInfo[key].cost) / this.getTotal(year, month, dataType);
       }
 
       for (const key in chartInfo) {
         if (accumDeg === 0) {
           chartInfo[key].startPoint = 0;
           accumDeg +=
-            360 * (chartInfo[key].cost / this.getSpendingTotal(year, month));
+            360 * (chartInfo[key].cost / this.getTotal(year, month, dataType));
         } else {
           chartInfo[key].startPoint = accumDeg;
           accumDeg +=
-            360 * (chartInfo[key].cost / this.getSpendingTotal(year, month));
+            360 * (chartInfo[key].cost / this.getTotal(year, month, dataType));
         }
       }
 

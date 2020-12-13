@@ -25,14 +25,18 @@ const Chart = props => {
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [chartType, setChartType] = useState('category');
+  const [dataType, setDataType] = useState('지출');
   const defaultMethod = useDefaultPayment();
 
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-  const ChartInfo = useAccountBookData(
-    store => store.getTransactionsForPieChart,
+  const chartInfo = useAccountBookData(store =>
+    store.getTransactionsForPieChart(
+      DateInfo.year,
+      DateInfo.month + 1,
+      dataType,
+    ),
   );
 
-  const chartInfo = ChartInfo(DateInfo.year, DateInfo.month + 1);
   const refArr = [];
   chartInfo.forEach(() => refArr.push(React.createRef()));
 
@@ -46,7 +50,30 @@ const Chart = props => {
       <NavButton chartType={chartType} setChartType={setChartType} />
 
       {chartInfo.length === 0 && <div className="no__data">No Data</div>}
-
+      {chartInfo.length !== 0 && chartType === 'category' && (
+        <div className="data__type">
+          <label key="Income">
+            수입
+            <input
+              type="radio"
+              name="startday"
+              value="수입"
+              checked={dataType === '수입'}
+              onChange={e => setDataType(e.target.value)}
+            />
+          </label>
+          <label key="Spending">
+            지출
+            <input
+              type="radio"
+              name="startday"
+              value="지출"
+              checked={dataType === '지출'}
+              onChange={e => setDataType(e.target.value)}
+            />
+          </label>
+        </div>
+      )}
       {chartType === 'category' && chartInfo.length !== 0 && (
         <div className="category__charts">
           <PieChart chartInfo={chartInfo} refArr={refArr} />
