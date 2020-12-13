@@ -11,15 +11,8 @@ export default function SaveModal({
   title,
 }) {
   const onClickSaveModalOk = async () => {
-    try {
-      const res = await saveAction(updateData);
-      if (res.status !== ResponseMessage.success) {
-        throw new Error();
-      }
-      setSaveModal(false);
-    } catch (error) {
-      throw new Error();
-    }
+    await saveAction(updateData);
+    setSaveModal(false);
   };
 
   const onClickOverlay = event => {
