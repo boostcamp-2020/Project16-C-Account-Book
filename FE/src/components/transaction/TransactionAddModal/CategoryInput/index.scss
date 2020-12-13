@@ -21,24 +21,18 @@
     cursor: pointer;
   }
 
-  input[type='radio'][name='category'] + span:hover {
-    background: $transaction-category-hover-color;
+  input[type='radio'][name='type'][value='수입']:checked + span,
+  input[type='radio'][name='type'][value='수입'] + span:hover,
+  input[type='radio'][name='category'][data-type='수입']:checked + span,
+  input[type='radio'][name='category'][data-type='수입'] + span:hover {
+    background: $transaction-modal-income-category-color;
     color: #fff;
   }
 
-  input[type='radio'][name='category']:checked + span {
-    border: 1px solid $transaction-category-hover-color;
-    background: $transaction-selected-item-color;
-    color: #fff;
-  }
-
-  input[type='radio'][name='type'] + span:hover {
-    background: $transaction-modal-spending-category-color;
-    color: #fff;
-  }
-
-  input[type='radio'][name='type']:checked + span {
-    border: 1px solid $transaction-modal-spending-category-color;
+  input[type='radio'][name='type'][value='지출']:checked + span,
+  input[type='radio'][name='type'][value='지출'] + span:hover,
+  input[type='radio'][name='category'][data-type='지출']:checked + span,
+  input[type='radio'][name='category'][data-type='지출'] + span:hover {
     background: $transaction-modal-spending-category-color;
     color: #fff;
   }
