@@ -15,4 +15,8 @@
       transform: translateX(100%);
     }
   }
+
+  &.light {
+    background-color: $light-background-color;
+  }
 }
