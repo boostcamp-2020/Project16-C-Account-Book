@@ -1,7 +1,9 @@
 import CategoryModel from '@models/category';
 import { User } from '@interfaces/auth';
 import AccountBook from '@interfaces/accountbook';
+import Transaction from '@interfaces/transaction';
 import { AccountBookDoc, AccountBookModel } from './schema';
+import { TransactionDoc } from '../transaction/schema';
 
 const get = async ({
   userid,
@@ -18,10 +20,53 @@ const get = async ({
 };
 
 const getDetail = async (id: string): Promise<any> => {
-  const accountBook = await AccountBookModel.findOne({
-    _id: id,
-  });
+  const accountBook = await AccountBookModel.findOne().where(`_id`).equals(id);
   return accountBook;
+};
+
+const getTransactions = async (
+  id: string,
+  year: string,
+  month: string,
+): Promise<any> => {
+  const accountBook = await AccountBookModel.findOne()
+    .where('_id')
+    .equals(id)
+    .gte(`transactions.date`, new Date(`${year}-${month}-01`))
+    .lte(`transactions.date`, new Date(`${year}-${month}-31`));
+  if (accountBook) {
+    const transactions = accountBook.transactions.map(t => {
+      const { _id, content, type, category, cost, date, payment } = t;
+      const d = new Date(date);
+      const yyyy = d.getFullYear();
+      const mm = d.getMonth().toString().padStart(2, '0');
+      const dd = d.getDate().toString().padStart(2, '0');
+      const newdate = `${yyyy}-${mm}-${dd}`;
+      const ret = {
+        _id,
+        content,
+        type,
+        category,
+        cost,
+        date: newdate,
+        payment,
+      };
+      return ret;
+    });
+    const newAccountBook = {
+      _id: accountBook._id,
+      code: accountBook.code,
+      startday: accountBook.startday,
+      description: accountBook.description,
+      name: accountBook.name,
+      users: accountBook.users,
+      categories: accountBook.categories,
+      payments: accountBook.payments,
+      transactions,
+    };
+    console.log(newAccountBook);
+    return newAccountBook;
+  }
 };
 
 const create = async ({
@@ -302,12 +347,19 @@ const addUser = async (code: string, userInfo: any): Promise<any> => {
   const curAccountBook = await AccountBookModel.findOne({ code });
   if (curAccountBook) {
     const curUser = curAccountBook.users;
+    const id = curAccountBook._id;
     curUser.push(userInfo);
     const updateResult = await AccountBookModel.update(
       { code },
       { users: curUser },
     );
-    if (updateResult.nModified) return true;
+    if (updateResult.nModified) {
+      const accountBooks = await AccountBookModel.find(
+        { _id: id },
+        '_id name description',
+      );
+      return accountBooks;
+    }
     return false;
   }
   return false;
@@ -349,4 +401,5 @@ export default {
   updateCode,
   addUser,
   delUser,
+  getTransactions,
 };
