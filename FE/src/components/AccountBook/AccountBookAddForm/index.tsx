@@ -1,9 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { createAccountBook } from '../../../api/accoun-book-list';
-import { joinAccountBook } from '../../../api/social';
+import CreateForm from './CreateForm';
+import JoinForm from './JoinForm';
 
-import { ResponseMessage } from '../../../util/message';
 import './index.scss';
 
 export default function AccountBookAddForm({
@@ -12,113 +11,28 @@ export default function AccountBookAddForm({
   datas,
   setDatas,
 }) {
-  const accountBookInput = useRef();
-  const inviteCodeInput = useRef();
-
   const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-
-  const onCreateAccountBook = async event => {
-    if (event.key === 'Enter') {
-      try {
-        const res = await createAccountBook({ name, description });
-        if (res.status !== ResponseMessage.success) {
-          throw new Error();
-        }
-
-        setCreate(false);
-        setDatas([
-          {
-            name: res.data.name,
-            description: res.data.description,
-            _id: res.data._id,
-          },
-          ...datas,
-        ]);
-      } catch (error) {
-        throw new Error();
-      }
-    }
-  };
-
-  const onJoinAccountBook = async event => {
-    if (event.key === 'Enter') {
-      const res = await joinAccountBook({
-        code: inviteCodeInput.current.value,
-      });
-
-      if (res.data === true) {
-        setCreate(false);
-        setDatas([
-          {
-            name: res.data.name,
-            description: res.data.description,
-            _id: res.data._id,
-          },
-          ...datas,
-        ]);
-      } else {
-        alert('Invalid Invite Code!!');
-      }
-    }
-  };
-
-  const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
-
-  const onChangeDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
-  };
 
   const cancleCreate = () => {
     setCreate(false);
   };
 
-  useEffect(() => {
-    if (createForm === 'create') {
-      accountBookInput.current.focus();
-    }
-    if (createForm === 'join') {
-      inviteCodeInput.current.focus();
-    }
-  }, [createForm]);
   return (
     <div className="create__acbook">
       {createForm === 'create' ? (
-        <>
-          <input
-            className="input__name"
-            ref={accountBookInput}
-            value={name}
-            type="text"
-            name="title"
-            placeholder="Enter AccountBook Title"
-            onKeyPress={onCreateAccountBook}
-            onChange={onChangeName}
-            autoFocus
-          />
-          <textarea
-            className="input__description"
-            value={description}
-            type="text"
-            name="description"
-            placeholder="Enter AccountBook Description"
-            onKeyPress={onCreateAccountBook}
-            onChange={onChangeDescription}
-          />
-        </>
+        <CreateForm
+          name={name}
+          setName={setName}
+          setCreate={setCreate}
+          datas={datas}
+          setDatas={setDatas}
+        />
       ) : (
         <>
-          <input
-            className="input__code"
-            ref={inviteCodeInput}
-            type="text"
-            name="title"
-            placeholder="Enter Invite Code"
-            onKeyPress={onJoinAccountBook}
-            onChange={onChangeName}
-            autoFocus
+          <JoinForm
+            setName={setName}
+            setCreate={setCreate}
+            setDatas={setDatas}
           />
         </>
       )}

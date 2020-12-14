@@ -5,6 +5,7 @@ import CardContainer from '../CardContainer';
 import NewMethod from '../NewMethod';
 import ActionButton from '../../Common/ActionButton';
 import SaveModal from '../../Common/SaveModal';
+import useSaveModal from '../../../service/useSaveModal';
 import './modal.scss';
 
 export default function PaymentModal({
@@ -12,10 +13,7 @@ export default function PaymentModal({
   defaultMethod,
 }): React.ReactElement {
   const [addFormModal, setAddFormModal] = useState(false);
-  const [saveModal, setSaveModal] = useState(false);
-  const [saveAction, setSaveAction] = useState(null);
-  const [updateData, setUpdateData] = useState({});
-  const [modalTitle, setModalTitle] = useState('');
+  const confirmModal = useSaveModal();
 
   const onClickNew = () => {
     setAddFormModal(() => !addFormModal);
@@ -33,21 +31,16 @@ export default function PaymentModal({
           <ActionButton type="large" content="Add" action={onClickNew} />
         </div>
 
-        <CardContainer
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
-          setModalTitle={setModalTitle}
-        />
+        <CardContainer confirmModal={confirmModal} />
       </div>
       {addFormModal && <NewMethod defaultMethod={defaultMethod} />}
       {addFormModal && <AddTemplate setAddFormModal={setAddFormModal} />}
-      {saveModal && (
+      {confirmModal.saveModal && (
         <SaveModal
-          saveAction={saveAction}
-          updateData={updateData}
-          setSaveModal={setSaveModal}
-          title={modalTitle}
+          saveAction={confirmModal.saveAction}
+          updateData={confirmModal.updateData}
+          setSaveModal={confirmModal.setSaveModal}
+          title={confirmModal.modalTitle}
         />
       )}
     </>

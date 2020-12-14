@@ -6,6 +6,7 @@
   height: 100vh;
   margin: 0 0 0;
   position: relative;
+
   background-color: $dark-background-color;
 
   .title {
@@ -35,5 +36,9 @@
     top: 55%;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  &.light {
+    background-color: white;
   }
 }
