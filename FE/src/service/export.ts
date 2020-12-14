@@ -1,37 +1,35 @@
 export default function exportToCSV(csv) {
-  const filename = 'transactions.csv';
+  const downloadFile = link => {
+    const filename = 'transactions.csv';
+    const a = document.createElement('a');
+    a.setAttribute('target', '_blank');
+    a.setAttribute('style', 'display:none');
+    a.setAttribute('href', link);
+    a.setAttribute('download', filename);
+    a.click();
+    a.remove();
+  };
+
   if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    console.log('if');
-    let blob = new Blob([decodeURIComponent(csv)], {
+    // IE를 위한 msSaveOROpenBlob
+    const blob = new Blob([decodeURIComponent(csv)], {
       type: 'text/csv;charset=utf8',
     });
 
     window.navigator.msSaveOrOpenBlob(blob, filename);
   } else if (window.Blob && window.URL) {
     //HTML5 Blob
-    console.log('else if');
-    let blob = new Blob([csv], { type: 'text/csv;charset=utf8' });
-    let csvUrl = URL.createObjectURL(blob);
-    let a = document.createElement('a');
-    a.setAttribute('style', 'display:none');
-    a.setAttribute('href', csvUrl);
-    a.setAttribute('download', filename);
-    document.body.appendChild(a);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf8' });
+    const csvUrl = URL.createObjectURL(blob);
 
-    a.click();
-    a.remove();
+    downloadFile(csvUrl);
+
+    window.URL.revokeObjectURL(csvUrl);
   } else {
     // Data URI
-    console.log('else');
-    let csvData =
+    const csvData =
       'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
-    let a = document.createElement('a');
-    a.setAttribute('style', 'display:none');
-    a.setAttribute('target', '_blank');
-    a.setAttribute('href', csvData);
-    a.setAttribute('download', filename);
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+
+    downloadFile(csvData);
   }
 }
