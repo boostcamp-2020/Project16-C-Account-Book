@@ -14,13 +14,14 @@ import useLoginCheck from '../../service/useLoginCheck';
 
 import { useDateInfoData } from '../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../store/Theme/themeHook';
 import useAccountBook from '../../service/useAccountBookSetting';
 
 import './chart.scss';
 
 const Chart = props => {
   useLoginCheck();
-
+  const theme = useThemeData(store => store.mode);
   const accountBookId = useHistory().location.state;
   useAccountBook(accountBookId);
 
@@ -42,7 +43,9 @@ const Chart = props => {
   chartInfo.forEach(() => refArr.push(React.createRef()));
 
   return (
-    <div className="chart__wrapper">
+    <div
+      className={theme === 'dark' ? 'chart__wrapper' : 'chart__wrapper light'}
+    >
       <MenuBar
         id={accountBookId.id}
         setModal={setPaymentMethodModal}

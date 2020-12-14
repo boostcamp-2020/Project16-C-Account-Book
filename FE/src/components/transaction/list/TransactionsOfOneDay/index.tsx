@@ -103,7 +103,7 @@ const TransactionsOfOneDay = ({
         </ul>
       </div>
     ),
-    [transactions, draggedInDate],
+    [transactions, draggedInDate, theme],
   );
 };
 

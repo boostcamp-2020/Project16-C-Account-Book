@@ -9,6 +9,10 @@
   width: 40%;
   height: 50%;
 
+  &.light {
+    color: black;
+  }
+
   .stat__unit {
     padding: 15px 0;
     display: flex;
@@ -22,7 +26,9 @@
     width: 60%;
     height: 20px;
     background-color: $light-black;
-
+    &.light {
+      background-color: #eee;
+    }
     .stat__color {
       position: absolute;
       animation: statAnimation 2s;

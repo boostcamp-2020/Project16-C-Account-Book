@@ -27,6 +27,10 @@
   flex-direction: column;
   position: relative;
 
+  &.light {
+    background-color: $light-background-color;
+  }
+
   .category__charts {
     width: 100%;
     height: 100%;
