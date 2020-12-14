@@ -14,6 +14,13 @@
     background-color: $light-black;
     text-shadow: $selectedTextShadow;
   }
+  &.light {
+    color: $black;
+
+    &:hover {
+      color: $white;
+    }
+  }
 }
 
 @mixin categorySettingBox {
@@ -21,6 +28,10 @@
 
   .category__title {
     @include settingTitle;
+    &.light {
+      color: $black;
+      text-shadow: none;
+    }
   }
   .category__list {
     display: flex;
@@ -38,6 +49,16 @@
       .fas.fa-plus-circle {
         color: $white;
         width: 5vw;
+        &.light {
+          color: $black;
+        }
+      }
+      &.light {
+        &:hover {
+          .fas.fa-plus-circle {
+            color: $white;
+          }
+        }
       }
     }
   }
