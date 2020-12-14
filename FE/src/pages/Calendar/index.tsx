@@ -5,6 +5,7 @@ import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import TotalContent from '../../components/Calendar/TotalContent';
 import Calendar from '../../components/Calendar/Calendar';
+import DetailModal from '../../components/Calendar/DetailModal';
 import './calendar.scss';
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
@@ -19,6 +20,7 @@ export default function CalendarPage() {
   useAccountBook(accountBookId);
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
+  const [detailModal, setDetailModal] = useState(false);
   const defaultMethod = useDefaultPayment();
 
   return (
@@ -33,13 +35,14 @@ export default function CalendarPage() {
         pageType="calendar"
       />
       <TotalContent />
-      <Calendar />
+      <Calendar setDetailModal={setDetailModal} />
       {paymentMethodModal && (
         <PaymentModal
           setModal={setPaymentMethodModal}
           defaultMethod={defaultMethod}
         />
       )}
+      {detailModal && <DetailModal setDetailModal={setDetailModal} />}
     </div>
   );
 }

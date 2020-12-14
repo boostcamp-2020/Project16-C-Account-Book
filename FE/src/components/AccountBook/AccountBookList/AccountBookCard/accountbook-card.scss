@@ -23,15 +23,6 @@
     animation: cardShow 1s backwards;
     color: $black;
 
-    &.light {
-      animation: colorChange 1s forwards;
-      @keyframes colorChange {
-        to {
-          background-color: $light-acbook-card-color;
-        }
-      }
-    }
-
     cursor: pointer;
 
     .ac__title {
