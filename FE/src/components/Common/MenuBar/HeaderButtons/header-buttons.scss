@@ -4,6 +4,24 @@
 
 @mixin navigationButton($type) {
   @include headerNavigationButtons($type);
+  .fas.fa-arrow-left {
+    &.light {
+      text-shadow: none;
+      color: $light-font-color;
+    }
+  }
+  .navigation__content {
+    &.light {
+      text-shadow: none;
+      color: $light-font-color;
+    }
+  }
+  .fas.fa-arrow-right {
+    &.light {
+      text-shadow: none;
+      color: $light-font-color;
+    }
+  }
 
   @include mobile {
     .navigation__content {

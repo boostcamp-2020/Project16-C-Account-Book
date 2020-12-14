@@ -5,4 +5,8 @@
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
+
+  &.light {
+    background-color: white;
+  }
 }

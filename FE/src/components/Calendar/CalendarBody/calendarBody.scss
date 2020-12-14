@@ -39,6 +39,11 @@ td {
   &.td__hidden {
     height: 0;
   }
+
+  &.light {
+    color: $black;
+    background-color: $light-background-color;
+  }
 }
 
 .today {

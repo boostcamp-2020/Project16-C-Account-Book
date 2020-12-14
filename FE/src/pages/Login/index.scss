@@ -12,7 +12,8 @@
   .theme__button {
     position: absolute;
     top: 1em;
-    right: 1em;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .title {

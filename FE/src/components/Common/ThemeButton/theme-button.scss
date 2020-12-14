@@ -11,7 +11,7 @@
   background-color: transparent;
   color: $dark-font-color;
   font-size: 1.5rem;
-  box-shadow: $noSelectedBoxShadow;
+
   &:hover {
     box-shadow: $selectedBoxShadow;
     text-shadow: $selectedTextShadow;

@@ -12,8 +12,9 @@
 
   .acbook__list__theme {
     position: absolute;
-    right: 1em;
     top: 1em;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 3;
   }
 
