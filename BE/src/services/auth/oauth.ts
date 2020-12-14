@@ -61,7 +61,7 @@ export const getAccessToken = async (code: string, social: string) => {
 export const getUserInfo = async (
   accessToken: string,
   social: string,
-): Promise<User> => {
+): Promise<any> => {
   const { data } = await axios.get(userInfoGetUrl[social], {
     headers: {
       Authorization: `BEARER ${accessToken}`,
