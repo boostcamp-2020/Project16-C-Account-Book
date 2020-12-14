@@ -75,6 +75,15 @@ const getDetail = async (ctx: Context): Promise<any> => {
   return accountBook;
 };
 
+const getTransactions = async (ctx: Context): Promise<any> => {
+  const accountBook = await accountBookModel.getTransactions(
+    ctx.params.accountbookid,
+    ctx.params.year,
+    ctx.params.month,
+  );
+  return accountBook;
+};
+
 const getCode = async (ctx: Context): Promise<any> => {
   const id = ctx.params.accountbookid;
   const code = Random.randomStr(10);
@@ -109,4 +118,5 @@ export default {
   getCode,
   addUser,
   delUser,
+  getTransactions,
 };

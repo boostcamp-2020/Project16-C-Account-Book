@@ -18,9 +18,36 @@ const get = async ({
 };
 
 const getDetail = async (id: string): Promise<any> => {
-  const accountBook = await AccountBookModel.findOne({
-    _id: id,
-  });
+  const accountBook = await AccountBookModel.findOne().where(`_id`).equals(id);
+  return accountBook;
+};
+
+const getTransactions = async (
+  id: string,
+  year: string,
+  month: string,
+): Promise<any> => {
+  const accountBook = await AccountBookModel.findOne()
+    .where('_id')
+    .equals(id)
+    .gte(`transactions.date`, new Date(`${year}-${month}-01`))
+    .lte(`transactions.date`, new Date(`${year}-${month}-31`));
+  if (accountBook) {
+    accountBook.transactions = accountBook.transactions.map<any>(
+      (transaction): any => {
+        const date = new Date(transaction.date);
+        const yyyy = date.getFullYear();
+        const mm = date.getMonth().toString().padStart(2, '0');
+        const dd = date.getDate().toString().padStart(2, '0');
+        const newdate = `${yyyy}-${mm}-${dd}`;
+        console.log(newdate);
+        transaction.date = transaction.date.toLocaleString().slice(0, 10);
+        console.log(transaction.date);
+
+        return transaction;
+      },
+    );
+  }
   return accountBook;
 };
 
@@ -356,4 +383,5 @@ export default {
   updateCode,
   addUser,
   delUser,
+  getTransactions,
 };

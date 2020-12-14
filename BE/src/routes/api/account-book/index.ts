@@ -21,6 +21,10 @@ router.delete('/:accountbookid', controller.del);
 
 // GET accountbook detail
 router.get('/:accountbookid', controller.getDetail);
+router.get(
+  '/:accountbookid/year/:year/month/:month',
+  controller.getTransactions,
+);
 
 router.use('/:accountbookid/transaction', transactionRouter.routes());
 router.use('/:accountbookid/payment', paymentRouter.routes());

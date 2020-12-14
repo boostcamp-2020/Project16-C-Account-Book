@@ -80,7 +80,7 @@ const exportCSV = async (ctx: Context): Promise<any> => {
   const accountBook = await accountBookModel.getDetail(
     ctx.params.accountbookid,
   );
-  const transactions = accountBook.transactions;
+  const { transactions } = accountBook;
   console.log(transactions);
 
   if (transactions) {
