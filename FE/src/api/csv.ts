@@ -13,7 +13,6 @@ export const postTransactionCSV = async (id, body) => {
     `${process.env.SERVER_URL}/api/accountbook/${id}/transaction/csv`,
     body,
   );
-  console.log(data);
 
   return data;
 };
