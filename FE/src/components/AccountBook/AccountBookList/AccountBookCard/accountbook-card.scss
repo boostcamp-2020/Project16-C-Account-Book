@@ -11,7 +11,7 @@
   padding: 8em 0;
   .acbook {
     position: relative;
-    background-color: #f9e000;
+    background-color: $accountbook-card-color;
     width: 333px;
     min-height: 195px;
     z-index: 1;
@@ -21,7 +21,16 @@
     transition-duration: 0.3s;
     transform: translateX(10%);
     animation: cardShow 1s backwards;
-    color: black;
+    color: $black;
+
+    &.light {
+      animation: colorChange 1s forwards;
+      @keyframes colorChange {
+        to {
+          background-color: $light-acbook-card-color;
+        }
+      }
+    }
 
     cursor: pointer;
 

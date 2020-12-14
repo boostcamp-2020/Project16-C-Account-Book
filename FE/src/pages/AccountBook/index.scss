@@ -10,10 +10,21 @@
   background-color: $dark-background-color;
   animation: showPage 1s ease;
 
+  .acbook__list__theme {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 3;
+  }
+
   @keyframes showPage {
     from {
       transform: translateX(-100%);
     }
+  }
+
+  &.light {
+    background-color: white;
   }
 }
 

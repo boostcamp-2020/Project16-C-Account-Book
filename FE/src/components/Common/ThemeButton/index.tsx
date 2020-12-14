@@ -6,6 +6,7 @@ import './theme-button.scss';
 
 export default function ThemeButton(props) {
   const theme = useThemeData(store => store.mode);
+
   const changeTheme = useThemeData(store => store.changeMode);
 
   const onClickChangeTheme = () => {
@@ -26,7 +27,7 @@ export default function ThemeButton(props) {
       ) : (
         <>
           <button
-            className="theme__change__button white"
+            className="theme__change__button light"
             onClick={onClickChangeTheme}
           >
             <i className="fas fa-lightbulb" />

@@ -17,6 +17,16 @@
 
     color: $dark-emphasize-font-color;
     text-shadow: $selectedTextShadow;
+
+    &.light {
+      animation: acbookTitleColorChange 1s forwards;
+      @keyframes acbookTitleColorChange {
+        to {
+          color: black;
+          text-shadow: none;
+        }
+      }
+    }
   }
 
   .acbook__control {

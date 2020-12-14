@@ -6,6 +6,7 @@ import {
   deleteAccountBook,
 } from '../../../../api/accoun-book-list';
 
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import { ResponseMessage } from '../../../../util/message';
 
 import './accountbook-card.scss';
@@ -17,6 +18,8 @@ export default function AccountBookCard({
   setDatas,
   datas,
 }) {
+  const theme = useThemeData(store => store.mode);
+
   const titleRef = useRef();
   const descRef = useRef();
   const titleEditRef = useRef();
@@ -117,7 +120,7 @@ export default function AccountBookCard({
   return (
     <div
       key={acbook._id}
-      className="acbook link"
+      className={theme === 'dark' ? 'acbook link' : 'acbook link light'}
       data-acbookid={acbook._id}
       onClick={linkToDetail}
       style={{ animationDelay: `${index * 0.08}s` }}

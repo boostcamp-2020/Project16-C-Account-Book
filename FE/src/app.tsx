@@ -18,6 +18,10 @@ import GithubLoginProcess from './pages/Login/GithubLoginProcess';
 import NaverLoginProcess from './pages/Login/NaverLoginProcess';
 
 const App = () => {
+  if (!localStorage.getItem('theme')) {
+    localStorage.setItem('theme', 'dark');
+  }
+
   return (
     <ThemeProvider>
       <DateInfoProvider>

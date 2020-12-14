@@ -22,16 +22,22 @@
     text-shadow: $selectedTextShadow;
     color: $dark-general-font-color;
   }
-  @if ($mode == white) {
+  @if ($mode == light) {
     color: #ffca0a;
     box-shadow: $selectedBoxShadow;
+
+    &:hover {
+      box-shadow: $selectedBoxShadow;
+      text-shadow: none;
+      color: $black;
+    }
   }
 }
 
 .theme__change__button {
   @include themeButton(dark);
 
-  &.white {
-    @include themeButton(white);
+  &.light {
+    @include themeButton(light);
   }
 }
