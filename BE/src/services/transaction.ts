@@ -140,11 +140,8 @@ const importCSV = async (ctx: Context): Promise<any> => {
 
         if (splitedCSV.length === 1) {
           if (!(csvArray[0][i] in fields)) return false;
-
           tempTransaction[csvArray[0][i]] = csvArray[index][i];
         } else if (splitedCSV.length === 2) {
-          if (!(splitedCSV[1] in tempTransaction[splitedCSV[0]])) return false;
-
           tempTransaction[splitedCSV[0]][splitedCSV[1]] = csvArray[index][i];
         }
       }
