@@ -1,7 +1,9 @@
 import CategoryModel from '@models/category';
 import { User } from '@interfaces/auth';
 import AccountBook from '@interfaces/accountbook';
+import Transaction from '@interfaces/transaction';
 import { AccountBookDoc, AccountBookModel } from './schema';
+import { TransactionDoc } from '../transaction/schema';
 
 const get = async ({
   userid,
@@ -33,22 +35,38 @@ const getTransactions = async (
     .gte(`transactions.date`, new Date(`${year}-${month}-01`))
     .lte(`transactions.date`, new Date(`${year}-${month}-31`));
   if (accountBook) {
-    accountBook.transactions = accountBook.transactions.map<any>(
-      (transaction): any => {
-        const date = new Date(transaction.date);
-        const yyyy = date.getFullYear();
-        const mm = date.getMonth().toString().padStart(2, '0');
-        const dd = date.getDate().toString().padStart(2, '0');
-        const newdate = `${yyyy}-${mm}-${dd}`;
-        console.log(newdate);
-        transaction.date = transaction.date.toLocaleString().slice(0, 10);
-        console.log(transaction.date);
-
-        return transaction;
-      },
-    );
+    const transactions = accountBook.transactions.map(t => {
+      const { _id, content, type, category, cost, date, payment } = t;
+      const d = new Date(date);
+      const yyyy = d.getFullYear();
+      const mm = d.getMonth().toString().padStart(2, '0');
+      const dd = d.getDate().toString().padStart(2, '0');
+      const newdate = `${yyyy}-${mm}-${dd}`;
+      const ret = {
+        _id,
+        content,
+        type,
+        category,
+        cost,
+        date: newdate,
+        payment,
+      };
+      return ret;
+    });
+    const newAccountBook = {
+      _id: accountBook._id,
+      code: accountBook.code,
+      startday: accountBook.startday,
+      description: accountBook.description,
+      name: accountBook.name,
+      users: accountBook.users,
+      categories: accountBook.categories,
+      payments: accountBook.payments,
+      transactions,
+    };
+    console.log(newAccountBook);
+    return newAccountBook;
   }
-  return accountBook;
 };
 
 const create = async ({

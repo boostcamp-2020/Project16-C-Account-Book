@@ -6,6 +6,6 @@ export default interface Transaction {
   type: string;
   category: { category: Category };
   cost: number;
-  date: Date | string;
+  date: string;
   payment: { payment: PaymentMethod };
 }
