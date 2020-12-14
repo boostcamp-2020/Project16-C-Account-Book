@@ -10,6 +10,9 @@
       right: 5%;
       font-size: 1.5vh;
     }
+    &.light {
+      text-shadow: none;
+    }
   }
 }
 .calendar__setting__desc {
@@ -20,4 +23,7 @@
   @include settingBox;
   position: relative;
   background-color: transparent;
+  &.light {
+    color: $black;
+  }
 }
