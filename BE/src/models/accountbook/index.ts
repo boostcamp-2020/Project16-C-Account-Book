@@ -302,12 +302,19 @@ const addUser = async (code: string, userInfo: any): Promise<any> => {
   const curAccountBook = await AccountBookModel.findOne({ code });
   if (curAccountBook) {
     const curUser = curAccountBook.users;
+    const id = curAccountBook._id;
     curUser.push(userInfo);
     const updateResult = await AccountBookModel.update(
       { code },
       { users: curUser },
     );
-    if (updateResult.nModified) return true;
+    if (updateResult.nModified) {
+      const accountBooks = await AccountBookModel.find(
+        { _id: id },
+        '_id name description',
+      );
+      return accountBooks;
+    }
     return false;
   }
   return false;

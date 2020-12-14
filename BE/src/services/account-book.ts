@@ -87,7 +87,7 @@ const addUser = async (ctx: Context): Promise<any> => {
   const { code } = ctx.request.body;
   const userInfo = ctx.user;
   const updateResult = await accountBookModel.addUser(code, userInfo);
-  if (updateResult) return true;
+  if (updateResult) return updateResult;
   return false;
 };
 
