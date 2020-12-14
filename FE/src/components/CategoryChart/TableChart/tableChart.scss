@@ -8,6 +8,7 @@
   color: $dark-general-font-color;
   width: 40%;
   height: 50%;
+  overflow-y: auto;
 
   &.light {
     color: black;
