@@ -37,7 +37,14 @@ const PaymentInput = ({ paymentPool }) => {
                 onChange={onPaymentChange}
                 checked={name === input.payment?.name}
               />
-              <div className="payment__card__view">
+              <div
+                className="payment__card__view"
+                style={
+                  name === input.payment?.name
+                    ? { backgroundColor: color }
+                    : undefined
+                }
+              >
                 <div className="payment__card__title">{name}</div>
                 <div className="payment__card__description">{desc}</div>
               </div>

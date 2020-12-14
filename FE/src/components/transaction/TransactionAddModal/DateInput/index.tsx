@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import Select, { ValueType } from 'react-select';
 
 import calculateDate from '../../../../util/calculateDate';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
@@ -11,23 +12,48 @@ const DateInput = () => {
     setInput: store.setInput,
   }));
 
-  const onYearChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target) {
-      const targetElement = e.target as HTMLSelectElement;
-      setInput({ ...input, year: targetElement.value });
-    }
+  const selectStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: 'black',
+    }),
+    control: provided => ({
+      ...provided,
+      width: '80px',
+      marginRight: '5px',
+    }),
+    dropdownIndicator: provided => ({
+      width: '20px',
+    }),
   };
-  const onMonthChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target) {
-      const targetElement = e.target as HTMLSelectElement;
-      setInput({ ...input, month: targetElement.value });
-    }
-  };
-  const onDayChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target) {
-      const targetElement = e.target as HTMLSelectElement;
-      setInput({ ...input, day: targetElement.value });
-    }
+
+  const yearOptions = Array.from(
+    { length: 61 },
+    (_, i) => i + +(new Date().getFullYear() - 30),
+  ).map(year => ({
+    value: year,
+    label: year,
+  }));
+
+  const monthOptions = Array.from({ length: 12 }, (_, i) => i + 1).map(
+    month => ({
+      value: month,
+      label: month,
+    }),
+  );
+
+  const dayOptions = Array.from(
+    {
+      length: calculateDate.getDaysInMonth(+input.year, +(input.month + 1)),
+    },
+    (_, i) => i + 1,
+  ).map(day => ({
+    value: day,
+    label: day,
+  }));
+
+  const onSelectChange = type => item => {
+    setInput({ ...input, [type]: item.value });
   };
 
   return (
@@ -35,52 +61,30 @@ const DateInput = () => {
       <div className="indicator">날짜</div>
       <div className="row">
         <div className="row__item">
-          <select
-            name="year"
-            defaultValue={+input.year}
-            onChange={onYearChange}
-          >
-            {Array.from(
-              { length: 61 },
-              (_, i) => i + +(new Date().getFullYear() - 30),
-            ).map(item => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          <Select
+            value={yearOptions.find(({ value }) => value === +input.year)}
+            onChange={onSelectChange('year')}
+            options={yearOptions}
+            styles={selectStyles}
+          />
           년
         </div>
         <div className="row__item">
-          <select
-            name="month"
-            defaultValue={+input.month}
-            onChange={onMonthChange}
-          >
-            {Array.from({ length: 12 }, (_, i) => i + 1).map(item => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          <Select
+            value={monthOptions.find(({ value }) => value === +input.month)}
+            onChange={onSelectChange('month')}
+            options={monthOptions}
+            styles={selectStyles}
+          />
           월
         </div>
         <div className="row__item">
-          <select name="date" defaultValue={+input.day} onChange={onDayChange}>
-            {Array.from(
-              {
-                length: calculateDate.getDaysInMonth(
-                  +input.year,
-                  +(input.month + 1),
-                ),
-              },
-              (_, i) => i + 1,
-            ).map(item => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
+          <Select
+            value={dayOptions.find(({ value }) => value === +input.day)}
+            onChange={onSelectChange('day')}
+            options={dayOptions}
+            styles={selectStyles}
+          />
           일
         </div>
       </div>
