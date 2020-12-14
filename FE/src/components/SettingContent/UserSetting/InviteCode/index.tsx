@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 
 import ActionButton from '../../../Common/ActionButton';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import { getInviteCode } from '../../../../api/invite-code';
 import './inviteCode.scss';
 import { ResponseMessage } from '../../../../util/message';
 
 export default function InviteCode(props) {
+  const theme = useThemeData(store => store.mode);
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const [codeVisible, setCodeVisible] = useState(false);
   const [codeContent, setCodeContet] = useState('');
@@ -36,8 +38,18 @@ export default function InviteCode(props) {
   };
 
   return (
-    <div className="invite__code__box">
-      <div className="invite__code__title">Invite Code</div>
+    <div
+      className={
+        theme === 'dark' ? 'invite__code__box' : 'invite__code__box light'
+      }
+    >
+      <div
+        className={
+          theme === 'dark' ? 'invite__code__title' : 'invite__code__title light'
+        }
+      >
+        Invite Code
+      </div>
       <div className="invite__code__desc">
         You can get invite code to invite someone.
       </div>
