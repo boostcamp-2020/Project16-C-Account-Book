@@ -4,10 +4,12 @@ import CSVReader from 'react-csv-reader';
 import ActionButton from '../../../Common/ActionButton';
 import './csvImport.scss';
 import { postTransactionCSV } from '../../../../api/csv';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import { ResponseMessage } from '../../../../util/message';
 
 export default function CSVImport({ accountBookId }) {
   const [file, setFile] = useState('');
+  const theme = useThemeData(store => store.mode);
 
   const onClickHandler = async event => {
     if (file !== '') {
@@ -29,16 +31,32 @@ export default function CSVImport({ accountBookId }) {
   };
 
   return (
-    <div className="csv__import__box">
-      <div className="csv__import__title">Import</div>
+    <div
+      className={
+        theme === 'dark' ? 'csv__import__box' : 'csv__import__box light'
+      }
+    >
+      <div
+        className={
+          theme === 'dark' ? 'csv__import__title' : 'csv__import__title light'
+        }
+      >
+        Import
+      </div>
       <div className="csv__import__desc">
         Please, select '.csv' file and click Import Button.
       </div>
       <div className="csv__import__content">
         <CSVReader
           onFileLoaded={data => fileChangeHandler(data)}
-          cssInputClass="csv__import__input"
-          cssClass="csv__import__filebox"
+          cssInputClass={
+            theme === 'dark' ? 'csv__import__input' : 'csv__import__input light'
+          }
+          cssClass={
+            theme === 'dark'
+              ? 'csv__import__filebox'
+              : 'csv__import__filebox light'
+          }
         />
         <div className="csv__import__btn">
           <ActionButton
