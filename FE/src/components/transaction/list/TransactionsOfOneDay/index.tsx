@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo } from 'react';
 import './index.scss';
 
 import { useHistory } from 'react-router-dom';
@@ -6,7 +6,7 @@ import TransactionItem from '../TransactionItem';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { iTransactionsOfOneDay } from '../../../../types/transaction';
 import { updateTransaction as updateTransactionApi } from '../../../../api/transaction';
-import cursorInElement from '../../../../util/calculate-cursor';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 
 const TransactionsOfOneDay = ({
   date,
@@ -17,6 +17,7 @@ const TransactionsOfOneDay = ({
   setDraggedInDate,
 }: iTransactionsOfOneDay) => {
   const accountBookId = useHistory().location.state.id;
+  const theme = useThemeData(store => store.mode);
 
   const { getTransactionById, updateTransactionInStore } = useAccountBookData(
     store => ({
@@ -48,8 +49,6 @@ const TransactionsOfOneDay = ({
     const movedTransactionId = e.dataTransfer.getData('transactionId');
     const movedTransaction = getTransactionById(movedTransactionId);
 
-    console.log('on drop');
-
     if (draggedItem.date === date) return setDraggedInDate('');
     movedTransaction.date = date;
     updateTransaction(movedTransaction);
@@ -64,7 +63,15 @@ const TransactionsOfOneDay = ({
         onDrop={onDrop}
         onDragOver={onDragOver}
       >
-        <label className="transactions__oneday__daybar">{date}일</label>
+        <label
+          className={
+            theme === 'dark'
+              ? 'transactions__oneday__daybar'
+              : 'transactions__oneday__daybar light'
+          }
+        >
+          {date}일
+        </label>
         <ul className="transactions__oneday__container">
           {transactions.map(t => (
             <TransactionItem

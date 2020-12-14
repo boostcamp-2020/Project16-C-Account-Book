@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useCallback } from 'react';
-import styles from './listfilter.modules.scss';
+import './listfilter.scss';
 
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
 const Filter = ({
@@ -15,6 +16,7 @@ const Filter = ({
   selectedTypes: string[];
   selectType: (values: string[]) => void;
 }) => {
+  const theme = useThemeData(store => store.mode);
   const {
     categoryPool,
     filteredPriceIn,
@@ -49,14 +51,25 @@ const Filter = ({
       } else {
         selectType([...selectedTypes, targetElement.value]);
       }
-      console.log('click ', selectedTypes);
     },
     [selectedTypes, selectType],
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inoutFilter}>
+    <div
+      className={
+        theme === 'dark'
+          ? 'acbook__list__container'
+          : 'acbook__list__container light'
+      }
+    >
+      <div
+        className={
+          theme === 'dark'
+            ? 'acbook__list__inoutFilter'
+            : 'acbook__list__inoutFilter light'
+        }
+      >
         {['수입', '지출'].map(type => (
           <label key={type}>
             <input
@@ -74,7 +87,13 @@ const Filter = ({
           </label>
         ))}
       </div>
-      <div className={styles.categoryFilter}>
+      <div
+        className={
+          theme === 'dark'
+            ? 'acbook__list__categoryFilter'
+            : 'acbook__list__categoryFilter light'
+        }
+      >
         {categoryPool
           .filter(
             ({ type }) =>
@@ -89,7 +108,13 @@ const Filter = ({
                 onChange={onCategoryChange}
                 checked={selectedCategories.includes(name)}
               />
-              <span>{name}</span>
+              <span
+                className={
+                  theme === 'dark' ? 'category__title' : 'category__title light'
+                }
+              >
+                {name}
+              </span>
             </label>
           ))}
       </div>

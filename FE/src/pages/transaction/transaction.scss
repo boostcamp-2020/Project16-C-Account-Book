@@ -1,7 +1,10 @@
-.container {
+.transaction__container {
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  &.light {
+    background-color: white;
+  }
 }

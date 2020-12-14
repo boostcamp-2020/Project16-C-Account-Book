@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Modal from '../../components/PaymentMethod/Modal';
+import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import ListContainer from '../../components/transaction/list/listcontainer';
 import TransactionAddModal from '../../components/transaction/TransactionAddModal';
-import styles from './transaction.module.scss';
+import './transaction.scss';
 
 import useDefaultPayment from '../../service/useDefaultPayment';
 import useLoginCheck from '../../service/useLoginCheck';
@@ -13,9 +13,11 @@ import useAccountBook from '../../service/useAccountBookSetting';
 
 import TransactionFormModalProvider from '../../store/TransactionFormModal/TransactionFormModalContext';
 import { useTransactionAddModalData } from '../../store/TransactionFormModal/TransactionFormModalHook';
+import { useThemeData } from '../../store/Theme/themeHook';
 
 function TransactionComponent(props) {
   useLoginCheck();
+  const theme = useThemeData(store => store.mode);
 
   const accountBookId = useHistory().location.state;
   useAccountBook(accountBookId);
@@ -27,7 +29,13 @@ function TransactionComponent(props) {
   );
 
   return (
-    <div className={styles.container}>
+    <div
+      className={
+        theme === 'dark'
+          ? 'transaction__container'
+          : 'transaction__container light'
+      }
+    >
       <MenuBar
         id={accountBookId.id}
         setModal={setPaymentMethodModal}
@@ -35,7 +43,10 @@ function TransactionComponent(props) {
       />
       <ListContainer />
       {paymentMethodModal && (
-        <Modal setModal={setPaymentMethodModal} defaultMethod={defaultMethod} />
+        <PaymentModal
+          setModal={setPaymentMethodModal}
+          defaultMethod={defaultMethod}
+        />
       )}
 
       {transactionAddModalVisible && (
