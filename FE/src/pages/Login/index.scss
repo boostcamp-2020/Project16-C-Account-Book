@@ -9,6 +9,12 @@
 
   background-color: $dark-background-color;
 
+  .theme__button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+
   .title {
     position: absolute;
     top: 23%;
@@ -29,6 +35,10 @@
     }
     text-shadow: $selectedTextShadow;
     color: $dark-emphasize-font-color;
+
+    &.light {
+      color: black;
+    }
   }
 
   .login-button-container {
