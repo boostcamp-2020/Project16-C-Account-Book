@@ -32,7 +32,7 @@ export default function CSVImport({ accountBookId }) {
     <div className="csv__import__box">
       <div className="csv__import__title">Import</div>
       <div className="csv__import__desc">
-        Please, select '.csv' file and click Import Button
+        Please, select '.csv' file and click Import Button.
       </div>
       <div className="csv__import__content">
         <CSVReader

@@ -8,7 +8,12 @@ import {
 import './cardContainer.scss';
 import { ResponseMessage } from '../../../util/message';
 
-export default React.memo(function CardContainer(): React.ReactElement {
+export default React.memo(function CardContainer({
+  setSaveModal,
+  setSaveAction,
+  setUpdateData,
+  setModalTitle,
+}): React.ReactElement {
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const paymentMethods = useAccountBookData(
     store => store.accountBook.payments,
@@ -65,7 +70,7 @@ export default React.memo(function CardContainer(): React.ReactElement {
     }
   };
 
-  const onClickDelete = async event => {
+  const deleteProcess = async event => {
     try {
       const res = await deletePaymentMethod({
         accountBookId,
@@ -79,6 +84,15 @@ export default React.memo(function CardContainer(): React.ReactElement {
     } catch (error) {
       throw new Error();
     }
+  };
+
+  const onClickDelete = async event => {
+    setModalTitle(() => '정말 이 결제수단을 삭제하시겠습니까?');
+    setSaveModal(() => true);
+    setUpdateData(() => {
+      return event;
+    });
+    setSaveAction(() => deleteProcess);
   };
 
   return (

@@ -118,19 +118,20 @@ export default function CategoryModal({
         {modal === 'create' ? (
           <>
             <div className="modal__title">Create</div>
-            <div className="modal__contents">
+            <div className="modal__contents__create">
               <input
                 ref={createRef}
                 type="text"
                 className="create__category__input"
                 placeholder="Enter Category Name"
               />
-
-              <ActionButton
-                type="general"
-                content="Create"
-                action={onClickCreateBtn}
-              />
+              <div className="create__category__button">
+                <ActionButton
+                  type="general"
+                  content="Create"
+                  action={onClickCreateBtn}
+                />
+              </div>
             </div>
           </>
         ) : (

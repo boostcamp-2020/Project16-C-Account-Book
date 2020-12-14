@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 
 import { createAccountBook } from '../../../api/accoun-book-list';
 import { joinAccountBook } from '../../../api/social';
+
+import { ResponseMessage } from '../../../util/message';
 import './index.scss';
 
 export default function AccountBookAddForm({
@@ -18,10 +20,24 @@ export default function AccountBookAddForm({
 
   const onCreateAccountBook = async event => {
     if (event.key === 'Enter') {
-      const res = await createAccountBook({ name, description });
+      try {
+        const res = await createAccountBook({ name, description });
+        if (res.status !== ResponseMessage.success) {
+          throw new Error();
+        }
 
-      setCreate(false);
-      setDatas([{ name, description, _id: res.data._id }, ...datas]);
+        setCreate(false);
+        setDatas([
+          {
+            name: res.data.name,
+            description: res.data.description,
+            _id: res.data._id,
+          },
+          ...datas,
+        ]);
+      } catch (error) {
+        throw new Error();
+      }
     }
   };
 
@@ -30,11 +46,23 @@ export default function AccountBookAddForm({
       const res = await joinAccountBook({
         code: inviteCodeInput.current.value,
       });
-      console.log(res);
-      setCreate(false);
-      setDatas([{ name, description, _id: res.data._id }, ...datas]);
+
+      if (res.data === true) {
+        setCreate(false);
+        setDatas([
+          {
+            name: res.data.name,
+            description: res.data.description,
+            _id: res.data._id,
+          },
+          ...datas,
+        ]);
+      } else {
+        alert('Invalid Invite Code!!');
+      }
     }
   };
+
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };

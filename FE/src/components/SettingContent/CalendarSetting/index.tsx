@@ -14,12 +14,14 @@ export default function CalendarSetting({
   setSaveModal,
   setUpdateData,
   setSaveAction,
+  setModalTitle,
 }) {
   const start = useAccountBookData(store => store.accountBook.startday);
 
   const [startDay, setStartDay] = useState('');
 
   const onClickSaveBtn = () => {
+    setModalTitle(() => '변경사항을 저장하시겠습니까?');
     setSaveModal(() => true);
     setUpdateData(() => {
       return { accountBookId, startday: startDay };
@@ -34,15 +36,21 @@ export default function CalendarSetting({
   return (
     <div className="calendar__setting__container">
       <div className="calendar__setting__startday">
-        <div className="calendar__setting__title">Start Day</div>
+        <div className="calendar__setting__title">
+          Start Day
+          <div className="calendar__save__btn">
+            <ActionButton
+              type="general"
+              content="Save"
+              action={onClickSaveBtn}
+            />
+          </div>
+        </div>
         <div className="calendar__setting__desc">
           You can select start day of Calendar
         </div>
         <DayRadioButton startDay={startDay} setStartDay={setStartDay} />
         <WeekHeader startDay={startDay} />
-        <div className="calendar__save__btn">
-          <ActionButton type="general" content="Save" action={onClickSaveBtn} />
-        </div>
       </div>
     </div>
   );

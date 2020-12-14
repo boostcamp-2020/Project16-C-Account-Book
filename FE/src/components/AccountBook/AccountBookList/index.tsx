@@ -12,7 +12,14 @@ import { ResponseMessage } from '../../../util/message';
 
 import './index.scss';
 
-export const AccountBookList = ({ datas, setDatas }) => {
+export const AccountBookList = ({
+  datas,
+  setDatas,
+  setSaveModal,
+  setSaveAction,
+  setUpdateData,
+  setModalTitle,
+}) => {
   const history = useHistory();
 
   const setAccountBookList = async () => {
@@ -101,8 +108,7 @@ export const AccountBookList = ({ datas, setDatas }) => {
     });
   };
 
-  const onClickDelete = async event => {
-    event.stopPropagation();
+  const deleteProcess = async event => {
     const accountBookId = event.target.dataset.id;
     try {
       const res = await deleteAccountBook(accountBookId);
@@ -113,6 +119,16 @@ export const AccountBookList = ({ datas, setDatas }) => {
     } catch (error) {
       throw new Error();
     }
+  };
+
+  const onClickDelete = async event => {
+    event.stopPropagation();
+    setModalTitle(() => '정말 이 가계부를 삭제하시겠습니까?');
+    setSaveModal(() => true);
+    setUpdateData(() => {
+      return event;
+    });
+    setSaveAction(() => deleteProcess);
   };
 
   useEffect(() => {
