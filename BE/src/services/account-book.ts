@@ -81,6 +81,7 @@ const getTransactions = async (ctx: Context): Promise<any> => {
     ctx.params.year,
     ctx.params.month,
   );
+
   return accountBook;
 };
 

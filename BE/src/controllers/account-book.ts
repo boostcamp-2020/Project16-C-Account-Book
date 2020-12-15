@@ -56,6 +56,7 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
 const getTransactions = async (ctx: Context): Promise<Context['body']> => {
   const accountBook = await service.getTransactions(ctx);
   const res = response(200, 'success', accountBook);
+
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;

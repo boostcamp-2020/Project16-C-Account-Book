@@ -34,12 +34,13 @@ const getTransactions = async (
     .equals(id)
     .gte(`transactions.date`, new Date(`${year}-${month}-01`))
     .lte(`transactions.date`, new Date(`${year}-${month}-31`));
+
   if (accountBook) {
     const transactions = accountBook.transactions.map(t => {
       const { _id, content, type, category, cost, date, payment } = t;
       const d = new Date(date);
-      const yyyy = d.getFullYear();
-      const mm = d.getMonth().toString().padStart(2, '0');
+      const yyyy = year;
+      const mm = month;
       const dd = d.getDate().toString().padStart(2, '0');
       const newdate = `${yyyy}-${mm}-${dd}`;
       const ret = {
@@ -64,9 +65,21 @@ const getTransactions = async (
       payments: accountBook.payments,
       transactions,
     };
-    console.log(newAccountBook);
+
     return newAccountBook;
   }
+  const newAccountBook = await getDetail(id);
+  return {
+    _id: newAccountBook._id,
+    code: newAccountBook.code,
+    startday: newAccountBook.startday,
+    description: newAccountBook.description,
+    name: newAccountBook.name,
+    users: newAccountBook.users,
+    categories: newAccountBook.categories,
+    payments: newAccountBook.payments,
+    transactions: [],
+  };
 };
 
 const create = async ({

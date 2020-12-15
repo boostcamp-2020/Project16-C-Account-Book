@@ -5,12 +5,10 @@ import { useDateInfoData } from '../store/DateInfo/dateInfoHook';
 
 const useAccountBook = accountBookId => {
   const setAccountBook = useAccountBookData(store => store.setAccountBook);
-  const { year, month } = useDateInfoData(store => ({
-    year: store.year,
-    month: store.month,
-  }));
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+
   useEffect(() => {
-    setAccountBook(accountBookId.id, year, month);
+    setAccountBook(accountBookId.id, DateInfo.year, DateInfo.month);
   }, []);
 };
 
