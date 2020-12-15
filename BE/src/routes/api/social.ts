@@ -9,4 +9,5 @@ const router = new Router();
 router.post('/user', controller.post);
 
 router.delete('/:accountbookid/user', controller.del);
+
 export default router;
