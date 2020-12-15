@@ -26,19 +26,27 @@
   .user__list__desc {
     @include settingDesc;
   }
-  .user__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    .profile__image {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      outline: none;
-      margin-bottom: 1em;
+  .user__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    width: 100%;
+    justify-content: center;
+    .user__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .profile__image {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        margin-bottom: 1em;
+      }
     }
   }
 

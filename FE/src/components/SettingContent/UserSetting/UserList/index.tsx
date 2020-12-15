@@ -53,18 +53,19 @@ export default function UserList({ confirmModal }) {
       <div className="user__list__desc">
         You can see users in this Account Book.
       </div>
-
-      {users &&
-        users.map(user => (
-          <div className="user__info">
-            <img
-              src={user.profile}
-              className="profile__image"
-              alt="profile__avatar"
-            />
-            <div className="user__name">{user.name}</div>
-          </div>
-        ))}
+      <div className="user__list">
+        {users &&
+          users.map(user => (
+            <div className="user__info">
+              <img
+                src={user.profile}
+                className="profile__image"
+                alt="profile__avatar"
+              />
+              <div className="user__name">{user.name}</div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
