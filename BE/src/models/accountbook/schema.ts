@@ -1,13 +1,6 @@
 import mongoose from 'mongoose';
 import { CategoryDoc, Schema as CategorySchema } from '@models/category/schema';
-import {
-  PaymentDoc,
-  Schema as PaymentMethodSchema,
-} from '@models/paymentmethod/schema';
-import {
-  TransactionDoc,
-  Schema as TransactionSchema,
-} from '@models/transaction/schema';
+import { PaymentDoc, Schema as PaymentMethodSchema } from '@models/paymentmethod/schema';
 import { UserDoc, Schema as UserSchema } from '@models/user/schema';
 import AccountBook from '@interfaces/accountbook';
 
@@ -19,7 +12,6 @@ export interface AccountBookDoc extends AccountBook, mongoose.Document {
   categories: CategoryDoc[];
   payments: PaymentDoc[];
   users: UserDoc[];
-  transactions: TransactionDoc[];
 }
 
 interface AccountBookMod extends mongoose.Model<AccountBookDoc> {
@@ -33,7 +25,6 @@ const Schema = new mongoose.Schema({
   categories: { type: [CategorySchema], default: [] },
   payments: { type: [PaymentMethodSchema], default: [] },
   users: { type: [UserSchema], required: true },
-  transactions: { type: [TransactionSchema], default: [] },
 });
 
 Schema.statics.transactions = async function (_id: string) {
@@ -41,7 +32,4 @@ Schema.statics.transactions = async function (_id: string) {
   return accountbook.transactions;
 };
 
-export const AccountBookModel = mongoose.model<AccountBookDoc, AccountBookMod>(
-  'accountbooks',
-  Schema,
-);
+export const AccountBookModel = mongoose.model<AccountBookDoc, AccountBookMod>('Accountbooks', Schema);

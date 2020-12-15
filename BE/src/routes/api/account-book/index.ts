@@ -13,6 +13,7 @@ const router = new Router();
 router.get('/', controller.get);
 router.get('/:accountbookid', controller.getDetail);
 router.get('/:accountbookid/code', controller.getCode);
+router.get('/:accountbookid/year/:year/month/:month', controller.getTransaction);
 
 router.post('/', controller.post);
 

@@ -54,8 +54,14 @@ const del = async (params: any): Promise<any> => {
 };
 
 const getDetail = async (params: any): Promise<any> => {
-  const { accountBookId } = params.accountbookid;
-  const accountBook = await accountBookModel.getDetail(accountBookId);
+  const { accountbookid } = params;
+  const accountBook = await accountBookModel.getDetail(accountbookid);
+  return accountBook;
+};
+
+const getTransaction = async (params: any): Promise<any> => {
+  const { accountbookid } = params;
+  const accountBook = await accountBookModel.getTransactions(accountbookid, params.year, params.month);
   return accountBook;
 };
 
@@ -83,6 +89,7 @@ const delUser = async (paramInfo: any, userInfo: any): Promise<boolean> => {
 export default {
   get,
   getDetail,
+  getTransaction,
   post,
   patch,
   patchStartday,
@@ -90,5 +97,4 @@ export default {
   getCode,
   addUser,
   delUser,
-  getTransactions,
 };

@@ -31,6 +31,15 @@ const getCode = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
+const getTransaction = async (ctx: Context): Promise<Context['body']> => {
+  const { params } = ctx;
+  const accountBook = await service.getDetail(params);
+  const res = response(200, accountBook);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
+};
+
 const post = async (ctx: Context): Promise<Context['body']> => {
   const userInfo = ctx.user;
   const { body } = ctx.request;
@@ -42,7 +51,7 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const update = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const accountBookInfo = await service.patch(params, body);
   const res = response(200, accountBookInfo);
@@ -52,7 +61,7 @@ const update = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const updateStartday = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const accountBookInfo = await service.patchStartday(params, body);
   const res = response(200, accountBookInfo);
@@ -62,7 +71,7 @@ const updateStartday = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const deleteResult = await service.del(params);
   const res = response(200, deleteResult);
   ctx.status = res.status;
@@ -70,4 +79,4 @@ const del = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
-export default { get, getDetail, getCode, post, update, updateStartday, del };
+export default { get, getDetail, getCode, getTransaction, post, update, updateStartday, del };
