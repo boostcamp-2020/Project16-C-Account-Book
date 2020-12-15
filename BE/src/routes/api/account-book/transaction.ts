@@ -1,5 +1,4 @@
 import Router from 'koa-router';
-import koaBody from 'koa-body';
 
 import Controller from '@controllers/transaction';
 
@@ -8,7 +7,6 @@ const router = new Router();
 // api/accountbook/:accountbookid/transaction
 
 router.get('/csv', Controller.exportCSV);
-router.get('/year/:year/month/:month', Controller.exportCSV);
 router.post('/', Controller.post);
 router.post('/csv', Controller.importCSV);
 router.patch('/:transactionid', Controller.patch);
