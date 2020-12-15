@@ -5,4 +5,9 @@ const get = async (): Promise<any> => {
   return transactions;
 };
 
-export default { get };
+const post = async (transactioninfo: any): Promise<any> => {
+  const transaction = await new TransactionModel(transactioninfo).save();
+  return transaction;
+};
+
+export default { get, post };
