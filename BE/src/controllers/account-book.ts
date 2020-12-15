@@ -53,6 +53,14 @@ const getDetail = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
+const getTransactions = async (ctx: Context): Promise<Context['body']> => {
+  const accountBook = await service.getTransactions(ctx);
+  const res = response(200, 'success', accountBook);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
+};
+
 const getCode = async (ctx: Context): Promise<Context['body']> => {
   const accountData = await service.getCode(ctx);
   const res = response(200, 'success', accountData);
@@ -61,4 +69,13 @@ const getCode = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
-export default { get, post, update, updateStartday, del, getDetail, getCode };
+export default {
+  get,
+  post,
+  update,
+  updateStartday,
+  del,
+  getTransactions,
+  getDetail,
+  getCode,
+};

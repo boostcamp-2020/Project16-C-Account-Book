@@ -30,6 +30,7 @@ export default function AccountBookAddForm({
       ) : (
         <>
           <JoinForm
+            datas={datas}
             setName={setName}
             setCreate={setCreate}
             setDatas={setDatas}
