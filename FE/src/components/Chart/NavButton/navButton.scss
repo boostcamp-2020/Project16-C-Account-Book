@@ -37,6 +37,33 @@
   display: flex;
   justify-content: center;
 
+  &.light {
+    .category {
+      color: black;
+      background-color: white;
+
+      &.selected {
+        color: white;
+        background-color: black;
+      }
+      &:hover {
+        background-color: #555;
+      }
+    }
+    .date {
+      color: black;
+      background-color: white;
+
+      &.selected {
+        color: white;
+        background-color: black;
+      }
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+
   .category {
     @include noSelectedButton(category);
     @include selectedButton;

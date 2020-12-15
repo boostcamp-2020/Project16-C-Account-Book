@@ -34,6 +34,7 @@ export default function AccountBookAddForm({
             setName={setName}
             setCreate={setCreate}
             setDatas={setDatas}
+            datas
           />
         </>
       )}

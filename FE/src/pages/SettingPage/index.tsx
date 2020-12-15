@@ -11,10 +11,14 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import SaveModal from '../../components/Common/SaveModal';
 import useLoginCheck from '../../service/useLoginCheck';
 import useSaveModal from '../../service/useSaveModal';
+
+import { useThemeData } from '../../store/Theme/themeHook';
 import './settingPage.scss';
 
 export default function SettingPage() {
   useLoginCheck();
+
+  const theme = useThemeData(store => store.mode);
 
   const [settingType, setSettingType] = useState('user');
   const confirmModal = useSaveModal();
@@ -24,7 +28,13 @@ export default function SettingPage() {
 
   useAccountBook(accountBookId);
   return (
-    <div className="setting__page__wrapper">
+    <div
+      className={
+        theme === 'dark'
+          ? 'setting__page__wrapper'
+          : 'setting__page__wrapper light'
+      }
+    >
       <SettingBar settingType={settingType} setSettingType={setSettingType} />
       {settingType === 'user' && <UserSetting confirmModal={confirmModal} />}
       {settingType === 'calendar' && (

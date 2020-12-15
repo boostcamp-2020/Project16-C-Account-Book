@@ -1,0 +1,65 @@
+@use '../../../../styles/values' as *;
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/mediaQuery' as *;
+
+.menubar__ctrBox {
+  padding-top: 1.5%;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  font-weight: 900;
+  color: $dark-emphasize-font-color;
+  text-shadow: $selectedTextShadow;
+
+  .btn-cal {
+    @include buttonDefaultSetting;
+    position: relative;
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
+    font-size: 16px;
+    background: none;
+    font-weight: 900;
+    color: $dark-emphasize-font-color;
+    text-shadow: $selectedTextShadow;
+    &.light {
+      text-shadow: none;
+      color: black;
+    }
+  }
+  .btn-cal:after {
+    content: '<';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 25px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .btn-cal.next {
+    float: right;
+    &.light {
+      text-shadow: none;
+      color: black;
+    }
+  }
+
+  .btn-cal.next:after {
+    content: '>';
+  }
+
+  .year-month {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.light {
+      text-shadow: none;
+      color: black;
+    }
+  }
+}

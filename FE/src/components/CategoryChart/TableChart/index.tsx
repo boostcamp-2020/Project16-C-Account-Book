@@ -1,26 +1,47 @@
 import React from 'react';
 
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import { useThemeData } from '../../../store/Theme/themeHook';
 import CommaMaker from '../../../util/commaForMoney';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './tableChart.scss';
 
 export default function TableChart({ chartInfo }) {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const theme = useThemeData(store => store.mode);
 
   return (
-    <div className="pie__table">
+    <div className={theme == 'dark' ? 'pie__table' : 'pie__table light'}>
       {chartInfo &&
         chartInfo.map((el, i) => (
           <div
-            className="stat__unit"
+            className={theme === 'dark' ? 'stat__unit' : 'stat__unit light'}
             key={DateInfo.year + DateInfo.month + el.category}
           >
-            <span className="stat__category">{el.category}</span>
-            <span className="stat__percent"> {el.percent.toFixed(1)}%</span>
-            <span className="stat__background">
+            <span
+              className={
+                theme === 'dark' ? 'stat__category' : 'stat__category light'
+              }
+            >
+              {el.category}
+            </span>
+            <span
+              className={
+                theme === 'dark' ? 'stat__percent' : 'stat__percent light'
+              }
+            >
+              {' '}
+              {el.percent.toFixed(1)}%
+            </span>
+            <span
+              className={
+                theme === 'dark' ? 'stat__background' : 'stat__background light'
+              }
+            >
               <span
-                className="stat__color"
+                className={
+                  theme === 'dark' ? 'stat__color' : 'stat__color light'
+                }
                 style={{
                   display: 'inline-block',
                   width: `${Math.floor(el.percent)}%`,
@@ -29,7 +50,12 @@ export default function TableChart({ chartInfo }) {
                 }}
               />
             </span>
-            <span className="stat__price"> {CommaMaker(el.cost)}원</span>
+            <span
+              className={theme === 'dark' ? 'stat__price' : 'stat__price light'}
+            >
+              {' '}
+              {CommaMaker(el.cost)}원
+            </span>
           </div>
         ))}
     </div>

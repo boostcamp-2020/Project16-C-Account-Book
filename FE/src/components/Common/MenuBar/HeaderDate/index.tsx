@@ -1,10 +1,11 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
-
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import CalculateDate from '../../../../util/calculateDate';
 import './header-date.scss';
 
 export default function HeaderDate({ pageType }) {
+  const theme = useThemeData(store => store.mode);
   const btnNextRef = useRef();
   const btnPrevRef = useRef();
   const calMonRef = useRef();
@@ -43,11 +44,11 @@ export default function HeaderDate({ pageType }) {
       <button
         type="button"
         title="prev"
-        className="btn-cal prev"
+        className={theme === 'dark' ? 'btn-cal prev' : 'btn-cal prev light'}
         onClick={onClickPrevMonth}
         ref={btnPrevRef}
       />
-      <div className="year-month">
+      <div className={theme === 'dark' ? 'year-month' : 'year-month light'}>
         <span className="cal-year" ref={calYearRef} />
         <span className="cal-month" ref={calMonRef} />
       </div>
@@ -55,7 +56,7 @@ export default function HeaderDate({ pageType }) {
       <button
         type="button"
         title="next"
-        className="btn-cal next"
+        className={theme === 'dark' ? 'btn-cal next' : 'btn-cal next light'}
         onClick={onClickNextMonth}
         ref={btnNextRef}
       />

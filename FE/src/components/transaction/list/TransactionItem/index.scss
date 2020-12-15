@@ -74,12 +74,25 @@
       border-radius: 20px;
       border: 1.4px solid $dark-emphasize-font-color;
     }
+    &.light {
+      span {
+        border: 1px solid $black;
+      }
+      color: $black;
+    }
   }
   .transaction__item__description {
     flex: 4;
+    &.light {
+      color: $light-font-color;
+    }
   }
   .transaction__item__payment {
     flex: 2;
+
+    &.light {
+      color: $light-font-color;
+    }
   }
   .transaction__item__cost {
     flex: 2;

@@ -10,6 +10,18 @@
 
     .settingbar__back__navBtn {
       @include headerNavigationButtons(left);
+      .nav__accountbook__btn {
+        &.light {
+          color: $black;
+          text-shadow: none;
+        }
+      }
+      .fas.fa-arrow-left {
+        &.light {
+          color: $black;
+          text-shadow: none;
+        }
+      }
     }
     @include mobile {
       .settingbar__back__navBtn {
@@ -26,5 +38,9 @@
     .settingbar__buttons {
       gap: 1em;
     }
+  }
+
+  &.light {
+    background-color: $light-background-color;
   }
 }

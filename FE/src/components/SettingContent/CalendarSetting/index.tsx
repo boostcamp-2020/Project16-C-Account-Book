@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../../store/Theme/themeHook';
 
 import DayRadioButton from './DayRadioButton';
 import WeekHeader from './WeekHeader';
@@ -16,7 +17,7 @@ export default function CalendarSetting({ confirmModal }) {
     setUpdateData,
     setModalTitle,
   } = confirmModal;
-
+  const theme = useThemeData(store => store.mode);
   const start = useAccountBookData(store => store.accountBook.startday);
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const [startDay, setStartDay] = useState('');
@@ -36,8 +37,20 @@ export default function CalendarSetting({ confirmModal }) {
 
   return (
     <div className="calendar__setting__container">
-      <div className="calendar__setting__startday">
-        <div className="calendar__setting__title">
+      <div
+        className={
+          theme === 'dark'
+            ? 'calendar__setting__startday'
+            : 'calendar__setting__startday light'
+        }
+      >
+        <div
+          className={
+            theme === 'dark'
+              ? 'calendar__setting__title'
+              : 'calendar__setting__title light'
+          }
+        >
           Start Day
           <div className="calendar__save__btn">
             <ActionButton

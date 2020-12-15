@@ -21,5 +21,10 @@
     &:first-child::before {
       content: none;
     }
+    &.notSunday {
+      &.light {
+        color: black;
+      }
+    }
   }
 }

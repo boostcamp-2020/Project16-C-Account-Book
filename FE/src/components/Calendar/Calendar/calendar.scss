@@ -36,6 +36,12 @@
           &.sunday {
             color: $spending-color;
           }
+
+          &.notSunday {
+            &.light {
+              color: $black;
+            }
+          }
         }
       }
     }

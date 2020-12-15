@@ -16,12 +16,14 @@ $little-white: #fff;
 $light-grey: lightgrey;
 $income-color: #54aafc;
 $spending-color: #ee4337;
+$accountbook-card-color: #f9e000;
+$light-acbook-card-color: #2cc42c;
 
 $spinner-background-color: #bbbbbb;
 $spin-color: #282727;
 
 //transaction
-$transaction-add-btn-color: #3eb924;
+$transaction-add-btn-color: #2b8f17;
 $transaction-category-hover-color: rgb(39, 165, 159);
 $transaction-delete-button-color: rgb(212, 49, 49);
 
@@ -53,3 +55,7 @@ $dark-border-color: #979797;
 
 //input tag
 $input-background-color: #eee;
+
+// light-mode
+$light-background-color: white;
+$light-font-color: black;

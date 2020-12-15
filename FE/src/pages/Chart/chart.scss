@@ -26,6 +26,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: $dark-background-color;
+
+  &.light {
+    background-color: $light-background-color;
+  }
 
   .category__charts {
     width: 100%;

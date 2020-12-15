@@ -5,8 +5,10 @@ import exportToCSV from '../../../../service/export';
 import ActionButton from '../../../Common/ActionButton';
 import { getTransactionCSV } from '../../../../api/csv';
 import { ResponseMessage } from '../../../../util/message';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 
 export default function CSVExport({ accountBookId }) {
+  const theme = useThemeData(store => store.mode);
   const downloadCSV = async () => {
     try {
       const res = await getTransactionCSV(accountBookId);
@@ -21,8 +23,18 @@ export default function CSVExport({ accountBookId }) {
   };
 
   return (
-    <div className="csv__export__box">
-      <div className="csv__export__title">Export</div>
+    <div
+      className={
+        theme === 'dark' ? 'csv__export__box' : 'csv__export__box light'
+      }
+    >
+      <div
+        className={
+          theme === 'dark' ? 'csv__export__title' : 'csv__export__title light'
+        }
+      >
+        Export
+      </div>
       <div className="csv__export__desc">
         You can get all Transactions in this Account Book.
       </div>

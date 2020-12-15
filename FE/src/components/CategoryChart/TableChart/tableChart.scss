@@ -8,6 +8,11 @@
   color: $dark-general-font-color;
   width: 40%;
   height: 50%;
+  overflow-y: auto;
+
+  &.light {
+    color: black;
+  }
 
   .stat__unit {
     padding: 15px 0;
@@ -22,7 +27,9 @@
     width: 60%;
     height: 20px;
     background-color: $light-black;
-
+    &.light {
+      background-color: #eee;
+    }
     .stat__color {
       position: absolute;
       animation: statAnimation 2s;

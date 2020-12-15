@@ -6,6 +6,7 @@ import { iTransactionItem } from '../../../../types/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 
 const TransactionItem = ({
   id: transactionId,
@@ -19,6 +20,7 @@ const TransactionItem = ({
   dragObject,
   setDraggedInDate,
 }: iTransactionItem) => {
+  const theme = useThemeData(store => store.mode);
   const [buttonReveal, setButtonReveal] = useState('');
 
   const {
@@ -103,11 +105,33 @@ const TransactionItem = ({
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
     >
-      <div className="transaction__item__category">
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__category'
+            : 'transaction__item__category light'
+        }
+      >
         <span>{category.name}</span>
       </div>
-      <div className="transaction__item__description">{content}</div>
-      <div className="transaction__item__payment">{payment.name}</div>
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__description'
+            : 'transaction__item__description light'
+        }
+      >
+        {content}
+      </div>
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__payment'
+            : 'transaction__item__payment light'
+        }
+      >
+        {payment.name}
+      </div>
       {type === '지출' ? (
         <span className="transaction__item__cost transaction__item__out">{`-${cost}`}</span>
       ) : (

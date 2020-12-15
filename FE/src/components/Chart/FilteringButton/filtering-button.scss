@@ -30,17 +30,29 @@
 
   input[type='radio'] + .filter__income {
     @include radioButton(income);
+    &.light {
+      color: $income-color;
+    }
   }
 
   input[type='radio'] + .filter__spending {
     @include radioButton(spending);
+    &.light {
+      color: $spending-color;
+    }
   }
 
   input[type='radio']:checked + .filter__income {
     background: $income-color;
+    &.light {
+      color: $white;
+    }
   }
 
   input[type='radio']:checked + .filter__spending {
     background: $spending-color;
+    &.light {
+      color: $white;
+    }
   }
 }

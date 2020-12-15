@@ -4,11 +4,13 @@ import ActionButton from '../../../Common/ActionButton';
 import { dropAccountBook } from '../../../../api/social';
 import './userList.scss';
 import { useHistory } from 'react-router-dom';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import { ResponseMessage } from '../../../../util/message';
 
 export default function UserList({ confirmModal }) {
   const { setSaveModal, setSaveAction, setModalTitle } = confirmModal;
 
+  const theme = useThemeData(store => store.mode);
   const history = useHistory();
   const users = useAccountBookData(store => store.accountBook.users);
   const accountBookId = useAccountBookData(store => store.accountBook._id);
@@ -31,8 +33,14 @@ export default function UserList({ confirmModal }) {
   };
 
   return (
-    <div className="user__list__box">
-      <div className="user__list__title">
+    <div
+      className={theme === 'dark' ? 'user__list__box' : 'user__list__box light'}
+    >
+      <div
+        className={
+          theme === 'dark' ? 'user__list__title' : 'user__list__title light'
+        }
+      >
         User List
         <div className="drop__btn">
           <ActionButton

@@ -22,4 +22,9 @@
   // margin: 3em 1em;
   color: $dark-emphasize-font-color;
   text-shadow: $selectedTextShadow;
+
+  &.light {
+    color: black;
+    text-shadow: none;
+  }
 }

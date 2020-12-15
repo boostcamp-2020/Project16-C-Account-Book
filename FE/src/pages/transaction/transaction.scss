@@ -1,12 +1,11 @@
 @use '../../styles/values.scss' as *;
 
-.calendar__wrapper {
-  width: 100%;
+.transaction__container {
   height: 100%;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  scroll-behavior: smooth;
+  align-items: center;
+  overflow-y: auto;
   background-color: $dark-background-color;
   &.light {
     background-color: white;

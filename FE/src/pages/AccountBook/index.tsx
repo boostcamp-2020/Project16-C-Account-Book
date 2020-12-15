@@ -6,6 +6,9 @@ import AccountBookAddForm from '../../components/AccountBook/AccountBookAddForm'
 import useLoginChcek from '../../service/useLoginCheck';
 import SaveModal from '../../components/Common/SaveModal';
 import useSaveModal from '../../service/useSaveModal';
+import ThemeButton from '../../components/Common/ThemeButton';
+import { useThemeData } from '../../store/Theme/themeHook';
+
 import './index.scss';
 
 export default function AccountBookListPage() {
@@ -13,6 +16,7 @@ export default function AccountBookListPage() {
   const [createForm, setCreateForm] = useState(false);
   const [listDatas, setListDatas] = useState([]);
   const confirmModal = useSaveModal();
+  const theme = useThemeData(store => store.mode);
 
   const onClickOverlay = event => {
     if (event.target.classList.contains('acbook__container')) {
@@ -21,7 +25,18 @@ export default function AccountBookListPage() {
   };
 
   return (
-    <div className="acbook__list__container" onClick={onClickOverlay}>
+    <div
+      className={
+        theme === 'dark'
+          ? 'acbook__list__container'
+          : 'acbook__list__container light'
+      }
+      onClick={onClickOverlay}
+    >
+      <div className="acbook__list__theme">
+        <ThemeButton />
+      </div>
+
       <AccountBookControl setCreateForm={setCreateForm} />
       <div className="acbook__list">
         {createForm && (

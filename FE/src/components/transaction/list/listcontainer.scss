@@ -17,6 +17,10 @@
   position: relative;
   padding-bottom: 5em;
   gap: 1.5em;
+
+  &.light {
+    background-color: $light-background-color;
+  }
 }
 
 .transaction__add__button {

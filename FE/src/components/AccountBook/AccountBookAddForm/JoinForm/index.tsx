@@ -3,7 +3,9 @@ import React from 'react';
 import { joinAccountBook } from '../../../../api/social';
 import './join-form.scss';
 
-export default function JoinForm({ datas, setCreate, setDatas, setName }) {
+
+export default function JoinForm({ setCreate, setDatas, setName, datas }) {
+
   const onJoinAccountBook = async event => {
     if (event.key === 'Enter') {
       const res = await joinAccountBook({
