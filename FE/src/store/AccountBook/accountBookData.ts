@@ -14,6 +14,20 @@ export const createStore = () => {
       transactions: [],
     },
 
+    initAccountBook() {
+      this.accountBook = {
+        _id: null,
+        code: null,
+        name: null,
+        startday: null,
+        description: null,
+        categories: [],
+        payments: [],
+        users: [],
+        transactions: [],
+      };
+    },
+
     filteredTransactions: {},
 
     filteredPriceIn: 0,

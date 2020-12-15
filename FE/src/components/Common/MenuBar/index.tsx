@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useThemeData } from '../../../store/Theme/themeHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
 import HeaderButtons from './HeaderButtons';
 import HeaderDate from './HeaderDate';
 import ThemeButton from '../ThemeButton';
@@ -10,9 +11,13 @@ import './menubar.scss';
 const MenuBar = ({ id, setModal, pageType }) => {
   const history = useHistory();
   const theme = useThemeData(store => store.mode);
+  const initAcBook = useAccountBookData(store => store.initAccountBook);
   const allBtnRef = useRef();
 
   const onClickIcon = useCallback(event => {
+    if (event.target.dataset.type === '/') {
+      initAcBook();
+    }
     history.push({
       pathname: event.target.dataset.type,
       state: {
