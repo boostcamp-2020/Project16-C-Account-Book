@@ -82,7 +82,7 @@ const MenuBar = ({ id, setModal, pageType }) => {
         </div>
       </div>
 
-      <HeaderDate pageType={pageType} />
+      <HeaderDate id={id} pageType={pageType} />
     </header>
   );
 };

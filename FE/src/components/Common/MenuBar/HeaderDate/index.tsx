@@ -6,20 +6,17 @@ import CalculateDate from '../../../../util/calculateDate';
 
 import './header-date.scss';
 
-export default function HeaderDate({ pageType }) {
+export default function HeaderDate({ id, pageType }) {
   const theme = useThemeData(store => store.mode);
   const btnNextRef = useRef();
   const btnPrevRef = useRef();
   const calMonRef = useRef();
   const calYearRef = useRef();
 
-  const accountBookId = useAccountBookData(store => store.accountBook._id);
-
   const setAccountBook = useAccountBookData(store => store.setAccountBook);
 
-  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-
   const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
+  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
   const setYearMonth = useCallback((year, month) => {
     const yy = year;
@@ -34,14 +31,15 @@ export default function HeaderDate({ pageType }) {
     setYearMonth(info.getFullYear(), info.getMonth());
     setDateInfo(info.getFullYear(), info.getMonth(), info.getDate());
 
-    setAccountBook(accountBookId, DateInfo.year, info.getMonth());
+    setAccountBook(id, info.getFullYear(), info.getMonth());
   }, []);
 
   const onClickPrevMonth = useCallback(() => {
     const info = CalculateDate.prevMonth();
     setYearMonth(info.getFullYear(), info.getMonth());
     setDateInfo(info.getFullYear(), info.getMonth(), info.getDate());
-    setAccountBook(accountBookId, DateInfo.year, info.getMonth());
+
+    setAccountBook(id, info.getFullYear(), info.getMonth());
   }, []);
 
   useEffect(() => {
