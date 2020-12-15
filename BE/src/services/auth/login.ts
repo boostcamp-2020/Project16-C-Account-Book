@@ -47,7 +47,7 @@ const login = async (body: Context['body']): Promise<any> => {
     const githubAccessToken = await getAccessToken(code, social);
     const userInfo = await getUserInfo(githubAccessToken, social);
     const refreshInfo = { type: 'refresh' };
-    const isUserInDB = !!(await userModel.get({ ...userInfo }));
+    const isUserInDB = !!(await userModel.get(userInfo.userid, userInfo.social));
 
     if (!isUserInDB) {
       await userModel.create(userInfo);
