@@ -52,15 +52,12 @@ export default function CSVExport({ accountBookId }) {
         You can get all Transactions in this Account Book.
       </div>
       <div className="csv__export__btn">
-        <ActionButton content="Export" action={downloadCSV} type="general" />
-      </div>
-      <div className="csv__export__desc">You can download Template.csv</div>
-      <div className="csv__export__btn">
         <ActionButton
-          content="Download"
+          content="Template"
           action={downloadTemplateCSV}
           type="general"
         />
+        <ActionButton content="Export" action={downloadCSV} type="general" />
       </div>
     </div>
   );
