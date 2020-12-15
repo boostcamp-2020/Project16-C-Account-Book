@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './csvExport.scss';
 import exportToCSV from '../../../../service/export';
 import ActionButton from '../../../Common/ActionButton';
-import { getTransactionCSV } from '../../../../api/csv';
+import { getTransactionCSV, getTemplateCSV } from '../../../../api/csv';
 import { ResponseMessage } from '../../../../util/message';
 import { useThemeData } from '../../../../store/Theme/themeHook';
 
@@ -16,12 +17,24 @@ export default function CSVExport({ accountBookId }) {
         throw new Error();
       }
       const csv = res.data;
-      exportToCSV(csv);
+      exportToCSV(csv, 'transactions.csv');
     } catch (error) {
       throw new Error();
     }
   };
 
+  const downloadTemplateCSV = async () => {
+    try {
+      const res = await getTemplateCSV(accountBookId);
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+      const csv = res.data;
+      exportToCSV(csv, 'template.csv');
+    } catch (error) {
+      throw new Error();
+    }
+  };
   return (
     <div
       className={
@@ -40,6 +53,14 @@ export default function CSVExport({ accountBookId }) {
       </div>
       <div className="csv__export__btn">
         <ActionButton content="Export" action={downloadCSV} type="general" />
+      </div>
+      <div className="csv__export__desc">You can download Template.csv</div>
+      <div className="csv__export__btn">
+        <ActionButton
+          content="Download"
+          action={downloadTemplateCSV}
+          type="general"
+        />
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
-export default function exportToCSV(csv) {
+export default function exportToCSV(csv, filename) {
   const downloadFile = link => {
-    const filename = 'transactions.csv';
     const a = document.createElement('a');
     a.setAttribute('target', '_blank');
     a.setAttribute('style', 'display:none');
