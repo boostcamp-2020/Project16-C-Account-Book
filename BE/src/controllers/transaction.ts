@@ -10,6 +10,14 @@ const exportCSV = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
+const downloadTemplateCSV = async (ctx: Context): Promise<Context['body']> => {
+  const csv = await service.downloadTemplateCSV(ctx);
+  const res = response(200, csv.message, csv.data);
+  ctx.body = res;
+
+  return ctx.body;
+};
+
 const importCSV = async (ctx: Context): Promise<Context['body']> => {
   const csv = await service.importCSV(ctx);
   if (csv.message === 'success') {
@@ -42,4 +50,4 @@ const del = async (ctx: Context): Promise<Context['body']> => {
   return ctx.body;
 };
 
-export default { exportCSV, post, importCSV, patch, del };
+export default { exportCSV, downloadTemplateCSV, post, importCSV, patch, del };
