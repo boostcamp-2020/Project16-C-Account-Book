@@ -1,10 +1,14 @@
 @use '../../../styles/values.scss' as *;
 @use '../../../styles/mixins.scss' as *;
+@use '../../../styles/mediaQuery.scss' as *;
 
 @mixin categoryUnit {
-  padding: 0.5em 1.5em;
+  height: 5vh;
+  line-height: 5vh;
   border: 1px solid $dark-border-color;
   border-radius: 20px;
+  text-align: center;
+  font-size: 1.5vh;
   cursor: pointer;
   &:hover {
     background-color: $light-black;
@@ -14,10 +18,9 @@
 
 @mixin categorySettingBox {
   @include settingBox;
+
   .category__title {
-    font-size: 1.5em;
-    padding: 1em;
-    text-shadow: $selectedTextShadow;
+    @include settingTitle;
   }
   .category__list {
     display: flex;
@@ -27,12 +30,14 @@
 
     .category__unit {
       @include categoryUnit;
+      width: 8vw;
     }
 
     .category__unit__add {
       @include categoryUnit;
       .fas.fa-plus-circle {
         color: $white;
+        width: 5vw;
       }
     }
   }
@@ -46,5 +51,12 @@
   }
   .spending__category__setting {
     @include categorySettingBox;
+  }
+
+  @include mobile {
+    .income__category__setting,
+    .spending__category__setting {
+      width: 80%;
+    }
   }
 }

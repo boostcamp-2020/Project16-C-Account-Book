@@ -7,12 +7,19 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
+  .user__list__title {
+    @include settingTitle;
+  }
+  .user__list__desc {
+    @include settingDesc;
+  }
   .user__info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 15%;
+
     .profile__image {
       width: 40px;
       height: 40px;
