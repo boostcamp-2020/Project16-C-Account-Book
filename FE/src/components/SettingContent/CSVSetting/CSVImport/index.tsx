@@ -11,17 +11,14 @@ export default function CSVImport({ accountBookId }) {
   const [file, setFile] = useState('');
   const theme = useThemeData(store => store.mode);
 
-  const onClickHandler = async event => {
-    if (file !== '') {
-      try {
-        const res = await postTransactionCSV(accountBookId, file);
-        console.log(res);
-        if (res.status !== ResponseMessage.success) {
-          throw new Error();
-        }
-      } catch (err) {
+  const onClickHandler = async () => {
+    try {
+      const res = await postTransactionCSV(accountBookId, file);
+      if (res.status !== ResponseMessage.success) {
         throw new Error();
       }
+    } catch (err) {
+      throw new Error();
     }
   };
 

@@ -80,8 +80,7 @@ const exportCSV = async (ctx: Context): Promise<any> => {
   const accountBook = await accountBookModel.getDetail(
     ctx.params.accountbookid,
   );
-  const transactions = accountBook.transactions;
-  console.log(transactions);
+  const { transactions } = accountBook;
 
   if (transactions) {
     const fields = [
@@ -110,36 +109,55 @@ const exportCSV = async (ctx: Context): Promise<any> => {
 };
 
 const importCSV = async (ctx: Context): Promise<any> => {
-  const csvArray = ctx.request.body;
-
-  const failMessage = { message: 'csv 형식이 올바르지 않습니다.', data: {} };
-  const fields = {
-    content: 1,
-    type: 1,
-    cost: 1,
-    date: 1,
-    category: 1,
-    payment: 1,
-  };
-  const transactionArray = [];
-
-  for (let index = 1; index < csvArray.length; index++) {
-    const tempTransaction: any = { category: {}, payment: {} };
-
-    for (let i = 0; i < csvArray[0].length; i++) {
-      const splitArray = csvArray[0][i].split('.');
-
-      if (splitArray.length === 1) {
-        if (!(csvArray[0][i] in fields)) return failMessage;
-
-        tempTransaction[csvArray[0][i]] = csvArray[index][i];
-      } else if (splitArray.length === 2) {
-        if (!(splitArray[0] in fields)) return failMessage;
-
-        tempTransaction[splitArray[0]][splitArray[1]] = csvArray[index][i];
-      }
+  const isValidForm = (tempTransaction: any) => {
+    const requirementsFields = ['content', 'type', 'cost', 'date'];
+    for (const field of requirementsFields) {
+      if (tempTransaction[field] === '') return false;
     }
-    transactionArray.push(tempTransaction);
+
+    return true;
+  };
+
+  const makeTransactionArray = (csvArray: any) => {
+    const fields = {
+      content: 1,
+      type: 1,
+      cost: 1,
+      date: 1,
+      category: 1,
+      payment: 1,
+    };
+    const transactionArray = [];
+
+    for (let index = 1; index < csvArray.length; index++) {
+      const tempTransaction: any = {
+        category: { name: '미분류', icon: 1 },
+        payment: { color: 'hsl(177deg 62% 40%)', desc: '' },
+      };
+
+      for (let i = 0; i < csvArray[0].length; i++) {
+        const splitedCSV = csvArray[0][i].split('.');
+
+        if (splitedCSV.length === 1) {
+          if (!(csvArray[0][i] in fields)) return false;
+          tempTransaction[csvArray[0][i]] = csvArray[index][i];
+        } else if (splitedCSV.length === 2) {
+          tempTransaction[splitedCSV[0]][splitedCSV[1]] = csvArray[index][i];
+        }
+      }
+
+      if (!isValidForm(tempTransaction)) return false;
+      transactionArray.push(tempTransaction);
+    }
+
+    return transactionArray;
+  };
+
+  const csvDatas = ctx.request.body;
+  const transactionArray = makeTransactionArray(csvDatas);
+
+  if (transactionArray === false) {
+    return { message: 'csv 형식이 올바르지 않습니다.', data: {} };
   }
 
   const result = await accountBookModel.addTransactions(

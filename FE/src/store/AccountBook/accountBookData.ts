@@ -50,8 +50,8 @@ export const createStore = () => {
       );
     },
 
-    async setAccountBook(id) {
-      const accountBook = await getTargetAccountBook(id);
+    async setAccountBook(id, year, month) {
+      const accountBook = await getTargetAccountBook(id, year, month);
       accountBook.data.payments.reverse();
       this.accountBook = accountBook.data;
     },
