@@ -1,7 +1,9 @@
 import React, { useRef, useCallback, useEffect } from 'react';
 import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
+import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { useThemeData } from '../../../../store/Theme/themeHook';
 import CalculateDate from '../../../../util/calculateDate';
+
 import './header-date.scss';
 
 export default function HeaderDate({ pageType }) {
@@ -10,6 +12,10 @@ export default function HeaderDate({ pageType }) {
   const btnPrevRef = useRef();
   const calMonRef = useRef();
   const calYearRef = useRef();
+
+  const accountBookId = useAccountBookData(store => store.accountBook._id);
+
+  const setAccountBook = useAccountBookData(store => store.setAccountBook);
 
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
@@ -27,12 +33,15 @@ export default function HeaderDate({ pageType }) {
     const info = CalculateDate.nextMonth();
     setYearMonth(info.getFullYear(), info.getMonth());
     setDateInfo(info.getFullYear(), info.getMonth(), info.getDate());
+
+    setAccountBook(accountBookId, DateInfo.year, info.getMonth());
   }, []);
 
   const onClickPrevMonth = useCallback(() => {
     const info = CalculateDate.prevMonth();
     setYearMonth(info.getFullYear(), info.getMonth());
     setDateInfo(info.getFullYear(), info.getMonth(), info.getDate());
+    setAccountBook(accountBookId, DateInfo.year, info.getMonth());
   }, []);
 
   useEffect(() => {
