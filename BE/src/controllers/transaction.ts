@@ -5,7 +5,7 @@ import service from '@/services/transaction';
 import response from '@/utils/response';
 
 const exportCSV = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const csv = await service.exportCSV(params);
   const res = response(200, { csv });
   ctx.status = 200;
@@ -14,7 +14,7 @@ const exportCSV = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const post = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const transaction = await service.post(params, body);
   const res = response(200, { transaction });
@@ -23,7 +23,7 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const importCSV = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const csv = await service.importCSV(params, body);
   if (csv) {
@@ -36,7 +36,7 @@ const importCSV = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const patch = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const updateResult = await service.patch(params, body);
   const res = response(200, updateResult);
@@ -46,7 +46,7 @@ const patch = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const delResult = await service.del(params);
   const res = response(200, delResult);
   ctx.status = res.status;

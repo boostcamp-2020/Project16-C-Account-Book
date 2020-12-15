@@ -3,7 +3,7 @@ import response from '@/utils/response';
 import service from '@/services/category';
 
 const post = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const category = await service.post(params, body);
   const res = response(200, { category });
@@ -13,7 +13,7 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const patch = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const { body } = ctx.request;
   const updateResult = await service.patch(params, body);
   const res = response(200, updateResult);
@@ -23,7 +23,7 @@ const patch = async (ctx: Context): Promise<Context['body']> => {
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
-  const { params } = ctx.params;
+  const { params } = ctx;
   const delResult = await service.del(params);
   const res = response(200, delResult);
   ctx.status = res.status;

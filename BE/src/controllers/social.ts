@@ -16,7 +16,7 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 
 const del = async (ctx: Context): Promise<Context['body']> => {
   const userInfo = ctx.user;
-  const paramInfo = ctx.params;
+  const paramInfo = ctx;
   const result = await service.delUser(paramInfo, userInfo);
   const res = response(200, result);
   ctx.status = res.status;
