@@ -108,6 +108,37 @@ const exportCSV = async (ctx: Context): Promise<any> => {
   };
 };
 
+const downloadTemplateCSV = async (ctx: Context): Promise<any> => {
+  const exampleTransaction = [
+    {
+      content: '버거킹',
+      type: '지출',
+      cost: 20000,
+      date: '2020-12-15',
+      category: { name: '식비', type: '지출' },
+      payment: { name: 'BC Card', desc: '체크 카드' },
+    },
+  ];
+
+  const fields = [
+    'content',
+    'type',
+    'cost',
+    'date',
+    'category.name',
+    'category.type',
+    'payment.name',
+    'payment.desc',
+  ];
+
+  const json2csvParser = new Parser({ fields });
+  const csv = json2csvParser.parse(exampleTransaction);
+  return {
+    message: 'success',
+    data: csv,
+  };
+};
+
 const importCSV = async (ctx: Context): Promise<any> => {
   const isValidForm = (tempTransaction: any) => {
     const requirementsFields = ['content', 'type', 'cost', 'date'];
@@ -175,4 +206,4 @@ const importCSV = async (ctx: Context): Promise<any> => {
   };
 };
 
-export default { post, patch, del, exportCSV, importCSV };
+export default { post, patch, del, exportCSV, downloadTemplateCSV, importCSV };
