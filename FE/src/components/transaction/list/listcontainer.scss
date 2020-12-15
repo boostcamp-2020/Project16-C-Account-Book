@@ -4,14 +4,13 @@
 .transaction__list__container {
   width: 60%;
   height: 100%;
-  padding: 10px 5px;
 
   background-color: $dark-background-color;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2em;
+
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;

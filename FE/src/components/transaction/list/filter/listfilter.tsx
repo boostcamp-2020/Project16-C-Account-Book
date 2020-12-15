@@ -81,8 +81,8 @@ const Filter = ({
             />
             <span>
               {type === '지출'
-                ? `-${CommaMaker(filteredPriceOut)}`
-                : `+${CommaMaker(filteredPriceIn)}`}
+                ? `-${CommaMaker(filteredPriceOut)}원`
+                : `+${CommaMaker(filteredPriceIn)}원`}
             </span>
           </label>
         ))}
