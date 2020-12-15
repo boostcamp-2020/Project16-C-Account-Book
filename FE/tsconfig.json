@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-  "allowJs": true,
-  "checkJs": true,
-  "sourceMap": true,
-  "target": "es5",
+    "allowJs": true,
+    "checkJs": true,
+    "sourceMap": true,
+    "target": "es5",
     "lib": ["dom", "ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,6 +13,11 @@
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
+    "paths": {
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ]
+    },
     "moduleResolution":"node",
     "outDir":"dist"
   },
