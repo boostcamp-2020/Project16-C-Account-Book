@@ -4,7 +4,7 @@
 .pie__table {
   position: absolute;
   right: 8%;
-  top: 45%;
+  top: 43%;
   color: $dark-general-font-color;
   width: 40%;
   height: 50%;
@@ -23,8 +23,8 @@
   .stat__background {
     position: absolute;
     display: inline-block;
-    left: 22%;
-    width: 55%;
+    left: 25%;
+    width: 53%;
     height: 20px;
     background-color: $light-black;
     &.light {
@@ -48,7 +48,7 @@
 
   .stat__percent {
     position: absolute;
-    left: 10%;
+    left: 13%;
     font-weight: bolder;
   }
 
