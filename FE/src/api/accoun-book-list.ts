@@ -11,8 +11,11 @@ export const getAccountBookList = () => {
   return data;
 };
 
-export const getTargetAccountBook = id => {
-  const data = getFetch(`${process.env.SERVER_URL}/api/accountbook/${id}`);
+export const getTargetAccountBook = (id, year, month) => {
+  // /api/accountbook/:accountbookid/year/:year/month/:month
+  const data = getFetch(
+    `${process.env.SERVER_URL}/api/accountbook/${id}/year/${year}/month/${month}`,
+  );
 
   return data;
 };
