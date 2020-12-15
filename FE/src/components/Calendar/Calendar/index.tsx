@@ -36,7 +36,7 @@ export default function Calendar({ setDetailModal }) {
       <div className="my-calendar">
         <div className="calendar-box">
           <table className="cal-table">
-            <thead className={theme !== 'dark' && 'light'}>
+            <thead>
               <tr>
                 <CalendarHeader startDay={startDay} />
               </tr>

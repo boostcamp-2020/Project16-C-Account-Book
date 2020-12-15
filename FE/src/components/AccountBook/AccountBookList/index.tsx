@@ -16,9 +16,6 @@ export const AccountBookList = ({ datas, setDatas, confirmModal }) => {
         throw new Error();
       }
 
-      accountBooks.data.sort((a, b) => {
-        return b.transactions.length - a.transactions.length;
-      });
       setDatas(accountBooks.data);
     } catch (err) {
       throw new Error();
