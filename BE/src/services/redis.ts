@@ -1,4 +1,4 @@
-import redisDB from '@loaders/redis';
+import { redisDB } from '@loaders/redis';
 import { tempUser, User } from '@interfaces/auth';
 
 import { promisify } from 'util';
@@ -33,13 +33,13 @@ const intoRefreshToken = (refreshToken: string, userData: User): boolean => {
   );
 };
 
-const isBlocked = async (refreshToken: string): Promise<string> => {
+const isBlocked = async (refreshToken: string): Promise<boolean> => {
   redisDB.select(blacklist);
   const blocked = await getBlockInfo(refreshToken);
-  return blocked || '';
+  return !!blocked;
 };
 
-const isValid = async (refreshToken: string): Promise<User | null> => {
+const isValid = async (refreshToken: string): Promise<User> => {
   redisDB.select(refresh);
   const accessInfo = await getAccessInfo(refreshToken);
   const keys = Object.keys(accessInfo);
@@ -55,7 +55,7 @@ const isValid = async (refreshToken: string): Promise<User | null> => {
   }
 
   const user: User = userInfo;
-  return user || null;
+  return user;
 };
 
 export default { intoBlackList, intoRefreshToken, isBlocked, isValid };
