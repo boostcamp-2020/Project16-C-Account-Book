@@ -15,11 +15,17 @@ export default function CSVImport({ accountBookId, confirmModal }) {
   const onClickHandler = async () => {
     try {
       const res = await postTransactionCSV(accountBookId, file);
+
       if (res.status !== ResponseMessage.success) {
-        throw new Error();
+        setModalTitle(() => 'csv파일의 data format이 올바르지 않습니다.');
+        setSaveModal(() => true);
+        setSaveAction(() => () => {});
+        return;
       }
+
       setModalTitle(() => '요청하신 파일이 Import되었습니다.');
       setSaveModal(() => true);
+      setSaveAction(() => () => {});
     } catch (err) {
       throw new Error();
     }
