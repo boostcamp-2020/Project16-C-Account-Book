@@ -6,9 +6,9 @@ import response from '@/utils/response';
 
 const get = async (ctx: Context): Promise<Context['body']> => {
   const defaultPaymentMethods = await service.get();
-  const res = response(200, { defaultPaymentMethods });
+  const res = response(200, defaultPaymentMethods);
   ctx.status = res.status;
-  ctx.body = res.data;
+  ctx.body = res;
 
   return ctx.body;
 };
