@@ -47,8 +47,8 @@ export const updateFetch = async (query, body) => {
     body: JSON.stringify(body),
   });
 
-  // const json = response.json();
-  return response;
+  const json = response.json();
+  return json;
 };
 
 export const deleteFetch = async (query, body) => {
