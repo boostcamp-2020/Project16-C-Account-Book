@@ -5,9 +5,9 @@ import { TStore } from './TransactionFormModalStore';
 
 export const useStoreData = <Selection, ContextData, Store>(
   context: React.Context<ContextData>,
-  storeSelector: (ContextData: ContextData) => Store,
+  storeSelector: (contextData: ContextData) => Store,
   dataSelector: (store: Store) => Selection,
-) => {
+): any => {
   try {
     const value = React.useContext(context);
     if (!value) throw new Error();
@@ -22,7 +22,7 @@ export const useStoreData = <Selection, ContextData, Store>(
 
 export const useTransactionAddModalData = <Selection>(
   dataSelector: (store: TStore) => Selection,
-) =>
+): any =>
   useStoreData(
     transactionFormModalContext,
     contextData => contextData!,
