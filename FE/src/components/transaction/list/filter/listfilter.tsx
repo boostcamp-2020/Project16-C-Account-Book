@@ -59,8 +59,8 @@ const Filter = ({
     <div
       className={
         theme === 'dark'
-          ? 'acbook__list__container'
-          : 'acbook__list__container light'
+          ? 'acbook__filter__container'
+          : 'acbook__filter__container light'
       }
     >
       <div
