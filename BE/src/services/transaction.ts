@@ -1,4 +1,5 @@
 import accountBookModel from '@models/accountbook';
+import transactionModel from '@/models/transaction';
 
 const { Parser } = require('json2csv');
 
@@ -10,8 +11,9 @@ const post = async (params: any, body: any): Promise<any> => {
     cost: body.cost,
     date: body.date,
     payment: body.payment,
+    accountbook: params.accountbookid,
   };
-  const transaction = await accountBookModel.addTransaction(params.accountbookid, transactionInfo);
+  const transaction = await transactionModel.post(transactionInfo);
   if (transaction) {
     return transaction;
   }
