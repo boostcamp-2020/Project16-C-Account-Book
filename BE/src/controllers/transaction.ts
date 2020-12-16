@@ -7,8 +7,8 @@ import response from '@/utils/response';
 const exportCSV = async (ctx: Context): Promise<Context['body']> => {
   const { params } = ctx;
   const csv = await service.exportCSV(params);
-  const res = response(200, csv.data);
-  ctx.status = 200;
+  const res = response(200, csv);
+  ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
 };
@@ -19,16 +19,16 @@ const post = async (ctx: Context): Promise<Context['body']> => {
 
   const transaction = await service.post(params, body);
   const res = response(200, transaction);
-  console.log(transaction);
+  ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
 };
 
 const downloadTemplateCSV = async (ctx: Context): Promise<Context['body']> => {
   const csv = await service.downloadTemplateCSV(ctx);
-  const res = response(200, csv.data);
+  const res = response(200, csv);
+  ctx.status = res.status;
   ctx.body = res;
-
   return ctx.body;
 };
 
