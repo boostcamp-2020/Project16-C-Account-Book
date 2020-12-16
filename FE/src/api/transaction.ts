@@ -6,6 +6,7 @@ import {
 } from '../service/fetch';
 
 export const createTransaction = async (accountbookId, transaction) => {
+  console.log(transaction);
   const url = `${process.env.SERVER_URL}/api/accountbook/${accountbookId}/transaction`;
   const res = await postFetch(url, transaction);
 
