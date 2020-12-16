@@ -1,5 +1,6 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 
+import validateForm from '../../../../service/transaction-form-validation';
 import DateInput from '../DateInput';
 import CategoryInput from '../CategoryInput';
 import PaymentInput from '../PaymentInput';
@@ -11,6 +12,7 @@ import { useTransactionAddModalData } from '../../../../store/TransactionFormMod
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
 const TransactionAddForm = ({ accountbookId }) => {
+  const priceInputElementRef = useRef<HTMLInputElement>(null);
   const {
     input,
     setMessageVisible,
@@ -67,10 +69,20 @@ const TransactionAddForm = ({ accountbookId }) => {
 
   const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input._id === '') {
-      addTransaction();
-    } else {
-      updateTransaction();
+    try {
+      if (validateForm(input)) {
+        if (input._id === '') {
+          addTransaction();
+        } else {
+          updateTransaction();
+        }
+      }
+    } catch (error) {
+      if (error.name === 'PRICE_UNSET') {
+        priceInputElementRef.current?.focus();
+      }
+      console.error(error);
+      alert(error.message);
     }
   };
 
@@ -87,7 +99,7 @@ const TransactionAddForm = ({ accountbookId }) => {
         <DateInput />
         <CategoryInput {...{ categoryPool }} />
         <PaymentInput {...{ paymentPool }} />
-        <PriceInput />
+        <PriceInput {...{ priceInputElementRef }} />
         <ContentInput />
 
         <div className="transaction__button__container">
