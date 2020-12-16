@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, ReactElement, useEffect, useState } from 'react';
 
 import DateInput from '../DateInput';
 import CategoryInput from '../CategoryInput';
@@ -10,7 +10,11 @@ import './index.scss';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
-const TransactionAddForm = ({ accountbookId }) => {
+const TransactionAddForm = ({
+  accountbookId,
+}: {
+  accountbookId: string;
+}): ReactElement => {
   const {
     input,
     setMessageVisible,

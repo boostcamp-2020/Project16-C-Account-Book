@@ -1,3 +1,6 @@
+import iCategory from '@interfaces/category';
+import iPayment from '@interfaces/payment';
+import { iTransaction } from '@interfaces/transaction';
 import { getTargetAccountBook } from '../../api/accoun-book-list';
 
 export const createStore = () => {
@@ -34,7 +37,7 @@ export const createStore = () => {
 
     filteredPriceOut: 0,
 
-    getTransactionById(transactionId) {
+    getTransactionById(transactionId: string): iTransaction | undefined {
       return this.accountBook.transactions.find(
         item => item._id === transactionId,
       );
@@ -261,20 +264,30 @@ export const createStore = () => {
       icon: number;
       type: string;
     }) {
-      this.accountBook.categories = this.accountBook.categories.map(item => {
-        if (item._id === data.categoryId) {
-          item = { ...item, name: data.name, icon: data.icon, type: data.type };
-        }
-        return item;
-      });
+      this.accountBook.categories = this.accountBook.categories.map(
+        (item: iCategory) => {
+          if (item._id === data.categoryId) {
+            const updatedCategory = {
+              ...item,
+              name: data.name,
+              icon: data.icon,
+              type: data.type,
+            };
+            return updatedCategory;
+          }
+          return item;
+        },
+      );
     },
     deleteCategory(data: { categoryId: string }) {
       this.accountBook.categories = this.accountBook.categories.filter(
-        item => item._id !== data.categoryId,
+        (item: iCategory) => item._id !== data.categoryId,
       );
     },
-    getPaymentByName(name: string) {
-      return this.accountBook.payments.find(payment => payment.name === name);
+    getPaymentByName(name: string): iPayment | undefined {
+      return this.accountBook.payments.find(
+        (payment: iPayment) => payment.name === name,
+      );
     },
   };
 

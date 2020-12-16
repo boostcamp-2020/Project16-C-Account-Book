@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
+import { initialTransaction, iTransaction } from '@interfaces/transaction';
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
 import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
@@ -11,9 +12,11 @@ const Transactions = ({
 }: {
   selectedCategories: string[];
   selectedTypes: string[];
-}) => {
-  const [draggedItem, setDraggedItem] = useState({});
-  const [draggedInDate, setDraggedInDate] = useState('');
+}): ReactElement => {
+  const [draggedItem, setDraggedItem] = useState<iTransaction>(
+    initialTransaction,
+  );
+  const [draggedInDate, setDraggedInDate] = useState<string>('');
 
   const {
     filteredTransactions,
