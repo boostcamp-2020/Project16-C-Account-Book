@@ -61,6 +61,13 @@ export const createStore = () => {
       this.accountBook.transactions = newTransactions;
     },
 
+    updateTransactionToLast(transaction) {
+      const restTransaction = this.accountBook.transactions.filter(item => {
+        return item._id !== transaction._id;
+      });
+      this.accountBook.transactions = [...restTransaction, transaction];
+    },
+
     deleteTransaction(id) {
       this.accountBook.transactions = this.accountBook.transactions.filter(
         ({ _id }) => id !== _id,

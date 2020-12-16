@@ -108,10 +108,11 @@ const TransactionItem = ({
       console.log('on end', e.dataTransfer.dropEffect);
       setTimeout(() => {
         setDraggedInDate('');
-      }, 50);
+      }, 500);
     } catch (error) {
       console.error(error);
     }
+
   };
 
   return (
