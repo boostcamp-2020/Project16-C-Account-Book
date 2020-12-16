@@ -21,6 +21,7 @@ const get = async ({
 
 const getDetail = async (id: string): Promise<any> => {
   const accountBook = await AccountBookModel.findOne().where(`_id`).equals(id);
+
   return accountBook;
 };
 
@@ -54,6 +55,7 @@ const getTransactions = async (
       };
       return ret;
     });
+    console.log(transactions);
     const newAccountBook = {
       _id: accountBook._id,
       code: accountBook.code,

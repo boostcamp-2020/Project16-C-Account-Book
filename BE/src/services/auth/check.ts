@@ -39,7 +39,7 @@ const decodeToken = (token: string): any => {
 const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
   const user = decodeToken(token);
-  console.log(user);
+
   const isUserInDB = !!(await userModel.get(user));
   return isUserInDB ? user : null;
 };
