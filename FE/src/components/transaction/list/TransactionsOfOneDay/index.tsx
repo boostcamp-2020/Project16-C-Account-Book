@@ -22,7 +22,7 @@ const TransactionsOfOneDay = ({
   const { getTransactionById, updateTransactionInStore } = useAccountBookData(
     store => ({
       getTransactionById: store.getTransactionById,
-      updateTransactionInStore: store.updateTransaction,
+      updateTransactionInStore: store.updateTransactionToLast,
     }),
   );
 
