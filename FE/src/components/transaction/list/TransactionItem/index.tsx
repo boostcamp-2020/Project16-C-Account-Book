@@ -95,7 +95,7 @@ const TransactionItem = ({
     console.log('on end', e.dataTransfer.dropEffect);
     setTimeout(() => {
       setDraggedInDate('');
-    }, 100);
+    }, 500);
   };
 
   return (
