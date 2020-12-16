@@ -6,7 +6,6 @@ import service from '@/services/payment-method';
 
 const post = async (ctx: Context): Promise<Context['body']> => {
   const { params } = ctx;
-  console.log(params);
   const { body } = ctx.request;
   const paymentMethod = await service.post(params, body);
   const res = response(200, paymentMethod);
