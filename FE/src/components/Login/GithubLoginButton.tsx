@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import './LoginButton.scss';
 import { ReactComponent as GithubLogo } from '../../../public/images/github-logo.svg';
 
-const Button = () => {
+const Button = (): ReactElement => {
   const baseUrl = 'https://github.com/login/oauth/authorize';
   const githubClientId = process.env.GITHUB_CLIENT_ID;
 

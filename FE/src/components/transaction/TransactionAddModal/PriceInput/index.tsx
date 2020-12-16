@@ -18,11 +18,14 @@ const PriceInput = ({
   }));
 
   const onPriceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target) {
-      const targetElement = e.target as HTMLInputElement;
-      setInput({ ...input, cost: +targetElement.value });
-      inputLabel.current.textContent = `₩ ${CommaMaker(+targetElement.value)}`;
-      console.log(inputLabel.current);
+    try {
+      if (e.target) {
+        const targetElement = e.target as HTMLInputElement;
+        setInput({ ...input, cost: +targetElement.value });
+        if (!inputLabel.current) throw new Error('label is null');
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
   return (
@@ -30,7 +33,9 @@ const PriceInput = ({
       <div className="indicator">금액</div>
       <div className="price__input">
         <label ref={inputLabel} htmlFor="price__input">
-          ₩ 0
+          {input.cost ? `₩ ${CommaMaker(
+          +input.cost,
+        )}` : '₩ 0'}
         </label>
         <input
           ref={priceInputElementRef}

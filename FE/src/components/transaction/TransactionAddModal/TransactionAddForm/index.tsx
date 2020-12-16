@@ -1,4 +1,5 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, ReactElement, useEffect, useRef, useState } from 'react';
+
 
 import validateForm from '../../../../service/transaction-form-validation';
 import DateInput from '../DateInput';
@@ -11,7 +12,11 @@ import './index.scss';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
-const TransactionAddForm = ({ accountbookId }) => {
+const TransactionAddForm = ({
+  accountbookId,
+}: {
+  accountbookId: string;
+}): ReactElement => {
   const priceInputElementRef = useRef<HTMLInputElement>(null);
   const {
     input,

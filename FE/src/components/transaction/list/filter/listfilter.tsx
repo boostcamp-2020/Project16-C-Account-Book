@@ -1,21 +1,17 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, ReactElement, useCallback } from 'react';
 import './listfilter.scss';
 
+import { iFilterProps } from '@interfaces/transaction-components';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { useThemeData } from '../../../../store/Theme/themeHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
-const Filter = ({
+const TransactionsFilter = ({
   selectedCategories,
   selectCategories,
   selectedTypes,
   selectType,
-}: {
-  selectedCategories: string[];
-  selectCategories: (value: string[]) => void;
-  selectedTypes: string[];
-  selectType: (values: string[]) => void;
-}) => {
+}: iFilterProps): ReactElement => {
   const theme = useThemeData(store => store.mode);
   const {
     categoryPool,
@@ -122,4 +118,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default TransactionsFilter;
