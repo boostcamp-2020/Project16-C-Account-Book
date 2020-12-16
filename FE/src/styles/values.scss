@@ -5,6 +5,7 @@ $selectedBoxShadow: -2px -2px 5px rgba(0, 0, 0, 0.5),
   3px 3px 3px rgba(255, 255, 255, 0.07);
 $selectedTextShadow: 0 0 10px rgba(33, 156, 243, 1),
   0 0 10px rgba(33, 156, 243, 1);
+$initialFilterTextShadow: 0 0 10px rgb(253, 89, 24), 0 0 10px rgb(253, 89, 24);
 $dragboxShadow: 0 0 10px rgb(236, 129, 97), 0 0 10px rgb(236, 129, 97);
 
 // color
@@ -18,6 +19,7 @@ $income-color: #54aafc;
 $spending-color: #ee4337;
 $accountbook-card-color: #f9e000;
 $light-acbook-card-color: #2cc42c;
+$initialFilter-color: rgb(253, 89, 24);
 
 $spinner-background-color: #bbbbbb;
 $spin-color: #282727;

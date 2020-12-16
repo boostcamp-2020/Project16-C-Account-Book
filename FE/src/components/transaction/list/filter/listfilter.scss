@@ -2,7 +2,7 @@
 
 .acbook__filter__container {
   width: 100%;
-  height: 25%;
+  // height: 25%;
   padding: 3em 0;
   display: flex;
   flex-direction: column;
@@ -84,21 +84,38 @@
       display: none;
     }
 
-    input:checked + span,
-    input:hover + span {
+    input[data-type='지출']:checked + span,
+    input[data-type='지출']:hover + span {
       padding: 3px;
-      border-bottom: 2px solid $transaction-category-hover-color;
-      color: $transaction-category-hover-color;
+      border-bottom: 2px solid $spending-color;
+      color: $spending-color;
+    }
+
+    input[data-type='수입']:checked + span,
+    input[data-type='수입']:hover + span {
+      padding: 3px;
+      border-bottom: 2px solid $income-color;
+      color: $income-color;
     }
 
     label {
       cursor: pointer;
     }
-    span {
+    span,
+    .filter-init-button {
       color: $dark-general-font-color;
       font-size: 1em;
       padding: 3px;
       margin: 0 10px 0 10px;
+    }
+
+    .filter-init-button {
+      border: none;
+      background-color: transparent;
+      color: $initialFilter-color;
+      text-shadow: $initialFilterTextShadow;
+      cursor: pointer;
+      outline: none;
     }
   }
 }
