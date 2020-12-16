@@ -1,9 +1,7 @@
-import Response from '@interfaces/response';
+import Response from '@/interfaces/response';
 
-export const response = (
-  status: number,
-  message: string,
-  data?: any,
-): Response => {
-  return { status, message, data };
+const response = <T>(status: number, data: T): Response => {
+  return { status, data };
 };
+
+export default response;

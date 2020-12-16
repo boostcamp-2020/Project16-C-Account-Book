@@ -34,6 +34,8 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'jsx-a11y/label-has-associated-control': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'import/no-unresolved': 'off',
+    'no-underscore-dangle': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',

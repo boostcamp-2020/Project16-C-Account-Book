@@ -1,10 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
 import './index.scss';
 
-const MessageInput = () => {
+const MessageInput = (): ReactElement => {
   const { message, setMessage } = useTransactionAddModalData(store => ({
     message: store.message,
     setMessage: store.setMessage,

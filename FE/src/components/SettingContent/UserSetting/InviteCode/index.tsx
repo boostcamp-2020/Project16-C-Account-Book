@@ -17,10 +17,12 @@ export default function InviteCode(props) {
   const onClickGetCode = async () => {
     try {
       const res = await getInviteCode({ accountBookId });
+      console.log(res);
       if (res.status !== ResponseMessage.success) {
         throw new Error();
       }
-      setCodeContet(res.data.code);
+
+      setCodeContet(res.data);
       setCodeVisible(() => true);
     } catch (error) {
       throw new Error();

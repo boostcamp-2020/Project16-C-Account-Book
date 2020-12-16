@@ -1,9 +1,10 @@
 import createError from 'http-errors';
-import { Context, Next } from 'koa';
+import { Context } from 'koa';
 import jwt, { Secret } from 'jsonwebtoken';
 
-import userModel from '@models/user';
-import { User } from '@interfaces/auth';
+import userModel from '@/models/user';
+
+import { User } from '@/interfaces/auth';
 
 const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   if (!authorization) {
@@ -15,10 +16,7 @@ const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   const matched = authorization.match(tokenReg);
 
   if (!matched || matched?.length < 2) {
-    const authTypeError = createError(
-      401,
-      'authorization type needs to be BEARER',
-    );
+    const authTypeError = createError(401, 'authorization type needs to be BEARER');
     throw authTypeError;
   }
 
@@ -39,8 +37,7 @@ const decodeToken = (token: string): any => {
 const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
   const user = decodeToken(token);
-
-  const isUserInDB = !!(await userModel.get(user));
+  const isUserInDB = !!(await userModel.get(user.userid, user.social));
   return isUserInDB ? user : null;
 };
 

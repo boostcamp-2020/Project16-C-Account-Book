@@ -1,3 +1,5 @@
+import { iTransaction } from '@interfaces/transaction';
+import { iSetTransactionAddModalVisible } from '@interfaces/transaction-form-modal-store';
 import { createTransaction, updateTransaction } from '../../api/transaction';
 
 export const createStore = () => {
@@ -40,12 +42,12 @@ export const createStore = () => {
       this.message = text;
     },
 
-    setTransactionAddModalVisible(visible: boolean) {
+    setTransactionAddModalVisible(visible: boolean): void {
       this.transactionAddModalVisible = visible;
     },
 
-    setInput(transaction: any) {
-      this.input = transaction;
+    setInput(transactionFormInput: any) {
+      this.input = transactionFormInput;
     },
 
     async submitPost(accountbookId: string) {
@@ -81,7 +83,7 @@ export const createStore = () => {
       const newTransaction = { ...this.input, date };
 
       try {
-        const { status, data } = await updateTransaction(
+        const { status } = await updateTransaction(
           accountbookId,
           newTransaction,
         );

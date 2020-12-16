@@ -1,28 +1,28 @@
-import React, { ChangeEvent } from 'react';
-import Select, { ValueType } from 'react-select';
+import React, { ReactElement } from 'react';
+import Select from 'react-select';
 
 import calculateDate from '../../../../util/calculateDate';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
 import './index.scss';
 
-const DateInput = () => {
+const DateInput = (): ReactElement => {
   const { input, setInput } = useTransactionAddModalData(store => ({
     input: store.input,
     setInput: store.setInput,
   }));
 
   const selectStyles = {
-    option: (provided, state) => ({
+    option: (provided: any, state: any) => ({
       ...provided,
       color: 'black',
     }),
-    control: provided => ({
+    control: (provided: any) => ({
       ...provided,
       width: '80px',
       marginRight: '5px',
     }),
-    dropdownIndicator: provided => ({
+    dropdownIndicator: () => ({
       width: '20px',
     }),
   };
@@ -52,7 +52,7 @@ const DateInput = () => {
     label: day,
   }));
 
-  const onSelectChange = type => item => {
+  const onSelectChange = (type: string) => (item: any) => {
     setInput({ ...input, [type]: item.value });
   };
 

@@ -1,13 +1,6 @@
-import { User } from '@interfaces/auth';
 import { UserModel } from './schema';
 
-const get = async ({
-  userid,
-  social,
-}: {
-  userid: string;
-  social: string;
-}): Promise<any> => {
+const get = async (userid: any, social: any): Promise<any> => {
   const user = await UserModel.findOne({ userid, social });
   return user;
 };

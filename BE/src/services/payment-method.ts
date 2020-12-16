@@ -1,71 +1,37 @@
 import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
 
-const post = async (ctx: Context): Promise<any> => {
+const post = async (params: any, body: any): Promise<any> => {
   const paymentMethodInfo = {
-    name: ctx.request.body.name,
-    color: ctx.request.body.color,
-    desc: ctx.request.body.desc,
+    name: body.name,
+    color: body.color,
+    desc: body.desc,
   };
-  const paymentMethod = await accountBookModel.addPaymentMethod(
-    ctx.params.accountbookid,
-    paymentMethodInfo,
-  );
+  const paymentMethod = await accountBookModel.addPaymentMethod(params.accountbookid, paymentMethodInfo);
   if (paymentMethod) {
-    return {
-      message: 'success',
-      data: paymentMethod,
-    };
+    return paymentMethod;
   }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  return {};
 };
 
-const patch = async (ctx: Context): Promise<any> => {
-  const accountBookId = ctx.params.accountbookid;
-  const paymentMethodId = ctx.params.paymentid;
+const patch = async (params: any, body: any): Promise<any> => {
+  const accountBookId = params.accountbookid;
+  const paymentMethodId = params.paymentid;
   const updateInfo = {
     _id: paymentMethodId,
-    name: ctx.request.body.name,
-    color: ctx.request.body.color,
-    desc: ctx.request.body.desc,
+    name: body.name,
+    color: body.color,
+    desc: body.desc,
   };
-  const updateResult = await accountBookModel.updatePaymentMethod(
-    accountBookId,
-    paymentMethodId,
-    updateInfo,
-  );
-  if (updateResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  const updateResult = await accountBookModel.updatePaymentMethod(accountBookId, paymentMethodId, updateInfo);
+  return !!updateResult;
 };
 
-const del = async (ctx: Context): Promise<any> => {
-  const accountBookId = ctx.params.accountbookid;
-  const paymentId = ctx.params.paymentid;
-  const delResult = await accountBookModel.deletePaymentMethod(
-    accountBookId,
-    paymentId,
-  );
-  if (delResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+const del = async (params: any): Promise<any> => {
+  const accountBookId = params.accountbookid;
+  const paymentId = params.paymentid;
+  const delResult = await accountBookModel.deletePaymentMethod(accountBookId, paymentId);
+  return !!delResult;
 };
 
 export default { post, patch, del };

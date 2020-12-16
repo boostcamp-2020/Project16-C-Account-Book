@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import './index.scss';
 
 import { useHistory } from 'react-router-dom';
+import { iTransactionOfOneDayProp } from '@interfaces/transaction-components';
+import { iLocation } from '@interfaces/accountbook';
+import { iTransaction } from '@interfaces/transaction';
 import TransactionItem from '../TransactionItem';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
-import { iTransactionsOfOneDay } from '../../../../types/transaction';
 import { updateTransaction as updateTransactionApi } from '../../../../api/transaction';
 import { useThemeData } from '../../../../store/Theme/themeHook';
 
@@ -15,14 +17,15 @@ const TransactionsOfOneDay = ({
   setDraggedItem,
   draggedInDate,
   setDraggedInDate,
-}: iTransactionsOfOneDay) => {
-  const accountBookId = useHistory().location.state.id;
+}: iTransactionOfOneDayProp): ReactElement => {
+  const { location } = useHistory<iLocation>();
+  const accountBookId = location.state.id;
   const theme = useThemeData(store => store.mode);
 
   const { getTransactionById, updateTransactionInStore } = useAccountBookData(
     store => ({
       getTransactionById: store.getTransactionById,
-      updateTransactionInStore: store.updateTransaction,
+      updateTransactionInStore: store.updateTransactionToLast,
     }),
   );
 
@@ -32,7 +35,9 @@ const TransactionsOfOneDay = ({
     setDraggedInDate(date);
   };
 
-  const updateTransaction = async movedTransaction => {
+  const updateTransaction = async (
+    movedTransaction: iTransaction,
+  ): Promise<void> => {
     const { status } = await updateTransactionApi(
       accountBookId,
       movedTransaction,
@@ -50,8 +55,10 @@ const TransactionsOfOneDay = ({
     const movedTransaction = getTransactionById(movedTransactionId);
 
     if (draggedItem.date === date) return setDraggedInDate('');
-    movedTransaction.date = date;
-    updateTransaction(movedTransaction);
+    if (movedTransaction) {
+      movedTransaction.date = date;
+      updateTransaction(movedTransaction);
+    }
   };
 
   return useMemo(
@@ -82,7 +89,7 @@ const TransactionsOfOneDay = ({
               payment={t.payment}
               cost={t.cost}
               type={t.type}
-              id={t._id}
+              _id={t._id}
               key={t._id}
               setDraggedItem={setDraggedItem}
               setDraggedInDate={setDraggedInDate}
@@ -92,12 +99,12 @@ const TransactionsOfOneDay = ({
             <TransactionItem
               dragObject
               date={date}
-              category={draggedItem.category}
-              content={draggedItem.content}
+              category={draggedItem?.category}
+              content={draggedItem?.content}
               payment={draggedItem.payment}
               cost={draggedItem.cost}
               type={draggedItem.type}
-              id={draggedItem._id}
+              _id={draggedItem._id}
             />
           )}
         </ul>
