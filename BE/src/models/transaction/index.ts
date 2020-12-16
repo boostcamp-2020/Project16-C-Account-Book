@@ -10,4 +10,19 @@ const post = async (transactioninfo: any): Promise<any> => {
   return transaction;
 };
 
-export default { get, post };
+const postMany = async (transactionArray: any): Promise<any> => {
+  const result = await TransactionModel.insertMany(transactionArray);
+  console.log(result);
+  return true;
+};
+
+const patch = async (transactionId: any, transactionInfo: any): Promise<any> => {
+  const updateResult = await TransactionModel.update({ _id: transactionId }, { transactionInfo });
+  return !!updateResult.nModified;
+};
+
+const del = async (transactionId: any): Promise<any> => {
+  const deleteResult = await TransactionModel.deleteOne({ _id: transactionId });
+  return !!deleteResult.deletedCount;
+};
+export default { get, post, postMany, patch, del };

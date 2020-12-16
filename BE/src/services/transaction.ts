@@ -21,7 +21,6 @@ const post = async (params: any, body: any): Promise<any> => {
 };
 
 const patch = async (params: any, body: any): Promise<any> => {
-  const accountBookId = params.accountbookid;
   const transactionId = params.transactionid;
   const updateInfo = {
     _id: transactionId,
@@ -32,14 +31,13 @@ const patch = async (params: any, body: any): Promise<any> => {
     date: body.date,
     payment: body.payment,
   };
-  const updateResult = await accountBookModel.updateTransaction(accountBookId, transactionId, updateInfo);
+  const updateResult = await transactionModel.patch(transactionId, updateInfo);
   return !!updateResult;
 };
 
 const del = async (params: any): Promise<any> => {
-  const accountBookId = params.accountbookid;
   const transactionId = params.transactionid;
-  const delResult = await accountBookModel.deleteTransaction(accountBookId, transactionId);
+  const delResult = await transactionModel.del(transactionId);
   return !!delResult;
 };
 
@@ -93,6 +91,7 @@ const importCSV = async (params: any, body: any): Promise<any> => {
       const tempTransaction: any = {
         category: { name: '미분류', icon: 1 },
         payment: { color: 'hsl(177deg 62% 40%)', desc: '' },
+        accountbook: params.accountbookid,
       };
 
       for (let i = 0; i < csvArray[0].length; i += 1) {
@@ -120,7 +119,7 @@ const importCSV = async (params: any, body: any): Promise<any> => {
     return { message: 'csv 형식이 올바르지 않습니다.', data: {} };
   }
 
-  const result = await accountBookModel.addTransactions(params.accountbookid, transactionArray);
+  const result = await transactionModel.postMany(transactionArray);
 
   return !!result;
 };
