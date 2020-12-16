@@ -9,7 +9,4 @@ export const Schema = new mongoose.Schema({
   desc: { type: String, default: '' },
 });
 
-export const DefaultPaymentMethodModel = mongoose.model<PaymentDoc>(
-  'default_payment_methods',
-  Schema,
-);
+export const DefaultPaymentMethodModel = mongoose.model<PaymentDoc>('Default_payment_methods', Schema);

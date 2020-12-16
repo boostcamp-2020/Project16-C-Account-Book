@@ -9,7 +9,4 @@ export const Schema = new mongoose.Schema({
   icon: { type: Number, required: true },
 });
 
-export const CategoryModel = mongoose.model<CategoryDoc>(
-  'default_categories',
-  Schema,
-);
+export const CategoryModel = mongoose.model<CategoryDoc>('Default_categories', Schema);

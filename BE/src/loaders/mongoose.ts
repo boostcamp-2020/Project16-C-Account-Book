@@ -1,15 +1,10 @@
 import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
-import dotenv from 'dotenv';
-import path from 'path';
-
-dotenv.config({ path: path.join(__dirname, '../../.env') });
-
-const URL = process.env.DATABASE_URL || `mongodb://localhost:27017/test`;
+import config from '@/config';
 
 export default async (): Promise<void> => {
   await mongoose.connect(
-    URL,
+    config.databaseURL,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -21,7 +16,7 @@ export default async (): Promise<void> => {
         console.error(error);
         throw error;
       } else {
-        console.log(`connected to DB ${URL}✅`);
+        console.log(`connected to DB ${config.databaseURL}✅`);
       }
     },
   );

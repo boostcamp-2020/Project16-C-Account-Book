@@ -1,23 +1,18 @@
-import { Context } from 'koa';
 import Router from 'koa-router';
 
-import authController from '@controllers/auth';
-import authRouter from './auth';
-import accountBookRouter from './account-book';
-import defaultPaymentMethodRouter from './defaultPaymentMethod';
-import socialRouter from './social';
+import authMiddleware from '@/middlewares/check-token';
+
+import authRouter from '@/routes/api/auth';
+import accountBookRouter from '@/routes/api/account-book';
+import defaultPaymentMethodRouter from '@/routes/api/defaultPaymentMethod';
+import socialRouter from '@/routes/api/social';
 
 const router = new Router();
 
-router.get('/', (ctx: Context, next) => {
-  ctx.body = `GET ${ctx.path}`;
-  next();
-});
+// api/
 
 router.use('/auth', authRouter.routes());
-
-router.use(authController.checkToken);
-
+router.use(authMiddleware.checkToken);
 router.use('/accountbook', accountBookRouter.routes());
 router.use('/social/accountbook', socialRouter.routes());
 router.use('/defaultPaymentMethod', defaultPaymentMethodRouter.routes());
