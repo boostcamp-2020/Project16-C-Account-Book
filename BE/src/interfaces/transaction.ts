@@ -8,4 +8,5 @@ export default interface Transaction {
   cost: number;
   date: Date;
   payment: { payment: PaymentMethod };
+  accountbook: string;
 }

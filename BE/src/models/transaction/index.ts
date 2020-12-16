@@ -7,7 +7,19 @@ const get = async (): Promise<any> => {
 
 const post = async (transactioninfo: any): Promise<any> => {
   const transaction = await new TransactionModel(transactioninfo).save();
-  return transaction;
+
+  const newTransactions = {
+    _id: transaction._id,
+    content: transaction.content,
+    type: transaction.type,
+    category: transaction.category,
+    cost: transaction.cost,
+    payment: transaction.payment,
+    accountbook: transaction.accountbook,
+    date: transaction.date.toISOString().substr(0, 10),
+  };
+
+  return newTransactions;
 };
 
 const postMany = async (transactionArray: any): Promise<any> => {

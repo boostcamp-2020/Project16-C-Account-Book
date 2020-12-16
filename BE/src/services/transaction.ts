@@ -1,5 +1,6 @@
 import accountBookModel from '@models/accountbook';
 import transactionModel from '@/models/transaction';
+import { Context } from 'koa';
 
 const { Parser } = require('json2csv');
 
@@ -13,6 +14,8 @@ const post = async (params: any, body: any): Promise<any> => {
     payment: body.payment,
     accountbook: params.accountbookid,
   };
+
+  console.log(transactionInfo);
   const transaction = await transactionModel.post(transactionInfo);
   if (transaction) {
     return transaction;
@@ -64,7 +67,6 @@ const exportCSV = async (params: any): Promise<any> => {
   }
   return {};
 };
-
 const downloadTemplateCSV = async (ctx: Context): Promise<any> => {
   const exampleTransaction = [
     {

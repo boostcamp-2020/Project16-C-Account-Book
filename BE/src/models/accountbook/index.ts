@@ -19,6 +19,9 @@ const getDetail = async (id: string): Promise<any> => {
 };
 
 const getTransactions = async (id: string, year: string, month: string): Promise<any> => {
+  console.log(id);
+  console.log(year);
+  console.log(month);
   const accountBook = await AccountBookModel.findOne({ _id: id });
   if (accountBook) {
     const startMonth = new Date(+year, +month - 2, 2);
@@ -31,6 +34,19 @@ const getTransactions = async (id: string, year: string, month: string): Promise
       },
     });
 
+    const newTransactions = transactions.map(t => {
+      return {
+        _id: t._id,
+        content: t.content,
+        type: t.type,
+        category: t.category,
+        cost: t.cost,
+        payment: t.payment,
+        accountbook: t.accountbook,
+        date: t.date.toISOString().substr(0, 10),
+      };
+    });
+
     const newAccountBook = {
       _id: accountBook._id,
       code: accountBook.code,
@@ -40,7 +56,7 @@ const getTransactions = async (id: string, year: string, month: string): Promise
       users: accountBook.users,
       categories: accountBook.categories,
       payments: accountBook.payments,
-      transactions,
+      transactions: newTransactions,
     };
     return newAccountBook;
   }

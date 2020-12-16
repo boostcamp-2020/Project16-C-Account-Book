@@ -10,7 +10,7 @@ router.get('/csv', controller.exportCSV);
 
 router.post('/', controller.post);
 router.post('/csv', controller.importCSV);
-
+router.get('/csv/template', controller.downloadTemplateCSV);
 router.patch('/:transactionid', controller.patch);
 
 router.delete('/:transactionid', controller.del);

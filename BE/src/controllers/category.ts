@@ -6,7 +6,8 @@ const post = async (ctx: Context): Promise<Context['body']> => {
   const { params } = ctx;
   const { body } = ctx.request;
   const category = await service.post(params, body);
-  const res = response(200, { category });
+  const res = response(200, category);
+  console.log(res);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;

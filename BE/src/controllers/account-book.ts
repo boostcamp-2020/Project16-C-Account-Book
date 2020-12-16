@@ -35,6 +35,7 @@ const getTransaction = async (ctx: Context): Promise<Context['body']> => {
   const { params } = ctx;
   const accountBook = await service.getTransaction(params);
   const res = response(200, accountBook);
+  console.log(accountBook);
   ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
