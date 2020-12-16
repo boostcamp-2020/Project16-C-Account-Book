@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 
 import './index.scss';
 import { useHistory } from 'react-router-dom';
-import { iTransactionItem } from '../../../../types/transaction';
+import { iTransactionItemProp } from '@interfaces/transaction-components';
+import { iLocation } from '@interfaces/accountbook';
+import { iTransaction } from '../../../../interfaces/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
@@ -10,7 +12,7 @@ import { useThemeData } from '../../../../store/Theme/themeHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
 const TransactionItem = ({
-  id: transactionId,
+  _id: transactionId,
   date,
   category,
   content,
@@ -20,9 +22,11 @@ const TransactionItem = ({
   setDraggedItem,
   dragObject,
   setDraggedInDate,
-}: iTransactionItem) => {
+}: iTransaction & iTransactionItemProp): any => {
   const theme = useThemeData(store => store.mode);
-  const [buttonReveal, setButtonReveal] = useState('');
+  const [buttonReveal, setButtonReveal] = useState<string>('');
+  const { location } = useHistory<iLocation>();
+  const accountBookId = location.state.id;
 
   const {
     setTransactionAddModalVisible,
@@ -31,8 +35,6 @@ const TransactionItem = ({
     setTransactionAddModalVisible: store.setTransactionAddModalVisible,
     setInput: store.setInput,
   }));
-
-  const accountBookId = useHistory().location.state.id;
 
   const { deleteTransactionInStore, getTransactionById } = useAccountBookData(
     store => ({
@@ -65,9 +67,12 @@ const TransactionItem = ({
     setTransactionAddModalVisible(true);
   };
 
-  const onDeleteButtonClicked = async e => {
+  const onDeleteButtonClicked = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.stopPropagation();
     try {
+      if (!transactionId) throw new Error('transaction id undefined');
       const { status } = await deleteTransactionApi(
         accountBookId,
         transactionId,
@@ -82,26 +87,41 @@ const TransactionItem = ({
   };
 
   const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.target.classList.add('on__drag');
+    try {
+      if (!setDraggedItem) throw new Error('cannot draggable');
+      e.target.classList.add('on__drag');
+      if (!transactionId) throw new Error('transaction id undefined');
+      e.dataTransfer.setData('transactionId', transactionId);
+      const movedTransaction = getTransactionById(transactionId);
 
-    e.dataTransfer.setData('transactionId', transactionId);
-    const movedTransaction = getTransactionById(transactionId);
-
-    setDraggedItem(movedTransaction);
+      if (!movedTransaction) throw new Error('no matched transaction');
+      setDraggedItem(movedTransaction);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
-    e.target.classList.remove('on__drag');
-    console.log('on end', e.dataTransfer.dropEffect);
-    setTimeout(() => {
-      setDraggedInDate('');
-    }, 500);
+    try {
+      if (!setDraggedInDate) throw new Error('cannot draggable');
+      e.target.classList.remove('on__drag');
+      console.log('on end', e.dataTransfer.dropEffect);
+      setTimeout(() => {
+        setDraggedInDate('');
+      }, 500);
+    } catch (error) {
+      console.error(error);
+    }
+
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
+      role="button"
       className={`transaction__item${dragObject ? ' on__dragged__in' : ''}`}
       onClick={onTransactionClicked}
+      onKeyDown={onTransactionClicked}
       draggable
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}

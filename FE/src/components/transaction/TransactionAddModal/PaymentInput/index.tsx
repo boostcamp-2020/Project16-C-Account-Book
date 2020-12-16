@@ -1,10 +1,15 @@
-import React, { ChangeEvent } from 'react';
+import iPayment from '@interfaces/payment';
+import React, { ChangeEvent, ReactElement } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
 import './index.scss';
 
-const PaymentInput = ({ paymentPool }) => {
+const PaymentInput = ({
+  paymentPool,
+}: {
+  paymentPool: iPayment[];
+}): ReactElement => {
   const { input, setInput } = useTransactionAddModalData(store => ({
     input: store.input,
     setInput: store.setInput,

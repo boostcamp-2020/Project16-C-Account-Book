@@ -1,10 +1,14 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
 import './index.scss';
 
-const CategoryInput = ({ categoryPool }: { categoryPool: Array<any> }) => {
+const CategoryInput = ({
+  categoryPool,
+}: {
+  categoryPool: Array<any>;
+}): ReactElement => {
   const { input, setInput } = useTransactionAddModalData(store => ({
     input: store.input,
     setInput: store.setInput,
