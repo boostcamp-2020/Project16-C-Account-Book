@@ -59,8 +59,8 @@ const Filter = ({
     <div
       className={
         theme === 'dark'
-          ? 'acbook__list__container'
-          : 'acbook__list__container light'
+          ? 'acbook__filter__container'
+          : 'acbook__filter__container light'
       }
     >
       <div
@@ -81,8 +81,8 @@ const Filter = ({
             />
             <span>
               {type === '지출'
-                ? `-${CommaMaker(filteredPriceOut)}`
-                : `+${CommaMaker(filteredPriceIn)}`}
+                ? `-${CommaMaker(filteredPriceOut)}원`
+                : `+${CommaMaker(filteredPriceIn)}원`}
             </span>
           </label>
         ))}

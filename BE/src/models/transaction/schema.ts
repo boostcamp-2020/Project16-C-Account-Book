@@ -13,7 +13,7 @@ export const Schema = new mongoose.Schema({
   type: { type: String, required: true },
   cost: { type: Number, required: true },
   category: { type: CategorySchema, required: true },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   payment: { type: PaymentSchema, required: true },
 });
 

@@ -42,7 +42,7 @@ export default function SettingPage() {
       )}
 
       {settingType === 'category' && <CategorySetting />}
-      {settingType === 'csv' && <CSVSetting />}
+      {settingType === 'csv' && <CSVSetting confirmModal={confirmModal} />}
       {confirmModal.saveModal && (
         <SaveModal
           saveAction={confirmModal.saveAction}

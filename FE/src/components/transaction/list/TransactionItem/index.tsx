@@ -7,6 +7,7 @@ import { useTransactionAddModalData } from '../../../../store/TransactionFormMod
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
 import { useThemeData } from '../../../../store/Theme/themeHook';
+import CommaMaker from '../../../../util/commaForMoney';
 
 const TransactionItem = ({
   id: transactionId,
@@ -133,9 +134,13 @@ const TransactionItem = ({
         {payment.name}
       </div>
       {type === '지출' ? (
-        <span className="transaction__item__cost transaction__item__out">{`-${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__out">
+          {`-${CommaMaker(cost)}원`}
+        </span>
       ) : (
-        <span className="transaction__item__cost transaction__item__in">{`+${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__in">
+          {`+${CommaMaker(cost)}원`}
+        </span>
       )}
       <div className={`transaction__item__button__container ${buttonReveal}`}>
         <button
