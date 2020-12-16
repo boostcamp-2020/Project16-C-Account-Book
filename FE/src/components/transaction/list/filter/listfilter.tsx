@@ -27,6 +27,13 @@ const Filter = ({
     filteredPriceOut: store.filteredPriceOut,
   }));
 
+  const onClickInitFilter = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    selectCategories([]);
+    selectType([]);
+  };
+
   const onCategoryChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const targetElement = e.target as HTMLInputElement;
@@ -94,16 +101,25 @@ const Filter = ({
             : 'acbook__list__categoryFilter light'
         }
       >
+        <button
+          type="button"
+          className="filter-init-button"
+          onClick={onClickInitFilter}
+        >
+          초기화
+        </button>
         {categoryPool
           .filter(
             ({ type }) =>
               selectedTypes.length === 0 || selectedTypes.includes(type),
           )
-          .map(({ name }) => (
+          .map(({ name, type, icon }) => (
             <label key={name}>
               <input
                 type="checkbox"
                 name="category"
+                data-type={type}
+                data-icon={icon}
                 value={name}
                 onChange={onCategoryChange}
                 checked={selectedCategories.includes(name)}
