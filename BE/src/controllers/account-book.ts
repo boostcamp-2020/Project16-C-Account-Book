@@ -33,7 +33,7 @@ const getCode = async (ctx: Context): Promise<Context['body']> => {
 
 const getTransaction = async (ctx: Context): Promise<Context['body']> => {
   const { params } = ctx;
-  const accountBook = await service.getDetail(params);
+  const accountBook = await service.getTransaction(params);
   const res = response(200, accountBook);
   ctx.status = res.status;
   ctx.body = res;
