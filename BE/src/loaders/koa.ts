@@ -3,7 +3,7 @@ import bodyParser from 'koa-bodyparser';
 import Router from 'koa-router';
 import logger from 'koa-logger';
 
-import { errorCatcher, errorHandler } from '@/loaders/error';
+import { errorCatcher, errorHandler } from '@loaders/error';
 import indexRouter from '../routes/index';
 
 const router = new Router();

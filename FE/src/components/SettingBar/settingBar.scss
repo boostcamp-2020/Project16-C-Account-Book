@@ -1,0 +1,46 @@
+@use '../../styles/values' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/mediaQuery' as *;
+
+.settingbar__header {
+  @include headerSetting;
+
+  .settingbar__buttons {
+    @include headerButtons;
+
+    .settingbar__back__navBtn {
+      @include headerNavigationButtons(left);
+      .nav__accountbook__btn {
+        &.light {
+          color: $black;
+          text-shadow: none;
+        }
+      }
+      .fas.fa-arrow-left {
+        &.light {
+          color: $black;
+          text-shadow: none;
+        }
+      }
+    }
+    @include mobile {
+      .settingbar__back__navBtn {
+        .nav__accountbook__btn {
+          display: none;
+        }
+        .fas.fa-arrow-left {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  @include mobile {
+    .settingbar__buttons {
+      gap: 1em;
+    }
+  }
+
+  &.light {
+    background-color: $light-background-color;
+  }
+}

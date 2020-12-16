@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "tsc && export PRODUCTION=true && node -r ./tsconfig-paths-bootstrap.js build/index.js",
+    "start": " tsc && export PRODUCTION=true && node -r ./tsconfig-paths-bootstrap.js build/index.js",
     "dev": "nodemon"
   },
   "author": "",
@@ -17,14 +17,17 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "http-errors": "^1.8.0",
+    "json2csv": "^5.0.5",
     "jsonwebtoken": "^8.5.1",
     "koa": "2.13.0",
+    "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-logger": "^3.2.1",
     "koa-router": "10.0.0",
     "module-alias": "2.2.2",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.15",
+    "redis": "^3.0.2",
     "tsconfig-paths": "^3.9.0"
   },
   "devDependencies": {
@@ -39,6 +42,7 @@
     "@types/mongodb": "^3.5.33",
     "@types/mongoose": "^5.10.1",
     "@types/node": "14.14.8",
+    "@types/redis": "^2.8.28",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "4.8.1",
     "eslint": "7.13.0",

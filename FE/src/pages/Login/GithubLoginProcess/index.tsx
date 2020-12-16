@@ -7,8 +7,8 @@ import authApi from '../../../api/auth';
 const LoginProcessPage = () => {
   const history = useHistory();
 
-  const login = async (code: string) => {
-    await authApi.login(code);
+  const login = async (code: string, social: string) => {
+    await authApi.login(code, social);
     history.push('/');
   };
 
@@ -21,7 +21,7 @@ const LoginProcessPage = () => {
     const code = url.split('?code=')[1];
 
     if (code) {
-      login(code);
+      login(code, 'github');
     }
   });
 

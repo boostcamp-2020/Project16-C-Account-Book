@@ -1,0 +1,6 @@
+@use '../../../styles/mixins'as *;
+@use '../../../styles/values'as *;
+
+.csv__setting__container {
+  @include settingContainer;
+}

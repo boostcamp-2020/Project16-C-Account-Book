@@ -1,0 +1,30 @@
+@use '../../../styles/values' as *;
+.create__acbook {
+  position: relative;
+  background-color: #f9e000;
+  width: 333px;
+  min-height: 195px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  padding: 2em 1em;
+
+  .fas.fa-minus-circle {
+    position: absolute;
+    right: 0.5em;
+    top: 1em;
+    font-size: 1.4em;
+    color: $spending-color;
+    cursor: pointer;
+  }
+
+  @keyframes cardShow {
+    from {
+      opacity: 0;
+      transform: translateX(300px);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}

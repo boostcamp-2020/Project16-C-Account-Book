@@ -1,0 +1,156 @@
+@use '../../../../styles/values.scss' as *;
+
+.transaction__item {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: inherit;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 1em;
+  color: $dark-emphasize-font-color;
+  cursor: pointer;
+
+  .transaction__item__button__container {
+    display: none;
+    position: absolute;
+  }
+
+  .reveal {
+    display: flex;
+    animation: button__in;
+    animation-duration: 0.3s;
+    right: 10px;
+    width: 20%;
+    justify-content: space-evenly;
+    background-color: $dark-background-color;
+    box-shadow: 0 0 20px 0px $dark-background-color;
+  }
+
+  .hide {
+    display: flex;
+    animation: button__out;
+    animation-duration: 0.3s;
+    right: -100%;
+  }
+
+  .transaction__item__delete__button,
+  .transaction__item__modify__button {
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .transaction__item__delete__button {
+    border: 1px solid $transaction-delete-button-color;
+    background-color: $transaction-delete-button-color;
+    color: white;
+    box-shadow: 0 0 5px 1px $transaction-delete-button-color;
+  }
+
+  .transaction__item__modify__button {
+    border: 1px solid $transaction-add-btn-color;
+    background-color: $transaction-add-btn-color;
+    box-shadow: 0 0 5px 1px$transaction-add-btn-color;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px dotted $dark-border-color;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .transaction__item__category {
+    flex: 2;
+    span {
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: 1.4px solid $dark-emphasize-font-color;
+    }
+    &.light {
+      span {
+        border: 1px solid $black;
+      }
+      color: $black;
+    }
+  }
+  .transaction__item__description {
+    flex: 4;
+    &.light {
+      color: $light-font-color;
+    }
+  }
+  .transaction__item__payment {
+    flex: 2;
+
+    &.light {
+      color: $light-font-color;
+    }
+  }
+  .transaction__item__cost {
+    flex: 2;
+    text-align: end;
+  }
+
+  .transaction__item__in {
+    color: $income-color;
+  }
+
+  .transaction__item__out {
+    color: $spending-color;
+  }
+}
+
+.on__dragged__in {
+  border-radius: 10px;
+  box-shadow: $dragboxShadow;
+}
+
+.on__drag {
+  animation-name: air;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes air {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes button__in {
+  0% {
+    opacity: 0;
+    right: -15%;
+  }
+
+  100% {
+    opacity: 1;
+    right: 10px;
+  }
+}
+
+@keyframes button__out {
+  0% {
+    opacity: 1;
+    right: 10px;
+  }
+
+  100% {
+    opacity: 0;
+    left: 105%;
+  }
+}

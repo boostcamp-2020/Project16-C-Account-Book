@@ -1,0 +1,51 @@
+@use '../../../../styles/mixins' as *;
+@use '../../../../styles/values' as *;
+
+.invite__code__box {
+  @include settingBox;
+
+  .invite__code__title {
+    @include settingTitle;
+    &.light {
+      text-shadow: none;
+    }
+  }
+
+  .invite__code__desc {
+    @include settingDesc;
+  }
+
+  .invite__code__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+
+    .get__code__button {
+      font-size: 1.5vh;
+    }
+
+    .content__and__clipboard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .invite__code {
+        padding-bottom: 1.5vh;
+        border-bottom: 1px solid $dark-emphasize-font-color;
+      }
+      .far.fa-clipboard {
+        margin-left: 15px;
+        font-size: 3vh;
+        cursor: pointer;
+      }
+    }
+  }
+  .clip__board__message {
+    display: flex;
+    justify-content: center;
+    padding: 3vh 0;
+  }
+  &.light {
+    color: $black;
+  }
+}

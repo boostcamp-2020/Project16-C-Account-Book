@@ -1,11 +1,19 @@
-.wrapper {
+@use '../../../styles/defaultCards' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
+
+.new__method__wrapper {
   bottom: 1px;
   transform: translateX(-50%);
   position: absolute;
   left: 50%;
   z-index: 3;
-  .scene {
-    border: 1px solid #ccc;
+
+  @include default-card;
+
+  .new__method__scene {
+    border: 1px solid $white;
     margin: 40px 0;
     position: relative;
     width: 210px;
@@ -14,7 +22,7 @@
     perspective: 1000px;
   }
 
-  .carousel {
+  .new__method__carousel {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -29,73 +37,43 @@
     height: 120px;
     left: 10px;
     top: 10px;
-    border: 2px solid white;
     border-radius: 6px;
-    // backface-visibility: hidden;
     line-height: 116px;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
-    color: white;
+    color: $white;
     text-align: center;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $noSelectedBoxShadow;
     transition: transform 1s, opacity 1s;
     cursor: pointer;
   }
 
-  .carousel__cell:nth-child(1) {
-    transform: rotateY(0deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(2) {
-    transform: rotateY(40deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(3) {
-    transform: rotateY(80deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(4) {
-    transform: rotateY(120deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(5) {
-    transform: rotateY(160deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(6) {
-    transform: rotateY(200deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(7) {
-    transform: rotateY(240deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(8) {
-    transform: rotateY(280deg) translateZ(288px);
-  }
-  .carousel__cell:nth-child(9) {
-    transform: rotateY(320deg) translateZ(288px);
-  }
-
-  .prev__button {
+  .new__method__prev__button {
+    @include buttonDefaultSetting;
+    border: 1px solid $white;
     position: absolute;
     left: -15em;
     bottom: 8rem;
     padding: 0.2em 1em;
 
-    background-color: rgba(0, 0, 0, 0.1);
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-
-    outline: none;
-    cursor: pointer;
+    background-color: $modal-button-background;
+    color: $white;
   }
 
-  .next__button {
+  .new__method__next__button {
+    @include buttonDefaultSetting;
+    border: 1px solid $white;
     position: absolute;
     right: -15em;
     bottom: 8rem;
     padding: 0.2em 1em;
-
-    background-color: rgba(0, 0, 0, 0.1);
-    color: white;
-    border: 1px solid white;
-    border-radius: 6px;
-
-    outline: none;
-    cursor: pointer;
+    background-color: $modal-button-background;
+    color: $white;
+  }
+}
+@include mobile {
+  .new__method__wrapper {
+    opacity: 0;
   }
 }

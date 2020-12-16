@@ -1,0 +1,68 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mediaQuery.scss' as *;
+
+.pie__table {
+  position: absolute;
+  right: 8%;
+  top: 43%;
+  color: $dark-general-font-color;
+  width: 40%;
+  height: 50%;
+  overflow-y: auto;
+
+  &.light {
+    color: black;
+  }
+
+  .stat__unit {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .stat__background {
+    position: absolute;
+    display: inline-block;
+    left: 25%;
+    width: 53%;
+    height: 20px;
+    background-color: $light-black;
+    &.light {
+      background-color: #eee;
+    }
+    .stat__color {
+      position: absolute;
+      animation: statAnimation 2s;
+    }
+
+    @keyframes statAnimation {
+      from {
+        width: 0;
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .stat__percent {
+    position: absolute;
+    left: 13%;
+    font-weight: bolder;
+  }
+
+  .stat__price {
+    position: absolute;
+    right: 0;
+  }
+}
+
+@include mobile {
+  .pie__table {
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

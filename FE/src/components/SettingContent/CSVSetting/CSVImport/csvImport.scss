@@ -1,0 +1,49 @@
+@use '../../../../styles/values'as *;
+@use '../../../../styles/mixins'as *;
+
+.csv__import__box {
+  @include settingBox;
+
+  .csv__import__title {
+    @include settingTitle;
+    &.light {
+      text-shadow: none;
+    }
+  }
+
+  .csv__import__desc {
+    @include settingDesc;
+  }
+
+  .csv__import__filebox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 30%;
+    border-radius: 6px;
+    background-color: transparent;
+  }
+  .csv__import__content {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+
+    .csv__import__input {
+      button {
+        background-color: transparent;
+      }
+
+      font-size: 1.5vh;
+      color: $dark-emphasize-font-color;
+
+      &.light {
+        color: $black;
+      }
+    }
+  }
+
+  &.light {
+    color: $black;
+  }
+}

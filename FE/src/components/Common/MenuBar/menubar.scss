@@ -1,0 +1,25 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
+
+.menubar__header {
+  @include headerSetting;
+  position: relative;
+
+  &.light {
+    background-color: $light-background-color;
+  }
+
+  @include mobile {
+    .menubar__ctrBox {
+      padding: 5%;
+      font-size: 1rem;
+    }
+  }
+}
+
+@include mobile {
+  .menubar__header {
+    padding: 5% 0;
+  }
+}

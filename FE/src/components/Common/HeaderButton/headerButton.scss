@@ -1,0 +1,65 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
+
+@mixin lightModeHeaderButton {
+  &.light {
+    text-shadow: none;
+    color: black;
+  }
+}
+
+.header__navBtn {
+  @include buttonDefaultSetting;
+  text-align: center;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  background-color: transparent;
+  color: $dark-font-color;
+  font-size: 1.5rem;
+  // box-shadow: $noSelectedBoxShadow;
+
+  .fas.fa-users {
+    @include lightModeHeaderButton;
+  }
+
+  .far.fa-calendar-alt {
+    @include lightModeHeaderButton;
+  }
+
+  .fas.fa-boxes {
+    @include lightModeHeaderButton;
+  }
+
+  .fas.fa-file-csv {
+    @include lightModeHeaderButton;
+  }
+
+  .far.fa-chart-bar {
+    @include lightModeHeaderButton;
+  }
+
+  .fas.fa-credit-card {
+    @include lightModeHeaderButton;
+  }
+
+  .fas.fa-history {
+    @include lightModeHeaderButton;
+  }
+
+  &:hover {
+    box-shadow: $selectedBoxShadow;
+    text-shadow: $selectedTextShadow;
+    color: $dark-general-font-color;
+  }
+  &.checked {
+    box-shadow: $selectedBoxShadow;
+    text-shadow: $selectedTextShadow;
+    color: $dark-general-font-color;
+  }
+
+  &.light {
+    color: black;
+  }
+}

@@ -1,0 +1,2 @@
+content,type,cost,date,category.name,category.type,payment.name,payment.desc
+버거킹,지출,20000,2020-12-15,식비,지출,BC Card,체크 카드

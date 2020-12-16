@@ -3,14 +3,15 @@ export const createStore = () => {
     nowCalendarInfo: {
       year: new Date().getFullYear(),
       month: new Date().getMonth(),
-      day: '',
+      day: 1,
     },
 
-    setCalendarInfo(year: number, month: number) {
+    setCalendarInfo(year: number, month: number, day: number) {
       this.nowCalendarInfo = {
         ...this.nowCalendarInfo,
         year,
         month,
+        day,
       };
     },
   };

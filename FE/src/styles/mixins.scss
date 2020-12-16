@@ -1,0 +1,180 @@
+@use './values.scss' as *;
+
+// loading-spinner
+
+@mixin loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .indicator {
+    color: $dark-emphasize-font-color;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: 900;
+  }
+
+  .spinner {
+    border: 20px solid $spinner-background-color;
+    border-top: 20px solid $spin-color;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// form
+
+@mixin buttonDefaultSetting {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+}
+
+@mixin input-form {
+  padding: 0.5em 1em;
+
+  border: 1px solid #e1e4e8;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1em;
+  background-color: #fff;
+
+  &:focus {
+    background-color: #fff;
+    border: 1px solid #77aedb;
+    box-shadow: 0 0 1em #71a1c9;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+  }
+}
+
+@mixin general-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $white;
+  color: $white;
+  width: 5em;
+  height: 30px;
+  background-color: $modal-button-background;
+  font-size: 1em;
+  padding: 0px;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
+
+@mixin large-button-design {
+  @include buttonDefaultSetting;
+  border: 1px solid $dark-emphasize-font-color;
+  color: $white;
+
+  background-color: $modal-button-background;
+
+  width: 8em;
+  height: 50px;
+  font-size: 1em;
+  z-index: 4;
+
+  &:hover {
+    background-color: $light-black;
+    text-shadow: $selectedTextShadow;
+    box-shadow: $selectedBoxShadow;
+  }
+}
+
+// setting tab
+
+@mixin settingTitle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 3vh;
+  padding: 3.5vh 0;
+  text-shadow: $selectedTextShadow;
+}
+
+@mixin settingDesc {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 2vh;
+  padding-bottom: 3vh;
+}
+
+@mixin settingContainer {
+  width: 100%;
+  height: 100%;
+  color: $dark-general-font-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
+@mixin settingBox {
+  width: 55%;
+  height: 40%;
+  border: 1px solid $dark-border-color;
+  border-radius: 6px;
+  padding: 1.5vw;
+}
+
+// header
+@mixin headerSetting {
+  position: relative;
+  background-color: $dark-background-color;
+  width: 100%;
+
+  padding-top: 2.5%;
+  z-index: 2;
+}
+
+@mixin headerButtons {
+  display: flex;
+  justify-content: center;
+  gap: 3em;
+  position: relative;
+}
+
+@mixin headerNavigationButtons($type) {
+  @include buttonDefaultSetting;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  text-align: center;
+  line-height: 1.5em;
+  @if $type == left {
+    left: 5%;
+  } @else {
+    right: 5%;
+  }
+  height: 1.5em;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1.5em;
+
+  text-shadow: $selectedTextShadow;
+  color: $dark-emphasize-font-color;
+}

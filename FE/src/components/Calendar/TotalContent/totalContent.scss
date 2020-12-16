@@ -1,0 +1,48 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mediaQuery' as *;
+
+@mixin calendar-total($type) {
+  width: 20%;
+  text-align: center;
+  border-radius: 50px;
+  padding: 1em 0;
+  font-weight: bolder;
+  @if $type== income {
+    border: 1.5px solid $income-color;
+    color: $income-color;
+  } @else {
+    border: 1.5px solid $spending-color;
+    color: $spending-color;
+  }
+  @include mobile {
+    padding: 0.5em 0;
+  }
+}
+
+.calendar__total__price {
+  width: 100%;
+  padding: 1.5% 0;
+  display: flex;
+  justify-content: center;
+  gap: 5em;
+
+  .calendar__income__total {
+    @include calendar-total(income);
+  }
+  .calendar__spending__total {
+    @include calendar-total(spending);
+  }
+
+  @include mobile {
+    .calendar__income__total,
+    .calendar__spending__total {
+      width: 45%;
+    }
+  }
+}
+
+@include mobile {
+  .calendar__total__price {
+    gap: 1em;
+  }
+}

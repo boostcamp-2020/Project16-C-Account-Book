@@ -1,0 +1,29 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+.calendar__setting__container {
+  @include settingContainer;
+
+  .calendar__setting__title {
+    @include settingTitle;
+    .calendar__save__btn {
+      position: absolute;
+      right: 5%;
+      font-size: 1.5vh;
+    }
+    &.light {
+      text-shadow: none;
+    }
+  }
+}
+.calendar__setting__desc {
+  @include settingDesc;
+}
+
+.calendar__setting__startday {
+  @include settingBox;
+  position: relative;
+  background-color: transparent;
+  &.light {
+    color: $black;
+  }
+}

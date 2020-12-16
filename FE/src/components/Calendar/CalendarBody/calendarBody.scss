@@ -1,0 +1,76 @@
+@use '../../../styles/values' as *;
+@use '../../../styles/mixins' as *;
+@use '../../../styles/mediaQuery' as *;
+
+td {
+  vertical-align: center;
+
+  .income__info {
+    font-size: 0.8em;
+    color: $income-color;
+  }
+  .spending__info {
+    font-size: 0.8em;
+    color: $spending-color;
+  }
+}
+
+.day {
+  padding: 0.5em 0;
+
+  height: 6rem;
+  color: $white;
+  background-color: $light-black;
+  border-radius: 6px;
+
+  cursor: pointer;
+  &:hover {
+    animation: dateHover 1s;
+  }
+  @keyframes dateHover {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+      transform-origin: 40% 50%;
+    }
+  }
+  &.td__hidden {
+    height: 0;
+  }
+
+  &.light {
+    color: $black;
+    background-color: $light-background-color;
+  }
+}
+
+.today {
+  background: $calendar-today-color;
+  animation: todayColor 2s;
+  width: 40px;
+  height: 40px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  line-height: 40px;
+  border-radius: 50%;
+  color: $white;
+}
+
+@keyframes todayColor {
+  from {
+    transform: translate(-50px);
+    background: $white;
+  }
+}
+
+@include mobile {
+  .day {
+    height: 4rem;
+    font-size: 0.6rem;
+  }
+  .today {
+    font-size: 0.6rem;
+  }
+}

@@ -1,31 +1,63 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import styles from './transaction.module.scss';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import Modal from '../../components/PaymentMethod/Modal';
-import Menubar from '../../components/Common/MenuBar';
+import PaymentModal from '../../components/PaymentMethod/Modal';
+import MenuBar from '../../components/Common/MenuBar';
 import ListContainer from '../../components/transaction/list/listcontainer';
-import { getDefaultMethods } from '../../api/defaultPaymentMethod';
+import TransactionAddModal from '../../components/transaction/TransactionAddModal';
+import './transaction.scss';
 
-const TransactionComponent = props => {
-  const [modal, setModal] = useState(false);
-  const [defaultMethod, setDefaultMethod] = useState([]);
+import useDefaultPayment from '../../service/useDefaultPayment';
+import useLoginCheck from '../../service/useLoginCheck';
+import useAccountBook from '../../service/useAccountBookSetting';
 
-  const getData = async () => {
-    const datas = await getDefaultMethods();
-    setDefaultMethod(datas);
-  };
+import TransactionFormModalProvider from '../../store/TransactionFormModal/TransactionFormModalContext';
+import { useTransactionAddModalData } from '../../store/TransactionFormModal/TransactionFormModalHook';
+import { useThemeData } from '../../store/Theme/themeHook';
 
-  useEffect(() => {
-    getData();
-  }, []);
+function TransactionComponent(props) {
+  useLoginCheck();
+  const theme = useThemeData(store => store.mode);
+
+  const accountBookId = useHistory().location.state;
+  useAccountBook(accountBookId);
+
+  const [paymentMethodModal, setPaymentMethodModal] = useState(false);
+  const defaultMethod = useDefaultPayment();
+  const transactionAddModalVisible = useTransactionAddModalData(
+    store => store.transactionAddModalVisible,
+  );
 
   return (
-    <div className={styles.container}>
-      <Menubar setModal={setModal} pageType="transaction" />
+    <div
+      className={
+        theme === 'dark'
+          ? 'transaction__container'
+          : 'transaction__container light'
+      }
+    >
+      <MenuBar
+        id={accountBookId.id}
+        setModal={setPaymentMethodModal}
+        pageType="transaction"
+      />
       <ListContainer />
-      {modal && <Modal setModal={setModal} defaultMethod={defaultMethod} />}
+      {paymentMethodModal && (
+        <PaymentModal
+          setModal={setPaymentMethodModal}
+          defaultMethod={defaultMethod}
+        />
+      )}
+
+      {transactionAddModalVisible && (
+        <TransactionAddModal accountbookId={accountBookId.id} />
+      )}
     </div>
   );
-};
+}
 
-export default TransactionComponent;
+export default () => (
+  <TransactionFormModalProvider>
+    <TransactionComponent />
+  </TransactionFormModalProvider>
+);

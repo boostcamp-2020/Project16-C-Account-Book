@@ -1,0 +1,30 @@
+@use '../../../../styles/values' as *;
+
+.start__day__header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5vw;
+  margin-top: 3em;
+  th {
+    color: $white;
+
+    margin-left: 10px;
+    &.sunday {
+      color: $spending-color;
+    }
+
+    &::before {
+      content: '|';
+      padding: 0 1em;
+    }
+    &:first-child::before {
+      content: none;
+    }
+    &.notSunday {
+      &.light {
+        color: black;
+      }
+    }
+  }
+}

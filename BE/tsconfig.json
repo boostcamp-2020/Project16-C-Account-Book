@@ -6,9 +6,14 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@apis/*": ["./routes/api/*"],
+      "@models/*": ["./models/*"],
+      "@controllers/*": ["./controllers/*"],
+      "@loaders/*": ["./loaders/*"],
+      "@services/*": ["./services/*"],
+      "@interfaces/*": ["./interfaces/*"],
+      "@utils/*": ["./utils/*"]
     },
     "esModuleInterop": true,
     "skipLibCheck": true,

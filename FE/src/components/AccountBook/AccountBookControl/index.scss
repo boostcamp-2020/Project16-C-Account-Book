@@ -1,0 +1,53 @@
+@use '../../../styles/values.scss' as *;
+@use '../../../styles/mixins.scss' as *;
+@use '../../../styles/mediaQuery.scss' as *;
+
+.acbook__container {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  padding: 7em;
+
+  .acbook__title {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    font-size: 5vw;
+
+    color: $dark-emphasize-font-color;
+    text-shadow: $selectedTextShadow;
+
+    &.light {
+      animation: acbookTitleColorChange 1s forwards;
+      @keyframes acbookTitleColorChange {
+        to {
+          color: black;
+          text-shadow: none;
+        }
+      }
+    }
+  }
+
+  .acbook__control {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .acbook__add__btn {
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    font-size: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+  }
+}
+@include mobile {
+  .acbook__container {
+    position: inherit;
+    padding: 0;
+  }
+}

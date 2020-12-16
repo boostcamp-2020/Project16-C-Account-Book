@@ -1,0 +1,76 @@
+@use '../../../styles/values' as *;
+
+@mixin noSelectedButton($category) {
+  width: 15em;
+  padding: 0.7em 0;
+  border: 2px solid $light-black;
+
+  font-size: 1.2em;
+  @if $category == category {
+    border-radius: 6px 0 0 6px;
+  } @else {
+    border-radius: 0 6px 6px 0;
+  }
+
+  background-color: $dark-background-color;
+  outline: none;
+  color: $dark-general-font-color;
+  &:hover {
+    text-shadow: $selectedTextShadow;
+    color: $dark-emphasize-font-color;
+  }
+  cursor: pointer;
+}
+
+@mixin selectedButton {
+  &.selected {
+    background-color: $black;
+    text-shadow: $selectedTextShadow;
+    color: $dark-general-font-color;
+  }
+}
+
+.nav__buttons {
+  margin-top: 3em;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+
+  &.light {
+    .category {
+      color: black;
+      background-color: white;
+
+      &.selected {
+        color: white;
+        background-color: black;
+      }
+      &:hover {
+        background-color: #555;
+      }
+    }
+    .date {
+      color: black;
+      background-color: white;
+
+      &.selected {
+        color: white;
+        background-color: black;
+      }
+      &:hover {
+        background-color: #555;
+      }
+    }
+  }
+
+  .category {
+    @include noSelectedButton(category);
+    @include selectedButton;
+  }
+
+  .date {
+    @include noSelectedButton(date);
+    @include selectedButton;
+  }
+}
