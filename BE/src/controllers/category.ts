@@ -1,24 +1,32 @@
-import { response } from '@utils/response';
 import { Context } from 'koa';
-import service from '@services/category';
+import response from '@/utils/response';
+import service from '@/services/category';
 
 const post = async (ctx: Context): Promise<Context['body']> => {
-  const category = await service.post(ctx);
-  const res = response(200, category.message, category.data);
+  const { params } = ctx;
+  const { body } = ctx.request;
+  const category = await service.post(params, body);
+  const res = response(200, { category });
+  ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
 };
 
 const patch = async (ctx: Context): Promise<Context['body']> => {
-  const updateResult = await service.patch(ctx);
-  const res = response(200, updateResult.message, updateResult.data);
+  const { params } = ctx;
+  const { body } = ctx.request;
+  const updateResult = await service.patch(params, body);
+  const res = response(200, updateResult);
+  ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
 };
 
 const del = async (ctx: Context): Promise<Context['body']> => {
-  const delResult = await service.del(ctx);
-  const res = response(200, delResult.message, delResult.data);
+  const { params } = ctx;
+  const delResult = await service.del(params);
+  const res = response(200, delResult);
+  ctx.status = res.status;
   ctx.body = res;
   return ctx.body;
 };

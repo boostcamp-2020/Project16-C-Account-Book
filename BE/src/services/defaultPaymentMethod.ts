@@ -1,6 +1,8 @@
-import PaymentModel from '@models/paymentmethod';
+import { PaymentDoc } from '@/models/paymentmethod/schema';
 
-const get = async (): Promise<any> => {
+import PaymentModel from '@/models/paymentmethod';
+
+const get = async (): Promise<PaymentDoc[]> => {
   const defaultPaymentMethods = await PaymentModel.get();
   return defaultPaymentMethods;
 };

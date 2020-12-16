@@ -1,8 +1,14 @@
-import mongooseLoader from './mongoose';
-import koaLoader from './koa';
+import Koa from 'koa';
 
-export default async (koaApp: any): Promise<void> => {
+import mongooseLoader from '@/loaders/mongoose';
+import koaLoader from '@/loaders/koa';
+import { redisLoader } from '@/loaders/redis';
+
+export default async (
+  koaApp: Koa<Koa.DefaultState, Koa.DefaultContext>,
+): Promise<void> => {
+  redisLoader();
   await mongooseLoader();
-  await koaLoader(koaApp);
+  koaLoader(koaApp);
   console.log(`Koa Initialized ✅`);
 };
