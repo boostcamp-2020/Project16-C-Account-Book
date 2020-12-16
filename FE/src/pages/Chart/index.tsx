@@ -53,10 +53,11 @@ const Chart = props => {
       />
       <NavButton chartType={chartType} setChartType={setChartType} />
 
-      {chartInfo.length === 0 && <div className="no__data">No Data</div>}
-      {chartInfo.length !== 0 && chartType === 'category' && (
+      {chartType === 'category' && (
         <FilteringButton dataType={dataType} setDataType={setDataType} />
       )}
+      {chartInfo.length === 0 && <div className="no__data">No Data</div>}
+
       {chartType === 'category' && chartInfo.length !== 0 && (
         <div className="category__charts">
           <PieChart chartInfo={chartInfo} refArr={refArr} />
