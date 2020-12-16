@@ -1,5 +1,7 @@
-import React, { FormEvent, ReactElement, useEffect, useState } from 'react';
+import React, { FormEvent, ReactElement, useEffect, useRef, useState } from 'react';
 
+
+import validateForm from '../../../../service/transaction-form-validation';
 import DateInput from '../DateInput';
 import CategoryInput from '../CategoryInput';
 import PaymentInput from '../PaymentInput';
@@ -15,6 +17,7 @@ const TransactionAddForm = ({
 }: {
   accountbookId: string;
 }): ReactElement => {
+  const priceInputElementRef = useRef<HTMLInputElement>(null);
   const {
     input,
     setMessageVisible,
@@ -71,10 +74,20 @@ const TransactionAddForm = ({
 
   const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input._id === '') {
-      addTransaction();
-    } else {
-      updateTransaction();
+    try {
+      if (validateForm(input)) {
+        if (input._id === '') {
+          addTransaction();
+        } else {
+          updateTransaction();
+        }
+      }
+    } catch (error) {
+      if (error.name === 'PRICE_UNSET') {
+        priceInputElementRef.current?.focus();
+      }
+      console.error(error);
+      alert(error.message);
     }
   };
 
@@ -91,7 +104,7 @@ const TransactionAddForm = ({
         <DateInput />
         <CategoryInput {...{ categoryPool }} />
         <PaymentInput {...{ paymentPool }} />
-        <PriceInput />
+        <PriceInput {...{ priceInputElementRef }} />
         <ContentInput />
 
         <div className="transaction__button__container">

@@ -1,11 +1,15 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, RefObject, useRef } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
 import './index.scss';
 
-const PriceInput = () => {
+const PriceInput = ({
+  priceInputElementRef,
+}: {
+  priceInputElementRef: RefObject<HTMLInputElement>;
+}) => {
   const inputLabel = useRef(null);
 
   const { input, setInput } = useTransactionAddModalData(store => ({
@@ -34,6 +38,7 @@ const PriceInput = () => {
         )}` : '₩ 0'}
         </label>
         <input
+          ref={priceInputElementRef}
           id="price__input"
           type="number"
           name="price"
