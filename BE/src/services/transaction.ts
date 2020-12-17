@@ -57,7 +57,6 @@ const exportCSV = async (params: any): Promise<any> => {
       'category.icon',
       'category.type',
       'payment.name',
-      'payment.color',
       'payment.desc',
     ];
     const json2csvParser = new Parser({ fields });
