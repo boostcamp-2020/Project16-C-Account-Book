@@ -3,11 +3,16 @@ import { useEffect } from 'react';
 
 const useLoginChcek = () => {
   const history = useHistory();
-  useEffect(() => {
-    if (!window.localStorage.getItem('accessToken')) {
-      history.push('/login');
-    }
-  }, []);
+  const accountBookId = useHistory().location?.state;
+  if (
+    !window.localStorage.getItem('accessToken') ||
+    window.localStorage.getItem('accessToken') === 'accessToken'
+  ) {
+    console.log('uselogincheck');
+    history.push('/login');
+    return false;
+  }
+  return accountBookId;
 };
 
 export default useLoginChcek;

@@ -16,15 +16,11 @@ import { useThemeData } from '../../store/Theme/themeHook';
 import './settingPage.scss';
 
 export default function SettingPage() {
-  useLoginCheck();
-
+  const accountBookId = useLoginCheck();
   const theme = useThemeData(store => store.mode);
 
   const [settingType, setSettingType] = useState('user');
   const confirmModal = useSaveModal();
-
-  const history = useHistory();
-  const accountBookId = history.location.state;
 
   useAccountBook(accountBookId);
   return (
