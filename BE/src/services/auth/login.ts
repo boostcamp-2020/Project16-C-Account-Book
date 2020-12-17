@@ -26,7 +26,7 @@ const makeToken = <T>(Info: T, expire: number): string => {
 };
 
 const slidingSession = <User>(Info: User): string => {
-  const accessToken = makeToken<User>(Info, DAY);
+  const accessToken = makeToken<User>(Info, MIN);
   return accessToken;
 };
 
@@ -53,8 +53,8 @@ const login = async (body: Context['body']): Promise<any> => {
       await userModel.create(userInfo);
     }
 
-    const accessToken = makeToken<User>(userInfo, DAY);
-    const refreshToken = makeToken<{ type: string }>(refreshInfo, DAY);
+    const accessToken = makeToken<User>(userInfo, HOUR);
+    const refreshToken = makeToken<{ type: string }>(refreshInfo, MONTH);
     redisService.intoRefreshToken(refreshToken, userInfo);
 
     return { accessToken, refreshToken };
