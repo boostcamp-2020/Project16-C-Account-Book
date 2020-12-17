@@ -12,6 +12,7 @@ export default function IncomeCategory({
     <div className="category__list">
       {incomeCategories.map(item => (
         <div
+          key={item._id}
           className={
             theme === 'dark' ? 'category__unit' : 'category__unit light'
           }

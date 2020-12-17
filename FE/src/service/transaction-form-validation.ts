@@ -1,7 +1,6 @@
 const validateForm = input => {
   const { category, payment, cost } = input;
   const error = new Error();
-  console.log('input111: ', input);
 
   if (!category.name) {
     error.name = 'CATEGORY_UNSET';

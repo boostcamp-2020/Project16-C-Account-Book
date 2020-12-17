@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PaymentModal from '../../components/PaymentMethod/Modal';
@@ -13,10 +13,10 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import { useThemeData } from '../../store/Theme/themeHook';
 
 export default function CalendarPage() {
-  const accountBookId = useHistory().location.state;
+  const accountBookId = useLoginCheck();
+
   const theme = useThemeData(store => store.mode);
 
-  useLoginCheck();
   useAccountBook(accountBookId);
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
@@ -26,7 +26,7 @@ export default function CalendarPage() {
   return (
     <div
       className={
-        theme == 'dark' ? 'calendar__wrapper' : 'calendar__wrapper light'
+        theme === 'dark' ? 'calendar__wrapper' : 'calendar__wrapper light'
       }
     >
       <MenuBar

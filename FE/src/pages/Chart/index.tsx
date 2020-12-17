@@ -20,9 +20,9 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import './chart.scss';
 
 const Chart = props => {
-  useLoginCheck();
+  const accountBookId = useLoginCheck();
   const theme = useThemeData(store => store.mode);
-  const accountBookId = useHistory().location.state;
+
   useAccountBook(accountBookId);
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);

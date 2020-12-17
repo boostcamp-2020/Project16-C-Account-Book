@@ -56,7 +56,7 @@ export default function UserList({ confirmModal }) {
       <div className="user__list">
         {users &&
           users.map(user => (
-            <div className="user__info">
+            <div key={user.name} className="user__info">
               <img
                 src={user.profile}
                 className="profile__image"
