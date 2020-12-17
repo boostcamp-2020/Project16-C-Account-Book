@@ -1,5 +1,4 @@
-import React, { FormEvent, ReactElement, useEffect, useRef, useState } from 'react';
-
+import React, { FormEvent, ReactElement, useRef } from 'react';
 
 import validateForm from '../../../../service/transaction-form-validation';
 import DateInput from '../DateInput';
@@ -49,12 +48,10 @@ const TransactionAddForm = ({
   const addTransaction = async () => {
     try {
       const newTransaction = await submitPost(accountbookId);
-      console.log('newTransaction: ', newTransaction);
 
       addTransactionToStore(newTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {
-      console.error(error);
       alert('거래내역 추가 실패');
     }
   };
@@ -62,8 +59,8 @@ const TransactionAddForm = ({
   const updateTransaction = async () => {
     try {
       const updatedTransaction = await submitUpdate(accountbookId);
-      console.log('updated Transaction: ', updatedTransaction);
-
+      console.log('updqte!!!');
+      console.log(updatedTransaction);
       updateTransactionToStore(updatedTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {

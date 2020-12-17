@@ -16,10 +16,8 @@ import { useTransactionAddModalData } from '../../store/TransactionFormModal/Tra
 import { useThemeData } from '../../store/Theme/themeHook';
 
 function TransactionComponent(props) {
-  useLoginCheck();
+  const accountBookId = useLoginCheck();
   const theme = useThemeData(store => store.mode);
-
-  const accountBookId = useHistory().location.state;
   useAccountBook(accountBookId);
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);

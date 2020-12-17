@@ -13,6 +13,7 @@ export default function SpendingCategory({
     >
       {spendingCategories.map(item => (
         <div
+          key={item._id}
           className={
             theme === 'dark' ? 'category__unit' : 'category__unit light'
           }

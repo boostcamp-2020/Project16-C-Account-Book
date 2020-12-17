@@ -48,7 +48,7 @@ export default function CalendarBody() {
                   startCount = 1;
                 }
                 if (!startCount) {
-                  return <td className="td__hidden" key={v4()} />;
+                  return <td key={v4()} />;
                 }
 
                 ++countDay;
