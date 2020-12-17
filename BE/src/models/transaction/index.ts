@@ -29,7 +29,7 @@ const postMany = async (transactionArray: any): Promise<any> => {
 };
 
 const patch = async (transactionId: any, transactionInfo: any): Promise<any> => {
-  const updateResult = await TransactionModel.update({ _id: transactionId }, { transactionInfo });
+  const updateResult = await TransactionModel.update({ _id: transactionId }, transactionInfo);
   return !!updateResult.nModified;
 };
 

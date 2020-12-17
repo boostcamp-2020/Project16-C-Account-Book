@@ -35,6 +35,7 @@ const patch = async (params: any, body: any): Promise<any> => {
     payment: body.payment,
   };
   const updateResult = await transactionModel.patch(transactionId, updateInfo);
+  if (updateResult) return updateInfo;
   return !!updateResult;
 };
 
