@@ -32,7 +32,6 @@ const CategoryInput = ({
       type: targetElement.value,
       category: { ...input.category, type: targetElement.value },
     });
-    console.log(input.type);
   };
 
   return (

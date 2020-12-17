@@ -105,14 +105,13 @@ const TransactionItem = ({
     try {
       if (!setDraggedInDate) throw new Error('cannot draggable');
       e.target.classList.remove('on__drag');
-      console.log('on end', e.dataTransfer.dropEffect);
+
       setTimeout(() => {
         setDraggedInDate('');
       }, 500);
     } catch (error) {
       console.error(error);
     }
-
   };
 
   return (

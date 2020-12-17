@@ -9,7 +9,7 @@ export default function JoinForm({ setCreate, setDatas, setName, datas }) {
       const res = await joinAccountBook({
         code: event.target.value,
       });
-      console.log(res.data[0]);
+
       if (res.status === 200) {
         setCreate(false);
         setDatas([
