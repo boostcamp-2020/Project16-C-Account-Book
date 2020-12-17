@@ -4,17 +4,15 @@
 .transaction__list__container {
   width: 60%;
   height: 100%;
-
   background-color: $dark-background-color;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  overflow-y: scroll;
   overflow-x: hidden;
+  overflow-y: visible;
   position: relative;
-  padding-bottom: 5em;
   gap: 1.5em;
 
   &.light {
@@ -25,7 +23,7 @@
 .transaction__add__button {
   @include buttonDefaultSetting;
   position: sticky;
-  bottom: -8%;
+  bottom: 5%;
   right: 0;
 
   background-color: transparent;

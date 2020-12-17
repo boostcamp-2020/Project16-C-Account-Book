@@ -1,11 +1,9 @@
 @use '../../styles/values.scss' as *;
 
 .transaction__container {
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
   background-color: $dark-background-color;
   &.light {
     background-color: white;
