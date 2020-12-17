@@ -22,9 +22,9 @@
 
 .transaction__add__button {
   @include buttonDefaultSetting;
-  position: sticky;
-  bottom: 5%;
-  right: 0;
+  position: fixed;
+  top: 85%;
+  right: 50%;
 
   background-color: transparent;
   height: 60px;
