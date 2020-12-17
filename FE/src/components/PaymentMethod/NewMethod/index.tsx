@@ -16,11 +16,8 @@ export default function NewMethod({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const carousel = useRef();
 
-  // const cellCount = data.length;
   const radius = 288;
   const theta = 360 / defaultMethod.length;
-
-  // useEffect(() => {}, [selectedIndex]);
 
   const rotateCarousel = turn => {
     if (carousel) {
@@ -51,8 +48,9 @@ export default function NewMethod({
       <div className="new__method__wrapper">
         <div className="new__method__scene">
           <div className="new__method__carousel" ref={carousel}>
-            {defaultMethod.map(card => (
+            {defaultMethod.map((card, index) => (
               <div
+                key={`${card.name}${index}`}
                 className="carousel__cell"
                 onClick={onClickCard}
                 data-color={card.color}
