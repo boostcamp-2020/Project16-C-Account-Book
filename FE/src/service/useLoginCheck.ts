@@ -6,9 +6,8 @@ const useLoginChcek = () => {
   const accountBookId = useHistory().location?.state;
   if (
     !window.localStorage.getItem('accessToken') ||
-    window.localStorage.getItem('accessToken') === 'accessToken'
+    window.localStorage.getItem('accessToken') === 'undefined'
   ) {
-    console.log('uselogincheck');
     history.push('/login');
     return false;
   }

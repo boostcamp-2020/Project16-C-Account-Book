@@ -30,6 +30,7 @@ export const AccountBookList = ({ datas, setDatas, confirmModal }) => {
     <>
       {datas.map((acbook, index) => (
         <AccountBookCard
+          key={acbook._id}
           confirmModal={confirmModal}
           index={index}
           acbook={acbook}
