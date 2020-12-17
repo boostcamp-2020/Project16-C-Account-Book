@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
@@ -14,11 +13,19 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import TransactionFormModalProvider from '../../store/TransactionFormModal/TransactionFormModalContext';
 import { useTransactionAddModalData } from '../../store/TransactionFormModal/TransactionFormModalHook';
 import { useThemeData } from '../../store/Theme/themeHook';
+import { useHistory } from 'react-router-dom';
 
 function TransactionComponent(props) {
+  const history = useHistory();
   const accountBookId = useLoginCheck();
+
   const theme = useThemeData(store => store.mode);
-  useAccountBook(accountBookId);
+
+  const isWrongAccess = useAccountBook(accountBookId);
+  if (!isWrongAccess) {
+    history.push('/');
+    return null;
+  }
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const defaultMethod = useDefaultPayment();

@@ -13,11 +13,16 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import { useThemeData } from '../../store/Theme/themeHook';
 
 export default function CalendarPage() {
+  const history = useHistory();
   const accountBookId = useLoginCheck();
 
   const theme = useThemeData(store => store.mode);
 
-  useAccountBook(accountBookId);
+  const isWrongAccess = useAccountBook(accountBookId);
+  if (!isWrongAccess) {
+    history.push('/');
+    return null;
+  }
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [detailModal, setDetailModal] = useState(false);

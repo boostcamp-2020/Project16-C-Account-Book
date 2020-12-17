@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const useLoginChcek = () => {
   const history = useHistory();
@@ -11,6 +10,7 @@ const useLoginChcek = () => {
     history.push('/login');
     return false;
   }
+
   return accountBookId;
 };
 

@@ -20,10 +20,15 @@ import useAccountBook from '../../service/useAccountBookSetting';
 import './chart.scss';
 
 const Chart = props => {
+  const history = useHistory();
   const accountBookId = useLoginCheck();
   const theme = useThemeData(store => store.mode);
 
-  useAccountBook(accountBookId);
+  const isWrongAccess = useAccountBook(accountBookId);
+  if (!isWrongAccess) {
+    history.push('/');
+    return null;
+  }
 
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [chartType, setChartType] = useState('category');
