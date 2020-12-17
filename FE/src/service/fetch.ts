@@ -24,7 +24,10 @@ export const getFetch = async (query): Promise<any> => {
         Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
       },
     });
-    return newResponse.json();
+    const newJson = await newResponse.json();
+    if (newJson.accessToken)
+      window.localStorage.setItem('accessToken', newJson.accessToken);
+    return newJson;
   }
   return json;
 };
@@ -40,6 +43,26 @@ export const postFetch = async (query, body) => {
   });
 
   const json = response.json();
+  if (response.status === 401) {
+    const ref = await refresh();
+    if (!ref) {
+      const history = useHistory();
+      history.push('/login');
+      return;
+    }
+    const newResponse = await fetch(`${query}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const newJson = await newResponse.json();
+    if (newJson.accessToken)
+      window.localStorage.setItem('accessToken', newJson.accessToken);
+    return newJson;
+  }
   return json;
 };
 
@@ -54,6 +77,26 @@ export const updateFetch = async (query, body) => {
   });
 
   const json = response.json();
+  if (response.status === 401) {
+    const ref = await refresh();
+    if (!ref) {
+      const history = useHistory();
+      history.push('/login');
+      return;
+    }
+    const newResponse = await fetch(`${query}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const newJson = await newResponse.json();
+    if (newJson.accessToken)
+      window.localStorage.setItem('accessToken', newJson.accessToken);
+    return newJson;
+  }
   return json;
 };
 
@@ -68,5 +111,25 @@ export const deleteFetch = async (query, body) => {
   });
 
   const json = response.json();
+  if (response.status === 401) {
+    const ref = await refresh();
+    if (!ref) {
+      const history = useHistory();
+      history.push('/login');
+      return;
+    }
+    const newResponse = await fetch(`${query}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.localStorage.getItem('accessToken')}`,
+      },
+      body: JSON.stringify(body),
+    });
+    const newJson = await newResponse.json();
+    if (newJson.accessToken)
+      window.localStorage.setItem('accessToken', newJson.accessToken);
+    return newJson;
+  }
   return json;
 };
