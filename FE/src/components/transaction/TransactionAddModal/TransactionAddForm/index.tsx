@@ -59,12 +59,9 @@ const TransactionAddForm = ({
   const updateTransaction = async () => {
     try {
       const updatedTransaction = await submitUpdate(accountbookId);
-      console.log('updqte!!!');
-      console.log(updatedTransaction);
       updateTransactionToStore(updatedTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {
-      console.error(error);
       alert('거래내역 수정 실패');
     }
   };
@@ -83,7 +80,7 @@ const TransactionAddForm = ({
       if (error.name === 'PRICE_UNSET') {
         priceInputElementRef.current?.focus();
       }
-      console.error(error);
+
       alert(error.message);
     }
   };

@@ -81,7 +81,6 @@ const TransactionItem = ({
       if (status !== 200) throw new Error();
       deleteTransactionInStore(transactionId);
     } catch (error) {
-      console.error(error);
       alert('삭제에 실패했습니다.');
     }
   };

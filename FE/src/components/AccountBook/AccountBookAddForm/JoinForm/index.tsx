@@ -16,7 +16,7 @@ export default function JoinForm({
       const res = await joinAccountBook({
         code: event.target.value,
       });
-      console.log(res);
+      res;
       if (res.data) {
         setCreate(false);
         setDatas([

@@ -168,7 +168,7 @@ const init = args => {
   ];
   const json2csvParser = new Parser({ fields });
   const csv = json2csvParser.parse(transactions);
-  console.log(csv);
+  csv;
   fs.writeFileSync('transaction.csv', csv);
 };
 
