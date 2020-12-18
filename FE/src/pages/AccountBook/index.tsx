@@ -41,6 +41,7 @@ export default function AccountBookListPage() {
       <div className="acbook__list">
         {createForm && (
           <AccountBookAddForm
+            confirmModal={confirmModal}
             setCreate={setCreateForm}
             createForm={createForm}
             datas={listDatas}

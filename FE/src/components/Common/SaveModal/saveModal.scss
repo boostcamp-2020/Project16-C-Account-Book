@@ -20,26 +20,27 @@
     border-radius: 6px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     .save__modal__title {
       color: white;
       font-size: 1.5em;
     }
-    .save__ok__btn {
-      position: absolute;
-      width: 5em;
-      height: 30px;
-
-      right: 20%;
-      bottom: 1em;
-    }
-    .save__cancel__btn {
-      position: absolute;
-      width: 5em;
-      height: 30px;
-
-      right: 5%;
-      bottom: 1em;
+    .confirm__btn__set {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-top: 1.5em;
+      width: 100%;
+      gap: 20%;
+      .save__ok__btn {
+        width: 5em;
+        height: 30px;
+      }
+      .save__cancel__btn {
+        width: 5em;
+        height: 30px;
+      }
     }
   }
 }
