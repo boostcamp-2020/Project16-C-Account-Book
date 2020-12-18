@@ -102,7 +102,7 @@ const TransactionsFilter = ({
           className="filter-init-button"
           onClick={onClickInitFilter}
         >
-          초기화
+          필터링 초기화
         </button>
         {categoryPool
           .filter(
