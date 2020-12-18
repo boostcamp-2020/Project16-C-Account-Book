@@ -1,4 +1,5 @@
 @use '../../../../styles/values.scss' as *;
+@use '../../../../styles/mixins.scss' as *;
 
 .transaction__item {
   position: relative;
@@ -38,10 +39,11 @@
 
   .transaction__item__delete__button,
   .transaction__item__modify__button {
+    @include buttonDefaultSetting;
+
     color: white;
     padding: 10px;
     border-radius: 10px;
-    cursor: pointer;
   }
 
   .transaction__item__delete__button {
