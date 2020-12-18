@@ -67,11 +67,12 @@
   @include buttonDefaultSetting;
   border: 1px solid $white;
   color: $white;
-  width: 5em;
-  height: 30px;
+  width: 6em;
+  height: 2.5em;
   background-color: $modal-button-background;
   font-size: 1em;
-  padding: 0px;
+
+  padding: 0.5em 1em;
 
   &:hover {
     background-color: $light-black;
