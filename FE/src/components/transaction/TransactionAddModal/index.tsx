@@ -8,8 +8,10 @@ import './TransactionAddModal.scss';
 
 const TransactionAddModal = ({
   accountbookId,
+  confirmModal,
 }: {
   accountbookId: string;
+  confirmModal: any;
 }): ReactElement => {
   const {
     messageVisible,
@@ -38,7 +40,10 @@ const TransactionAddModal = ({
       <div className="form__container">
         <h2>거래내역 추가</h2>
         {!messageVisible ? (
-          <TransactionAddForm accountbookId={accountbookId} />
+          <TransactionAddForm
+            accountbookId={accountbookId}
+            confirmModal={confirmModal}
+          />
         ) : (
           <MessageInputForm />
         )}

@@ -13,9 +13,13 @@ import { useAccountBookData } from '../../../../store/AccountBook/accountBookInf
 
 const TransactionAddForm = ({
   accountbookId,
+  confirmModal,
 }: {
   accountbookId: string;
+  confirmModal: any;
 }): ReactElement => {
+  const { setSaveModal, setSaveAction, setModalTitle } = confirmModal;
+
   const priceInputElementRef = useRef<HTMLInputElement>(null);
   const {
     input,
@@ -81,7 +85,9 @@ const TransactionAddForm = ({
         priceInputElementRef.current?.focus();
       }
 
-      alert(error.message);
+      setModalTitle(() => error.message);
+      setSaveModal(() => true);
+      setSaveAction(() => () => {});
     }
   };
 
