@@ -15,7 +15,6 @@ const post = async (params: any, body: any): Promise<any> => {
     accountbook: params.accountbookid,
   };
 
-  console.log(transactionInfo);
   const transaction = await transactionModel.post(transactionInfo);
   if (transaction) {
     return transaction;
@@ -46,8 +45,7 @@ const del = async (params: any): Promise<any> => {
 };
 
 const exportCSV = async (params: any): Promise<any> => {
-  const accountBook = await accountBookModel.getDetail(params.accountbookid);
-  const { transactions } = accountBook;
+  const transactions = await transactionModel.getExport(params.accountbookid);
 
   if (transactions) {
     const fields = [
@@ -59,7 +57,6 @@ const exportCSV = async (params: any): Promise<any> => {
       'category.icon',
       'category.type',
       'payment.name',
-      'payment.color',
       'payment.desc',
     ];
     const json2csvParser = new Parser({ fields });
@@ -84,10 +81,7 @@ const downloadTemplateCSV = async (ctx: Context): Promise<any> => {
 
   const json2csvParser = new Parser({ fields });
   const csv = json2csvParser.parse(exampleTransaction);
-  return {
-    message: 'success',
-    data: csv,
-  };
+  return csv;
 };
 
 const importCSV = async (params: any, body: any): Promise<any> => {

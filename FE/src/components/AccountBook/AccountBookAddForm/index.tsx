@@ -6,6 +6,7 @@ import JoinForm from './JoinForm';
 import './index.scss';
 
 export default function AccountBookAddForm({
+  confirmModal,
   setCreate,
   createForm,
   datas,
@@ -30,6 +31,7 @@ export default function AccountBookAddForm({
       ) : (
         <>
           <JoinForm
+            confirmModal={confirmModal}
             datas={datas}
             setName={setName}
             setCreate={setCreate}

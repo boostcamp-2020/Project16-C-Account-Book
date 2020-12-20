@@ -2,7 +2,7 @@
 @use '../../../styles/mixins.scss' as *;
 
 .transaction__modal {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      padding: 30px 60px 30px 60px;
+      padding: 1.2em 3em;
     }
 
     .row {

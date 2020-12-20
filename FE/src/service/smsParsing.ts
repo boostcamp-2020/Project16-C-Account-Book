@@ -97,7 +97,7 @@ const message = `[WEB발신]
 464,000원 익월
 합산요금청구`;
 
-// console.log(getDataFromSMS(message));
+// (getDataFromSMS(message));
 
 // 밑은 test 코드인데 제가 툴이 안 깔려 있어 일단 주석 처리 하였습니다.
 

@@ -12,11 +12,11 @@ export default async (): Promise<void> => {
     },
     (error: MongoError) => {
       if (error) {
-        console.log('Failed to connect to Mongo server');
+        ('Failed to connect to Mongo server');
         console.error(error);
         throw error;
       } else {
-        console.log(`connected to DB ${config.databaseURL}✅`);
+        `connected to DB ${config.databaseURL}✅`;
       }
     },
   );

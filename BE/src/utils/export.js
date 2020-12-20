@@ -2,8 +2,7 @@ const fs = require('fs');
 const { Parser } = require('json2csv');
 
 const chars = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
-const randomNum = (num, devide) =>
-  Math.floor((Math.random() * num) % devide) + 1;
+const randomNum = (num, devide) => Math.floor((Math.random() * num) % devide) + 1;
 
 const makeWord = () => {
   const n = randomNum(100, 15);
@@ -17,7 +16,7 @@ const makeWord = () => {
 const makeType = () => {
   const n = randomNum(100, 2) - 1;
   if (n) return '수입';
-  else return '지출';
+  return '지출';
 };
 const makeDate = () => {
   const month = randomNum(100, 12);
@@ -143,7 +142,7 @@ const makepayment = () => {
 };
 
 const init = args => {
-  let transactions = [];
+  const transactions = [];
   for (let i = 0; i < args; ++i) {
     const transaction = {
       content: makeWord(),
@@ -155,7 +154,7 @@ const init = args => {
     };
     transactions.push(transaction);
   }
-  let jsonTransactions = JSON.stringify(transactions, null, 2);
+  const jsonTransactions = JSON.stringify(transactions, null, 2);
   const fields = [
     'content',
     'type',
@@ -169,7 +168,7 @@ const init = args => {
   ];
   const json2csvParser = new Parser({ fields });
   const csv = json2csvParser.parse(transactions);
-  console.log(csv);
+  csv;
   fs.writeFileSync('transaction.csv', csv);
 };
 

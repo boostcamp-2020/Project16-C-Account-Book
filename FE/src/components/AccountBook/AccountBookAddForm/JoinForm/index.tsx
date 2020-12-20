@@ -3,14 +3,21 @@ import React from 'react';
 import { joinAccountBook } from '../../../../api/social';
 import './join-form.scss';
 
-export default function JoinForm({ setCreate, setDatas, setName, datas }) {
+export default function JoinForm({
+  confirmModal,
+  setCreate,
+  setDatas,
+  setName,
+  datas,
+}) {
+  const { setSaveModal, setSaveAction, setModalTitle } = confirmModal;
   const onJoinAccountBook = async event => {
     if (event.key === 'Enter') {
       const res = await joinAccountBook({
         code: event.target.value,
       });
-
-      if (res.status === 200) {
+      res;
+      if (res.data) {
         setCreate(false);
         setDatas([
           {
@@ -21,7 +28,11 @@ export default function JoinForm({ setCreate, setDatas, setName, datas }) {
           ...datas,
         ]);
       } else {
-        alert('Invalid Invite Code!!');
+        setModalTitle(
+          () => '유효하지 않은 Invite Code입니다. 다시 확인해 주세요.',
+        );
+        setSaveModal(() => true);
+        setSaveAction(() => () => {});
       }
     }
   };

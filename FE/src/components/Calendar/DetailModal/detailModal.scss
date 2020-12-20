@@ -2,7 +2,7 @@
 @use '../../../styles/mixins' as *;
 
 .detail-info-overlay {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   background-color: $modal-background;

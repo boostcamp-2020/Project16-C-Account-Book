@@ -4,20 +4,8 @@
 .price__input__container {
   .price__input {
     position: relative;
-    label {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      padding: 0.5em 1em;
-      color: $black;
-      background-color: $white;
-      cursor: text;
-    }
   }
   input {
     @include input-form;
-    color: $transparent-color;
   }
 }

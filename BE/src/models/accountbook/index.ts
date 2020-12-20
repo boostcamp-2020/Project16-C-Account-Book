@@ -19,9 +19,6 @@ const getDetail = async (id: string): Promise<any> => {
 };
 
 const getTransactions = async (id: string, year: string, month: string): Promise<any> => {
-  console.log(id);
-  console.log(year);
-  console.log(month);
   const accountBook = await AccountBookModel.findOne({ _id: id });
   if (accountBook) {
     const startMonth = new Date(+year, +month - 2, 2);

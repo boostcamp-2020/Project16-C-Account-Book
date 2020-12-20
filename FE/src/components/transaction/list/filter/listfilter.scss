@@ -2,7 +2,7 @@
 
 .acbook__filter__container {
   width: 100%;
-  // height: 25%;
+  min-height: 60%;
   padding: 3em 0;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,6 @@
       border-bottom: 2px solid $spending-color;
       color: $spending-color;
     }
-
     input[data-type='수입']:checked + span,
     input[data-type='수입']:hover + span {
       padding: 3px;
@@ -111,11 +110,11 @@
 
     .filter-init-button {
       border: none;
+      cursor: pointer;
+      outline: none;
       background-color: transparent;
       color: $initialFilter-color;
       text-shadow: $initialFilterTextShadow;
-      cursor: pointer;
-      outline: none;
     }
   }
 }

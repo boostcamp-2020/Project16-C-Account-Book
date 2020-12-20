@@ -5,6 +5,11 @@ const get = async (): Promise<any> => {
   return transactions;
 };
 
+const getExport = async (accountbookid: string): Promise<any> => {
+  const transactions = await TransactionModel.find({ accountbook: accountbookid });
+  return transactions;
+};
+
 const post = async (transactioninfo: any): Promise<any> => {
   const transaction = await new TransactionModel(transactioninfo).save();
 
@@ -24,7 +29,6 @@ const post = async (transactioninfo: any): Promise<any> => {
 
 const postMany = async (transactionArray: any): Promise<any> => {
   const result = await TransactionModel.insertMany(transactionArray);
-  console.log(result);
   return true;
 };
 
@@ -37,4 +41,4 @@ const del = async (transactionId: any): Promise<any> => {
   const deleteResult = await TransactionModel.deleteOne({ _id: transactionId });
   return !!deleteResult.deletedCount;
 };
-export default { get, post, postMany, patch, del };
+export default { get, getExport, post, postMany, patch, del };
