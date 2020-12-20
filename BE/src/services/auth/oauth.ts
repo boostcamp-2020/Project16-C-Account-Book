@@ -1,7 +1,7 @@
 import createError from 'http-errors';
 import axios from 'axios';
 
-import { iTokenGetParams, User } from '@interfaces/auth';
+import { iTokenGetParams } from '@interfaces/auth';
 
 const tokenGetParams: { [key: string]: iTokenGetParams } = {
   github: {
@@ -45,7 +45,7 @@ const getTokenFromRes = (data: any, social: string): string => {
   }
 };
 
-export const getAccessToken = async (code: string, social: string) => {
+export const getAccessToken = async (code: string, social: string): Promise<string> => {
   const { data } = await axios.post(tokenGetUrl[social], null, {
     params: {
       ...tokenGetParams[social],
@@ -58,10 +58,7 @@ export const getAccessToken = async (code: string, social: string) => {
   return token;
 };
 
-export const getUserInfo = async (
-  accessToken: string,
-  social: string,
-): Promise<User> => {
+export const getUserInfo = async (accessToken: string, social: string): Promise<any> => {
   const { data } = await axios.get(userInfoGetUrl[social], {
     headers: {
       Authorization: `BEARER ${accessToken}`,
@@ -71,7 +68,7 @@ export const getUserInfo = async (
   if (social === 'github') {
     const userInfo = {
       userid: data.login,
-      name: data.name,
+      name: data.name || '',
       profile: data.avatar_url,
       social,
     };
@@ -80,7 +77,7 @@ export const getUserInfo = async (
   if (social === 'naver') {
     const userInfo = {
       userid: data.response.email,
-      name: data.response.name,
+      name: data.response.name || '',
       profile: data.response.profile_image,
       social,
     };

@@ -1,20 +1,18 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import styles from './listfilter.modules.scss';
+import React, { ChangeEvent, ReactElement, useCallback } from 'react';
+import './listfilter.scss';
 
+import { iFilterProps } from '@interfaces/transaction-components';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../../../store/Theme/themeHook';
 import CommaMaker from '../../../../util/commaForMoney';
 
-const Filter = ({
+const TransactionsFilter = ({
   selectedCategories,
   selectCategories,
   selectedTypes,
   selectType,
-}: {
-  selectedCategories: string[];
-  selectCategories: (value: string[]) => void;
-  selectedTypes: string[];
-  selectType: (values: string[]) => void;
-}) => {
+}: iFilterProps): ReactElement => {
+  const theme = useThemeData(store => store.mode);
   const {
     categoryPool,
     filteredPriceIn,
@@ -24,6 +22,13 @@ const Filter = ({
     filteredPriceIn: store.filteredPriceIn,
     filteredPriceOut: store.filteredPriceOut,
   }));
+
+  const onClickInitFilter = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    selectCategories([]);
+    selectType([]);
+  };
 
   const onCategoryChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +54,25 @@ const Filter = ({
       } else {
         selectType([...selectedTypes, targetElement.value]);
       }
-      console.log('click ', selectedTypes);
     },
     [selectedTypes, selectType],
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.inoutFilter}>
+    <div
+      className={
+        theme === 'dark'
+          ? 'acbook__filter__container'
+          : 'acbook__filter__container light'
+      }
+    >
+      <div
+        className={
+          theme === 'dark'
+            ? 'acbook__list__inoutFilter'
+            : 'acbook__list__inoutFilter light'
+        }
+      >
         {['수입', '지출'].map(type => (
           <label key={type}>
             <input
@@ -68,28 +84,49 @@ const Filter = ({
             />
             <span>
               {type === '지출'
-                ? `-${CommaMaker(filteredPriceOut)}`
-                : `+${CommaMaker(filteredPriceIn)}`}
+                ? `-${CommaMaker(filteredPriceOut)}원`
+                : `+${CommaMaker(filteredPriceIn)}원`}
             </span>
           </label>
         ))}
       </div>
-      <div className={styles.categoryFilter}>
+      <div
+        className={
+          theme === 'dark'
+            ? 'acbook__list__categoryFilter'
+            : 'acbook__list__categoryFilter light'
+        }
+      >
+        <button
+          type="button"
+          className="filter-init-button"
+          onClick={onClickInitFilter}
+        >
+          필터링 초기화
+        </button>
         {categoryPool
           .filter(
             ({ type }) =>
               selectedTypes.length === 0 || selectedTypes.includes(type),
           )
-          .map(({ name }) => (
+          .map(({ name, type, icon }) => (
             <label key={name}>
               <input
                 type="checkbox"
                 name="category"
+                data-type={type}
+                data-icon={icon}
                 value={name}
                 onChange={onCategoryChange}
                 checked={selectedCategories.includes(name)}
               />
-              <span>{name}</span>
+              <span
+                className={
+                  theme === 'dark' ? 'category__title' : 'category__title light'
+                }
+              >
+                {name}
+              </span>
             </label>
           ))}
       </div>
@@ -97,4 +134,4 @@ const Filter = ({
   );
 };
 
-export default Filter;
+export default TransactionsFilter;

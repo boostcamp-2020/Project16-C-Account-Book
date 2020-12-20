@@ -1,11 +1,36 @@
 @use '../../styles/values' as *;
+@use '../../styles/mixins' as *;
 @use '../../styles/mediaQuery' as *;
+
+@mixin radioButton($type) {
+  display: inline-block;
+  background: none;
+  @if $type == income {
+    border: 1px solid $income-color;
+  } @else {
+    border: 1px solid $spending-color;
+  }
+  padding: 0.5em 3em;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:checked {
+    background: $income-color;
+  }
+}
+
 .chart__wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: $dark-background-color;
+
+  &.light {
+    background-color: $light-background-color;
+  }
 
   .category__charts {
     width: 100%;
@@ -18,13 +43,41 @@
     height: 100%;
   }
 
+  .data__type {
+    input[type='radio'] {
+      display: none;
+    }
+    display: flex;
+    justify-content: center;
+    font-size: 2vh;
+    padding: 3vh;
+    color: $dark-emphasize-font-color;
+    gap: 3em;
+
+    input[type='radio'] + .filter__income {
+      @include radioButton(income);
+    }
+
+    input[type='radio'] + .filter__spending {
+      @include radioButton(spending);
+    }
+
+    input[type='radio']:checked + .filter__income {
+      background: $income-color;
+    }
+
+    input[type='radio']:checked + .filter__spending {
+      background: $spending-color;
+    }
+  }
+
   .no__data {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translateY(-10%);
+
     border-radius: 6px;
     margin: auto;
     color: $dark-emphasize-font-color;

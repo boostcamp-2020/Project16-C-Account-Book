@@ -1,3 +1,6 @@
+import iCategory from '@interfaces/category';
+import iPayment from '@interfaces/payment';
+import { iTransaction } from '@interfaces/transaction';
 import { getTargetAccountBook } from '../../api/accoun-book-list';
 
 export const createStore = () => {
@@ -14,11 +17,31 @@ export const createStore = () => {
       transactions: [],
     },
 
+    initAccountBook() {
+      this.accountBook = {
+        _id: null,
+        code: null,
+        name: null,
+        startday: null,
+        description: null,
+        categories: [],
+        payments: [],
+        users: [],
+        transactions: [],
+      };
+    },
+
     filteredTransactions: {},
 
     filteredPriceIn: 0,
 
     filteredPriceOut: 0,
+
+    getTransactionById(transactionId: string): iTransaction | undefined {
+      return this.accountBook.transactions.find(
+        item => item._id === transactionId,
+      );
+    },
 
     addTransaction(transaction) {
       this.accountBook.transactions = [
@@ -28,11 +51,21 @@ export const createStore = () => {
     },
 
     updateTransaction(transaction) {
-      const rest = this.accountBook.transactions.filter(
-        item => item._id !== transaction._id,
+      const newTransactions = [...this.accountBook.transactions];
+      const index = this.accountBook.transactions.findIndex(
+        item => item._id === transaction._id,
       );
 
-      this.accountBook.transactions = [...rest, transaction];
+      newTransactions.splice(index, 1, transaction);
+
+      this.accountBook.transactions = newTransactions;
+    },
+
+    updateTransactionToLast(transaction) {
+      const restTransaction = this.accountBook.transactions.filter(item => {
+        return item._id !== transaction._id;
+      });
+      this.accountBook.transactions = [...restTransaction, transaction];
     },
 
     deleteTransaction(id) {
@@ -41,9 +74,9 @@ export const createStore = () => {
       );
     },
 
-    async setAccountBook(id) {
-      const accountBook = await getTargetAccountBook(id);
-      accountBook.data.payments.reverse();
+    async setAccountBook(id, year, month) {
+      const accountBook = await getTargetAccountBook(id, year, month);
+
       this.accountBook = accountBook.data;
     },
 
@@ -161,26 +194,11 @@ export const createStore = () => {
       return specificDatas;
     },
 
-    getSpendingTotal(year, month) {
+    getTotal(year, month, dataType) {
       let sum = 0;
       this.accountBook.transactions.forEach(item => {
         if (
-          item.type === '지출' &&
-          Number(item.date.split('-')[0]) === year &&
-          Number(item.date.split('-')[1]) === month
-        ) {
-          sum += item.cost;
-        }
-      });
-
-      return sum;
-    },
-    getIncomeTotal(year, month) {
-      let sum = 0;
-
-      this.accountBook.transactions.forEach(item => {
-        if (
-          item.type === '수입' &&
+          item.type === dataType &&
           Number(item.date.split('-')[0]) === year &&
           Number(item.date.split('-')[1]) === month
         ) {
@@ -191,13 +209,13 @@ export const createStore = () => {
       return sum;
     },
 
-    getTransactionsForPieChart(year: number, month: number) {
+    getTransactionsForPieChart(year: number, month: number, dataType: string) {
       const chartInfo = {};
       let accumDeg = 0;
 
       const datas = this.accountBook.transactions.filter(
         item =>
-          item.type === '지출' &&
+          item.type === dataType &&
           year === Number(item.date.split('-')[0]) &&
           month === Number(item.date.split('-')[1]),
       );
@@ -213,18 +231,18 @@ export const createStore = () => {
 
       for (const key in chartInfo) {
         chartInfo[key].percent =
-          (100 * chartInfo[key].cost) / this.getSpendingTotal(year, month);
+          (100 * chartInfo[key].cost) / this.getTotal(year, month, dataType);
       }
 
       for (const key in chartInfo) {
         if (accumDeg === 0) {
           chartInfo[key].startPoint = 0;
           accumDeg +=
-            360 * (chartInfo[key].cost / this.getSpendingTotal(year, month));
+            360 * (chartInfo[key].cost / this.getTotal(year, month, dataType));
         } else {
           chartInfo[key].startPoint = accumDeg;
           accumDeg +=
-            360 * (chartInfo[key].cost / this.getSpendingTotal(year, month));
+            360 * (chartInfo[key].cost / this.getTotal(year, month, dataType));
         }
       }
 
@@ -253,20 +271,30 @@ export const createStore = () => {
       icon: number;
       type: string;
     }) {
-      this.accountBook.categories = this.accountBook.categories.map(item => {
-        if (item._id === data.categoryId) {
-          item = { ...item, name: data.name, icon: data.icon, type: data.type };
-        }
-        return item;
-      });
+      this.accountBook.categories = this.accountBook.categories.map(
+        (item: iCategory) => {
+          if (item._id === data.categoryId) {
+            const updatedCategory = {
+              ...item,
+              name: data.name,
+              icon: data.icon,
+              type: data.type,
+            };
+            return updatedCategory;
+          }
+          return item;
+        },
+      );
     },
     deleteCategory(data: { categoryId: string }) {
       this.accountBook.categories = this.accountBook.categories.filter(
-        item => item._id !== data.categoryId,
+        (item: iCategory) => item._id !== data.categoryId,
       );
     },
-    getPaymentByName(name: string) {
-      return this.accountBook.payments.find(payment => payment.name === name);
+    getPaymentByName(name: string): iPayment | undefined {
+      return this.accountBook.payments.find(
+        (payment: iPayment) => payment.name === name,
+      );
     },
   };
 

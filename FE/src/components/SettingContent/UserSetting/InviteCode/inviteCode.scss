@@ -6,6 +6,9 @@
 
   .invite__code__title {
     @include settingTitle;
+    &.light {
+      text-shadow: none;
+    }
   }
 
   .invite__code__desc {
@@ -41,5 +44,8 @@
     display: flex;
     justify-content: center;
     padding: 3vh 0;
+  }
+  &.light {
+    color: $black;
   }
 }

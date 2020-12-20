@@ -13,7 +13,14 @@ export const postTransactionCSV = async (id, body) => {
     `${process.env.SERVER_URL}/api/accountbook/${id}/transaction/csv`,
     body,
   );
-  console.log(data);
+
+  return data;
+};
+
+export const getTemplateCSV = id => {
+  const data = getFetch(
+    `${process.env.SERVER_URL}/api/accountbook/${id}/transaction/csv/template`,
+  );
 
   return data;
 };

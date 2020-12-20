@@ -1,0 +1,11 @@
+@use '../../styles/values.scss' as *;
+
+.transaction__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $dark-background-color;
+  &.light {
+    background-color: white;
+  }
+}

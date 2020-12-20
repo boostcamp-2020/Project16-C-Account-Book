@@ -1,0 +1,58 @@
+@use '../../../styles/values' as *;
+
+@mixin radioButton($type) {
+  display: inline-block;
+  background: none;
+  @if $type == income {
+    border: 1px solid $income-color;
+  } @else {
+    border: 1px solid $spending-color;
+  }
+  padding: 0.5em 3em;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:checked {
+    background: $income-color;
+  }
+}
+.data__type {
+  input[type='radio'] {
+    display: none;
+  }
+  display: flex;
+  justify-content: center;
+  font-size: 2vh;
+  padding: 3vh;
+  color: $dark-emphasize-font-color;
+  gap: 3em;
+
+  input[type='radio'] + .filter__income {
+    @include radioButton(income);
+    &.light {
+      color: $income-color;
+    }
+  }
+
+  input[type='radio'] + .filter__spending {
+    @include radioButton(spending);
+    &.light {
+      color: $spending-color;
+    }
+  }
+
+  input[type='radio']:checked + .filter__income {
+    background: $income-color;
+    &.light {
+      color: $white;
+    }
+  }
+
+  input[type='radio']:checked + .filter__spending {
+    background: $spending-color;
+    &.light {
+      color: $white;
+    }
+  }
+}

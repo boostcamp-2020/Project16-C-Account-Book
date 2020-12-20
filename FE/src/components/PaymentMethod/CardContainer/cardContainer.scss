@@ -103,9 +103,10 @@
     }
 
     &:last-child {
-      margin-bottom: 3em;
+      margin-bottom: 10%;
     }
   }
+
   @include mobile {
     .card__container__card {
       width: 250px;

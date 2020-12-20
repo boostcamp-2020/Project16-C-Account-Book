@@ -4,10 +4,15 @@
 .pie__table {
   position: absolute;
   right: 8%;
-  top: 45%;
+  top: 43%;
   color: $dark-general-font-color;
   width: 40%;
   height: 50%;
+  overflow-y: auto;
+
+  &.light {
+    color: black;
+  }
 
   .stat__unit {
     padding: 15px 0;
@@ -18,11 +23,13 @@
   .stat__background {
     position: absolute;
     display: inline-block;
-    left: 22%;
-    width: 60%;
+    left: 25%;
+    width: 53%;
     height: 20px;
     background-color: $light-black;
-
+    &.light {
+      background-color: #eee;
+    }
     .stat__color {
       position: absolute;
       animation: statAnimation 2s;

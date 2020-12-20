@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
+import { useThemeData } from '../../../store/Theme/themeHook';
 import ChartColorCollections from '../../../util/chartColorCollection';
 import './pieChart.scss';
 
 export default function PieChart({ chartInfo, refArr }) {
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
+  const theme = useThemeData(store => store.mode);
 
   const drawAnimation = () => {
     if (chartInfo.length !== 0) {
@@ -47,7 +49,11 @@ export default function PieChart({ chartInfo, refArr }) {
               data-per={`${el.percent}`}
               transform={`rotate(${el.startPoint} 150 150)`}
             />
-            <text className="txt" y="150" transform="translate(150)">
+            <text
+              className={theme === 'dark' ? 'txt' : 'txt light'}
+              y="150"
+              transform="translate(150)"
+            >
               <tspan x="0" textAnchor="middle">
                 Statistics
               </tspan>

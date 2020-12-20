@@ -5,37 +5,25 @@
 
   .calendar__setting__title {
     @include settingTitle;
-  }
-  .calendar__setting__desc {
-    @include settingDesc;
-  }
-
-  .calendar__setting__startday {
-    @include settingBox;
-    position: relative;
-    background-color: transparent;
-
     .calendar__save__btn {
       position: absolute;
-      top: 2em;
-      right: 0;
-      transform: translateX(-50%);
+      right: 5%;
+      font-size: 1.5vh;
+    }
+    &.light {
+      text-shadow: none;
     }
   }
 }
-.save__modal__overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  // background-color: rgba(0, 0, 0, 0.9);
-  .save__modal__content {
-    width: 50%;
-    height: 20%;
-    background-color: $modal-background;
-    border: 1px solid $dark-border-color;
-    color: $dark-general-font-color;
+.calendar__setting__desc {
+  @include settingDesc;
+}
+
+.calendar__setting__startday {
+  @include settingBox;
+  position: relative;
+  background-color: transparent;
+  &.light {
+    color: $black;
   }
 }

@@ -44,9 +44,7 @@ export default function DetailModal({ setDetailModal }) {
                     {item.category.name}
                   </span>
                   <span className="specific__content">{item.content}</span>
-                  <span className="specific__payment">
-                    {item.payment.description}
-                  </span>
+                  <span className="specific__payment">{item.payment.desc}</span>
                   {item.type === '지출' ? (
                     <span className="specific__cost spending">
                       -{CommaMaker(item.cost)}원

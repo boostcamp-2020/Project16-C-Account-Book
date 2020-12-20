@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import PaymentModal from '../../components/PaymentMethod/Modal';
 import MenuBar from '../../components/Common/MenuBar';
 import NavButton from '../../components/Chart/NavButton';
+import FilteringButton from '../../components/Chart/FilteringButton';
 import PieChart from '../../components/CategoryChart/PieChart';
 import TableChart from '../../components/CategoryChart/TableChart';
 import LineChart from '../../components/DateChart/LineChart';
@@ -13,30 +14,43 @@ import useLoginCheck from '../../service/useLoginCheck';
 
 import { useDateInfoData } from '../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../store/Theme/themeHook';
 import useAccountBook from '../../service/useAccountBookSetting';
 
 import './chart.scss';
 
 const Chart = props => {
-  const accountBookId = useHistory().location.state;
+  const history = useHistory();
+  const accountBookId = useLoginCheck();
+  const theme = useThemeData(store => store.mode);
 
-  useAccountBook(accountBookId);
-  useLoginCheck();
+  const isWrongAccess = useAccountBook(accountBookId);
+  if (!isWrongAccess) {
+    history.push('/');
+    return null;
+  }
+
   const [paymentMethodModal, setPaymentMethodModal] = useState(false);
   const [chartType, setChartType] = useState('category');
+  const [dataType, setDataType] = useState('지출');
   const defaultMethod = useDefaultPayment();
 
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-  const ChartInfo = useAccountBookData(
-    store => store.getTransactionsForPieChart,
+  const chartInfo = useAccountBookData(store =>
+    store.getTransactionsForPieChart(
+      DateInfo.year,
+      DateInfo.month + 1,
+      dataType,
+    ),
   );
 
-  const chartInfo = ChartInfo(DateInfo.year, DateInfo.month + 1);
   const refArr = [];
   chartInfo.forEach(() => refArr.push(React.createRef()));
 
   return (
-    <div className="chart__wrapper">
+    <div
+      className={theme === 'dark' ? 'chart__wrapper' : 'chart__wrapper light'}
+    >
       <MenuBar
         id={accountBookId.id}
         setModal={setPaymentMethodModal}
@@ -44,6 +58,9 @@ const Chart = props => {
       />
       <NavButton chartType={chartType} setChartType={setChartType} />
 
+      {chartType === 'category' && (
+        <FilteringButton dataType={dataType} setDataType={setDataType} />
+      )}
       {chartInfo.length === 0 && <div className="no__data">No Data</div>}
 
       {chartType === 'category' && chartInfo.length !== 0 && (

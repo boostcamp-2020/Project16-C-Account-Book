@@ -4,6 +4,8 @@ import AddTemplate from '../AddTemplate';
 import CardContainer from '../CardContainer';
 import NewMethod from '../NewMethod';
 import ActionButton from '../../Common/ActionButton';
+import SaveModal from '../../Common/SaveModal';
+import useSaveModal from '../../../service/useSaveModal';
 import './modal.scss';
 
 export default function PaymentModal({
@@ -11,6 +13,7 @@ export default function PaymentModal({
   defaultMethod,
 }): React.ReactElement {
   const [addFormModal, setAddFormModal] = useState(false);
+  const confirmModal = useSaveModal();
 
   const onClickNew = () => {
     setAddFormModal(() => !addFormModal);
@@ -28,10 +31,18 @@ export default function PaymentModal({
           <ActionButton type="large" content="Add" action={onClickNew} />
         </div>
 
-        <CardContainer />
+        <CardContainer confirmModal={confirmModal} />
       </div>
       {addFormModal && <NewMethod defaultMethod={defaultMethod} />}
       {addFormModal && <AddTemplate setAddFormModal={setAddFormModal} />}
+      {confirmModal.saveModal && (
+        <SaveModal
+          saveAction={confirmModal.saveAction}
+          updateData={confirmModal.updateData}
+          setSaveModal={confirmModal.setSaveModal}
+          title={confirmModal.modalTitle}
+        />
+      )}
     </>
   );
 }

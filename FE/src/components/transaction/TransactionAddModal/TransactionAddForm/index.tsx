@@ -1,5 +1,6 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, ReactElement, useRef } from 'react';
 
+import validateForm from '../../../../service/transaction-form-validation';
 import DateInput from '../DateInput';
 import CategoryInput from '../CategoryInput';
 import PaymentInput from '../PaymentInput';
@@ -10,7 +11,16 @@ import './index.scss';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 
-const TransactionAddForm = ({ accountbookId }) => {
+const TransactionAddForm = ({
+  accountbookId,
+  confirmModal,
+}: {
+  accountbookId: string;
+  confirmModal: any;
+}): ReactElement => {
+  const { setSaveModal, setSaveAction, setModalTitle } = confirmModal;
+
+  const priceInputElementRef = useRef<HTMLInputElement>(null);
   const {
     input,
     setMessageVisible,
@@ -42,12 +52,10 @@ const TransactionAddForm = ({ accountbookId }) => {
   const addTransaction = async () => {
     try {
       const newTransaction = await submitPost(accountbookId);
-      console.log('newTransaction: ', newTransaction);
 
       addTransactionToStore(newTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {
-      console.error(error);
       alert('거래내역 추가 실패');
     }
   };
@@ -55,22 +63,31 @@ const TransactionAddForm = ({ accountbookId }) => {
   const updateTransaction = async () => {
     try {
       const updatedTransaction = await submitUpdate(accountbookId);
-      console.log('updated Transaction: ', updatedTransaction);
-
       updateTransactionToStore(updatedTransaction);
       setTransactionAddModalVisible(false);
     } catch (error) {
-      console.error(error);
       alert('거래내역 수정 실패');
     }
   };
 
   const onSubmitClicked = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input._id === '') {
-      addTransaction();
-    } else {
-      updateTransaction();
+    try {
+      if (validateForm(input)) {
+        if (input._id === '') {
+          addTransaction();
+        } else {
+          updateTransaction();
+        }
+      }
+    } catch (error) {
+      if (error.name === 'PRICE_UNSET') {
+        priceInputElementRef.current?.focus();
+      }
+
+      setModalTitle(() => error.message);
+      setSaveModal(() => true);
+      setSaveAction(() => () => {});
     }
   };
 
@@ -87,7 +104,7 @@ const TransactionAddForm = ({ accountbookId }) => {
         <DateInput />
         <CategoryInput {...{ categoryPool }} />
         <PaymentInput {...{ paymentPool }} />
-        <PriceInput />
+        <PriceInput {...{ priceInputElementRef }} />
         <ContentInput />
 
         <div className="transaction__button__container">

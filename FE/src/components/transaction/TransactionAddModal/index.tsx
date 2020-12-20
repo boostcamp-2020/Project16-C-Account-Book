@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
 import TransactionAddForm from './TransactionAddForm';
@@ -6,18 +6,20 @@ import MessageInputForm from './MessageInputForm';
 
 import './TransactionAddModal.scss';
 
-const TransactionAddModal = ({ accountbookId }: { accountbookId: string }) => {
+const TransactionAddModal = ({
+  accountbookId,
+  confirmModal,
+}: {
+  accountbookId: string;
+  confirmModal: any;
+}): ReactElement => {
   const {
     messageVisible,
     setTransactionAddModalVisible,
-    setMessageVisible,
-    setMessage,
     initInput,
   } = useTransactionAddModalData(store => ({
     setTransactionAddModalVisible: store.setTransactionAddModalVisible,
     messageVisible: store.messageVisible,
-    setMessageVisible: store.setMessageVisible,
-    setMessage: store.setMessage,
     initInput: store.initInput,
   }));
 
@@ -26,16 +28,22 @@ const TransactionAddModal = ({ accountbookId }: { accountbookId: string }) => {
     setTransactionAddModalVisible(false);
   };
 
-  const onOverLayClicked = (e: Event) => {
+  const onOverLayClicked = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
     if (e.target === e.currentTarget) closeModal();
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div className="transaction__modal" onClick={onOverLayClicked}>
       <div className="form__container">
         <h2>거래내역 추가</h2>
         {!messageVisible ? (
-          <TransactionAddForm accountbookId={accountbookId} />
+          <TransactionAddForm
+            accountbookId={accountbookId}
+            confirmModal={confirmModal}
+          />
         ) : (
           <MessageInputForm />
         )}

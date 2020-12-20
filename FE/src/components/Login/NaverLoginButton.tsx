@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import './LoginButton.scss';
 
-const Button = () => {
+const Button = (): ReactElement => {
   const baseUrl = 'https://nid.naver.com/oauth2.0/authorize';
   const naverClientId = process.env.NAVER_CLIENT_ID;
   const redirectUrl = 'http://118.67.135.19:80/auth/naver';

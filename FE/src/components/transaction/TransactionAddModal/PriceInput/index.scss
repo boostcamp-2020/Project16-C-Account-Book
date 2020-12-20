@@ -1,6 +1,10 @@
 @use '../../../../styles/mixins.scss' as *;
+@use '../../../../styles/values.scss' as *;
 
-.price__input {
+.price__input__container {
+  .price__input {
+    position: relative;
+  }
   input {
     @include input-form;
   }

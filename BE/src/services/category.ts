@@ -1,66 +1,31 @@
 import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
 
-const post = async (ctx: Context): Promise<any> => {
+const post = async (params: any, body: any): Promise<any> => {
   const categoryInfo = {
-    name: ctx.request.body.name,
-    type: ctx.request.body.type,
-    icon: ctx.request.body.icon,
+    name: body.name,
+    type: body.type,
+    icon: body.icon,
   };
-  const category = await accountBookModel.addCategory(
-    ctx.params.accountbookid,
-    categoryInfo,
-  );
-  if (category) {
-    return {
-      message: 'success',
-      data: category,
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  const category = await accountBookModel.addCategory(params.accountbookid, categoryInfo);
+  if (category) return category;
+  return {};
 };
 
-const patch = async (ctx: Context): Promise<any> => {
+const patch = async (params: any, body: any): Promise<any> => {
   const categoryInfo = {
-    _id: ctx.params.categoryid,
-    name: ctx.request.body.name,
-    type: ctx.request.body.type,
-    icon: ctx.request.body.icon,
+    _id: params.categoryid,
+    name: body.name,
+    type: body.type,
+    icon: body.icon,
   };
-  const updateResult = await accountBookModel.updateCategory(
-    ctx.params.accountbookid,
-    categoryInfo,
-  );
-  if (updateResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  const updateResult = await accountBookModel.updateCategory(params.accountbookid, categoryInfo);
+  return !!updateResult;
 };
 
-const del = async (ctx: Context): Promise<any> => {
-  const delResult = await accountBookModel.deleteCategory(
-    ctx.params.accountbookid,
-    ctx.params.categoryid,
-  );
-  if (delResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+const del = async (params: any): Promise<any> => {
+  const delResult = await accountBookModel.deleteCategory(params.accountbookid, params.categoryid);
+  return !!delResult;
 };
 
 export default { post, patch, del };

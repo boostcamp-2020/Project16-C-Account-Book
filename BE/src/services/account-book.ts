@@ -2,98 +2,85 @@ import accountBookModel from '@models/accountbook';
 import { Context } from 'koa';
 import Random from '@utils/random';
 
-const get = async (ctx: Context): Promise<any> => {
-  const accountBooks = await accountBookModel.get(ctx.user);
+const get = async (userInfo: any): Promise<any> => {
+  const accountBooks = await accountBookModel.get(userInfo);
   return accountBooks;
 };
 
-const post = async (ctx: Context): Promise<any> => {
+const post = async (userInfo: any, body: Context['body']): Promise<any> => {
   const createInfo = {
-    name: ctx.request.body.name,
-    description: ctx.request.body.description,
-    user: ctx.user,
+    name: body.name,
+    description: body.description,
+    user: userInfo,
   };
   const accountBook = await accountBookModel.create(createInfo);
 
   return accountBook;
 };
 
-const patch = async (ctx: Context): Promise<any> => {
-  const { accountbookid } = ctx.params;
+const patch = async (params: any, body: any): Promise<any> => {
+  const { accountbookid } = params;
   const updateInfo = {
-    name: ctx.request.body.name,
-    description: ctx.request.body.description,
+    name: body.name,
+    description: body.description,
   };
   const updateResult = await accountBookModel.update(accountbookid, updateInfo);
   if (updateResult)
     return {
-      message: 'update',
-      data: {
-        _id: accountbookid,
-        name: updateInfo.name,
-        description: updateInfo.description,
-      },
+      _id: accountbookid,
+      name: updateInfo.name,
+      description: updateInfo.description,
     };
-  return {
-    message: 'not update',
-    data: {},
-  };
+  return {};
 };
 
-const patchStartday = async (ctx: Context): Promise<any> => {
-  const { accountbookid } = ctx.params;
+const patchStartday = async (params: any, body: any): Promise<any> => {
+  const { accountbookid } = params;
   const updateInfo = {
-    startday: ctx.request.body.startday,
+    startday: body.startday,
   };
-  const updateResult = await accountBookModel.updateStartday(
-    accountbookid,
-    updateInfo,
-  );
+  const updateResult = await accountBookModel.updateStartday(accountbookid, updateInfo);
   if (updateResult)
     return {
-      message: 'update',
-      data: {
-        _id: accountbookid,
-        startday: updateInfo.startday,
-      },
+      _id: accountbookid,
+      startday: updateInfo.startday,
     };
-  return {
-    message: 'not update',
-    data: {},
-  };
+  return {};
 };
 
-const del = async (ctx: Context): Promise<any> => {
-  const deleteResult = await accountBookModel.del(ctx.params.accountbookid);
+const del = async (params: any): Promise<any> => {
+  const deleteResult = await accountBookModel.del(params.accountbookid);
   return deleteResult;
 };
 
-const getDetail = async (ctx: Context): Promise<any> => {
-  const accountBook = await accountBookModel.getDetail(
-    ctx.params.accountbookid,
-  );
+const getDetail = async (params: any): Promise<any> => {
+  const { accountbookid } = params;
+  const accountBook = await accountBookModel.getDetail(accountbookid);
   return accountBook;
 };
 
-const getCode = async (ctx: Context): Promise<any> => {
-  const id = ctx.params.accountbookid;
+const getTransaction = async (params: any): Promise<any> => {
+  const { accountbookid } = params;
+  const accountBook = await accountBookModel.getTransactions(accountbookid, params.year, params.month);
+  return accountBook;
+};
+
+const getCode = async (params: any): Promise<any> => {
+  const accountBookId = params.accountbookid;
   const code = Random.randomStr(10);
-  const updateResult = await accountBookModel.updateCode(id, code);
+  const updateResult = await accountBookModel.updateCode(accountBookId, code);
+  return updateResult ? code : false;
+};
+
+const addUser = async (codeInfo: any, userInfo: any): Promise<boolean> => {
+  const { code } = codeInfo;
+  const updateResult = await accountBookModel.addUser(code, userInfo);
   if (updateResult) return updateResult;
   return false;
 };
 
-const addUser = async (ctx: Context): Promise<any> => {
-  const { code } = ctx.request.body;
-  const userInfo = ctx.user;
-  const updateResult = await accountBookModel.addUser(code, userInfo);
-  if (updateResult) return true;
-  return false;
-};
-
-const delUser = async (ctx: Context): Promise<any> => {
-  const accountBookId = ctx.params.accountbookid;
-  const userInfo = ctx.user;
+const delUser = async (paramInfo: any, userInfo: any): Promise<boolean> => {
+  const accountBookId = paramInfo.accountbookid;
   const updateResult = await accountBookModel.delUser(accountBookId, userInfo);
   if (updateResult) return true;
   return false;
@@ -102,6 +89,7 @@ const delUser = async (ctx: Context): Promise<any> => {
 export default {
   get,
   getDetail,
+  getTransaction,
   post,
   patch,
   patchStartday,

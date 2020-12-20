@@ -6,6 +6,9 @@
 
   .csv__import__title {
     @include settingTitle;
+    &.light {
+      text-shadow: none;
+    }
   }
 
   .csv__import__desc {
@@ -26,8 +29,6 @@
     justify-content: center;
     gap: 5%;
 
-    .csv__import__btn {
-    }
     .csv__import__input {
       button {
         background-color: transparent;
@@ -35,6 +36,14 @@
 
       font-size: 1.5vh;
       color: $dark-emphasize-font-color;
+
+      &.light {
+        color: $black;
+      }
     }
+  }
+
+  &.light {
+    color: $black;
   }
 }

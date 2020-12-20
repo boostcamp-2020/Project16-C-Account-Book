@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
-
+import { useThemeData } from '../../../store/Theme/themeHook';
 import CalculateDate from '../../../util/calculateDate';
 import DetailModal from '../DetailModal';
 
@@ -10,13 +10,11 @@ import CalendarHeader from '../CalendarHeader';
 import CalendarBody from '../CalendarBody';
 import './calendar.scss';
 
-export default function Calendar() {
-  const [detailModal, setDetailModal] = useState(false);
+export default function Calendar({ setDetailModal }) {
+  const theme = useThemeData(store => store.mode);
 
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
   const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
-
-  const startDay = useAccountBookData(store => store.accountBook.startday);
 
   const startDay = useAccountBookData(store => store.accountBook.startday);
 
@@ -49,7 +47,6 @@ export default function Calendar() {
           </table>
         </div>
       </div>
-      {detailModal && <DetailModal setDetailModal={setDetailModal} />}
     </div>
   );
 }

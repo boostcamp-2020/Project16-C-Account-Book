@@ -6,7 +6,15 @@
   height: 100vh;
   margin: 0 0 0;
   position: relative;
+
   background-color: $dark-background-color;
+
+  .theme__button {
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .title {
     position: absolute;
@@ -28,6 +36,10 @@
     }
     text-shadow: $selectedTextShadow;
     color: $dark-emphasize-font-color;
+
+    &.light {
+      color: black;
+    }
   }
 
   .login-button-container {
@@ -35,5 +47,9 @@
     top: 55%;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  &.light {
+    background-color: white;
   }
 }

@@ -20,10 +20,8 @@ const LoginProcessPage = () => {
 
     const matched = url.match(/code=([^&]+)(?:&*)/);
 
-    console.log(matched);
     if (!!matched && matched.length > 1) {
       const code = matched[1];
-      console.log(code);
 
       if (code) {
         login(code, 'naver');

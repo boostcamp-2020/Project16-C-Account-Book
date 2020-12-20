@@ -9,10 +9,14 @@
   flex-direction: column;
   animation: showSettingPage 1s ease;
   color: $dark-emphasize-font-color;
-
+  background-color: $dark-background-color;
   @keyframes showSettingPage {
     from {
       transform: translateX(100%);
     }
+  }
+
+  &.light {
+    background-color: $light-background-color;
   }
 }

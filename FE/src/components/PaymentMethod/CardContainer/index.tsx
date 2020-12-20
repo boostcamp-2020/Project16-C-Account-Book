@@ -6,8 +6,18 @@ import {
   deletePaymentMethod,
 } from '../../../api/payment-method';
 import './cardContainer.scss';
+import { ResponseMessage } from '../../../util/message';
 
-export default React.memo(function CardContainer(): React.ReactElement {
+export default React.memo(function CardContainer({
+  confirmModal,
+}): React.ReactElement {
+  const {
+    setSaveModal,
+    setSaveAction,
+    setUpdateData,
+    setModalTitle,
+  } = confirmModal;
+
   const accountBookId = useAccountBookData(store => store.accountBook._id);
   const paymentMethods = useAccountBookData(
     store => store.accountBook.payments,
@@ -40,30 +50,53 @@ export default React.memo(function CardContainer(): React.ReactElement {
     const content = contentRefArr[index];
 
     if (event.key === 'Enter') {
-      await updatePaymentMethod({
+      try {
+        const res = await updatePaymentMethod({
+          accountBookId,
+          paymentId: event.target.dataset.cardid,
+          name: event.target.dataset.name,
+          desc: event.target.value,
+          color: event.target.dataset.color,
+        });
+        if (res.status !== ResponseMessage.success) {
+          throw new Error();
+        }
+
+        event.target.classList.toggle('hidden');
+        content.current.classList.toggle('hidden');
+        updatePayment({
+          id: event.target.dataset.cardid,
+          desc: event.target.value,
+        });
+      } catch (error) {
+        throw new Error();
+      }
+    }
+  };
+
+  const deleteProcess = async event => {
+    try {
+      const res = await deletePaymentMethod({
         accountBookId,
         paymentId: event.target.dataset.cardid,
-        name: event.target.dataset.name,
-        desc: event.target.value,
-        color: event.target.dataset.color,
       });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
 
-      event.target.classList.toggle('hidden');
-      content.current.classList.toggle('hidden');
-      updatePayment({
-        id: event.target.dataset.cardid,
-        desc: event.target.value,
-      });
+      deletePayment(event.target.dataset.cardid);
+    } catch (error) {
+      throw new Error();
     }
   };
 
   const onClickDelete = async event => {
-    await deletePaymentMethod({
-      accountBookId,
-      paymentId: event.target.dataset.cardid,
+    setModalTitle(() => '정말 이 결제수단을 삭제하시겠습니까?');
+    setSaveModal(() => true);
+    setUpdateData(() => {
+      return event;
     });
-
-    deletePayment(event.target.dataset.cardid);
+    setSaveAction(() => deleteProcess);
   };
 
   return (

@@ -4,12 +4,9 @@
 
 .calendar-container {
   width: 100%;
-
-  // height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3%;
 
   .my-calendar {
     width: 100%;
@@ -35,6 +32,12 @@
 
           &.sunday {
             color: $spending-color;
+          }
+
+          &.notSunday {
+            &.light {
+              color: $black;
+            }
           }
         }
       }

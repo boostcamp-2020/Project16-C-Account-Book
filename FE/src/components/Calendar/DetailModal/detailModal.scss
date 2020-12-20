@@ -4,10 +4,11 @@
 .detail-info-overlay {
   position: fixed;
   width: 100%;
-  height: 140%;
+  height: 100%;
   background-color: $modal-background;
   display: flex;
   justify-content: center;
+  align-items: center;
   z-index: 3;
 
   &.hidden {

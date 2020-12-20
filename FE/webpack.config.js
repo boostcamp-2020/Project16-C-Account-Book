@@ -61,12 +61,15 @@ module.exports = {
   },
   devtool: 'eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'public/'),
     historyApiFallback: true,
-    host: '0.0.0.0'
+    host: '127.0.0.1',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss'],
+    alias: {
+      '@interfaces': path.resolve(__dirname, 'src/interfaces'),
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

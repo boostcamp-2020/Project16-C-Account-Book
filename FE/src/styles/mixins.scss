@@ -1,5 +1,43 @@
 @use './values.scss' as *;
 
+// loading-spinner
+
+@mixin loading-spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .indicator {
+    color: $dark-emphasize-font-color;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-weight: 900;
+  }
+
+  .spinner {
+    border: 20px solid $spinner-background-color;
+    border-top: 20px solid $spin-color;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// form
+
 @mixin buttonDefaultSetting {
   cursor: pointer;
   outline: none;
@@ -29,10 +67,12 @@
   @include buttonDefaultSetting;
   border: 1px solid $white;
   color: $white;
-  width: 5em;
-  height: 30px;
+  width: 6em;
+  height: 2.5em;
   background-color: $modal-button-background;
   font-size: 1em;
+
+  padding: 0.5em 1em;
 
   &:hover {
     background-color: $light-black;

@@ -1,16 +1,53 @@
 @use '../../../../styles/values.scss' as *;
 @use '../../../../styles/mixins.scss' as *;
 
+@mixin modal-contents($type) {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  @if $type == edit {
+    flex-direction: column;
+  } @else {
+    flex-direction: row;
+    gap: 7%;
+  }
+
+  justify-content: center;
+  align-items: center;
+
+  .create__category__input {
+    width: 50%;
+    background-color: $input-background-color;
+    @include input-form;
+  }
+
+  .edit__category__input {
+    width: 50%;
+    background-color: $input-background-color;
+    @include input-form;
+  }
+
+  .category__edit__btns {
+    position: absolute;
+    bottom: 20%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+  }
+}
 .category__modal__overlay {
   position: fixed;
   width: 100%;
-  height: 100%;
-
+  height: 120%;
   background-color: $modal-background;
   z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+
   .category__modal {
     width: 30%;
     height: 30%;
@@ -28,36 +65,11 @@
       margin-bottom: 1.5em;
       text-shadow: $selectedTextShadow;
     }
+    .modal__contents__create {
+      @include modal-contents(create);
+    }
     .modal__contents {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 7%;
-
-      .create__category__input {
-        width: 50%;
-        background-color: $input-background-color;
-        @include input-form;
-      }
-
-      .edit__category__input {
-        width: 50%;
-        background-color: $input-background-color;
-        @include input-form;
-      }
-
-      .category__edit__btns {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        transform: translateY(10%);
-        gap: 5%;
-      }
+      @include modal-contents(edit);
     }
   }
 }

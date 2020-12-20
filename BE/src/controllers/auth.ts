@@ -1,28 +1,25 @@
-import createError from 'http-errors';
-import { Context, Next } from 'koa';
+import { Context } from 'koa';
 
-import serviceAuthCheck from '@services/auth/check';
-import serviceLogin from '@services/auth/login';
+import serviceLogin from '@/services/auth/login';
+
+import response from '@/utils/response';
 
 const login = async (ctx: Context): Promise<Context['body']> => {
-  const token = await serviceLogin.login(ctx.request.body);
-  console.log('token: ', token);
-
-  ctx.body = { token };
+  const { body } = ctx.request;
+  const tokens = await serviceLogin.login(body);
+  const res = response(200, tokens);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
 };
 
-const checkToken = async (
-  ctx: Context,
-  next: Next,
-): Promise<Context['body']> => {
-  const user = await serviceAuthCheck.checkToken(ctx.header);
-  console.log(`여기${user}`);
-  if (!user) {
-    const jwtError = createError(401, 'unauthorized');
-    throw jwtError;
-  }
-  ctx.user = user;
-  await next();
+const refresh = async (ctx: Context): Promise<Context['body']> => {
+  const { body } = ctx.request;
+  const accessToken = await serviceLogin.refresh(body);
+  const res = response(200, accessToken);
+  ctx.status = res.status;
+  ctx.body = res;
+  return ctx.body;
 };
 
-export default { login, checkToken };
+export default { login, refresh };

@@ -3,12 +3,14 @@ import { v4 } from 'uuid';
 import CalculateDate from '../../../util/calculateDate';
 import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
+import { useThemeData } from '../../../store/Theme/themeHook';
 import CommaMaker from '../../../util/commaForMoney';
 
 import { StartDayMap, CalendarBodyTable } from '../../../util/calendarTemplate';
 import './calendarBody.scss';
 
 export default function CalendarBody() {
+  const theme = useThemeData(store => store.mode);
   const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
 
   const YearMonthTransactions = useAccountBookData(store =>
@@ -46,7 +48,7 @@ export default function CalendarBody() {
                   startCount = 1;
                 }
                 if (!startCount) {
-                  return <td className="td__hidden" key={v4()} />;
+                  return <td key={v4()} />;
                 }
 
                 ++countDay;
@@ -60,7 +62,11 @@ export default function CalendarBody() {
                     {markToday && markToday === countDay ? (
                       <td
                         key={`day${countDay}`}
-                        className={`day ${countDay}`}
+                        className={
+                          theme === 'dark'
+                            ? `day ${countDay}`
+                            : `day ${countDay} light`
+                        }
                         data-date={countDay}
                       >
                         <div className="today" data-date={countDay}>
@@ -90,7 +96,11 @@ export default function CalendarBody() {
                     ) : (
                       <td
                         key={`day${countDay}`}
-                        className={`day ${countDay}`}
+                        className={
+                          theme === 'dark'
+                            ? `day ${countDay}`
+                            : `day ${countDay} light`
+                        }
                         data-date={countDay}
                       >
                         {countDay}

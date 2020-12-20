@@ -1,87 +1,51 @@
 import accountBookModel from '@models/accountbook';
+import transactionModel from '@/models/transaction';
 import { Context } from 'koa';
 
 const { Parser } = require('json2csv');
 
-const post = async (ctx: Context): Promise<any> => {
+const post = async (params: any, body: any): Promise<any> => {
   const transactionInfo = {
-    content: ctx.request.body.content,
-    type: ctx.request.body.type,
-    category: ctx.request.body.category,
-    cost: ctx.request.body.cost,
-    date: ctx.request.body.date,
-    payment: ctx.request.body.payment,
+    content: body.content,
+    type: body.type,
+    category: body.category,
+    cost: body.cost,
+    date: body.date,
+    payment: body.payment,
+    accountbook: params.accountbookid,
   };
-  const transaction = await accountBookModel.addTransaction(
-    ctx.params.accountbookid,
-    transactionInfo,
-  );
+
+  const transaction = await transactionModel.post(transactionInfo);
   if (transaction) {
-    return {
-      message: 'success',
-      data: transaction,
-    };
+    return transaction;
   }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  return {};
 };
 
-const patch = async (ctx: Context): Promise<any> => {
-  const accountBookId = ctx.params.accountbookid;
-  const transactionId = ctx.params.transactionid;
+const patch = async (params: any, body: any): Promise<any> => {
+  const transactionId = params.transactionid;
   const updateInfo = {
     _id: transactionId,
-    content: ctx.request.body.content,
-    type: ctx.request.body.type,
-    category: ctx.request.body.category,
-    cost: ctx.request.body.cost,
-    date: ctx.request.body.date,
-    payment: ctx.request.body.payment,
+    content: body.content,
+    type: body.type,
+    category: body.category,
+    cost: body.cost,
+    date: body.date,
+    payment: body.payment,
   };
-  const updateResult = await accountBookModel.updateTransaction(
-    accountBookId,
-    transactionId,
-    updateInfo,
-  );
-  if (updateResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  const updateResult = await transactionModel.patch(transactionId, updateInfo);
+  if (updateResult) return updateInfo;
+  return !!updateResult;
 };
 
-const del = async (ctx: Context): Promise<any> => {
-  const accountBookId = ctx.params.accountbookid;
-  const transactionId = ctx.params.transactionid;
-  const delResult = await accountBookModel.deleteTransaction(
-    accountBookId,
-    transactionId,
-  );
-  if (delResult) {
-    return {
-      message: 'success',
-      data: {},
-    };
-  }
-  return {
-    message: 'fail',
-    data: {},
-  };
+const del = async (params: any): Promise<any> => {
+  const transactionId = params.transactionid;
+  const delResult = await transactionModel.del(transactionId);
+  return !!delResult;
 };
 
-const exportCSV = async (ctx: Context): Promise<any> => {
-  const accountBook = await accountBookModel.getDetail(
-    ctx.params.accountbookid,
-  );
-  const transactions = accountBook.transactions;
-  console.log(transactions);
+const exportCSV = async (params: any): Promise<any> => {
+  const transactions = await transactionModel.getExport(params.accountbookid);
 
   if (transactions) {
     const fields = [
@@ -93,68 +57,90 @@ const exportCSV = async (ctx: Context): Promise<any> => {
       'category.icon',
       'category.type',
       'payment.name',
-      'payment.color',
       'payment.desc',
     ];
     const json2csvParser = new Parser({ fields });
     const csv = json2csvParser.parse(transactions);
-    return {
-      message: 'success',
-      data: csv,
-    };
+    return csv;
   }
-  return {
-    message: 'fail',
-    data: {},
-  };
+  return {};
+};
+const downloadTemplateCSV = async (ctx: Context): Promise<any> => {
+  const exampleTransaction = [
+    {
+      content: '버거킹',
+      type: '지출',
+      cost: 20000,
+      date: '2020-12-15',
+      category: { name: '식비', type: '지출' },
+      payment: { name: 'BC Card', desc: '체크 카드' },
+    },
+  ];
+
+  const fields = ['content', 'type', 'cost', 'date', 'category.name', 'category.type', 'payment.name', 'payment.desc'];
+
+  const json2csvParser = new Parser({ fields });
+  const csv = json2csvParser.parse(exampleTransaction);
+  return csv;
 };
 
-const importCSV = async (ctx: Context): Promise<any> => {
-  const csvArray = ctx.request.body;
+const importCSV = async (params: any, body: any): Promise<any> => {
+  const isValidForm = (tempTransaction: any) => {
+    const requirementsFields = ['content', 'type', 'cost', 'date'];
 
-  const failMessage = { message: 'csv 형식이 올바르지 않습니다.', data: {} };
-  const fields = {
-    content: 1,
-    type: 1,
-    cost: 1,
-    date: 1,
-    category: 1,
-    payment: 1,
-  };
-  const transactionArray = [];
-
-  for (let index = 1; index < csvArray.length; index++) {
-    const tempTransaction: any = { category: {}, payment: {} };
-
-    for (let i = 0; i < csvArray[0].length; i++) {
-      const splitArray = csvArray[0][i].split('.');
-
-      if (splitArray.length === 1) {
-        if (!(csvArray[0][i] in fields)) return failMessage;
-
-        tempTransaction[csvArray[0][i]] = csvArray[index][i];
-      } else if (splitArray.length === 2) {
-        if (!(splitArray[0] in fields)) return failMessage;
-
-        tempTransaction[splitArray[0]][splitArray[1]] = csvArray[index][i];
-      }
+    for (const field of requirementsFields) {
+      if (tempTransaction[field] === '') return false;
     }
-    transactionArray.push(tempTransaction);
-  }
 
-  const result = await accountBookModel.addTransactions(
-    ctx.params.accountbookid,
-    transactionArray,
-  );
-
-  if (result) {
-    return {
-      message: 'success',
-    };
-  }
-  return {
-    message: 'fail',
+    return true;
   };
+
+  const makeTransactionArray = (csvArray: any) => {
+    const fields = {
+      content: 1,
+      type: 1,
+      cost: 1,
+      date: 1,
+      category: 1,
+      payment: 1,
+    };
+    const transactionArray = [];
+
+    for (let index = 1; index < csvArray.length; index += 1) {
+      const tempTransaction: any = {
+        category: { name: '미분류', icon: 1 },
+        payment: { color: 'hsl(177deg 62% 40%)', desc: '' },
+        accountbook: params.accountbookid,
+      };
+
+      for (let i = 0; i < csvArray[0].length; i += 1) {
+        const splitedCSV = csvArray[0][i].split('.');
+
+        if (splitedCSV.length === 1) {
+          if (!(csvArray[0][i] in fields)) return false;
+          tempTransaction[csvArray[0][i]] = csvArray[index][i];
+        } else if (splitedCSV.length === 2) {
+          tempTransaction[splitedCSV[0]][splitedCSV[1]] = csvArray[index][i];
+        }
+      }
+
+      if (!isValidForm(tempTransaction)) return false;
+      transactionArray.push(tempTransaction);
+    }
+
+    return transactionArray;
+  };
+
+  const csvDatas = body;
+  const transactionArray = makeTransactionArray(csvDatas);
+
+  if (transactionArray === false) {
+    return { message: 'csv 형식이 올바르지 않습니다.', data: {} };
+  }
+
+  const result = await transactionModel.postMany(transactionArray);
+
+  return !!result;
 };
 
-export default { post, patch, del, exportCSV, importCSV };
+export default { post, patch, del, exportCSV, downloadTemplateCSV, importCSV };

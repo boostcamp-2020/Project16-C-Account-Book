@@ -8,56 +8,49 @@ import CalendarSetting from '../../components/SettingContent/CalendarSetting';
 import CategorySetting from '../../components/SettingContent/CategorySetting';
 import CSVSetting from '../../components/SettingContent/CSVSetting';
 import useAccountBook from '../../service/useAccountBookSetting';
-import SaveModal from '../../components/SettingContent/SaveModal';
+import SaveModal from '../../components/Common/SaveModal';
 import useLoginCheck from '../../service/useLoginCheck';
+import useSaveModal from '../../service/useSaveModal';
 
+import { useThemeData } from '../../store/Theme/themeHook';
 import './settingPage.scss';
 
 export default function SettingPage() {
-  useLoginCheck();
+  const history = useHistory();
+  const accountBookId = useLoginCheck();
+  const theme = useThemeData(store => store.mode);
 
   const [settingType, setSettingType] = useState('user');
-  const [saveModal, setSaveModal] = useState(false);
-  const [saveAction, setSaveAction] = useState(null);
-  const [updateData, setUpdateData] = useState({});
+  const confirmModal = useSaveModal();
 
-  const history = useHistory();
-  const accountBookId = history.location.state;
+  const isWrongAccess = useAccountBook(accountBookId);
+  if (!isWrongAccess) {
+    history.push('/');
+    return null;
+  }
 
-  useAccountBook(accountBookId);
   return (
-    <div className="setting__page__wrapper">
-      <SettingBar
-        accountBookId={accountBookId.id}
-        settingType={settingType}
-        setSettingType={setSettingType}
-      />
-      {settingType === 'user' && (
-        <UserSetting
-          accountBookId={accountBookId.id}
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
-        />
-      )}
+    <div
+      className={
+        theme === 'dark'
+          ? 'setting__page__wrapper'
+          : 'setting__page__wrapper light'
+      }
+    >
+      <SettingBar settingType={settingType} setSettingType={setSettingType} />
+      {settingType === 'user' && <UserSetting confirmModal={confirmModal} />}
       {settingType === 'calendar' && (
-        <CalendarSetting
-          accountBookId={accountBookId.id}
-          setSaveModal={setSaveModal}
-          setSaveAction={setSaveAction}
-          setUpdateData={setUpdateData}
-        />
+        <CalendarSetting confirmModal={confirmModal} />
       )}
 
-      {settingType === 'category' && (
-        <CategorySetting accountBookId={accountBookId.id} />
-      )}
-      {settingType === 'csv' && <CSVSetting />}
-      {saveModal && (
+      {settingType === 'category' && <CategorySetting />}
+      {settingType === 'csv' && <CSVSetting confirmModal={confirmModal} />}
+      {confirmModal.saveModal && (
         <SaveModal
-          saveAction={saveAction}
-          updateData={updateData}
-          setSaveModal={setSaveModal}
+          saveAction={confirmModal.saveAction}
+          updateData={confirmModal.updateData}
+          setSaveModal={confirmModal.setSaveModal}
+          title={confirmModal.modalTitle}
         />
       )}
     </div>

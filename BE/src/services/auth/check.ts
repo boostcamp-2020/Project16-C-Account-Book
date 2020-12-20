@@ -1,9 +1,10 @@
 import createError from 'http-errors';
-import { Context, Next } from 'koa';
+import { Context } from 'koa';
 import jwt, { Secret } from 'jsonwebtoken';
 
-import userModel from '@models/user';
-import { User } from '@interfaces/auth';
+import userModel from '@/models/user';
+
+import { User } from '@/interfaces/auth';
 
 const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   if (!authorization) {
@@ -15,34 +16,29 @@ const parseTokenFromHeader = ({ authorization }: { authorization: string }) => {
   const matched = authorization.match(tokenReg);
 
   if (!matched || matched?.length < 2) {
-    const authTypeError = createError(
-      401,
-      'authorization type needs to be BEARER',
-    );
+    const authTypeError = createError(401, 'authorization type needs to be BEARER');
     throw authTypeError;
   }
 
   return matched[1];
 };
 
-const decodeToken = (token: string): User => {
+const decodeToken = (token: string): any => {
   const jwtKey: Secret = process.env.JWT_KEY as Secret;
   try {
-    const user: User = jwt.verify(token, jwtKey) as User;
+    const user = jwt.verify(token, jwtKey);
     return user;
   } catch (error) {
-    const jwtError = createError(401, 'jwt malformed');
+    const jwtError = createError(401, error);
     throw jwtError;
   }
 };
 
 const checkToken = async (header: Context['header']): Promise<User | null> => {
   const token = parseTokenFromHeader(header);
-  console.log('token: ', token);
-
   const user = decodeToken(token);
-  const isUserInDB = !!(await userModel.get(user));
+  const isUserInDB = !!(await userModel.get(user.userid, user.social));
   return isUserInDB ? user : null;
 };
 
-export default { checkToken };
+export default { checkToken, decodeToken };

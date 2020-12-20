@@ -1,10 +1,15 @@
-import React, { ChangeEvent } from 'react';
+import iPayment from '@interfaces/payment';
+import React, { ChangeEvent, ReactElement } from 'react';
 
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 
 import './index.scss';
 
-const PaymentInput = ({ paymentPool }) => {
+const PaymentInput = ({
+  paymentPool,
+}: {
+  paymentPool: iPayment[];
+}): ReactElement => {
   const { input, setInput } = useTransactionAddModalData(store => ({
     input: store.input,
     setInput: store.setInput,
@@ -13,6 +18,7 @@ const PaymentInput = ({ paymentPool }) => {
   const onPaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
     const targetElement = e.target as HTMLInputElement;
     const newPayment = {
+      _id: targetElement.dataset.id,
       name: targetElement.dataset.name,
       desc: targetElement.dataset.description,
       color: targetElement.dataset.color,
@@ -26,18 +32,26 @@ const PaymentInput = ({ paymentPool }) => {
       <div className="indicator">결제수단</div>
       <div className="payment__card__container">
         {paymentPool.length ? (
-          paymentPool.map(({ name, desc, color }) => (
-            <label className="payment__card__item" key={`${name}-${desc}`}>
+          paymentPool.map(({ _id, name, desc, color }) => (
+            <label className="payment__card__item" key={_id}>
               <input
                 type="radio"
                 name="payment"
                 data-name={name}
                 data-description={desc}
                 data-color={color}
+                data-id={_id}
                 onChange={onPaymentChange}
-                checked={name === input.payment?.name}
+                checked={_id === input.payment?._id}
               />
-              <div className="payment__card__view">
+              <div
+                className="payment__card__view"
+                style={
+                  _id === input.payment?._id
+                    ? { backgroundColor: color }
+                    : undefined
+                }
+              >
                 <div className="payment__card__title">{name}</div>
                 <div className="payment__card__description">{desc}</div>
               </div>

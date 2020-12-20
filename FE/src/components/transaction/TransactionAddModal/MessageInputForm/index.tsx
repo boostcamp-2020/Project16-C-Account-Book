@@ -25,9 +25,9 @@ const MessageInputForm = () => {
   const getPaymentByName = useAccountBookData(store => store.getPaymentByName);
 
   const onParseButtonClicked = () => {
-    const parsedData = getDataFromSMS(message);
+    const parsedData: any = getDataFromSMS(message);
 
-    const newInputData = {
+    const newInputData: any = {
       type: '지출',
       payment: {},
       cost: 0,
@@ -44,8 +44,7 @@ const MessageInputForm = () => {
     newInputData.cost = parsedData.amount;
     if (parsedData.date) {
       const dateArr = parsedData.date.split('/');
-      newInputData.month = dateArr[0];
-      newInputData.day = dateArr[1];
+      [newInputData.month, newInputData.day] = dateArr;
     }
 
     setInput({ ...input, ...newInputData });

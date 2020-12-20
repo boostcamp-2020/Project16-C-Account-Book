@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
+import { initialTransaction, iTransaction } from '@interfaces/transaction';
 import TransactionsOfOneDay from '../TransactionsOfOneDay';
 import { useDateInfoData } from '../../../../store/DateInfo/dateInfoHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
@@ -11,8 +12,12 @@ const Transactions = ({
 }: {
   selectedCategories: string[];
   selectedTypes: string[];
-}) => {
-  // axios로 비동기 처리
+}): ReactElement => {
+  const [draggedItem, setDraggedItem] = useState<iTransaction>(
+    initialTransaction,
+  );
+  const [draggedInDate, setDraggedInDate] = useState<string>('');
+
   const {
     filteredTransactions,
     filterTransaction,
@@ -39,6 +44,10 @@ const Transactions = ({
             date={day}
             transactions={filteredTransactions[day]}
             key={day}
+            draggedItem={draggedItem}
+            setDraggedItem={setDraggedItem}
+            draggedInDate={draggedInDate}
+            setDraggedInDate={setDraggedInDate}
           />
         ))}
     </>

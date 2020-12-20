@@ -2,21 +2,31 @@ import React, { useState } from 'react';
 
 import './index.scss';
 import { useHistory } from 'react-router-dom';
-import { iTransactionItem } from '../../../../types/transaction';
+import { iTransactionItemProp } from '@interfaces/transaction-components';
+import { iLocation } from '@interfaces/accountbook';
+import { iTransaction } from '../../../../interfaces/transaction';
 import { useTransactionAddModalData } from '../../../../store/TransactionFormModal/TransactionFormModalHook';
 import { useAccountBookData } from '../../../../store/AccountBook/accountBookInfoHook';
 import { deleteTransaction as deleteTransactionApi } from '../../../../api/transaction';
+import { useThemeData } from '../../../../store/Theme/themeHook';
+import CommaMaker from '../../../../util/commaForMoney';
 
 const TransactionItem = ({
-  id: transactionId,
+  _id: transactionId,
   date,
   category,
   content,
   payment,
   cost,
   type,
-}: iTransactionItem) => {
-  const [buttonReveal, setButtonReveal] = useState('');
+  setDraggedItem,
+  dragObject,
+  setDraggedInDate,
+}: iTransaction & iTransactionItemProp): any => {
+  const theme = useThemeData(store => store.mode);
+  const [buttonReveal, setButtonReveal] = useState<string>('');
+  const { location } = useHistory<iLocation>();
+  const accountBookId = location.state.id;
 
   const {
     setTransactionAddModalVisible,
@@ -26,10 +36,11 @@ const TransactionItem = ({
     setInput: store.setInput,
   }));
 
-  const accountBookId = useHistory().location.state.id;
-
-  const deleteTransactionInStore = useAccountBookData(
-    store => store.deleteTransaction,
+  const { deleteTransactionInStore, getTransactionById } = useAccountBookData(
+    store => ({
+      deleteTransactionInStore: store.deleteTransaction,
+      getTransactionById: store.getTransactionById,
+    }),
   );
 
   const onTransactionClicked = () => {
@@ -56,9 +67,12 @@ const TransactionItem = ({
     setTransactionAddModalVisible(true);
   };
 
-  const onDeleteButtonClicked = async e => {
+  const onDeleteButtonClicked = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.stopPropagation();
     try {
+      if (!transactionId) throw new Error('transaction id undefined');
       const { status } = await deleteTransactionApi(
         accountBookId,
         transactionId,
@@ -67,22 +81,84 @@ const TransactionItem = ({
       if (status !== 200) throw new Error();
       deleteTransactionInStore(transactionId);
     } catch (error) {
-      console.error(error);
       alert('삭제에 실패했습니다.');
     }
   };
 
+  const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    try {
+      if (!setDraggedItem) throw new Error('cannot draggable');
+      e.target.classList.add('on__drag');
+      if (!transactionId) throw new Error('transaction id undefined');
+      e.dataTransfer.setData('transactionId', transactionId);
+      const movedTransaction = getTransactionById(transactionId);
+
+      if (!movedTransaction) throw new Error('no matched transaction');
+      setDraggedItem(movedTransaction);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    try {
+      if (!setDraggedInDate) throw new Error('cannot draggable');
+      e.target.classList.remove('on__drag');
+
+      setTimeout(() => {
+        setDraggedInDate('');
+      }, 500);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="transaction__item" onClick={onTransactionClicked}>
-      <div className="transaction__item__category">
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
+    <div
+      role="button"
+      className={`transaction__item${dragObject ? ' on__dragged__in' : ''}`}
+      onClick={onTransactionClicked}
+      onKeyDown={onTransactionClicked}
+      draggable
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+    >
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__category'
+            : 'transaction__item__category light'
+        }
+      >
         <span>{category.name}</span>
       </div>
-      <div className="transaction__item__description">{content}</div>
-      <div className="transaction__item__payment">{payment.name}</div>
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__description'
+            : 'transaction__item__description light'
+        }
+      >
+        {content}
+      </div>
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__item__payment'
+            : 'transaction__item__payment light'
+        }
+      >
+        {payment.name}
+      </div>
       {type === '지출' ? (
-        <span className="transaction__item__cost transaction__item__out">{`-${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__out">
+          {`-${CommaMaker(cost)}원`}
+        </span>
       ) : (
-        <span className="transaction__item__cost transaction__item__in">{`+${cost}`}</span>
+        <span className="transaction__item__cost transaction__item__in">
+          {`+${CommaMaker(cost)}원`}
+        </span>
       )}
       <div className={`transaction__item__button__container ${buttonReveal}`}>
         <button

@@ -1,13 +1,15 @@
 import Router from 'koa-router';
 
-import Controller from '@controllers/category';
+import controller from '@/controllers/category';
 
 const router = new Router();
 
 // api/accountbook/:accountbookid/category
 
-router.post('/', Controller.post);
-router.patch('/:categoryid', Controller.patch);
-router.delete('/:categoryid', Controller.del);
+router.post('/', controller.post);
+
+router.patch('/:categoryid', controller.patch);
+
+router.delete('/:categoryid', controller.del);
 
 export default router;

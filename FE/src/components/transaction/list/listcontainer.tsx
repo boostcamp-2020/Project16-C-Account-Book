@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import './listcontainer.scss';
 import { PlusCircleIcon } from '@primer/octicons-react';
 
 import Filter from './filter/listfilter';
 import Transactions from './transactions';
 import { useTransactionAddModalData } from '../../../store/TransactionFormModal/TransactionFormModalHook';
+import { useThemeData } from '../../../store/Theme/themeHook';
+import { iSelectedCategories, iSelectedTypes } from '@interfaces/transaction-components';
 
-const ListContainer = () => {
-  const [selectedCategories, selectCategories] = useState([]);
-  const [selectedTypes, selectType] = useState([]);
+const ListContainer = (): ReactElement => {
+  const theme = useThemeData(store => store.mode);
+  const [selectedCategories, selectCategories] = useState<iSelectedCategories>([]);
+  const [selectedTypes, selectType] = useState<iSelectedTypes>([]);
 
   const {
     setTransactionAddModalVisible,
@@ -25,7 +28,13 @@ const ListContainer = () => {
 
   return (
     <>
-      <div className="transaction__list__container">
+      <div
+        className={
+          theme === 'dark'
+            ? 'transaction__list__container'
+            : 'transaction__list__container light'
+        }
+      >
         <Filter
           selectedCategories={selectedCategories}
           selectCategories={selectCategories}

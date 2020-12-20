@@ -1,43 +1,23 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
-import { useDateInfoData } from '../../../store/DateInfo/dateInfoHook';
-import HeaderButton from '../HeaderButton';
+import { useThemeData } from '../../../store/Theme/themeHook';
+import { useAccountBookData } from '../../../store/AccountBook/accountBookInfoHook';
+import HeaderButtons from './HeaderButtons';
+import HeaderDate from './HeaderDate';
+import ThemeButton from '../ThemeButton';
 import './menubar.scss';
-import CalculateDate from '../../../util/calculateDate';
 
 const MenuBar = ({ id, setModal, pageType }) => {
   const history = useHistory();
-  const DateInfo = useDateInfoData(store => store.nowCalendarInfo);
-  const setDateInfo = useDateInfoData(store => store.setCalendarInfo);
-
+  const theme = useThemeData(store => store.mode);
+  const initAcBook = useAccountBookData(store => store.initAccountBook);
   const allBtnRef = useRef();
-  const btnNextRef = useRef();
-  const btnPrevRef = useRef();
-  const calMonRef = useRef();
-  const calYearRef = useRef();
-
-  const setYearMonth = useCallback((year, month) => {
-    const yy = year;
-    const mm = month;
-
-    calMonRef.current.textContent = CalculateDate.monList[mm];
-    calYearRef.current.textContent = yy;
-  }, []);
-
-  const onClickNextMonth = useCallback(() => {
-    const info = CalculateDate.nextMonth();
-    setYearMonth(info.getFullYear(), info.getMonth());
-    setDateInfo(info.getFullYear(), info.getMonth());
-  }, []);
-
-  const onClickPrevMonth = useCallback(() => {
-    const info = CalculateDate.prevMonth();
-    setYearMonth(info.getFullYear(), info.getMonth());
-    setDateInfo(info.getFullYear(), info.getMonth());
-  }, []);
 
   const onClickIcon = useCallback(event => {
+    if (event.target.dataset.type === '/') {
+      initAcBook();
+    }
     history.push({
       pathname: event.target.dataset.type,
       state: {
@@ -46,73 +26,34 @@ const MenuBar = ({ id, setModal, pageType }) => {
     });
   }, []);
 
-  const onClickPayment = useCallback(() => {
-    setModal(true);
-  }, []);
-
-  useEffect(() => {
-    setYearMonth(DateInfo.year, DateInfo.month);
-  }, [pageType]);
-
   return (
-    <header className="menubar__header">
+    <header
+      className={theme === 'dark' ? 'menubar__header' : 'menubar__header light'}
+    >
       <div className="menubar__buttons" ref={allBtnRef}>
         <div
           className={pageType === '/' ? 'back__navBtn checked' : 'back__navBtn'}
           data-type="/"
           onClick={onClickIcon}
         >
-          <i data-type="/" className="fas fa-arrow-left" />
-          <span className="navigation__content" data-type="/">
+          <i
+            data-type="/"
+            className={
+              theme === 'dark' ? 'fas fa-arrow-left' : 'fas fa-arrow-left light'
+            }
+          />
+          <span
+            className={
+              theme === 'dark'
+                ? 'navigation__content'
+                : 'navigation__content light'
+            }
+            data-type="/"
+          >
             List
           </span>
         </div>
-        {pageType === 'transaction' ? (
-          <HeaderButton
-            buttonType="transaction"
-            isChecked
-            onClickIcon={onClickIcon}
-          />
-        ) : (
-          <HeaderButton
-            buttonType="transaction"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-        {pageType === 'calendar' ? (
-          <HeaderButton
-            buttonType="calendar"
-            isChecked
-            onClickIcon={onClickIcon}
-          />
-        ) : (
-          <HeaderButton
-            buttonType="calendar"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-        {pageType === 'chart' ? (
-          <HeaderButton
-            buttonType="chart"
-            isChecked
-            onClickIcon={onClickIcon}
-          />
-        ) : (
-          <HeaderButton
-            buttonType="chart"
-            isChecked={false}
-            onClickIcon={onClickIcon}
-          />
-        )}
-
-        <HeaderButton
-          buttonType="paymentMethod"
-          isChecked={false}
-          onClickIcon={onClickPayment}
-        />
-
+        <HeaderButtons id={id} pageType={pageType} setModal={setModal} />
         <div
           className={
             pageType === '/setting'
@@ -122,34 +63,31 @@ const MenuBar = ({ id, setModal, pageType }) => {
           data-type="setting"
           onClick={onClickIcon}
         >
-          <span className="navigation__content" data-type="/setting">
+          <span
+            className={
+              theme === 'dark'
+                ? 'navigation__content'
+                : 'navigation__content light'
+            }
+            data-type="/setting"
+          >
             Setting
           </span>
-          <i data-type="/setting" className="fas fa-arrow-right" />
+          <i
+            data-type="/setting"
+            className={
+              theme === 'dark'
+                ? 'fas fa-arrow-right'
+                : 'fas fa-arrow-right light'
+            }
+          />
+        </div>
+        <div className="header__theme">
+          <ThemeButton />
         </div>
       </div>
 
-      <div className="menubar__ctrBox">
-        <button
-          type="button"
-          title="prev"
-          className="btn-cal prev"
-          onClick={onClickPrevMonth}
-          ref={btnPrevRef}
-        />
-        <div className="year-month">
-          <span className="cal-year" ref={calYearRef} />
-          <span className="cal-month" ref={calMonRef} />
-        </div>
-
-        <button
-          type="button"
-          title="next"
-          className="btn-cal next"
-          onClick={onClickNextMonth}
-          ref={btnNextRef}
-        />
-      </div>
+      <HeaderDate id={id} pageType={pageType} />
     </header>
   );
 };

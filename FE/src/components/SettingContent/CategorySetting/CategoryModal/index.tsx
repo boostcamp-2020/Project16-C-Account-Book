@@ -8,6 +8,8 @@ import {
   deleteCategory,
 } from '../../../../api/category';
 
+import { ResponseMessage } from '../../../../util/message';
+
 import './categoryModal.scss';
 
 export default function CategoryModal({
@@ -45,46 +47,65 @@ export default function CategoryModal({
   const onClickOverlay = () => {
     setModal('');
   };
-  const onClickCreateBtn = () => {
-    createCategory({
-      accountBookId,
-      name: createRef.current.value,
-      type: categoryType,
-      icon: 1,
-    });
+  const onClickCreateBtn = async () => {
+    try {
+      const res = await createCategory({
+        accountBookId,
+        name: createRef.current.value,
+        type: categoryType,
+        icon: 1,
+      });
 
-    changeCategories({
-      name: createRef.current.value,
-      type: categoryType,
-      icon: 1,
-    });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
 
-    setModal(() => '');
+      changeCategories(res.data);
+
+      setModal(() => '');
+    } catch (error) {
+      throw new Error();
+    }
   };
 
-  const onClickUpdateBtn = () => {
-    updateCategory({
-      accountBookId,
-      categoryId,
-      name: editRef.current.value,
-      type: categoryType,
-      icon: 1,
-    });
+  const onClickUpdateBtn = async () => {
+    try {
+      const res = await updateCategory({
+        accountBookId,
+        categoryId,
+        name: editRef.current.value,
+        type: categoryType,
+        icon: 1,
+      });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
 
-    updateTarget({
-      categoryId,
-      name: editRef.current.value,
-      type: categoryType,
-      icon: 1,
-    });
+      updateTarget({
+        categoryId,
+        name: editRef.current.value,
+        type: categoryType,
+        icon: 1,
+      });
 
-    setModal(() => '');
+      setModal(() => '');
+    } catch (error) {
+      throw new Error();
+    }
   };
 
-  const onClickDeleteBtn = () => {
-    deleteCategory({ accountBookId, categoryId });
-    deleteTarget({ categoryId });
-    setModal(() => '');
+  const onClickDeleteBtn = async () => {
+    try {
+      const res = await deleteCategory({ accountBookId, categoryId });
+      if (res.status !== ResponseMessage.success) {
+        throw new Error();
+      }
+
+      deleteTarget({ categoryId });
+      setModal(() => '');
+    } catch (error) {
+      throw new Error();
+    }
   };
 
   useEffect(() => {
@@ -97,19 +118,20 @@ export default function CategoryModal({
         {modal === 'create' ? (
           <>
             <div className="modal__title">Create</div>
-            <div className="modal__contents">
+            <div className="modal__contents__create">
               <input
                 ref={createRef}
                 type="text"
                 className="create__category__input"
                 placeholder="Enter Category Name"
               />
-
-              <ActionButton
-                type="general"
-                content="Create"
-                action={onClickCreateBtn}
-              />
+              <div className="create__category__button">
+                <ActionButton
+                  type="general"
+                  content="Create"
+                  action={onClickCreateBtn}
+                />
+              </div>
             </div>
           </>
         ) : (

@@ -1,12 +1,15 @@
 import Router from 'koa-router';
 
-import Controller from '@controllers/payment';
+import controller from '@/controllers/payment';
 
 const router = new Router();
 
 // api/accountbook/:accountbookid/payment
-router.post('/', Controller.post);
-router.patch('/:paymentid', Controller.patch);
-router.delete('/:paymentid', Controller.del);
+
+router.post('/', controller.post);
+
+router.patch('/:paymentid', controller.patch);
+
+router.delete('/:paymentid', controller.del);
 
 export default router;

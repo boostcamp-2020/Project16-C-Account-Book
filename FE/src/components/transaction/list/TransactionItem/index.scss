@@ -1,4 +1,5 @@
 @use '../../../../styles/values.scss' as *;
+@use '../../../../styles/mixins.scss' as *;
 
 .transaction__item {
   position: relative;
@@ -38,10 +39,11 @@
 
   .transaction__item__delete__button,
   .transaction__item__modify__button {
+    @include buttonDefaultSetting;
+
     color: white;
     padding: 10px;
     border-radius: 10px;
-    cursor: pointer;
   }
 
   .transaction__item__delete__button {
@@ -74,12 +76,25 @@
       border-radius: 20px;
       border: 1.4px solid $dark-emphasize-font-color;
     }
+    &.light {
+      span {
+        border: 1px solid $black;
+      }
+      color: $black;
+    }
   }
   .transaction__item__description {
     flex: 4;
+    &.light {
+      color: $light-font-color;
+    }
   }
   .transaction__item__payment {
     flex: 2;
+
+    &.light {
+      color: $light-font-color;
+    }
   }
   .transaction__item__cost {
     flex: 2;
@@ -92,6 +107,29 @@
 
   .transaction__item__out {
     color: $spending-color;
+  }
+}
+
+.on__dragged__in {
+  border-radius: 10px;
+  box-shadow: $dragboxShadow;
+}
+
+.on__drag {
+  animation-name: air;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes air {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 

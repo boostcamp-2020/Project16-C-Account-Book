@@ -3,9 +3,12 @@
 
 .csv__export__box {
   @include settingBox;
-
+  position: relative;
   .csv__export__title {
     @include settingTitle;
+    &.light {
+      text-shadow: none;
+    }
   }
   .csv__export__desc {
     @include settingDesc;
@@ -13,5 +16,10 @@
   .csv__export__btn {
     display: flex;
     justify-content: center;
+    gap: 20%;
+  }
+
+  &.light {
+    color: $black;
   }
 }

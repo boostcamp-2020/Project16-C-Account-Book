@@ -1,34 +1,6 @@
 @use '../../../styles/values.scss' as *;
+@use '../../../styles/mixins.scss' as *;
 
 .spinner__container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-
-  .indicator {
-    margin-bottom: 30px;
-    font-size: 40px;
-    font-weight: 900;
-  }
-
-  .spinner {
-    border: 20px solid $spinner-background-color;
-    border-top: 20px solid $spin-color;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    animation: spin 2s linear infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+  @include loading-spinner;
 }

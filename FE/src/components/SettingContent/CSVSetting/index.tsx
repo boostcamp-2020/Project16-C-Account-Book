@@ -6,12 +6,12 @@ import './csvSetting.scss';
 import CSVImport from './CSVImport';
 import CSVExport from './CSVExport';
 
-export default function CSVSetting(props) {
+export default function CSVSetting({ confirmModal }) {
   const accountBookId = useHistory().location.state.id;
 
   return (
     <div className="csv__setting__container">
-      <CSVImport />
+      <CSVImport accountBookId={accountBookId} confirmModal={confirmModal} />
       <CSVExport accountBookId={accountBookId} />
     </div>
   );
