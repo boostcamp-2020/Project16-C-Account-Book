@@ -11,13 +11,17 @@
 `내돈내쓴` 서비스는 개인의 입출금 내역 및 통계자료를 관리해주는 서비스입니다.<br>
 `UX` 를 고려한 설계와 디자인으로, 인터랙티브한 경험을 주는 서비스입니다.<br>
 
+## 기능사항
+<img width="733" alt="스크린샷 2020-12-20 오후 1 44 07" src="https://user-images.githubusercontent.com/49441876/102705306-7e508d00-42c9-11eb-9224-ece0ad72d6b7.png">
+
+
 ### 자세한 사항은 [wiki](https://github.com/boostcamp-2020/Project16-C-Account-Book/wiki)를 참고해 주세요.
 
 
 <br>
 <br>
 
-## 🔗 배포URL
+## 🔗 배포URL ( 크롬 권장 )
 
 [http://www.spend-write-money.kro.kr/](http://www.spend-write-money.kro.kr/)
 
