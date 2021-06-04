@@ -25,14 +25,6 @@
 
 [http://www.spend-write-money.kro.kr/](http://www.spend-write-money.kro.kr/)
 
-### 테스터 계정<br>
-
-```
-Naver ID : account-book-c
-
-Naver Password: boostcamp16c!
-```
-
 <br>
 <br>
 
